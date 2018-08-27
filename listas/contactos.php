@@ -23,8 +23,6 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -164,70 +162,7 @@
                       </ul>
                     </li>
     
-                    <li role="presentation" class="dropdown">
-                      <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
-                      </a>
-                      <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <div class="text-center">
-                            <a>
-                              <strong>See All Alerts</strong>
-                              <i class="fa fa-angle-right"></i>
-                            </a>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
+                    
                   </ul>
                 </nav>
               </div>
@@ -244,10 +179,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Categorias</h2>
-
-
-                    
+                    <h2>Pagina de Contactos</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -265,6 +197,8 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                  <div class="x_content">
+                    <div class="content-wrapper">
             <?php 
             if (isset($_GET['success'])) {
                 
@@ -278,12 +212,14 @@
                     ';
                 }
             }elseif (isset($_GET['error'])) {
+              $msj=$_GET['msj'];
                if ($_GET['error']=='incorrecto') {
                     
                     echo '
               <div class="callout callout-danger">
               
                 Error al guardar, verifique los datos ingresados.
+
              </div>
                     ';
                 }
@@ -299,41 +235,144 @@
                 }
             }
              ?>
-                  <div class="x_content">
-                      
+             </div>
+                    <br>
+                    <br>
+                    
 
-                                    <input type="button" name="accion" value="Nueva Categoria" id="accion" class="btn btn-success save_data" /> 
-                    <br>
-                    <br>
-                    <div id="employee_table">
-                    <table id="datatable-buttons" class="table table-striped table-bordered" name="datatable-buttons">
+                    <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2>Agregar contacto</h2>
+                       
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <br />
+                        <input type="button" name="view" value="Seleccionar Cliente" id="1" class="btn btn-info view_data"/>
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/ContactoControlador.php?accion=guardar" method="post">
+                        <?php
+
+                          $id=$_GET["id"];
+                          $nombre=$_GET["nombre"];
+                          if ($id!="" && $nombre != "") {
+                              echo'
+                               <div class="row">
+                               <div class="col-md-6">    
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre Contacto <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-xs-6 col-xs-12">
+                              <input type="text" id="nombre" name="nombre" value="'.$nombre.'" readonly required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          </div>
+                          <input type="hidden" id="id_cliente" name="id_cliente" value="'.$id.'">
+                               ';
+                            }else{
+                             echo'
+                              <div class="row"> 
+                              <div class="col-md-6">   
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre Contacto <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-xs-6 col-xs-12">
+                              <input type="text" id="nombre" name="nombre" value="Seleccione un nombre..." readonly required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                              </div>
+                               ';
+
+                            }
+
+                        ?>
+                            
+                               <div class="col-md-6">   
+                              <div class="form-group">
+                                <label class="control-label col-md-4 col-xs-4 col-xs-12" for="first-name">Correo <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-xs-6 col-xs-12">
+                                  <input type="text" id="correo" name="correo" required="required" class="form-control col-md-3 col-xs-12">
+                                </div>
+                              </div>
+                              </div> 
+                              
+                        </div>
+                        <dir class="row">
+                          <div class="col-md-4">  
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-xs-3 col-xs-12" for="first-name">Telefono Contacto <span class="required">*</span>
+                                </label>
+                                <div class="col-md-5 col-xs-6 col-xs-12">
+                                  <input type="text" id="telefono" name="telefono" required="required" class="form-control col-md-3 col-xs-6">
+                                </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-xs-4 col-xs-7" for="first-name">Extension <span class="required">*</span>
+                            </label>
+                            <div class="col-md-5 col-xs-6 col-xs-12">
+                              <input type="text" id="extension" name="extension" required="required" class="form-control col-md-3 col-xs-6">
+                            </div>
+                          </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="control-label col-md-4 col-xs-2 col-xs-12" for="first-name">Movil <span class="required">*</span>
+                            </label>
+                            <div class="col-md-5 col-xs-6 col-xs-12">
+                              <input type="text" id="movil" name="movil" required="required" class="form-control col-md-3 col-xs-6">
+                            </div>
+                          </div>
+                          </div>
+                         </dir> 
+                          
+                          
+                          <div class="ln_solid"></div>
+                          <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
+                              <button type="submit" class="btn btn-success">Agregar Contacto</button>
+                            </div>
+                          </div>
+    
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+                    
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>N° </th>
-                          <th>Categoria</th>
-                          <th>Descripcion</th>
+                          <th>Nombre / Compañia</th>
+                          <th>Correo</th>
+                          <th>Telefono</th>                         
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
-                      <tbody>
-                        <?php 
-                         require_once "../class/Categorias.php";
-                         $misCategorias = new Categorias();
-                         $catego = $misCategorias->selectALL();
-                        
-                           # code...
-                         
-                         foreach ((array)$catego as $row) {
+                      <TBODY>
+                         <?php 
+                         require_once "../class/Contactos.php";
+                         $misContactos = new Contactos();
+                         $contacto = $misContactos->selectALL();
+                         foreach ((array)$contacto as $row) {
                          echo '
                           <tr>
-                           <td>'.$row['id_categoria'].'</td>
                            <td>'.$row['nombre'].'</td>
-                           <td>'.$row["descripcion"].'</td>
-                           <td>
+                           <td>'.$row["correo"].'</td>                           
+                           <td>'.$row["telefono"].'</td>
+                            <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_categoria"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_categoria"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/CategoriaControlador.php?id='.$row["id_categoria"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_contacto"].'" class="btn btn-info view_data"/> 
+                                    <a href="../views/modiCliente.php?id='.$row["id_contacto"].'" class="btn btn-warning">Editar</a>
+                                    <a href="../controller/ContactoControlador.php?id='.$row["id_contacto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
@@ -341,37 +380,17 @@
                      
                      
                          ?>
-                      </tbody>
+                      </TBODY>
                     </table>
-                  </div>
                   </div>
                 </div>
               </div>
-			  
-			  
-			  
-            </div>
- <div id="dataModal" class="modal fade">  
+			     <div id="dataModal2" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_detail">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>  
-   <div id="dataModal2" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
+                                                 <h4 class="modal-title">Clientes</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -381,38 +400,10 @@
                                        </div>  
                                   </div>  
   </div>
-     <div id="dataModal3" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_forms3">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>
+			  
+			  
+            </div>
             <!--page content -->
-<div id="add_data_Modal" class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header">  
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Agregar nueva Categoria</h4>  
-                </div>  
-                <div class="modal-body">  
-                     
-                </div>  
-                <div class="modal-footer">  
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                </div>  
-           </div>  
-      </div>  
- </div>
     
             <!-- footer content -->
             <footer>
@@ -464,34 +455,20 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
     
     </script>
-<script type="text/javascript">
+        <script type="text/javascript">
    $(document).ready(function(){  
       $('#add').click(function(){  
            $('#insert').val("Insert");  
            $('#insert_form')[0].reset();  
       });  
-      $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/modiCatego.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms2').html(data);  
-                          $('#dataModal2').modal('show');  
-                     }  
-                });  
-           }   
-      });  
+    
      
       $(document).on('click', '.view_data', function(){  
            var employee_id = $(this).attr("id");  
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectCatego.php",  
+                     url:"../views/listClientes.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -501,24 +478,9 @@ ga('send', 'pageview');
                 });  
            }            
       });  
-        $(document).on('click', '.save_data', function(){  
-           var employee_action = $(this).attr("accion");  
-           if(employee_action != '')  
-           {  
-                $.ajax({  
-                     url:"../views/saveCatego.php",  
-                     method:"POST",  
-                     data:{employee_action:employee_action},  
-                     success:function(data){  
-                          $('#employee_forms3').html(data);  
-                          $('#dataModal3').modal('show');  
-                     }  
-                });  
-           }            
-      });
+       
  });  
 
 </script>
-        
     </body>
 </html>

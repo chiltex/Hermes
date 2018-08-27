@@ -23,8 +23,6 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -70,7 +68,7 @@
                         <ul class="nav child_menu">
                           <li><a href="../listas/clientes.php">Clientes</a></li>
                           <li><a href="../listas/lista_categorias.php">Categorias</a></li>
-                          <li><a href="../listas/contactos.php?id=''&nombre=Seleccione un Cliente">Contactos</a></li>
+                          <li><a href="form_validation.html">Form Validation</a></li>
                           <li><a href="form_wizards.html">Form Wizard</a></li>
                           <li><a href="form_upload.html">Form Upload</a></li>
                           <li><a href="form_buttons.html">Form Buttons</a></li>
@@ -238,181 +236,146 @@
             <div class="right_col" role="main">
               
         
-              
-
-			  
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Pagina de Categorias</h2>
-
-
-                    
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2>Agregar cliente</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                           </li>
-                          <li><a href="#">Settings 2</a>
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a href="#">Settings 1</a>
+                              </li>
+                              <li><a href="#">Settings 2</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li><a class="close-link"><i class="fa fa-close"></i></a>
                           </li>
                         </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-            <?php 
-            if (isset($_GET['success'])) {
-                
-                if ($_GET['success']=='correcto') {
-                    
-                    echo '
-              <div class="callout callout-success">
-              
-                Los datos han sido guardados exitosamente.
-             </div>
-                    ';
-                }
-            }elseif (isset($_GET['error'])) {
-               if ($_GET['error']=='incorrecto') {
-                    
-                    echo '
-              <div class="callout callout-danger">
-              
-                Error al guardar, verifique los datos ingresados.
-             </div>
-                    ';
-                }
-            }elseif (isset($_GET['seleccion'])) {
-               if ($_GET['seleccion']=='nuevo') {
-                    
-                    echo '
-              <div class="callout callout-primary">
-              
-                Ingrese todos los datos.
-             </div>
-                    ';
-                }
-            }
-             ?>
-                  <div class="x_content">
-                      
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <br />
 
-                                    <input type="button" name="accion" value="Nueva Categoria" id="accion" class="btn btn-success save_data" /> 
-                    <br>
-                    <br>
-                    <div id="employee_table">
-                    <table id="datatable-buttons" class="table table-striped table-bordered" name="datatable-buttons">
-                      <thead>
-                        <tr>
-                          <th>N° </th>
-                          <th>Categoria</th>
-                          <th>Descripcion</th>
-                          <th>Opciones / Mantenimiento</th>                          
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php 
-                         require_once "../class/Categorias.php";
-                         $misCategorias = new Categorias();
-                         $catego = $misCategorias->selectALL();
-                        
-                           # code...
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/ClienteControlador.php?accion=modificar" method="post">
+                          <?php
+                                require_once "../class/Cliente.php";
+                                $codigo=$_GET["id"];
+                                $MiCliente = new Cliente();
+                                $cl = $MiCliente->selectOne($codigo);
+
+                   foreach ($cl as $field) {
+                                  # code...
+                                echo '
+                                <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre cliente <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="id_cliente" name="id_cliente" value="'.$field["id_cliente"].'" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                                  <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre cliente <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="nombre" name="nombre" value="'.$field["nombre"].'" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                           <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección cliente <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  
+                                  <input type="text" id="direccion" name="direccion" value="'.$field["direccion"].'" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo Cliente <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                              <select  id="id_tip_cli" name="id_tip_cli" class="form-control ">
+
+                                '; 
                          
-                         foreach ((array)$catego as $row) {
-                         echo '
-                          <tr>
-                           <td>'.$row['id_categoria'].'</td>
-                           <td>'.$row['nombre'].'</td>
-                           <td>'.$row["descripcion"].'</td>
-                           <td>
-                          
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_categoria"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_categoria"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/CategoriaControlador.php?id='.$row["id_categoria"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
-                           </td>
-                          </tr>
+                                    
+                           # code...
+
+                         
+                          $tipo_cliente=$MiCliente->selectOneTC($field['id_tip_cli']);
+                             foreach ($tipo_cliente as $rew) {
+                             echo '
+                          <option value="'.$rew["id_tip_cli"].'">'.$rew["tipo_cliente"].'</option>
                          ';
-                       }
+                           }
+
+                          $tipo_client=$MiCliente->selectOneDTC($field['id_tip_cli']);
+                             foreach ($tipo_client as $cew) {
+                             echo '
+                          <option value="'.$cew["id_tip_cli"].'">'.$cew["tipo_cliente"].'</option>
+                               ';
+                           }
+
+
+                       
                      
-                     
-                         ?>
-                      </tbody>
-                    </table>
-                  </div>
+                            echo '      
+                              </select>
+                            </div>
+                          </div>                          
+                          <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Categoria Cliente <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                <select  id="id_categoria" name="id_categoria" class="form-control ">
+                                    
+                        ';
+                              $categoria=$MiCliente->selectOneCat($field['id_categoria']);
+                             foreach ($categoria as $few) {
+                             echo '
+                          <option value="'.$few["id_categoria"].'">'.$few["nombre"].'</option>
+                         ';
+                           }
+
+                          $cat=$MiCliente->selectOneDCat($field['id_categoria']);
+                             foreach ($catt as $cew) {
+                             echo '
+                          <option value="'.$cew["id_categoria"].'">'.$cew["nombre"].'</option>
+                               ';
+                           }
+                        
+
+                       echo '
+                               </select>
+                              </div>
+                            </div>
+                            
+
+                              ';
+                          }
+                     ?><!--end php-->
+                          
+                          
+                          <div class="ln_solid"></div>
+                          <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
+                              <button type="submit" class="btn btn-success">Guardar</button>
+                            </div>
+                          </div>
+    
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-			  
-			  
+
 			  
             </div>
- <div id="dataModal" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_detail">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>  
-   <div id="dataModal2" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_forms2">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>
-     <div id="dataModal3" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_forms3">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>
             <!--page content -->
-<div id="add_data_Modal" class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header">  
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Agregar nueva Categoria</h4>  
-                </div>  
-                <div class="modal-body">  
-                     
-                </div>  
-                <div class="modal-footer">  
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                </div>  
-           </div>  
-      </div>  
- </div>
     
             <!-- footer content -->
             <footer>
@@ -464,61 +427,6 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
     
     </script>
-<script type="text/javascript">
-   $(document).ready(function(){  
-      $('#add').click(function(){  
-           $('#insert').val("Insert");  
-           $('#insert_form')[0].reset();  
-      });  
-      $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/modiCatego.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms2').html(data);  
-                          $('#dataModal2').modal('show');  
-                     }  
-                });  
-           }   
-      });  
-     
-      $(document).on('click', '.view_data', function(){  
-           var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/selectCatego.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms2').html(data);  
-                          $('#dataModal2').modal('show');  
-                     }  
-                });  
-           }            
-      });  
-        $(document).on('click', '.save_data', function(){  
-           var employee_action = $(this).attr("accion");  
-           if(employee_action != '')  
-           {  
-                $.ajax({  
-                     url:"../views/saveCatego.php",  
-                     method:"POST",  
-                     data:{employee_action:employee_action},  
-                     success:function(data){  
-                          $('#employee_forms3').html(data);  
-                          $('#dataModal3').modal('show');  
-                     }  
-                });  
-           }            
-      });
- });  
-
-</script>
         
     </body>
 </html>
