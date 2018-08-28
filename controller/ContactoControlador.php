@@ -29,7 +29,7 @@ if ($accion=="modificar") {
 
 }
 elseif ($accion=="eliminar") {	
-	$id_cliente =$_GET['id'];
+	$id_contacto =$_GET['id'];
 	$contactos = new Contactos();
 	$contactos->setId_contacto($id_contacto);
 	$delete=$contactos->delete();

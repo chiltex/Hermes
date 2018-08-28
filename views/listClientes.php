@@ -1,6 +1,12 @@
 <div class="x_panel"> 
 <div class="x_content"> 
-       <table id="datatable-buttons" class="table table-striped table-bordered">
+ <!-- <div class="input-group">
+  <span class="input-group-addon">Buscar</span>
+  <input id="filtrar" type="text" class="form-control" placeholder="Buscar...">
+</div>
+//buscador 1
+--> 
+       <table id="example1" class="table table-striped table-bordered">
          <thead>
                         <tr>
                           <th>Nombre / Compañia</th>
@@ -10,6 +16,7 @@
                           <th>Seleccionar</th>                          
                         </tr>
                       </thead>
+                      <tbody class="buscar">
 <?php 
   
   require_once "../class/Cliente.php";
@@ -41,9 +48,23 @@
                 	
                     
                 }
-?>   </table>
+?> </tbody>  </table>
 </div>
 </div>
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -52,30 +73,24 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
+
+ $(document).ready(function () {
+ 
+            (function ($) {
+ 
+                $('#filtrar').keyup(function () {
+ 
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+ 
+                })
+ 
+            }(jQuery));
+ 
+        }); 
+
     
     </script>
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-   <!-- Bootstrap -->
-   <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Datatables -->
-    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>

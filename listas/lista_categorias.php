@@ -265,40 +265,47 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-            <?php 
+           <?php 
             if (isset($_GET['success'])) {
                 
                 if ($_GET['success']=='correcto') {
                     
                     echo '
-              <div class="callout callout-success">
-              
+              <div class="alert alert-success" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Correcto:</span>
                 Los datos han sido guardados exitosamente.
-             </div>
+           
                     ';
                 }
             }elseif (isset($_GET['error'])) {
+              $msj=$_GET['msj'];
                if ($_GET['error']=='incorrecto') {
                     
                     echo '
-              <div class="callout callout-danger">
+                <div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Incorecto:</span>
               
                 Error al guardar, verifique los datos ingresados.
-             </div>
+
+           
                     ';
                 }
             }elseif (isset($_GET['seleccion'])) {
                if ($_GET['seleccion']=='nuevo') {
                     
                     echo '
-              <div class="callout callout-primary">
+                 <div class="alert alert-primary" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Atencion:</span>
               
                 Ingrese todos los datos.
-             </div>
+            
                     ';
                 }
             }
-             ?>
+             ?></div>
                   <div class="x_content">
                       
 
