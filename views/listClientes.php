@@ -5,7 +5,7 @@
   <input id="filtrar" type="text" class="form-control" placeholder="Buscar...">
 </div>
 //buscador 1
---> 
+--> <a href="../listas/clientes.php" class="btn btn-primary">Nuevo Cliente</a>
        <table id="example1" class="table table-striped table-bordered">
          <thead>
                         <tr>

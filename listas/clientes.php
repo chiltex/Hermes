@@ -76,8 +76,8 @@
                       </li>
                       <li><a><i class="fa fa-desktop"></i> Productos <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="general_elements.html">General Elements</a></li>
-                          <li><a href="media_gallery.html">Media Gallery</a></li>
+                         <li><a href="../listas/lista_grupo_producto.php">Grupo de Productos</a></li>
+                          <li><a href="../listas/Productos.php">Productos</a></li>
                           <li><a href="typography.html">Typography</a></li>
                           <li><a href="icons.html">Icons</a></li>
                           <li><a href="glyphicons.html">Glyphicons</a></li>

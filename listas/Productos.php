@@ -23,8 +23,6 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -35,7 +33,7 @@
             <div class="col-md-3 left_col">
               <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                  <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
+                  <a href="../index.php" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
                 </div>
     
                 <div class="clearfix"></div>
@@ -78,7 +76,7 @@
                       </li>
                       <li><a><i class="fa fa-desktop"></i> Productos <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                           <li><a href="../listas/lista_grupo_producto.php">Grupo de Productos</a></li>
+                         <li><a href="../listas/lista_grupo_producto.php">Grupo de Productos</a></li>
                           <li><a href="../listas/Productos.php">Productos</a></li>
                           <li><a href="typography.html">Typography</a></li>
                           <li><a href="icons.html">Icons</a></li>
@@ -164,70 +162,7 @@
                       </ul>
                     </li>
     
-                    <li role="presentation" class="dropdown">
-                      <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
-                      </a>
-                      <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <div class="text-center">
-                            <a>
-                              <strong>See All Alerts</strong>
-                              <i class="fa fa-angle-right"></i>
-                            </a>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
+                    
                   </ul>
                 </nav>
               </div>
@@ -244,10 +179,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Categorias</h2>
-
-
-                    
+                    <h2>Pagina de Clientes</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -265,6 +197,7 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                  <div class="x_content">
            <?php 
             if (isset($_GET['success'])) {
                 
@@ -306,41 +239,44 @@
                 }
             }
              ?></div>
-                  <div class="x_content">
-                      
-
-                                    <input type="button" name="accion" value="Nueva Categoria" id="accion" class="btn btn-success save_data" /> 
                     <br>
                     <br>
-                    <div id="employee_table">
-                    <table id="datatable-buttons" class="table table-striped table-bordered" name="datatable-buttons">
+                    
+                     <input type="button" name="accion" value="Nuevo Producto" id="accion" class="btn btn-success save_data" /> 
+                    
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>N° </th>
-                          <th>Categoria</th>
-                          <th>Descripcion</th>
+                          <th>Nombre / Compañia</th>
+                          <th>Grupo</th>
+                          <th>Estado</th>
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
-                      <tbody>
-                        <?php 
-                         require_once "../class/Categorias.php";
-                         $misCategorias = new Categorias();
-                         $catego = $misCategorias->selectALL();
-                        
-                           # code...
-                         
-                         foreach ((array)$catego as $row) {
+                      <TBODY>
+                         <?php 
+                         require_once "../class/Productos.php";
+                         $misProductos = new Productos();
+                         $producto = $misProductos->selectALL();
+                    
+                         foreach ((array)$producto as $row) {
                          echo '
                           <tr>
-                           <td>'.$row['id_categoria'].'</td>
                            <td>'.$row['nombre'].'</td>
-                           <td>'.$row["descripcion"].'</td>
+                           <td>';
+                                $grupo_producto=$misProductos->selectOneGP($row['id_grupo_producto']);
+                           foreach ($grupo_producto as $rew) {
+                             echo ''.$rew['nombre'].'';
+                           }
+                           
+                           echo '
+                           <td>'.$row["estado"].'</td>
+                           </td>
                            <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_categoria"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_categoria"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/CategoriaControlador.php?id='.$row["id_categoria"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_producto"].'" class="btn btn-info view_data"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_producto"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
@@ -348,37 +284,17 @@
                      
                      
                          ?>
-                      </tbody>
+                      </TBODY>
                     </table>
-                  </div>
                   </div>
                 </div>
               </div>
-			  
-			  
-			  
-            </div>
- <div id="dataModal" class="modal fade">  
+			     <div id="dataModal2" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_detail">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>  
-   <div id="dataModal2" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
+                                                 <h4 class="modal-title">Detalle Producto</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -388,12 +304,12 @@
                                        </div>  
                                   </div>  
   </div>
-     <div id="dataModal3" class="modal fade">  
+ <div id="dataModal3" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
+                                                 <h4 class="modal-title">Agregar NUevo Producto</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -403,23 +319,25 @@
                                        </div>  
                                   </div>  
   </div>
+  <div id="dataModal" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">Editar Porducto</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_forms">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+  </div> 
+			  
+			  
+            </div>
             <!--page content -->
-<div id="add_data_Modal" class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header">  
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Agregar nueva Categoria</h4>  
-                </div>  
-                <div class="modal-body">  
-                     
-                </div>  
-                <div class="modal-footer">  
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                </div>  
-           </div>  
-      </div>  
- </div>
     
             <!-- footer content -->
             <footer>
@@ -471,34 +389,20 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
     
     </script>
-<script type="text/javascript">
+        <script type="text/javascript">
    $(document).ready(function(){  
       $('#add').click(function(){  
            $('#insert').val("Insert");  
            $('#insert_form')[0].reset();  
       });  
-      $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/modiCatego.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms2').html(data);  
-                          $('#dataModal2').modal('show');  
-                     }  
-                });  
-           }   
-      });  
+    
      
       $(document).on('click', '.view_data', function(){  
            var employee_id = $(this).attr("id");  
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectCatego.php",  
+                     url:"../views/selectProducto.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -508,12 +412,12 @@ ga('send', 'pageview');
                 });  
            }            
       });  
-        $(document).on('click', '.save_data', function(){  
+       $(document).on('click', '.save_data', function(){  
            var employee_action = $(this).attr("accion");  
            if(employee_action != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveCatego.php",  
+                     url:"../views/saveProducto.php",  
                      method:"POST",  
                      data:{employee_action:employee_action},  
                      success:function(data){  
@@ -523,9 +427,24 @@ ga('send', 'pageview');
                 });  
            }            
       });
+        $(document).on('click', '.edit_data', function(){  
+          var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/modiProducto.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms').html(data);  
+                          $('#dataModal').modal('show');  
+                     }  
+                });  
+           }   
+      });
+       
  });  
 
 </script>
-        
     </body>
 </html>

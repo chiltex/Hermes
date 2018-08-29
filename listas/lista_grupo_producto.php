@@ -78,7 +78,7 @@
                       </li>
                       <li><a><i class="fa fa-desktop"></i> Productos <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                           <li><a href="../listas/lista_grupo_producto.php">Grupo de Productos</a></li>
+                          <li><a href="../listas/lista_grupo_producto.php">Grupo de Productos</a></li>
                           <li><a href="../listas/Productos.php">Productos</a></li>
                           <li><a href="typography.html">Typography</a></li>
                           <li><a href="icons.html">Icons</a></li>
@@ -169,64 +169,7 @@
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-green">6</span>
                       </a>
-                      <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <div class="text-center">
-                            <a>
-                              <strong>See All Alerts</strong>
-                              <i class="fa fa-angle-right"></i>
-                            </a>
-                          </div>
-                        </li>
-                      </ul>
+                    
                     </li>
                   </ul>
                 </nav>
@@ -309,7 +252,7 @@
                   <div class="x_content">
                       
 
-                                    <input type="button" name="accion" value="Nueva Categoria" id="accion" class="btn btn-success save_data" /> 
+                                    <input type="button" name="accion" value="Nuevo Grupo" id="accion" class="btn btn-success save_data" /> 
                     <br>
                     <br>
                     <div id="employee_table">
@@ -317,15 +260,15 @@
                       <thead>
                         <tr>
                           <th>N° </th>
-                          <th>Categoria</th>
-                          <th>Descripcion</th>
+                          <th>Grupo Producto</th>
+                          <th>Estado</th>
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
                       <tbody>
                         <?php 
-                         require_once "../class/Categorias.php";
-                         $misCategorias = new Categorias();
+                         require_once "../class/GrupoProducto.php";
+                         $misCategorias = new GrupoProducto();
                          $catego = $misCategorias->selectALL();
                         
                            # code...
@@ -333,14 +276,14 @@
                          foreach ((array)$catego as $row) {
                          echo '
                           <tr>
-                           <td>'.$row['id_categoria'].'</td>
+                           <td>'.$row['id_grupo_producto'].'</td>
                            <td>'.$row['nombre'].'</td>
-                           <td>'.$row["descripcion"].'</td>
+                           <td>'.$row["estado"].'</td>
                            <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_categoria"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_categoria"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/CategoriaControlador.php?id='.$row["id_categoria"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_grupo_producto"].'" class="btn btn-info view_data"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_grupo_producto"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/CategoriaControlador.php?id='.$row["id_grupo_producto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
@@ -378,7 +321,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
+                                                 <h4 class="modal-title">Detalle Grupo Productos</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -393,7 +336,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Categorias</h4>  
+                                                 <h4 class="modal-title">Agregar Nuevo Grupo</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -482,7 +425,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/modiCatego.php",  
+                     url:"../views/modiGrupoProducto.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -498,7 +441,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectCatego.php",  
+                     url:"../views/selectGrupoProducto.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -513,7 +456,7 @@ ga('send', 'pageview');
            if(employee_action != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveCatego.php",  
+                     url:"../views/saveGrupoProducto.php",  
                      method:"POST",  
                      data:{employee_action:employee_action},  
                      success:function(data){  

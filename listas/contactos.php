@@ -76,8 +76,8 @@
                       </li>
                       <li><a><i class="fa fa-desktop"></i> Productos <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="general_elements.html">General Elements</a></li>
-                          <li><a href="media_gallery.html">Media Gallery</a></li>
+                          <li><a href="../listas/lista_grupo_producto.php">Grupo de Productos</a></li>
+                          <li><a href="../listas/Productos.php">Productos</a></li>
                           <li><a href="typography.html">Typography</a></li>
                           <li><a href="icons.html">Icons</a></li>
                           <li><a href="glyphicons.html">Glyphicons</a></li>
@@ -378,8 +378,8 @@
                            <td>'.$row["telefono"].'</td>
                             <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_contacto"].'" class="btn btn-info view_data"/> 
-                                    <a href="../views/modiCliente.php?id='.$row["id_contacto"].'" class="btn btn-warning">Editar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_contacto"].'" class="btn btn-info view_data2"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_contacto"].'" class="btn btn-warning edit_data" />
                                     <a href="../controller/ContactoControlador.php?id='.$row["id_contacto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
@@ -401,6 +401,36 @@
                                                  <h4 class="modal-title">Clientes</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+  </div>
+    <div id="dataModal3" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">Detalle Contacto</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_forms3">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+  </div>
+     <div id="dataModal4" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">Modificar Contacto</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_forms4">  
                                             </div>  
                                             <div class="modal-footer">  
                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
@@ -485,6 +515,36 @@ ga('send', 'pageview');
                      }  
                 });  
            }            
+      });
+      $(document).on('click', '.view_data2', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/selectContacto.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms3').html(data);  
+                          $('#dataModal3').modal('show');  
+                     }  
+                });  
+           }            
+      }); 
+       $(document).on('click', '.edit_data', function(){  
+          var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/modiContacto.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms4').html(data);  
+                          $('#dataModal4').modal('show');  
+                     }  
+                });  
+           }   
       });  
        
  }); 
