@@ -80,13 +80,8 @@
                         <ul class="nav child_menu">
                           <li><a href="listas/lista_grupo_producto.php">Grupo de Productos</a></li>
                           <li><a href="listas/Productos.php">Productos</a></li>
-                          <li><a href="typography.html">Typography</a></li>
-                          <li><a href="icons.html">Icons</a></li>
-                          <li><a href="glyphicons.html">Glyphicons</a></li>
-                          <li><a href="widgets.html">Widgets</a></li>
-                          <li><a href="invoice.html">Invoice</a></li>
-                          <li><a href="inbox.html">Inbox</a></li>
-                          <li><a href="calendar.html">Calendar</a></li>
+                          <li><a href="../listas/Cliente_Producto.php?cliente=0&nombre=nada&producto=0">Productos de Clientes</a></li>
+                          <li><a href="../listas/Repuestos.php">Repuestos</a></li>
                         </ul>
                       </li>
                       <li><a><i class="fa fa-table"></i> Tickets <span class="fa fa-chevron-down"></span></a>

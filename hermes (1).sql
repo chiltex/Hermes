@@ -137,12 +137,12 @@ CREATE TABLE `productos` (
 --
 
 CREATE TABLE `repuestos` (
-  `id_repuesto` int(11) NOT NULL,
+  `id_repuesto` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `nombre` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
   `codigo_serie` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
   `descripcion` longtext COLLATE utf8mb4_bin,
   `estado` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+);
 
 -- --------------------------------------------------------
 

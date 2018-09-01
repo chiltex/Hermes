@@ -50,12 +50,20 @@ $descripcion=$_POST['descripcion'];
 	else{
 		header('Location: ../listas/lista_grupo_producto.php?error=incorrecto');
 	}
-}elseif ($accion=="estado") {
-	$id_grupo_producto =$_POST['id'];
-	$estado=$_POST['estado'];
+}elseif ($accion=="change") {
+	$codigo =$_GET['id'];
+	$estado=$_GET['estado'];
 	
 	$grupo = new GrupoProducto();
-	$update=$grupo->changeStatus($id_grupo_producto,$estado);
+	if ($estado=="Activo") {
+		$NEstado="Desactivado";
+		$update=$grupo->changeStatus($codigo,$NEstado);
+	}else{
+
+		$NEstado="Activo";
+		$update=$grupo->changeStatus($codigo,$NEstado);
+
+	}	
 	if ($update==true) {
 		header('Location: ../listas/lista_grupo_producto.php?success=correcto');
 		# code...
@@ -64,6 +72,7 @@ $descripcion=$_POST['descripcion'];
 	}
 
 }
+
 
 
 ?>

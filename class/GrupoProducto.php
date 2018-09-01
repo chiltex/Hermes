@@ -88,6 +88,13 @@ class GrupoProducto extends Conexion
     }
     public function selectALL()
     {
+        $query="SELECT * FROM grupo_producto WHERE estado='Activo'";
+        $selectall=$this->db->query($query);
+        $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListCategoria;
+    }
+     public function selectALL1()
+    {
         $query="SELECT * FROM grupo_producto";
         $selectall=$this->db->query($query);
         $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);

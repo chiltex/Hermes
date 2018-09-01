@@ -52,5 +52,29 @@ elseif ($accion=="guardar")
 		header('Location: ../listas/Productos.php?error=incorrecto');
 	}
 }
+elseif ($accion=="change") 
+{	
+	$codigo =$_GET['id'];
+	$estado=$_GET['estado'];
+
+	$Productos = new Productos();
+	if ($estado=="Activo") {
+		$NEstado="Desactivado";
+		$save=$Productos->changeStatus($codigo,$NEstado);
+	}else{
+
+		$NEstado="Activo";
+		$save=$Productos->changeStatus($codigo,$NEstado);
+
+	}	
+	
+	if ($save==true) {
+		header('Location: ../listas/Productos.php?success=correcto');
+		# code...
+	}
+	else{
+		header('Location: ../listas/Productos.php?error=incorrecto');
+	}
+}
 
 ?>

@@ -33,7 +33,7 @@
             <div class="col-md-3 left_col">
               <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                  <a href="../index.php" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
+                  <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
                 </div>
     
                 <div class="clearfix"></div>
@@ -53,7 +53,7 @@
                 <br />
     
                 <!-- sidebar menu -->
-               <?php
+                <?php
                  require_once "menuAdmin.php";
                   ?>
                 <!-- /sidebar menu -->
@@ -121,7 +121,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Clientes</h2>
+                    <h2>Productos de cada Cliente / Empresa</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -140,7 +140,11 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-           <?php 
+                    
+  
+
+
+            <?php 
             if (isset($_GET['success'])) {
                 
                 if ($_GET['success']=='correcto') {
@@ -154,7 +158,7 @@
                     ';
                 }
             }elseif (isset($_GET['error'])) {
-              
+            
                if ($_GET['error']=='incorrecto') {
                     
                     echo '
@@ -162,7 +166,7 @@
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="sr-only">Incorecto:</span>
               
-                Error al guardar, verifique los datos ingresados.
+                Error al guardar, verifique los datos ingresados o ya fue agregado este producto anteriormente.
 
            
                     ';
@@ -181,57 +185,76 @@
                 }
             }
              ?></div>
+             
                     <br>
                     <br>
                     
-                     <input type="button" name="accion" value="Nuevo Producto" id="accion" class="btn btn-success save_data" /> 
+
+                    <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                       
+                        
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <br />
+                        <div class="row">
+                          <div class="col-sm-4">
+                        <input type="button" name="view" value="Seleccionar Cliente" id="1" class="btn btn-info view_data"/>
+                          </div>
+                        <?php
+                          $id=$_GET["cliente"];
+                          $nombre=$_GET["nombre"];
+                          if ($id!=0 && $nombre != "nada") {
+                            echo '<div class="col-md-6"><h4>Cliente/ Empresa:<strong> '.$nombre.'</strong></h4></div> 
+                            <div class="col-sm-2">
+                         
+                            <input type="button" name="view" value="Agregar Producto" id="'.$id.'" class="btn btn-success view_data2"/>
+                             </div> 
+                            ';
+                            }else{
+                            echo "<h3>Seleccione un cliente o Empresa.</h3> ";
+
+                            }
+
+                        ?>
+                            
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                      
+
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Nombre / Compañia</th>
-                          <th>Grupo</th>
-                          <th>Estado</th>
-                          <th>Opciones / Mantenimiento</th>                          
+                          <th>Producto</th>
+                          <th>Codigo Serie</th>                       
+                          <th>Eliminar</th>                          
                         </tr>
                       </thead>
                       <TBODY>
                          <?php 
-                         require_once "../class/Productos.php";
-                         $misProductos = new Productos();
-                         $producto = $misProductos->selectALL1();
-                    
-                         foreach ((array)$producto as $row) {
+                         $cliente=$_GET["cliente"];
+                         require_once "../class/ClienteProducto.php";
+                         $ms = new ClienteProducto();
+                         $contacto = $ms->selectALL($cliente);
+                         foreach ((array)$contacto as $row) {
                          echo '
                           <tr>
                            <td>'.$row['nombre'].'</td>
-                           <td>';
-                                $grupo_producto=$misProductos->selectOneGP($row['id_grupo_producto']);
-                           foreach ($grupo_producto as $rew) {
-                             echo ''.$rew['nombre'].'';
-                           }
-                           
-
-                           
-                           echo '
-
-                           <td>'.$row["estado"].'</td>
-                           </td>
-                           <td>
+                           <td>'.$row["codigo_serie"].'</td>
+                            <td>
                           
-                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_producto"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_producto"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
-                                ';
-                                if ($row["estado"]=="Activo") {
-                            echo '<a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=change&estado='.$row["estado"].'" class="btn btn-warning glyphicon glyphicon-refresh">Desactivar</a>';
-                             # code...
-                           }else{
-                            echo '<a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=change&estado='.$row["estado"].'" class="btn btn-success glyphicon glyphicon-refresh">Activar</a>';
-
-                           }
-                                    
-                           echo '</td>
+                               <a href="../controller/ClienteProductoControlador.php?id='.$row["id_cliente_producto"].'&accion=eliminar&cliente='.$cliente.'" class="btn btn-danger">Eliminar</a>
+                           </td>
                           </tr>
                          ';
                        }
@@ -248,7 +271,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Producto</h4>  
+                                                 <h4 class="modal-title">Clientes</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -258,12 +281,12 @@
                                        </div>  
                                   </div>  
   </div>
- <div id="dataModal3" class="modal fade">  
+    <div id="dataModal3" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Agregar NUevo Producto</h4>  
+                                                 <h4 class="modal-title">Productos</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -273,21 +296,21 @@
                                        </div>  
                                   </div>  
   </div>
-  <div id="dataModal" class="modal fade">  
+     <div id="dataModal4" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Editar Porducto</h4>  
+                                                 <h4 class="modal-title">Productos</h4>  
                                             </div>  
-                                            <div class="modal-body" id="employee_forms">  
+                                            <div class="modal-body" id="employee_forms4">  
                                             </div>  
                                             <div class="modal-footer">  
                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
                                             </div>  
                                        </div>  
                                   </div>  
-  </div> 
+  </div>
 			  
 			  
             </div>
@@ -356,7 +379,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectProducto.php",  
+                     url:"../views/listClientes2.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -365,40 +388,41 @@ ga('send', 'pageview');
                      }  
                 });  
            }            
-      });  
-       $(document).on('click', '.save_data', function(){  
-           var employee_action = $(this).attr("accion");  
-           if(employee_action != '')  
+      });
+      $(document).on('click', '.view_data2', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveProducto.php",  
+                     url:"../views/listProductos.php",  
                      method:"POST",  
-                     data:{employee_action:employee_action},  
+                     data:{employee_id:employee_id},  
                      success:function(data){  
                           $('#employee_forms3').html(data);  
                           $('#dataModal3').modal('show');  
                      }  
                 });  
            }            
-      });
-        $(document).on('click', '.edit_data', function(){  
+      }); 
+       $(document).on('click', '.edit_data', function(){  
           var employee_id = $(this).attr("id");  
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/modiProducto.php",  
+                     url:"../views/modiContacto.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
-                          $('#employee_forms').html(data);  
-                          $('#dataModal').modal('show');  
+                          $('#employee_forms4').html(data);  
+                          $('#dataModal4').modal('show');  
                      }  
                 });  
            }   
-      });
+      });  
        
- });  
+ }); 
 
 </script>
+
     </body>
 </html>

@@ -53,9 +53,9 @@
                 <br />
     
                 <!-- sidebar menu -->
-               <?php
+<?php
                  require_once "menuAdmin.php";
-                  ?>
+?>
                 <!-- /sidebar menu -->
     
                 <!-- /menu footer buttons -->
@@ -184,50 +184,41 @@
                     <br>
                     <br>
                     
-                     <input type="button" name="accion" value="Nuevo Producto" id="accion" class="btn btn-success save_data" /> 
+                     <input type="button" name="accion" value="Nuevo Repuesto" id="accion" class="btn btn-success save_data" /> 
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Nombre / Compañia</th>
-                          <th>Grupo</th>
+                          <th>Codigo Serie</th>
                           <th>Estado</th>
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
                       <TBODY>
                          <?php 
-                         require_once "../class/Productos.php";
-                         $misProductos = new Productos();
-                         $producto = $misProductos->selectALL1();
+                         require_once "../class/Repuestos.php";
+                         $misRepuestos = new Repuestos();
+                         $repuesto = $misRepuestos->selectALL1();
                     
-                         foreach ((array)$producto as $row) {
+                         foreach ((array)$repuesto as $row) {
                          echo '
                           <tr>
                            <td>'.$row['nombre'].'</td>
-                           <td>';
-                                $grupo_producto=$misProductos->selectOneGP($row['id_grupo_producto']);
-                           foreach ($grupo_producto as $rew) {
-                             echo ''.$rew['nombre'].'';
-                           }
-                           
-
-                           
-                           echo '
-
+                           <td>'.$row['codigo_serie'].'</td>
                            <td>'.$row["estado"].'</td>
                            </td>
                            <td>
                           
-                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_producto"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_producto"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_repuesto"].'" class="btn btn-info view_data"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_repuesto"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/RepuestosControlador.php?id='.$row["id_repuesto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                                 ';
                                 if ($row["estado"]=="Activo") {
-                            echo '<a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=change&estado='.$row["estado"].'" class="btn btn-warning glyphicon glyphicon-refresh">Desactivar</a>';
+                            echo '<a href="../controller/RepuestosControlador.php?id='.$row["id_repuesto"].'&accion=change&estado='.$row["estado"].'" class="btn btn-warning glyphicon glyphicon-refresh">Desactivar</a>';
                              # code...
                            }else{
-                            echo '<a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=change&estado='.$row["estado"].'" class="btn btn-success glyphicon glyphicon-refresh">Activar</a>';
+                            echo '<a href="../controller/RepuestosControlador.php?id='.$row["id_repuesto"].'&accion=change&estado='.$row["estado"].'" class="btn btn-success glyphicon glyphicon-refresh">Activar</a>';
 
                            }
                                     
@@ -248,7 +239,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Producto</h4>  
+                                                 <h4 class="modal-title">Detalle Repuesto</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -263,7 +254,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Agregar NUevo Producto</h4>  
+                                                 <h4 class="modal-title">Agregar NUevo Repuesto</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -278,7 +269,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Editar Porducto</h4>  
+                                                 <h4 class="modal-title">Editar Repuesto</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms">  
                                             </div>  
@@ -356,7 +347,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectProducto.php",  
+                     url:"../views/selectRepuesto.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -371,7 +362,7 @@ ga('send', 'pageview');
            if(employee_action != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveProducto.php",  
+                     url:"../views/saveRepuesto.php",  
                      method:"POST",  
                      data:{employee_action:employee_action},  
                      success:function(data){  
@@ -386,7 +377,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/modiProducto.php",  
+                     url:"../views/modiRepuesto.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  

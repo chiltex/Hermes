@@ -53,7 +53,7 @@
                 <br />
     
                 <!-- sidebar menu -->
-                  <?php
+                 <?php
                  require_once "menuAdmin.php";
                   ?>
                 <!-- /sidebar menu -->
@@ -104,7 +104,7 @@
                       </ul>
                     </li>
     
-                   
+                    
                   </ul>
                 </nav>
               </div>
@@ -115,112 +115,136 @@
             <div class="right_col" role="main">
               
         
-                <div class="clearfix"></div>
-                <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Agregar cliente</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              
+
+			  
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Pagina de Usuarios</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
                           </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a class="close-link"><i class="fa fa-close"></i></a>
+                          <li><a href="#">Settings 2</a>
                           </li>
                         </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-                        <br />
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/ClienteControlador.php?accion=guardar" method="post">
-    
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre cliente <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="nombre" name="nombre" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo Cliente <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                              <select  id="id_tip_cli" name="id_tip_cli" class="form-control ">
-                                 <?php 
-                         require_once "../class/Cliente.php";
-                         $misTC = new Cliente();
-                         $tc = $misTC->selectAllTipCliente();
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+           <?php 
+            if (isset($_GET['success'])) {
+                
+                if ($_GET['success']=='correcto') {
+                    
+                    echo '
+              <div class="alert alert-success" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Correcto:</span>
+                Los datos han sido guardados exitosamente.
+           
+                    ';
+                }
+            }elseif (isset($_GET['error'])) {
+               if ($_GET['error']=='incorrecto') {
+                    
+                    echo '
+                <div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Incorecto:</span>
+              
+                Error al guardar, verifique los datos ingresados.
+
+           
+                    ';
+                }
+            }elseif (isset($_GET['seleccion'])) {
+               if ($_GET['seleccion']=='nuevo') {
+                    
+                    echo '
+                 <div class="alert alert-primary" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Atencion:</span>
+              
+                Ingrese todos los datos.
+            
+                    ';
+                }
+            }
+             ?></div>
+                    <br>
+                    <br>
+                    <a href="../views/saveUsuario.php" class="btn btn-success">Nuevo Cliente</a>
+                    
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Tipo</th>
+                          <th>Opciones / Mantenimiento</th>                          
+                        </tr>
+                      </thead>
+                      <TBODY>
+                         <?php 
+                         require_once "../class/Usuario.php";
+                         $misUsuarios = new Usuario();
+                         $usuario = $misUsuarios->selectALL();
                         
                            # code...
                          
-                         foreach ((array)$tc as $row) {
+                         foreach ((array)$usuario as $row) {
+                          $tipo_usuario=$misUsuarios->selectOneTC($row['id_tipo_usuario']);
                          echo '
-                          <option value="'.$row["id_tip_cli"].'">'.$row["tipo_cliente"].'</option>
+                          <tr>
+                           <td>'.$row['nombre'].'</td>
+                           <td>'.$row["apellido"].'</td>
+                           <td>';
+                           foreach ($tipo_usuario as $rew) {
+                             echo ''.$rew['nombre'].'';
+                           }
+                           echo '</td>
+                           <td>
+                          
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_usuario"].'" class="btn btn-info view_data"/> 
+                                    <a href="../views/modiUsuario.php?id='.$row["id_usuario"].'" class="btn btn-warning">Editar</a>
+                                    <a href="../controller/UsurioControlador.php?id='.$row["id_usuario"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                           </td>
+                          </tr>
                          ';
                        }
                      
                      
                          ?>
-                                  
-                              </select>
-                            </div>
-                          </div>                          
-                          <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Categoria Cliente <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-6">
-                                <select  id="id_categoria" name="id_categoria" class="form-control ">
-                                   <?php 
-                         require_once "../class/Categorias.php";
-                         $misCategorias = new Categorias();
-                         $catego = $misCategorias->selectALL();
-                        
-                           # code...
-                         
-                         foreach ((array)$catego as $row) {
-                         echo '
-                          <option value="'.$row["id_categoria"].'">'.$row["nombre"].'</option>
-                         ';
-                       }
-                     
-                     
-                         ?>
-                                    
-                                </select>
-                              </div>
-                            </div>
-                            
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección cliente <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <textarea type="text" id="direccion" name="direccion" required="required" class="form-control col-md-7 col-xs-12"></textarea>
-                                </div>
-                              </div>
-                          
-                          
-                          
-                          <div class="ln_solid"></div>
-                          <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
-                              <button type="submit" class="btn btn-success">Ingresar</button>
-                            </div>
-                          </div>
-    
-                        </form>
-                      </div>
-                    </div>
+                      </TBODY>
+                    </table>
                   </div>
                 </div>
-
+              </div>
+			     <div id="dataModal2" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">Detalle Usuario</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_forms2">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+  </div>
+			  
 			  
             </div>
             <!--page content -->
@@ -275,6 +299,32 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
     
     </script>
-        
+        <script type="text/javascript">
+   $(document).ready(function(){  
+      $('#add').click(function(){  
+           $('#insert').val("Insert");  
+           $('#insert_form')[0].reset();  
+      });  
+    
+     
+      $(document).on('click', '.view_data', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/selectUsuario.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms2').html(data);  
+                          $('#dataModal2').modal('show');  
+                     }  
+                });  
+           }            
+      });  
+       
+ });  
+
+</script>
     </body>
 </html>

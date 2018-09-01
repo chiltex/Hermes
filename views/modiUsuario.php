@@ -104,7 +104,70 @@
                       </ul>
                     </li>
     
-                   
+                    <li role="presentation" class="dropdown">
+                      <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge bg-green">6</span>
+                      </a>
+                      <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        <li>
+                          <a>
+                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span>
+                              <span>John Smith</span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              Film festivals used to be do-or-die moments for movie makers. They were where...
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a>
+                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span>
+                              <span>John Smith</span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              Film festivals used to be do-or-die moments for movie makers. They were where...
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a>
+                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span>
+                              <span>John Smith</span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              Film festivals used to be do-or-die moments for movie makers. They were where...
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a>
+                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span>
+                              <span>John Smith</span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              Film festivals used to be do-or-die moments for movie makers. They were where...
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <div class="text-center">
+                            <a>
+                              <strong>See All Alerts</strong>
+                              <i class="fa fa-angle-right"></i>
+                            </a>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
                   </ul>
                 </nav>
               </div>
@@ -140,78 +203,87 @@
                       </div>
                       <div class="x_content">
                         <br />
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/ClienteControlador.php?accion=guardar" method="post">
-    
-                          <div class="form-group">
+
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/UsuarioControlador.php?accion=modificar" method="post">
+                          <?php
+                                require_once "../class/Usuario.php";
+                                $codigo=$_GET["id"];
+                                $MiUsuario = new Usuario();
+                                $cl = $MiUsuario->selectOne($codigo);
+
+                   foreach ($cl as $field) {
+                                  # code...
+                                echo '
+                                <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre cliente <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="nombre" name="nombre" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" id="id_usuario" name="id_usuario" value="'.$field["id_usuario"].'" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
+                                  <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre cliente <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="nombre" name="nombre" value="'.$field["nombre"].'" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                           <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Apellidos <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  
+                                  <input type="text" id="apellido" name="apellido" value="'.$field["apellido"].'" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo Cliente <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo Usuario <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                              <select  id="id_tip_cli" name="id_tip_cli" class="form-control ">
-                                 <?php 
-                         require_once "../class/Cliente.php";
-                         $misTC = new Cliente();
-                         $tc = $misTC->selectAllTipCliente();
-                        
-                           # code...
+                              <select  id="id_tipo_usuario" name="id_tipo_usuario" class="form-control ">
+
+                                '; 
                          
-                         foreach ((array)$tc as $row) {
-                         echo '
-                          <option value="'.$row["id_tip_cli"].'">'.$row["tipo_cliente"].'</option>
+                                    
+                           # code...
+
+                         
+                          $tipo_usuario=$MiUsuario->selectOneTC($field['id_tipo_usuario']);
+                             foreach ($tipo_usuario as $rew) {
+                             echo '
+                          <option value="'.$rew["id_tipo_usuario"].'">'.$rew["nombre"].'</option>
                          ';
-                       }
-                     
-                     
-                         ?>
-                                  
+                           }
+
+                          $tipo_client=$MiUsuario->selectOneDTC($field['id_tipo_usuario']);
+                             foreach ($tipo_client as $cew) {
+                             echo '
+                          <option value="'.$cew["id_tipo_usuario"].'">'.$cew["nombre"].'</option>
+                               ';
+                           }
+                                echo '      
                               </select>
                             </div>
                           </div>                          
                           <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Categoria Cliente <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-6">
-                                <select  id="id_categoria" name="id_categoria" class="form-control ">
-                                   <?php 
-                         require_once "../class/Categorias.php";
-                         $misCategorias = new Categorias();
-                         $catego = $misCategorias->selectALL();
-                        
-                           # code...
-                         
-                         foreach ((array)$catego as $row) {
-                         echo '
-                          <option value="'.$row["id_categoria"].'">'.$row["nombre"].'</option>
-                         ';
-                       }
-                     
-                     
-                         ?>
-                                    
-                                </select>
-                              </div>
-                            </div>
-                            
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección cliente <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Correo <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <textarea type="text" id="direccion" name="direccion" required="required" class="form-control col-md-7 col-xs-12"></textarea>
-                                </div>
+                                 <input type="text" id="correo" name="correo" required="required" value="'.$field["correo"].'" class="form-control col-md-7 col-xs-12">
+                                 </div>
                               </div>
-                          
+                              
+                            
+
+                              ';
+                          }
+                     ?><!--end php-->
                           
                           
                           <div class="ln_solid"></div>
                           <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
-                              <button type="submit" class="btn btn-success">Ingresar</button>
+                              <button type="submit" class="btn btn-success">Guardar</button>
                             </div>
                           </div>
     
