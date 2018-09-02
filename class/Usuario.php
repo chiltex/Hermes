@@ -141,6 +141,37 @@ class Usuario extends Conexion
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
       return $ListUsuario;
 }
+    public function login(){
+
+        $pass = hash("sha256", $this->contraseña);
+        $query1="SELECT * FROM usuario WHERE correo='".$this->correo."' AND pass='".$pass."'";
+        $selectall1=$this->db->query($query1);
+        $ListUsuario=$selectall1->fetch_all(MYSQLI_ASSOC);
+
+        if ($selectall1->num_rows!=0) {
+            foreach ($ListUsuario as $key) {
+            if ($key["id_tipo_usuario"]==1) {
+                session_start();
+                
+                $_SESSION['logged-in'] = true;
+                $_SESSION['Administrador']= $this->correo;
+                return 1;
+            }
+            elseif($key["id_tipo_usuario"]==2){
+             session_start();
+                $_SESSION['logged-in'] = true;
+                $_SESSION['Operador']= $this->correo;
+                return 2;
+
+            }else{
+                $_SESSION['logged-in'] = false;
+                return 3;
+            }
+        }
+            
+        }
+
+    }
  	 
 }//end class
 ?>
