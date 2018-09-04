@@ -23,6 +23,8 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -53,7 +55,7 @@
                 <br />
     
                 <!-- sidebar menu -->
-                <?php
+                 <?php
                  require_once "menuAdmin.php";
                   ?>
                 <!-- /sidebar menu -->
@@ -104,7 +106,70 @@
                       </ul>
                     </li>
     
-                    
+                    <li role="presentation" class="dropdown">
+                      <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge bg-green">6</span>
+                      </a>
+                      <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        <li>
+                          <a>
+                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span>
+                              <span>John Smith</span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              Film festivals used to be do-or-die moments for movie makers. They were where...
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a>
+                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span>
+                              <span>John Smith</span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              Film festivals used to be do-or-die moments for movie makers. They were where...
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a>
+                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span>
+                              <span>John Smith</span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              Film festivals used to be do-or-die moments for movie makers. They were where...
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a>
+                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span>
+                              <span>John Smith</span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              Film festivals used to be do-or-die moments for movie makers. They were where...
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <div class="text-center">
+                            <a>
+                              <strong>See All Alerts</strong>
+                              <i class="fa fa-angle-right"></i>
+                            </a>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
                   </ul>
                 </nav>
               </div>
@@ -121,7 +186,10 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Productos de cada Cliente / Empresa</h2>
+                    <h2>Pagina de Tipos de Gestion</h2>
+
+
+                    
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -139,12 +207,7 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
-                    
-  
-
-
-            <?php 
+           <?php 
             if (isset($_GET['success'])) {
                 
                 if ($_GET['success']=='correcto') {
@@ -158,7 +221,7 @@
                     ';
                 }
             }elseif (isset($_GET['error'])) {
-            
+           
                if ($_GET['error']=='incorrecto') {
                     
                     echo '
@@ -166,7 +229,7 @@
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="sr-only">Incorecto:</span>
               
-                Error al guardar, verifique los datos ingresados o ya fue agregado este producto anteriormente.
+                Error al guardar, verifique los datos ingresados.
 
            
                     ';
@@ -185,75 +248,41 @@
                 }
             }
              ?></div>
-             
-                    <br>
-                    <br>
-                    
-
-                    <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                       
-                        
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-                        <br />
-                        <div class="row">
-                          <div class="col-sm-4">
-                        <input type="button" name="view" value="Seleccionar Cliente" id="1" class="btn btn-info view_data"/>
-                          </div>
-                        <?php
-                          $id=$_GET["cliente"];
-                          $nombre=$_GET["nombre"];
-                          if ($id!=0 && $nombre != "nada") {
-                            echo '<div class="col-md-6"><h4>Cliente/ Empresa:<strong> '.$nombre.'</strong></h4></div> 
-                            <div class="col-sm-2">
-                         
-                            <input type="button" name="view" value="Agregar Producto" id="'.$id.'" class="btn btn-success view_data2"/>
-                             </div> 
-                            ';
-                            }else{
-                            echo "<h3>Seleccione un cliente o Empresa.</h3> ";
-
-                            }
-
-                        ?>
-                            
-                       </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-
+                  <div class="x_content">
                       
 
-                    
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                                    <input type="button" name="accion" value="Nuevo Tipo de Gestion" id="accion" class="btn btn-success save_data" /> 
+                    <br>
+                    <br>
+                    <div id="employee_table">
+                    <table id="datatable-buttons" class="table table-striped table-bordered" name="datatable-buttons">
                       <thead>
                         <tr>
-                          <th>Producto</th>
-                          <th>Codigo Serie</th>                       
-                          <th>Eliminar</th>                          
+                          <th>N° </th>
+                          <th>Tipo de Gestion</th>
+                          <th>Descripcion</th>
+                          <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
-                      <TBODY>
-                         <?php 
-                         $cliente=$_GET["cliente"];
-                         require_once "../class/ClienteProducto.php";
-                         $ms = new ClienteProducto();
-                         $contacto = $ms->selectALL($cliente);
-                         foreach ((array)$contacto as $row) {
+                      <tbody>
+                        <?php 
+                         require_once "../class/TipoGestion.php";
+                         $misTGestions = new TipoGestion();
+                         $catego = $misTGestions->selectALL();
+                        
+                           # code...
+                         
+                         foreach ((array)$catego as $row) {
                          echo '
                           <tr>
+                           <td>'.$row['id_tipo_gestion'].'</td>
                            <td>'.$row['nombre'].'</td>
-                           <td>'.$row["codigo_serie"].'</td>
-                            <td>
+                           <td>'.$row["descripcion"].'</td>
+                           <td>
                           
-                               <a href="../controller/ClienteProductoControlador.php?id='.$row["id_cliente_producto"].'&accion=eliminar&cliente='.$cliente.'" class="btn btn-danger">Eliminar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_tipo_gestion"].'" class="btn btn-info view_data"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_tipo_gestion"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/GestionControlador.php?id='.$row["id_tipo_gestion"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
@@ -261,17 +290,37 @@
                      
                      
                          ?>
-                      </TBODY>
+                      </tbody>
                     </table>
+                  </div>
                   </div>
                 </div>
               </div>
-			     <div id="dataModal2" class="modal fade">  
+			  
+			  
+			  
+            </div>
+ <div id="dataModal" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Clientes</h4>  
+                                                 <h4 class="modal-title">Detalle Tipo de Gestion</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_detail">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+  </div>  
+   <div id="dataModal2" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">Detalle Tipo de Gestion</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -281,12 +330,12 @@
                                        </div>  
                                   </div>  
   </div>
-    <div id="dataModal3" class="modal fade">  
+     <div id="dataModal3" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Productos</h4>  
+                                                 <h4 class="modal-title">Detalle Tipo de Gestion</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -296,25 +345,23 @@
                                        </div>  
                                   </div>  
   </div>
-     <div id="dataModal4" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Productos</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_forms4">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>
-			  
-			  
-            </div>
             <!--page content -->
+<div id="add_data_Modal" class="modal fade">  
+      <div class="modal-dialog">  
+           <div class="modal-content">  
+                <div class="modal-header">  
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                     <h4 class="modal-title">Agregar nuevo Tipo de Gestion</h4>  
+                </div>  
+                <div class="modal-body">  
+                     
+                </div>  
+                <div class="modal-footer">  
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                </div>  
+           </div>  
+      </div>  
+ </div>
     
             <!-- footer content -->
             <footer>
@@ -372,14 +419,28 @@ ga('send', 'pageview');
            $('#insert').val("Insert");  
            $('#insert_form')[0].reset();  
       });  
-    
+      $(document).on('click', '.edit_data', function(){  
+          var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/modiTipoGestion.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms2').html(data);  
+                          $('#dataModal2').modal('show');  
+                     }  
+                });  
+           }   
+      });  
      
       $(document).on('click', '.view_data', function(){  
            var employee_id = $(this).attr("id");  
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/listClientes2.php",  
+                     url:"../views/selectTipoGestion.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -388,41 +449,25 @@ ga('send', 'pageview');
                      }  
                 });  
            }            
-      });
-      $(document).on('click', '.view_data2', function(){  
-           var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
+      });  
+        $(document).on('click', '.save_data', function(){  
+           var employee_action = $(this).attr("accion");  
+           if(employee_action != '')  
            {  
                 $.ajax({  
-                     url:"../views/listProductos.php",  
+                     url:"../views/saveTipoGestion.php",  
                      method:"POST",  
-                     data:{employee_id:employee_id},  
+                     data:{employee_action:employee_action},  
                      success:function(data){  
                           $('#employee_forms3').html(data);  
                           $('#dataModal3').modal('show');  
                      }  
                 });  
            }            
-      }); 
-       $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/modiContacto.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms4').html(data);  
-                          $('#dataModal4').modal('show');  
-                     }  
-                });  
-           }   
-      });  
-       
-  }); 
+      });
+ });  
 
 </script>
-
+        
     </body>
 </html>

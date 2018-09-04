@@ -9,7 +9,7 @@ if ($accion=="login") {
 	$usua->setContraseña($contraseña);
 	$login=$usua->login();
 	if ($login==1) {
-		header('Location: ../indexAdmin.php?success=correcto');
+		header('Location: ../indexAdmin.php?success=correcto&id=0&nombre=Seleccione un Tecnico');
 		# code...
 	}
 	elseif($login==2) {

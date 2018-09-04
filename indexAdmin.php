@@ -1,7 +1,12 @@
 <?php
 require_once "class/Events.php";
  $misEvents = new Events();
- $events = $misEvents->selectALL();
+ $codigo=$_GET['id'];
+ if ($codigo==0) {
+  $events = $misEvents->selectALL();
+ }else{
+  $events = $misEvents->selectALLONE($codigo);  
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +63,7 @@ require_once "class/Events.php";
             <div class="col-md-3 left_col">
               <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                  <a href="indexAdmin.php" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
+                  <a href="indexAdmin.php?id=0&nombre=Seleccione un Tecnico" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
                 </div>
     
                 <div class="clearfix"></div>
@@ -220,11 +225,32 @@ require_once "class/Events.php";
                       </li>
                     </ul>
                     <div class="clearfix"></div>
-                  </div>
+
+                    </div>
                      <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>Agenda</h1>
-                
+                <div class="row">
+                          <div class="col-sm-4">
+                        <input type="button" name="view" value="Seleccionar Usuario" id="1" class="btn btn-info view_data"/>
+                          </div>
+                        <?php
+                          $id=$_GET["id"];
+                          $nombre=$_GET["nombre"];
+                          if ($id!=0 && $nombre != "nada") {
+                            echo '<div class="col-md-4"><h4><strong> '.$nombre.'</strong></h4></div> 
+                            <div class="col-sm-2">
+                              <a href="indexAdmin.php?id=0&nombre=Seleccione un Operador" class="btn btn-danger">Ver Todos</a>
+                            </div> 
+                            ';
+                            }else{
+                            echo "<h3>Seleccione un Tecnico.</h3> ";
+
+                            }
+
+                        ?>
+                            
+                </div>
                 <div id="calendar" class="col-centered">
                 </div>
             </div>
@@ -284,7 +310,30 @@ require_once "class/Events.php";
             <input type="text" name="end" class="form-control" id="end" readonly>
           </div>
           </div>
-        
+          <div class="form-group">
+          <label for="end" class="col-sm-2 control-label">Operador</label>
+          <div class="col-sm-10">
+             <select  id="id_usuario" name="id_usuario" class="form-control ">
+          <?php
+            $TU=$misEvents->selectOperadores();
+             foreach ((array)$TU as $row) {
+                         echo '
+                          <option value="'.$row["id_usuario"].'">'.$row["nombre"].' '.$row["apellido"].'</option>
+                         ';
+                }
+
+          ?>
+            </select>
+          </div>
+          </div>
+          <?php 
+              echo '
+              <input type="hidden" name="id_usuario1" value="'.$codigo.'"class="form-control" id="id_usuario1">
+              <input type="hidden" name="nu" value="'.$nombre.'"class="form-control" id="nu">
+
+              ';
+           ?>
+
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
@@ -307,7 +356,13 @@ require_once "class/Events.php";
         <h4 class="modal-title" id="myModalLabel">Modificar Evento</h4>
         </div>
         <div class="modal-body">
-        
+          <?php 
+              echo '
+              <input type="hidden" name="id_usuario" value="'.$id.'"class="form-control" id="id_usuario">
+              <input type="hidden" name="nu" value="'.$nombre.'"class="form-control" id="nu">
+
+              ';
+           ?>
           <div class="form-group">
           <label for="title" class="col-sm-2 control-label">Titulo</label>
           <div class="col-sm-10">
@@ -381,6 +436,21 @@ require_once "class/Events.php";
             </div>
 
             <!--page content -->
+ <div id="dataModal2" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">Operadores</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_forms2">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+  </div>
 
     
             <!-- footer content -->
@@ -533,24 +603,55 @@ ga('send', 'pageview');
       Event[0] = id;
       Event[1] = start;
       Event[2] = end;
+      <?php 
+        if ($codigo!=0){
+       ?>
       
       $.ajax({
        url: 'EventsControlador.php?accion=date',
        type: "POST",
        data: {Event:Event},
        success: function(rep) {
-          if(rep == 'OK'){
-            alert('Evento se ha guardado correctamente');
-          }else{
-            alert('No se pudo guardar. Inténtalo de nuevo.'); 
-          }
+         
         }
-      });
+
+      });  
+    <?php } else{?>
+        alert('Seleccione un Tecnico Para modficar la cita seleccionada. O intente ingresando nuevamente la cita'); 
+      <?php      }?>
     }
     
   });
 
 </script>
-        
+<script type="text/javascript">
+   $(document).ready(function(){  
+      $('#add').click(function(){  
+           $('#insert').val("Insert");  
+           $('#insert_form')[0].reset();  
+      });  
+    
+     
+      $(document).on('click', '.view_data', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"views/listUsuarios.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms2').html(data);  
+                          $('#dataModal2').modal('show');  
+                     }  
+                });  
+           }            
+      });
+ 
+  
+       
+  }); 
+
+</script>    
     </body>
 </html>

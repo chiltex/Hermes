@@ -151,7 +151,7 @@ CREATE TABLE `repuestos` (
 --
 
 CREATE TABLE `ticket` (
-  `id_ticket` int(11) NOT NULL,
+  `id_ticket` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
   `descripcion` longtext COLLATE utf8mb4_bin,
   `estado` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
   `id_cliente` int(11) DEFAULT NULL,
@@ -172,8 +172,7 @@ CREATE TABLE `ticket` (
 CREATE TABLE `tipo_gestion` (
   `id_tipo_gestion` int(11) NOT NULL,
   `nombre` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
-  `descripcion` longtext COLLATE utf8mb4_bin,
-  `id_gestion` int(11) DEFAULT NULL
+  `descripcion` longtext COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------

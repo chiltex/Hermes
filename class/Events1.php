@@ -1,5 +1,5 @@
 <?php
-require_once "config/conexion.php";
+require_once "../config/conexion.php";
 
 class Events extends Conexion
 {
@@ -83,7 +83,7 @@ class Events extends Conexion
     			'".$this->star."',
     			'".$this->end."',
     			'".$this->descripcion."',
-                ".$this->id_usuario.");";
+                '".$this->id_usuario."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
@@ -112,14 +112,14 @@ class Events extends Conexion
     }
  public function selectALLONE($codigo)
     {
-        $query="SELECT * FROM events WHERE id_usuario='".$codigo."'";
+        $query="SELECT * FROM events WHERE id='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListClientes;
     }
   public function update()
     {
-        $query="UPDATE events SET title='".$this->tittle."',color='".$this->color."',descripcion='".$this->descripcion."' WHERE id='".$this->id."'";
+        $query="UPDATE events SET title='".$this->tittle."',color='".$this->color."',descripcion='".$this->descripcion."',id_usuario='".$this->id_usuario."' WHERE id='".$this->id."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;
@@ -139,7 +139,7 @@ class Events extends Conexion
     }
      public function selectOperadores()
     {
-        $query="SELECT * FROM usuario WHERE id_tipo_usuario='2'";
+        $query="SELECT * FROM Usuario WHERE id_tipo_usuario='2'";
         $selectall=$this->db->query($query);
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuario;

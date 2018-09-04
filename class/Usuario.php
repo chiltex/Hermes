@@ -97,7 +97,7 @@ class Usuario extends Conexion
     }
     public function delete()
     {
-       $query="DELETE FROM Usuario WHERE id_usuario='".$this->id_usuario."'"; 
+       $query="DELETE FROM usuario WHERE id_usuario='".$this->id_usuario."'"; 
        $delete=$this->db->query($query);
        if ($delete == true) {
         return true;
@@ -115,14 +115,14 @@ class Usuario extends Conexion
     }
      public function selectOne($codigo)
     {
-        $query="SELECT * FROM Usuario WHERE id_usuario='".$codigo."'";
+        $query="SELECT * FROM usuario WHERE id_usuario='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuario;
     }
       public function selectAllTipUsuario()
     {
-        $query="SELECT * FROM tipo_Usuario";
+        $query="SELECT * FROM tipo_usuario";
         $selectall=$this->db->query($query);
         $ListTC=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListTC;
