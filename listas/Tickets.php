@@ -121,7 +121,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Contactos</h2>
+                    <h2>Pagina de Clientes</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -140,11 +140,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    
-  
-
-
-            <?php 
+           <?php 
             if (isset($_GET['success'])) {
                 
                 if ($_GET['success']=='correcto') {
@@ -158,7 +154,6 @@
                     ';
                 }
             }elseif (isset($_GET['error'])) {
-              $msj=$_GET['msj'];
                if ($_GET['error']=='incorrecto') {
                     
                     echo '
@@ -185,144 +180,53 @@
                 }
             }
              ?></div>
-             
                     <br>
                     <br>
-                    
-
-                    <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Agregar contacto</h2>
-                       
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-                        <br />
-                        <input type="button" name="view" value="Seleccionar Cliente" id="1" class="btn btn-info view_data"/>
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/ContactoControlador.php?accion=guardar" method="post">
-                        <?php
-
-                          $id=$_GET["id"];
-                          $nombre=$_GET["nombre"];
-                          if ($id!="" && $nombre != "") {
-                              echo'
-                               <div class="row">
-                               <div class="col-md-6">    
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre Contacto <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-xs-6 col-xs-12">
-                              <input type="text" id="nombre" name="nombre" value=""  required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
-                          </div>
-                          <input type="hidden" id="id_cliente" name="id_cliente" value="'.$id.'">
-                               ';
-                            }else{
-                             echo'
-                              <div class="row"> 
-                              <div class="col-md-6">   
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre Contacto <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-xs-6 col-xs-12">
-                              <input type="text" id="nombre" name="nombre" value="Seleccione un nombre..." readonly required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
-                              </div>
-                               ';
-
-                            }
-
-                        ?>
-                            
-                               <div class="col-md-6">   
-                              <div class="form-group">
-                                <label class="control-label col-md-4 col-xs-4 col-xs-12" for="first-name">Correo <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-xs-6 col-xs-12">
-                                  <input type="text" id="correo" name="correo" required="required" class="form-control col-md-3 col-xs-12">
-                                </div>
-                              </div>
-                              </div> 
-                              
-                        </div>
-                        <dir class="row">
-                          <div class="col-md-4">  
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-xs-3 col-xs-12" for="first-name">Telefono Contacto <span class="required">*</span>
-                                </label>
-                                <div class="col-md-5 col-xs-6 col-xs-12">
-                                  <input type="text" id="telefono" name="telefono" required="required" class="form-control col-md-3 col-xs-6">
-                                </div>
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-xs-4 col-xs-7" for="first-name">Extension <span class="required">*</span>
-                            </label>
-                            <div class="col-md-5 col-xs-6 col-xs-12">
-                              <input type="text" id="extension" name="extension" required="required" class="form-control col-md-3 col-xs-6">
-                            </div>
-                          </div>
-                          </div>
-                          <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label col-md-4 col-xs-2 col-xs-12" for="first-name">Movil <span class="required">*</span>
-                            </label>
-                            <div class="col-md-5 col-xs-6 col-xs-12">
-                              <input type="text" id="movil" name="movil" required="required" class="form-control col-md-3 col-xs-6">
-                            </div>
-                          </div>
-                          </div>
-                         </dir> 
-                          
-                          
-                          <div class="ln_solid"></div>
-                          <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
-                              <button type="submit" class="btn btn-success">Agregar Contacto</button>
-                            </div>
-                          </div>
-    
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-
-
-
+                    <a href="../views/saveTicket.php?cliente=0&id_producto=0&codigo_serie=0000&producto=N/A&nombre=N/A" class="btn btn-success">Nuevo Ticket</a>
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Nombre / Compañia</th>
-                          <th>Correo</th>
-                          <th>Telefono</th>                         
-                          <th>Opciones / Mantenimiento</th>                          
+                          <th>N°</th>
+                          <th>Tipo</th>
+                          <th>Gestion</th>
+                          <th>Responsable</th>
+                          <th>Estado</th>
+                          <th>Opciones</th>                            
                         </tr>
                       </thead>
                       <TBODY>
                          <?php 
-                         require_once "../class/Contactos.php";
-                         $misContactos = new Contactos();
-                         $contacto = $misContactos->selectALL();
-                         foreach ((array)$contacto as $row) {
+                         require_once "../class/Ticket.php";
+                         $misTickets = new Ticket();
+                         $Ticket = $misTickets->selectALL();
+                        
+                           # code...
+                         
+                         foreach ((array)$Ticket as $row) {
+                          $gestion=$misTickets->selectOneG($row['id_gestion']);
+                          $tipo=$misTickets->selectOneTG($row['id_tipo_gestion']);
+                          $tecnico=$misTickets->selectOneU($row['id_usuario']);
                          echo '
                           <tr>
-                           <td>'.$row['nombre'].'</td>
-                           <td>'.$row["correo"].'</td>                           
-                           <td>'.$row["telefono"].'</td>
-                            <td>
+                           <td>'.$row['id_gestion'].'</td>';
+                            foreach ($gestion as $key) {
+                              echo '<td>'.$key['nombre'].'</td>';
+                            }
+                            foreach ($tipo as $rew) {
+                             echo '<td>'.$rew['nombre'].'</td>';
+                            }
+                            foreach ($tecnico as $field) {
+                               echo '<td>'.$field['nombre'].'</td>';
+                            }
+                           echo '
+
+                           <td>'.$row['estado'].'</td>
+                           <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_contacto"].'" class="btn btn-info view_data2"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_contacto"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/ContactoControlador.php?id='.$row["id_contacto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ticket"].'" class="btn btn-info view_data"/> 
+                                    <a href="../views/modiTicket.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'" class="btn btn-warning">Editar</a>
+                                    <a href="../controller/TicketControlador.php?id='.$row["id_ticket"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
@@ -340,39 +244,9 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Clientes</h4>  
+                                                 <h4 class="modal-title">Detalle Ticket</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>
-    <div id="dataModal3" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Contacto</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_forms3">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>
-     <div id="dataModal4" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Modificar Contacto</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_forms4">  
                                             </div>  
                                             <div class="modal-footer">  
                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
@@ -448,7 +322,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/listClientes.php",  
+                     url:"../views/selectCliente.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -457,41 +331,10 @@ ga('send', 'pageview');
                      }  
                 });  
            }            
-      });
-      $(document).on('click', '.view_data2', function(){  
-           var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/selectContacto.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms3').html(data);  
-                          $('#dataModal3').modal('show');  
-                     }  
-                });  
-           }            
-      }); 
-       $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/modiContacto.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms4').html(data);  
-                          $('#dataModal4').modal('show');  
-                     }  
-                });  
-           }   
       });  
        
- }); 
+ });  
 
 </script>
-
     </body>
 </html>

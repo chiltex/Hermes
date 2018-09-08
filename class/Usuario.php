@@ -120,6 +120,21 @@ class Usuario extends Conexion
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuario;
     }
+      public function selectTecnicos()
+    {
+        $query="SELECT * FROM usuario WHERE id_tipo_usuario=2";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListUsuario;
+    }
+    public function selectDTecnicos($codigo)
+    {
+        $query="SELECT * FROM usuario WHERE id_tipo_usuario=2 AND id_usuario!='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListUsuario;
+    }
+    
       public function selectAllTipUsuario()
     {
         $query="SELECT * FROM tipo_usuario";

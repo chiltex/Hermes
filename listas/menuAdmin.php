@@ -24,7 +24,7 @@
                       </li>
                       <li><a><i class="fa fa-table"></i> Tickets <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="tables.html">Tables</a></li>
+                          <li><a href="../listas/Tickets.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0">Ticket</a></li>
                           <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                         </ul>
                       </li>

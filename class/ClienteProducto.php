@@ -84,7 +84,7 @@ class ClienteProducto extends Conexion
     }
     public function selectALL($codigo)
     {
-        $query="SELECT P.nombre,P.codigo_serie, CP.id_cliente_producto FROM productos P INNER JOIN cliente_producto CP on CP.id_producto = P.id_producto WHERE CP.id_cliente='".$codigo."'";
+        $query="SELECT P.nombre,P.codigo_serie, CP.id_cliente_producto,CP.id_producto FROM productos P INNER JOIN cliente_producto CP on CP.id_producto = P.id_producto WHERE CP.id_cliente='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListProductos=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListProductos;
