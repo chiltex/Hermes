@@ -147,6 +147,8 @@
                               <div class="col-lg-6">
                                 <div class="row">
                                 <input type="button" name="view" value="Seleccionar Empresa" id="1" class="btn btn-info view_data"/>
+
+                    <input type="button" name="view" value="Agregar Empresa/Contacto" id="1" class="btn btn-info view_data3"/> 
                                 <?php 
                                       if (is_null($_GET["cliente"])&& is_null($_GET["nombre"])) {
                                        $id=0;
@@ -154,10 +156,17 @@
                                       }else{
                                          $id=$_GET["cliente"];
                                          $nombre=$_GET["nombre"]; 
-                                         echo '
-                                         <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div> 
-                              
-                                         ';
+                                         if ($id!="0" && $nombre!="N/A") {
+                                             echo '
+                                         <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
+                                           echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-warning view_data4"/>';
+                                           # code...
+                                         }else{
+                                           echo '
+                                         <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
+                                         }
+                                      
+
                                       }
                                       ?>
                                       <table id="example2 datatable-buttons" class="table table-striped table-bordered">
@@ -401,6 +410,21 @@
                                        </div>  
                                   </div>  
         </div>
+         <div id="dataModal4" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">Nueva Empresa/Contacto</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_forms4">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+                </div>
             <!-- footer content -->
             <footer>
               <div class="pull-right">
@@ -505,6 +529,38 @@ ga('send', 'pageview');
                      }  
                 });  
            }   
+      }); 
+         $(document).on('click', '.view_data3', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/nuevoEC.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms3').html(data);  
+                          $('#dataModal3').modal('show');  
+                     }  
+                });  
+           }            
+      });
+       $(document).on('click', '.view_data4', function(){  
+           var employee_id = $(this).attr("id");    
+           var employee_name = $(this).attr("nombre");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/nuevoC.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id,
+                          employee_name:employee_name},  
+                     success:function(data){  
+                          $('#employee_forms4').html(data);  
+                          $('#dataModal4').modal('show');  
+                     }  
+                });  
+           }            
       });  
        
   }); 

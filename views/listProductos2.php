@@ -5,8 +5,16 @@
   <input id="filtrar" type="text" class="form-control" placeholder="Buscar...">
 </div>
 //buscador 1
---> <a href="../listas/Productos.php" class="btn btn-primary">Nuevo Producto</a>
-       <table id="datatable-buttons" class="table table-striped table-bordered">
+
+--> 
+<?php 
+
+               $codigo=$_POST["employee_id"];
+
+               $empresa=$_POST["employee_name"];
+               echo '<a href="../listas/Cliente_Producto.php?cliente='.$codigo.'&nombre='.$empresa.'&producto=0" class="btn btn-primary">Nuevo Producto</a>';
+ ?>
+<table id="datatable-buttons" class="table table-striped table-bordered">
          <thead>
                         <tr>
                           <th>Producto</th>
@@ -18,9 +26,6 @@
 <?php 
   
   require_once "../class/Productos.php";
-  						 $codigo=$_POST["employee_id"];
-
-               $empresa=$_POST["employee_name"];
                          $misProductos = new Productos();
                          $pro = $misProductos->selectALL();
 

@@ -149,6 +149,14 @@ class Cliente extends Conexion
         $ListCliente=$selectall->fetch_all(MYSQLI_ASSOC);
       return $ListCliente;
 	}
+    public function selectLast()
+    {
+        $query="SELECT * FROM cliente ORDER BY id_cliente DESC LIMIT 1";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
+
 
 }//end class
 ?>
