@@ -170,6 +170,7 @@ class Usuario extends Conexion
                 
                 $_SESSION['logged-in'] = true;
                 $_SESSION['Administrador']= $this->correo;
+                $_SESSION['id_usuario']=$key['id_usuario'];
                 return 1;
             }
             elseif($key["id_tipo_usuario"]==2){

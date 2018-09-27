@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,7 +123,7 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2>Agregar Ticket</h2>
+                        <h2>Agregar Ficha Tecnica</h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                           </li>
@@ -142,24 +145,31 @@
                         <br />
                         <div class="row">
                           <div class="col-lg-12">
-                            <div class="row">
-                              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/TicketControlador.php?accion=guardar" method="post">
+                          
+           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/FichaTecnicaControlador.php?accion=guardar" method="post" ENCTYPE="multipart/form-data">
+              <div class="row">
                               <div class="col-lg-6">
                                 <div class="row">
-                                <input type="button" name="view" value="Seleccionar Empresa" id="1" class="btn btn-info view_data"/>
+                             
 
-                    <input type="button" name="view" value="Agregar Empresa/Contacto" id="1" class="btn btn-info view_data3"/> 
+                    <input type="button" name="view" value="Agregar Empresa/Contacto" id="1" bandera="ticket" class="btn btn-info view_data3"/> 
                                 <?php 
                                       if (is_null($_GET["cliente"])&& is_null($_GET["nombre"])) {
                                        $id=0;
                                        $nombre="N/A";
                                       }else{
                                          $id=$_GET["cliente"];
-                                         $nombre=$_GET["nombre"]; 
+                                         $nombre=$_GET["nombre"];
+                                         $id_producto=$_GET["id_producto"];
+                                         $producto=$_GET["producto"];
+                                         $codigo_serie=$_GET["codigo_serie"]; 
                                          if ($id!="0" && $nombre!="N/A") {
                                              echo '
                                          <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
-                                           echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-warning view_data4"/>';
+                                           echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" bandera="ticket" producto="'.$producto.'" codigo_serie="'.$codigo_serie.'" id_producto="'.$id_producto.'" class="btn btn-warning view_data4"/>
+                                           <input type="hidden" name="empresa" id="empresa" value="'.$nombre.'"/>
+
+                                           ';
                                            # code...
                                          }else{
                                            echo '
@@ -179,8 +189,8 @@
                                       </thead>
                                       <TBODY>
                                          <?php 
-                                         require_once "../class/Ticket.php";
-                                         $ms = new Ticket();
+                                         require_once "../class/FichaTenica.php";
+                                         $ms = new FichaTecnica();
                                          $contacto = $ms->selectOneC($id);
                                          foreach ((array)$contacto as $row) {
                                          echo '
@@ -193,14 +203,20 @@
                                            </td>
                                           </tr>
                                          ';
+
                                        }
+
+                                         
+                                         $id_usuario=$_SESSION['id_usuario'];
+                                         echo '<input type="hidden" name="id_usuario" id="id_usuario" value="'.$id_usuario.'"/>
+                                         <input type="hidden" name="codigo_serie" id="codigo_serie" value="'.$codigo_serie.'"/>';
                                      
                                      
                                                      ?>
                                           </TBODY>
                                         </table>
                                         <?php 
-                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-info view_data2"/>';
+                                           
 
                                             if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
                                                $id_producto=0;
@@ -212,34 +228,32 @@
                                                   $producto=$_GET["producto"];
                                               }
                                               echo '
-                                                <div class="col-xs-8"><h6>Producto:<strong> '.$producto.'</strong>  Codigo serie: <strong> '.$codigo_serie.'</strong></h6></div> 
-                                  <div class="col-sm-12">
+                                                <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong></h4></div>
+                                                <div class="col-xs-8"><h4>Codigo serie: <strong> '.$codigo_serie.'</strong></h4></div>  
+                                 <div class="col-xs-12">
                                               <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
+                                              <input type="hidden" name="producto" id="producto" value="'.$producto.'"/>
                                                   ';
 
                                              ?>
-                                        <div class="form-group">
-                                        <label class="control-label col-sm-3" for="last-name">Ficha Tecnica <span class="required">:</span>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-xs-4" for="last-name">Descripcion Producto <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <?php 
-                                              if (isset($_GET['id_ficha_tecnica'])) {
-                                                $id_ficha_tecnica=$_GET['id_ficha_tecnica'];
-                                                  echo '
-                                                  <div class="col-xs-8"><h4><strong> '.$id_ficha_tecnica.'</strong></h4></div>
-                                                  <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$id_ficha_tecnica.'"/>
-                                                  <input type="button" name="view" value="Ver Detalle" id="'.$id_ficha_tecnica.'" class="btn btn-info view_data5"/>
-                                                   ';  
-                                              }else{
-                                                  echo '
-                                                    <a href="../views/saveFT_T.php?cliente='.$id.'&id_producto='.$id_producto.'&nombre='.$nombre.'&producto='.$producto.'&codigo_serie='.$codigo_serie.'" class="btn btn-success">Añadir Ficha Tecnica</a>
-                                                  ';
-
-                                              }
-
-                                             ?>
-                                        </div>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                         <textarea name="descripcion" id="descripcion" class="form-control"></textarea>  
+                          
+                                          </div>
                                     </div>
+                                     <div class="form-group">
+                                        <label class="control-label col-xs-4" for="last-name">Descripcion Solucion <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                         <textarea name="trabajo" id="trabajo" class="form-control"></textarea>  
+                          
+                                          </div>
+                                    </div>
+                                        
                                            
                                   </div>
                               </div>
@@ -250,113 +264,63 @@
                                   <div class="col-lg-9">
                                     <div class="row">
                                         <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado<span class="required">*</span>
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo se entrega<span class="required">*</span>
                                           </label>
                                           <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select id="estado" name="estado" class="form-control ">
-                                              <option value="Iniciado">Iniciado</option>
-                                              <option value="En Proceso">En Proceso</option>
+                                            <select id="equipo_queda" name="equipo_queda" class="form-control ">
+                                              <option value="Iniciado">Reparado</option>
+                                              <option value="EnProceso">En espera</option>
                                               <option value="Finalizado">Finalizado</option>                                    
                                             </select>
                                           </div>
                                         </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tecnico Responsable <span class="required">*</span>
+                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="last-name">Descripcion Falla <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                          <select  id="id_usuario" name="id_usuario" class="form-control ">
-                                             <?php
-                                             require_once "../class/Usuario.php";
-                                                 $usua = new Usuario();
-                                                 $usuar=$usua->selectTecnicos();
-                                              
-                                                 # code...
-                                               
-                                               foreach ((array)$usuar as $rew) {
-                                               echo '
-                                                <option value="'.$rew["id_usuario"].'">'.$rew["nombre"].' '.$rew["apellido"].'</option>
-                                               ';
-                                             }
-                                           
-                                           
-                                               ?>
-                                              
-                                          </select>
-                                        </div>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                         <textarea name="falla" id="falla" class="form-control"></textarea>  
+                          
+                                          </div>
+                                       
                                     </div>
                                     </div>
                                   </div>
                                 <div class="col-lg-9">
                                   <div class="row">
                                  
-                                    <div class="form-group">
-                                      <label class="control-label col-md-3 col-xs-3 col-xs-6" for="first-name">Gestion<span class="required">*</span>
-                                      </label>
-                                      <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                        <select id="id_gestion" name="id_gestion" class="form-control ">  
-                                        <?php
-                                         require_once "../class/Gestion.php";
-                                             $gestion = new Gestion();
-                                             $ges=$gestion->selectALL();
-                                          
-                                             # code...
-                                           
-                                           foreach ((array)$ges as $raw) {
-                                           echo '
-                                            <option value="'.$raw["id_gestion"].'">'.$raw["nombre"].'</option>
-                                           ';
-                                         }
-                                       
-                                       
-                                           ?>                                
-                                        </select>
-                                      </div>
-                                    </div>
+                                  
                                      <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-6" for="last-name">Tipo Gestion <span class="required">*</span>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma Cliente<span class="required"></span>
                                     </label>
+                                    <br> <br> <br>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <canvas id='canvasCliente' width="300" height="100" style='border: 1px solid #CCC;'>
+                                              <p>Tu navegador no soporta canvas</p>
+                                          </canvas>
 
-                                      <select  id="id_tipo_gestion" name="id_tipo_gestion" class="form-control ">
-                                         <?php
-                                         require_once "../class/TipoGestion.php";
-                                             $tg = new TipoGestion();
-                                             $Tgo=$tg->selectALL();
-                                          
-                                             # code...
-                                           
-                                           foreach ((array)$Tgo as $riw) {
-                                           echo '
-                                            <option value="'.$riw["id_tipo_gestion"].'">'.$riw["nombre"].'</option>
-                                           ';
-                                         }
-                                       
-                                       
-                                           ?>
-                                          
-                                      </select>
+                                      <input type='hidden' name='imagenC' id='imagenC' />
+
+                                    <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button>
+                                   </div>
+                                    </div> <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma tecnico<span class="required"></span>
+                                    </label>
+                                    <br> <br> <br>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <canvas id='canvas2' width="300" height="100" style='border: 1px solid #CCC;'>
+                                              <p>Tu navegador no soporta canvas</p>
+                                          </canvas>
+
+                                      <input type='hidden' name='imagen2' id='imagen2' />
+
+                                    <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button>
                                    </div>
                                     </div>
-                                    <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Descripcion<span class="required">*</span>
-                                          </label>
-                                          <div class="col-md-6 col-sm-6 col-xs-12">                                   
-                                         <textarea name="descripcion" id="descripcion" class="form-control"></textarea>  
-                          
-                                          </div>
-                                        </div>
-                                     <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Solucion<span class="required">*</span>
-                                          </label>
-                                          <div class="col-md-6 col-sm-6 col-xs-12">                                   
-                                         <textarea name="solucion" id="solucion" class="form-control"></textarea>  
-                          
-                                          </div>
-                                        </div>
+                                    <input type="hidden" name="bandera" id="bandera" value="ticket"/>
+                                    
                                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
-                              <button type="submit" class="btn btn-success">Ingresar</button>
+                              <button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>
                             </div>
                           </div>
                                   </div>
@@ -366,7 +330,7 @@
                               </div>
                               </div>
 
-                              </form>
+           </form>
                           
                           </div>
                         </div>
@@ -482,13 +446,15 @@ ga('send', 'pageview');
     
      
       $(document).on('click', '.view_data', function(){  
-           var employee_id = $(this).attr("id");  
+           var employee_id = $(this).attr("id");   
+          var bandera = $(this).attr("bandera");  
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/listClientes3.php",  
+                     url:"../views/listClientes4.php",  
                      method:"POST",  
-                     data:{employee_id:employee_id},  
+                     data:{employee_id:employee_id,
+                           bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms2').html(data);  
                           $('#dataModal2').modal('show');  
@@ -499,13 +465,15 @@ ga('send', 'pageview');
       $(document).on('click', '.view_data2', function(){  
            var employee_id = $(this).attr("id");   
            var employee_name = $(this).attr("nombre");  
+          var bandera = $(this).attr("bandera");   
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/listProductos2.php",  
+                     url:"../views/listProductos3.php",  
                      method:"POST",  
                      data:{employee_id:employee_id,
-                          employee_name:employee_name},  
+                          employee_name:employee_name,
+                          bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms3').html(data);  
                           $('#dataModal3').modal('show');  
@@ -514,13 +482,15 @@ ga('send', 'pageview');
            }            
       }); 
        $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
+          var employee_id = $(this).attr("id");   
+          var bandera = $(this).attr("bandera");  
            if(employee_id != '')  
            {  
                 $.ajax({  
                      url:"../views/modiContacto.php",  
                      method:"POST",  
-                     data:{employee_id:employee_id},  
+                     data:{employee_id:employee_id,
+                          bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms4').html(data);  
                           $('#dataModal4').modal('show');  
@@ -530,12 +500,14 @@ ga('send', 'pageview');
       }); 
          $(document).on('click', '.view_data3', function(){  
            var employee_id = $(this).attr("id");  
+          var bandera = $(this).attr("bandera");   
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/nuevoEC.php",  
+                     url:"../views/nuevoEC1.php",  
                      method:"POST",  
-                     data:{employee_id:employee_id},  
+                     data:{employee_id:employee_id,
+                           bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms3').html(data);  
                           $('#dataModal3').modal('show');  
@@ -545,32 +517,26 @@ ga('send', 'pageview');
       });
        $(document).on('click', '.view_data4', function(){  
            var employee_id = $(this).attr("id");    
-           var employee_name = $(this).attr("nombre");  
+           var employee_name = $(this).attr("nombre"); 
+
+          var bandera = $(this).attr("bandera"); 
+          var producto = $(this).attr("producto");
+          var codigo_serie = $(this).attr("codigo_serie"); 
+          var id_producto = $(this).attr("id_producto"); 
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/nuevoC.php",  
+                     url:"../views/nuevoC1.php",  
                      method:"POST",  
                      data:{employee_id:employee_id,
-                          employee_name:employee_name},  
+                          employee_name:employee_name,
+                          bandera:bandera,
+                          producto:producto,
+                          codigo_serie:codigo_serie,
+                          id_producto:id_producto},  
                      success:function(data){  
                           $('#employee_forms4').html(data);  
                           $('#dataModal4').modal('show');  
-                     }  
-                });  
-           }            
-      });
-         $(document).on('click', '.view_data5', function(){  
-           var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/selecFT.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms2').html(data);  
-                          $('#dataModal2').modal('show');  
                      }  
                 });  
            }            
@@ -591,6 +557,207 @@ ga('send', 'pageview');
       'autoWidth'   : true
     })
   })
+</script>
+<script type="text/javascript">
+    /* Variables de Configuracion */
+    var idCanvas='canvasCliente';
+    var idCanvas2='canvas2';
+    var idForm='demo-form2';
+    var inputImagen='imagenC';
+    var inputImagen2='imagen2';
+
+    var estiloDelCursor='crosshair';
+    var colorDelTrazo='#555';
+    var colorDeFondo='#fff';
+    var grosorDelTrazo=2;
+
+    /* Variables necesarias */
+    var contexto=null;
+    var valX=0;
+    var valY=0;
+    var flag=false;
+    var imagen=document.getElementById(inputImagen); 
+    var anchoCanvas=document.getElementById(idCanvas).offsetWidth;
+    var altoCanvas=document.getElementById(idCanvas).offsetHeight;
+    var pizarraCanvas=document.getElementById(idCanvas);
+
+     var imagen2=document.getElementById(inputImagen2); 
+    var anchoCanvas2=document.getElementById(idCanvas2).offsetWidth;
+    var altoCanvas2=document.getElementById(idCanvas2).offsetHeight;
+    var pizarraCanvas2=document.getElementById(idCanvas2);
+
+     
+
+    /* Esperamos el evento load */
+    window.addEventListener('load',IniciarDibujo,false);
+
+    function IniciarDibujo(){
+      /* Creamos la pizarra */
+      pizarraCanvas.style.cursor=estiloDelCursor;
+      contexto=pizarraCanvas.getContext('2d');
+      contexto.fillStyle=colorDeFondo;
+
+      contexto.font = "bold 22px sans-serif";
+        // Fuente para el texto
+      contexto.fillText("hola",50,50);
+      contexto.fillRect(0,0,anchoCanvas,altoCanvas);
+      contexto.strokeStyle=colorDelTrazo;
+      contexto.lineWidth=grosorDelTrazo;
+      contexto.lineJoin='round';
+      contexto.lineCap='round';
+      /* Capturamos los diferentes eventos */
+      pizarraCanvas.addEventListener('mousedown',MouseDown,false);// Click pc
+      pizarraCanvas.addEventListener('mouseup',MouseUp,false);// fin click pc
+      pizarraCanvas.addEventListener('mousemove',MouseMove,false);// arrastrar pc
+
+      pizarraCanvas.addEventListener('touchstart',TouchStart,false);// tocar pantalla tactil
+      pizarraCanvas.addEventListener('touchmove',TouchMove,false);// arrastras pantalla tactil
+      pizarraCanvas.addEventListener('touchend',TouchEnd,false);// fin tocar pantalla dentro de la pizarra
+      pizarraCanvas.addEventListener('touchleave',TouchEnd,false);// fin tocar pantalla fuera de la pizarra
+
+           /* Creamos la pizarra2 */
+      pizarraCanvas2.style.cursor=estiloDelCursor;
+      contexto2=pizarraCanvas2.getContext('2d');
+      contexto2.fillStyle=colorDeFondo;
+      contexto2.fillRect(0,0,anchoCanvas2,altoCanvas2);
+      contexto2.strokeStyle=colorDelTrazo;
+      contexto2.lineWidth=grosorDelTrazo;
+      contexto2.lineJoin='round';
+      contexto2.lineCap='round';
+      contexto2.font = "40px Calibri, Arial";
+        // Fuente para el texto
+      contexto2.fillText("hola",0,0);
+      /* Capturamos los diferentes eventos */
+      pizarraCanvas2.addEventListener('mousedown',MouseDown2,false);// Click pc
+      pizarraCanvas2.addEventListener('mouseup',MouseUp2,false);// fin click pc
+      pizarraCanvas2.addEventListener('mousemove',MouseMove2,false);// arrastrar pc
+
+      pizarraCanvas2.addEventListener('touchstart',TouchStart2,false);// tocar pantalla tactil
+      pizarraCanvas2.addEventListener('touchmove',TouchMove2,false);// arrastras pantalla tactil
+      pizarraCanvas2.addEventListener('touchend',TouchEnd2,false);// fin tocar pantalla dentro de la pizarra
+      pizarraCanvas2.addEventListener('touchleave',TouchEnd2,false);// fin tocar pantalla fuera de la pizarra
+
+    }
+
+    function MouseDown(e){
+      flag=true;
+      contexto.beginPath();
+      valX=e.pageX-posicionX(pizarraCanvas); valY=e.pageY-posicionY(pizarraCanvas);
+      contexto.moveTo(valX,valY);
+    }
+
+    function MouseUp(e){
+      contexto.closePath();
+      flag=false;
+    }
+
+    function MouseMove(e){
+      if(flag){
+        contexto.beginPath();
+        contexto.moveTo(valX,valY);
+        valX=e.pageX-posicionX(pizarraCanvas); valY=e.pageY-posicionY(pizarraCanvas);
+        contexto.lineTo(valX,valY);
+        contexto.closePath();
+        contexto.stroke();
+      }
+    }
+
+    function TouchMove(e){
+      e.preventDefault();
+      if (e.targetTouches.length == 1) { 
+        var touch = e.targetTouches[0]; 
+        MouseMove(touch);
+      }
+    }
+
+    function TouchStart(e){
+      if (e.targetTouches.length == 1) { 
+        var touch = e.targetTouches[0]; 
+        MouseDown(touch);
+      }
+    }
+
+    function TouchEnd(e){
+      if (e.targetTouches.length == 1) { 
+        var touch = e.targetTouches[0]; 
+        MouseUp(touch);
+      }
+    }
+
+    function posicionY(obj) {
+      var valor = obj.offsetTop;
+      if (obj.offsetParent) valor += posicionY(obj.offsetParent);
+      return valor;
+    }
+
+    function posicionX(obj) {
+      var valor = obj.offsetLeft;
+      if (obj.offsetParent) valor += posicionX(obj.offsetParent);
+      return valor;
+    }
+    function MouseDown2(e){
+      flag=true;
+      contexto2.beginPath();
+      valX=e.pageX-posicionX(pizarraCanvas2); valY=e.pageY-posicionY(pizarraCanvas2);
+      contexto2.moveTo(valX,valY);
+    }
+
+    function MouseUp2(e){
+      contexto2.closePath();
+      flag=false;
+    }
+
+    function MouseMove2(e){
+      if(flag){
+        contexto2.beginPath();
+        contexto2.moveTo(valX,valY);
+        valX=e.pageX-posicionX(pizarraCanvas2); valY=e.pageY-posicionY(pizarraCanvas2);
+        contexto2.lineTo(valX,valY);
+        contexto2.closePath();
+        contexto2.stroke();
+      }
+    }
+
+    function TouchMove2(e){
+      e.preventDefault();
+      if (e.targetTouches.length == 1) { 
+        var touch = e.targetTouches[0]; 
+        MouseMove(touch);
+      }
+    }
+
+    function TouchStart2(e){
+      if (e.targetTouches.length == 1) { 
+        var touch = e.targetTouches[0]; 
+        MouseDown(touch);
+      }
+    }
+
+    function TouchEnd2(e){
+      if (e.targetTouches.length == 1) { 
+        var touch = e.targetTouches[0]; 
+        MouseUp(touch);
+      }
+    }
+
+    /* Limpiar pizarra */
+    function LimpiarTrazado(){
+      contexto=document.getElementById(idCanvas).getContext('2d');
+      contexto.fillStyle=colorDeFondo;
+      contexto.fillRect(0,0,anchoCanvas,altoCanvas);
+    }
+    function LimpiarTrazado2(){
+      contexto2=document.getElementById(idCanvas2).getContext('2d');
+      contexto2.fillStyle=colorDeFondo;
+      contexto2.fillRect(0,0,anchoCanvas2,altoCanvas2);
+    }
+
+    /* Enviar el trazado */
+    function GuardarTrazado(){
+      imagen.value=document.getElementById(idCanvas).toDataURL('image/png');
+      imagen2.value=document.getElementById(idCanvas2).toDataURL('image/png');
+      document.forms[idForm].submit();
+    }
 </script>
         
     </body>

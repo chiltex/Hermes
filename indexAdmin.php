@@ -122,11 +122,11 @@ require_once "class/Events.php";
                           <li><a href="other_charts.html">Other Charts</a></li>
                         </ul>
                       </li>
-                      <li><a><i class="fa fa-clone"></i>Configuraciones <span class="fa fa-chevron-down"></span></a>
+                      <li><a><i class="fa fa-clone"></i>Fichas Tecnicas <span class="fa fa-chevron-down"></span></a>
                       
                         <ul class="nav child_menu">
-                          <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                          <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                          <li><a href="views/saveFT.php?cliente=0&id_producto=0&producto=N/A&codigo_serie=0000&nombre=N/A">Ficha Tecnica</a></li>
+                          <li><a href="views/FichaTecnca.php">Fichas Tecnica</a></li>
                         </ul>
                       </li>
                     </ul>
