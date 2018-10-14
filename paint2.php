@@ -19,6 +19,7 @@
   <input type="text" name="cliente" id="cliente">
     <button type='button' onclick='LimpiarTrazado()'>Borrar</button>
     <button type='button' onclick='GuardarTrazado()'>Guardar</button>
+    <input type="checkbox" name="operacion"  value="1">Obtener la potencia de a elevado a b <br/>
     <input type='hidden' name='imagen' id='imagen' />
     <input type='hidden' name='imagen2' id='imagen2' />
 </form>

@@ -5,6 +5,7 @@
                       <li><a><i class="fa fa-home"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="../listas/Usuarios.php">Usuarios</a></li>
+                           <li><a href="../listas/TipoUsuario.php">Tipos de Usuarios</a></li>
                         </ul>
                       </li>
                       <li><a><i class="fa fa-edit"></i> Clientes <span class="fa fa-chevron-down"></span></a>
