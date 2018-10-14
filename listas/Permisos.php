@@ -186,7 +186,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Gestion</h2>
+                    <h2>Pagina de Permisos</h2>
 
 
                     
@@ -251,7 +251,7 @@
                   <div class="x_content">
                       
 
-                                    <input type="button" name="accion" value="Gestionar permisos" id="accion" class="btn btn-success save_data" /> 
+                                    <input type="button" name="accion" value="Permisosar permisos" id="accion" class="btn btn-success save_data" /> 
                     <br>
                     <br>
                     <div id="employee_table">
@@ -265,23 +265,22 @@
                       </thead>
                       <tbody>
                         <?php 
-                         require_once "../class/Gestion.php";
-                         $misGestions = new Gestion();
-                         $catego = $misGestions->selectALL();
+                         require_once "../class/Permisos.php";
+                         $misPermisoss = new Permisos();
+                         $catego = $misPermisoss->selectALL1();
                         
                            # code...
                          
                          foreach ((array)$catego as $row) {
                          echo '
                           <tr>
-                           <td>'.$row['id_gestion'].'</td>
+                           <td>'.$row['id_permiso'].'</td>
                            <td>'.$row['nombre'].'</td>
-                           <td>'.$row["descripcion"].'</td>
                            <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_gestion"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_gestion"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/GestionControlador.php?id='.$row["id_gestion"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_permiso"].'" class="btn btn-info view_data"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_permiso"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/PermisosControlador.php?id='.$row["id_permiso"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
@@ -304,7 +303,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Gestion</h4>  
+                                                 <h4 class="modal-title">Detalle Permisos</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_detail">  
                                             </div>  
@@ -319,7 +318,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Gestion</h4>  
+                                                 <h4 class="modal-title">Detalle Permisos</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -334,7 +333,7 @@
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Gestion</h4>  
+                                                 <h4 class="modal-title">Detalle Permisos</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -350,7 +349,7 @@
            <div class="modal-content">  
                 <div class="modal-header">  
                      <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Agregar nueva Gestion</h4>  
+                     <h4 class="modal-title">Agregar nueva Permisos</h4>  
                 </div>  
                 <div class="modal-body">  
                      
@@ -423,7 +422,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/modiGestion.php",  
+                     url:"../views/modiPermisos.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -439,7 +438,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectGestion.php",  
+                     url:"../views/selectPermisos.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -454,7 +453,7 @@ ga('send', 'pageview');
            if(employee_action != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveGestion.php",  
+                     url:"../views/savePermisos.php",  
                      method:"POST",  
                      data:{employee_action:employee_action},  
                      success:function(data){  

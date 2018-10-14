@@ -103,7 +103,7 @@ if ($accion=="modificar") {
     $Permisos->setCampo_n($campo_n);
     $Permisos->setCampo_o($campo_o);
     $Permisos->setCampo_p($campo_p);
-    $Permisos->setId_Permisos($id_Permisos);
+    $Permisos->setId_permiso($id_Permisos);
     $update=$Permisos->update();
     if ($update==true) {
         header('Location: ../listas/Permisos.php?success=correcto');

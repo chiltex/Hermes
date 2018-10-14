@@ -111,9 +111,16 @@ class Permisos extends Conexion
     public function setCampo_f($campo_f) {
         $this->campo_f = $campo_f;
     }
+     public function getCampo_g() {
+        return $this->campo_a;
+    }
+
+    public function setCampo_g($campo_g) {
+        $this->campo_g = $campo_g;
+    }
 
     public function getCampo_h() {
-        return $this->campo_a;
+        return $this->campo_h;
     }
 
     public function setCampo_h($campo_h) {
@@ -145,7 +152,7 @@ class Permisos extends Conexion
     }
 
     public function getCampo_l() {
-        return $this->campo_a;
+        return $this->campo_l;
     }
 
     public function setCampo_l($campo_l) {
@@ -156,12 +163,12 @@ class Permisos extends Conexion
         return $this->campo_m;
     }
 
-    public function setCampo_a($campo_m) {
+    public function setCampo_m($campo_m) {
         $this->campo_m = $campo_m;
     }
 
     public function getCampo_n() {
-        return $this->campo_a;
+        return $this->campo_n;
     }
 
     public function setCampo_n($campo_n) {
@@ -172,7 +179,7 @@ class Permisos extends Conexion
         return $this->campo_o;
     }
 
-    public function setCampo_a($campo_o) {
+    public function setCampo_o($campo_o) {
         $this->campo_o = $campo_o;
     }
 
@@ -180,7 +187,7 @@ class Permisos extends Conexion
         return $this->campo_p;
     }
 
-    public function setCampo_a($campo_p) {
+    public function setCampo_p($campo_p) {
         $this->campo_p = $campo_p;
     }
     //FUNCIONES-------------------------------------------------

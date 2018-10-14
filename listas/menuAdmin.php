@@ -6,6 +6,7 @@
                         <ul class="nav child_menu">
                           <li><a href="../listas/Usuarios.php">Usuarios</a></li>
                            <li><a href="../listas/TipoUsuario.php">Tipos de Usuarios</a></li>
+                           <li><a href="../listas/Permisos.php">Permisos</a></li>
                         </ul>
                       </li>
                       <li><a><i class="fa fa-edit"></i> Clientes <span class="fa fa-chevron-down"></span></a>
