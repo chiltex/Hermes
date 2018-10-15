@@ -16,6 +16,10 @@ if ($accion=="login") {
 		header('Location: ../indexOpe.php?success=correcto');
 		# code...
 	}
+	elseif($login==4) {
+		header('Location: ../listas/indexUs.php?success=correcto');
+		# code...
+	}
 	else{
 		header('Location: ../index.php?error=incorrecto');
 	}

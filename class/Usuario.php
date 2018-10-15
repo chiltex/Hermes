@@ -181,7 +181,16 @@ class Usuario extends Conexion
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
                 return 2;
 
-            }else{
+            }
+            elseif($key["id_tipo_usuario"]!=2 && $key["id_tipo_usuario"]!=1){
+             session_start();
+                $_SESSION['logged-in'] = true;
+                $_SESSION['Usuario']= $this->correo;
+                $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
+                return 2;
+
+            }
+            else{
                 $_SESSION['logged-in'] = false;
                 return 3;
             }
