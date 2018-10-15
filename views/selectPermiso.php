@@ -21,57 +21,60 @@ require_once "../class/Permisos.php";
                         </tr>
                         <tr>
                         <td>Permisos</td>
+                        <td></td>
+                        </tr>
                         ';
-                        if (is_null($row['campo_a'])==false) {
-                          echo '<td>'$row['campo_a']'</td>';
+
+                        if (($row['campo_a'])!=NULL) {
+                          echo '<tr><td>Usuarios</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_b'])==false) {
-                          echo '<td>'$row['campo_b']'</td>';
+                        if (($row['campo_b'])!=NULL) {
+                          echo '<tr><td>Tipo Usuarios</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_c'])==false) {
-                          echo '<td>'$row['campo_c']'</td>';
+                        if (($row['campo_c'])!=NULL) {
+                          echo '<tr><td>Clientes</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_d'])==false) {
-                          echo '<td>'$row['campo_d']'</td>';
+                        if (($row['campo_d'])!=NULL) {
+                          echo '<tr><td>Categorias de clientes</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_e'])==false) {
-                          echo '<td>'$row['campo_e']'</td>';
+                        if (($row['campo_e'])!=NULL) {
+                          echo '<tr><td>Contactos</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_f'])==false) {
-                          echo '<td>'$row['campo_f']'</td>';
+                        if (($row['campo_f'])!=NULL) {
+                          echo '<tr><td>Grupo de productos</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_g'])==false) {
-                          echo '<td>'$row['campo_g']'</td>';
+                        if (($row['campo_g'])!=NULL) {
+                          echo '<tr><td>Productos</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_h'])==false) {
-                          echo '<td>'$row['campo_h']'</td>';
+                        if (($row['campo_h'])!=NULL) {
+                          echo '<tr><td>Productos de clientes</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_i'])==false) {
-                          echo '<td>'$row['campo_i']'</td>';
+                        if (($row['campo_i'])!=NULL) {
+                          echo '<tr><td>Repuestos</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_j'])==false) {
-                          echo '<td>'$row['campo_j']'</td>';
+                        if (($row['campo_j'])!=NULL) {
+                          echo '<tr><td>Tickets</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_k'])==false) {
-                          echo '<td>'$row['campo_k']'</td>';
+                        if (($row['campo_k'])!=NULL) {
+                          echo '<tr><td>Gestion</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_l'])==false) {
-                          echo '<td>'$row['campo_l']'</td>';
+                        if (($row['campo_l'])!=NULL) {
+                          echo '<tr><td>Tipo de Gestion</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_m'])==false) {
-                          echo '<td>'$row['campo_m']'</td>';
+                        if ($row['campo_m']!=NULL) {
+                          echo '<tr><td>Ficha Tecnica</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_n'])==false) {
-                          echo '<td>'$row['campo_n']'</td>';
+                        if (($row['campo_n'])!=NULL) {
+                          echo '<tr><td>Agenda</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_o'])==false) {
-                          echo '<td>'$row['campo_o']'</td>';
+                        if (($row['campo_o'])!=NULL) {
+                          echo '<tr><td>Permisos</td><td>Si</td></tr>';
                         }
-                        if (is_null($row['campo_p'])==false) {
-                          echo '<td>'$row['campo_p']'</td>';
+                        if (($row['campo_p'])!=NULL) {
+                          echo '<tr><td>N/A</td><td>Si</td></tr>';
                         }
                         echo '
-                        </tr>
+                        
                           </table>
                           </div>
                          ';

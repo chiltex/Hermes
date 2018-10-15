@@ -83,54 +83,180 @@ require_once "class/Events.php";
                 <br />
     
                 <!-- sidebar menu -->
-                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <?php
+session_start();
+if (isset($_SESSION['id_tipo_usuario'])) {
+ $codigo= $_SESSION['id_tipo_usuario']; 
+}else{
+   echo '
+              <div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">ERROR:</span>
+                Porfavor inicie sesion.
+
+                                    <a href="../index.php" class="btn btn-danger">Iniciar Sesion</a>
+           
+                </div>';
+}
+
+?>
+             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                   <div class="menu_section">
                     <h3>General</h3>
+                     <?php 
+                      require_once "class/Permisos_1.php";
+                          $misPermisoss = new Permisos();
+                         $catego = $misPermisoss->selectOne($codigo);
+                          foreach ((array)$catego as $row) {
+
+                     ?>
                     <ul class="nav side-menu">
+                        <?php 
+                        if ($row['campo_a']!=NULL && $row['campo_b']!= NULL && $row['campo_o']!= NULL ) {
+                          ?>
                       <li><a><i class="fa fa-home"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="listas/Usuarios.php">Usuarios</a></li>
+                           <li><a href="listas/TipoUsuario.php">Tipos de Usuarios</a></li>
+                           <li><a href="listas/Permisos.php">Permisos</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                         } elseif ($row['campo_a']!=NULL && $row['campo_b']== NULL && $row['campo_o']!= NULL ){  ?>
+                         <li><a><i class="fa fa-home"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="listas/Usuarios.php">Usuarios</a></li>
+                           <li><a href="listas/Permisos.php">Permisos</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        } elseif ($row['campo_a']!=NULL && $row['campo_b']!= NULL && $row['campo_o']== NULL) {  ?>
+                         <li><a><i class="fa fa-home"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="listas/Usuarios.php">Usuarios</a></li>
                            <li><a href="listas/TipoUsuario.php">Tipos de Usuarios</a></li>
                         </ul>
                       </li>
-                      <li><a><i class="fa fa-edit"></i> Clientes <span class="fa fa-chevron-down"></span></a>
+                      <?php 
+                        } elseif ($row['campo_a']!=NULL && $row['campo_b']== NULL && $row['campo_o']== NULL) {  ?>
+                         <li><a><i class="fa fa-home"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="listas/Usuarios.php">Usuarios</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        }if ($row['campo_c']!=NULL && $row['campo_d']!= NULL && $row['campo_e']!= NULL) {  ?>
+                       <li><a><i class="fa fa-edit"></i> Clientes <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="listas/clientes.php">Clientes</a></li>
                           <li><a href="listas/lista_categorias.php">Categorias</a></li>
                           <li><a href="listas/contactos.php?id=''&nombre=Seleccione un Cliente">Contactos</a></li>
                         </ul>
                       </li>
-                      <li><a><i class="fa fa-desktop"></i> Productos <span class="fa fa-chevron-down"></span></a>
+                      <?php 
+                        } elseif ($row['campo_c']!=NULL && $row['campo_d']== NULL && $row['campo_e']!= NULL) {  ?>
+                       <li><a><i class="fa fa-edit"></i> Clientes <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="listas/lista_grupo_producto.php">Grupo de Productos</a></li>
+                          <li><a href="listas/clientes.php">Clientes</a></li>
+                          <li><a href="listas/contactos.php?id=''&nombre=Seleccione un Cliente">Contactos</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        }elseif ($row['campo_c']!=NULL && $row['campo_d']!= NULL && $row['campo_e']== NULL) {  ?>
+                       <li><a><i class="fa fa-edit"></i> Clientes <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="listas/clientes.php">Clientes</a></li>
+                          <li><a href="listas/lista_categorias.php">Categorias</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        }if ($row['campo_c']==NULL && $row['campo_d']!= NULL && $row['campo_e']!= NULL) {  ?>
+                       <li><a><i class="fa fa-edit"></i> Clientes <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                      
+                          <li><a href="listas/lista_categorias.php">Categorias</a></li>
+                          <li><a href="listas/contactos.php?id=''&nombre=Seleccione un Cliente">Contactos</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        }elseif ($row['campo_c']!=NULL && $row['campo_d']== NULL && $row['campo_e']== NULL) {  ?>
+                       <li><a><i class="fa fa-edit"></i> Clientes <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="listas/clientes.php">Clientes</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        }if ($row['campo_f']!=NULL && $row['campo_g']!= NULL && $row['campo_h']!= NULL && $row['campo_i']!= NULL) {  ?>
+                       <li><a><i class="fa fa-desktop"></i> Productos <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                         <li><a href="listas/lista_grupo_producto.php">Grupo de Productos</a></li>
                           <li><a href="listas/Productos.php">Productos</a></li>
-                          <li><a href="../listas/Cliente_Producto.php?cliente=0&nombre=nada&producto=0">Productos de Clientes</a></li>
-                          <li><a href="../listas/Repuestos.php">Repuestos</a></li>
+                          <li><a href="listas/Cliente_Producto.php?cliente=0&nombre=nada&producto=0">Productos de Clientes</a></li>
+                          <li><a href="listas/Repuestos.php">Repuestos</a></li>
                         </ul>
                       </li>
-                      <li><a><i class="fa fa-table"></i> Tickets <span class="fa fa-chevron-down"></span></a>
+                      <?php 
+                        } elseif ($row['campo_f']==NULL && $row['campo_g']!= NULL && $row['campo_h']!= NULL && $row['campo_i']!= NULL) {  ?>
+                       <li><a><i class="fa fa-desktop"></i> Productos <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="tables.html">Tables</a></li>
-                          <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                         
+                          <li><a href="listas/Productos.php">Productos</a></li>
+                          <li><a href="listas/Cliente_Producto.php?cliente=0&nombre=nada&producto=0">Productos de Clientes</a></li>
+                          <li><a href="listas/Repuestos.php">Repuestos</a></li>
                         </ul>
                       </li>
-                      <li><a><i class="fa fa-bar-chart-o"></i> Agenda <span class="fa fa-chevron-down"></span></a>
+                      <?php 
+                        }if ($row['campo_j']!=NULL) {  ?>
+                         <li><a><i class="fa fa-table"></i> Tickets <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="chartjs.html">Chart JS</a></li>
-                          <li><a href="chartjs2.html">Chart JS2</a></li>
-                          <li><a href="morisjs.html">Moris JS</a></li>
-                          <li><a href="echarts.html">ECharts</a></li>
-                          <li><a href="other_charts.html">Other Charts</a></li>
+                          <li><a href="listas/Tickets.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0">Ticket</a></li>
+                      </ul>
+                      </li>
+                      <?php 
+                        }if ($row['campo_k']!=NULL && $row['campo_l']!= NULL) {  ?>
+                         <li><a><i class="fa fa-bar-chart-o"></i> Gestiones <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="listas/Gestion.php">Gestion</a></li>
+                          <li><a href="listas/TipoGestion.php">Tipo de Gestion</a></li>
                         </ul>
                       </li>
-                      <li><a><i class="fa fa-clone"></i>Fichas Tecnicas <span class="fa fa-chevron-down"></span></a>
+                      <?php 
+                        } elseif ($row['campo_k']!=NULL && $row['campo_l']== NULL) {  ?>
+                         <li><a><i class="fa fa-bar-chart-o"></i> Gestiones <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="listas/Gestion.php">Gestion</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        }elseif ($row['campo_k']==NULL && $row['campo_l']!= NULL) {  ?>
+                         <li><a><i class="fa fa-bar-chart-o"></i> Gestiones <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="listas/TipoGestion.php">Tipo de Gestion</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        }if ($row['campo_m']!=NULL) {  ?>
+                         <li><a><i class="fa fa-clone"></i>Fichas Tecnicas <span class="fa fa-chevron-down"></span></a>
                       
                         <ul class="nav child_menu">
                           <li><a href="views/saveFT.php?cliente=0&id_producto=0&producto=N/A&codigo_serie=0000&nombre=N/A">Ficha Tecnica</a></li>
-                          <li><a href="views/FichaTecnca.php">Fichas Tecnica</a></li>
+                          <li><a href="listas/FichaTecnca.php">Fichas Tecnica</a></li>
                         </ul>
                       </li>
-                    </ul>
+                      <?php 
+                        }if ($row['campo_n']!=NULL) {  ?>
+                         <li><a><i class="glyphicon glyphicon-tags"></i>         Tareas <span class="fa fa-chevron-down"></span></a>
+                      
+                        <ul class="nav child_menu">
+                         <li><a href="indexAdmin.php?id=0&nombre=Seleccione%20un%20Tecnico">Tareas</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        }
+                       ?>                     
+                       </ul>
+                    <?php 
+                    } ?>
                   </div>
                   
     
@@ -232,14 +358,67 @@ require_once "class/Events.php";
             <div class="col-lg-12 text-center">
                 <h1>Agenda</h1>
                 <div class="row">
+                
+
+                <form name="form1" role="form" action="indexAdmin.php" method="GET">
+                  <div class="box-body">
+                  <div class="form-group">
+                      <label for="codigo">Tipo Usuario:</label>
+                      <select  id="id_tipo_usuario" name="id_tipo_usuario" class="form-control ">
+                                 <?php 
+                                 if (isset($_GET['id_tipo_usuario'])){
+                                   $idtu = $_GET['id_tipo_usuario'];
+                                       require_once "class/Permisos_1.php";
+                                       $misTU = new Permisos();
+                                       $tc1 = $misTU->selectAllTipUsuario1($idtu);
+                                       foreach ((array)$tc1 as $row1) {
+                                       echo '
+                                        <option value="'.$row1["id_tipo_usuario"].'">'.$row1["nombre"].'</option>
+                                       ';
+                                     }
+                                      $dtc1 = $misTU->selectAllTipUsuarioD($idtu);
+                                       foreach ((array)$dtc1 as $row1) {
+                                       echo '
+                                        <option value="'.$row1["id_tipo_usuario"].'">'.$row1["nombre"].'</option>
+                                       ';
+                                     }
+                                 }
+                                 else{
+                                              require_once "class/Permisos_1.php";
+                                     $misTU = new Permisos();
+                                     $tc = $misTU->selectAllTipUsuario();
+                                     foreach ((array)$tc as $row) {
+                                     echo '
+                                      <option value="'.$row["id_tipo_usuario"].'">'.$row["nombre"].'</option>
+                                     ';
+                                   }
+                                 }
+                         
+                     
+                     
+                         ?>
+                                  
+                              </select>
+                  </div>
+                   <input type="submit" class="btn btn-primary" name="consultar" value="Consultar" >
+                  </div>
+                </form>
                           <div class="col-sm-4">
-                        <input type="button" name="view" value="Seleccionar Usuario" id="1" class="btn btn-info view_data"/>
+                          <?php 
+                  if (isset($_GET['id_tipo_usuario'])) {
+                    $id_tu=$_GET['id_tipo_usuario'];
+                    echo ' <input type="button" name="view" value="Seleccionar Usuario" id="'.$id_tu.'" class="btn btn-info view_data"/>';
+                  }
+                 ?>
+
+                       
                           </div>
                         <?php
+                        if (isset($_GET["id"]) && isset($_GET["nombre"])) {
                           $id=$_GET["id"];
+                        
                           $nombre=$_GET["nombre"];
-                          if ($id!=0 && $nombre != "nada") {
-                            echo '<div class="col-md-4"><h4><strong> '.$nombre.'</strong></h4></div> 
+                           echo '<div class="col-md-4"><h4><strong> '.$nombre.'</strong></h4></div> 
                             <div class="col-sm-2">
                               <a href="indexAdmin.php?id=0&nombre=Seleccione un Operador" class="btn btn-danger">Ver Todos</a>
                             </div> 
@@ -653,6 +832,19 @@ ga('send', 'pageview');
        
   }); 
 
-</script>    
+</script>   
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
+</script> 
     </body>
 </html>

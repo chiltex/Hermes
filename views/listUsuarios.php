@@ -6,7 +6,8 @@
 </div>
 //buscador 1
 --> <a href="listas/Usuarios.php" class="btn btn-primary">Nuevo Usuario</a>
-       <table id="example1" class="table table-striped table-bordered">
+<div id="employee_table">
+       <table id="example1" class="table table-striped table-bordered" name="example1">
          <thead>
                         <tr>
                           <th>Nombre</th>
@@ -20,7 +21,7 @@
   require_once "../class/Events1.php";
   						 $codigo=$_POST["employee_id"];
                          $misEvents = new Events();
-                        $TU=$misEvents->selectOperadores();
+                        $TU=$misEvents->selectOperadores($codigo);
 
                foreach ($TU as $row) {
           				 
@@ -28,14 +29,16 @@
                           <tr>
                             <td>'.$row['nombre'].' '.$row['apellido'].'</td>
                           <td>
-                         <a href="indexAdmin.php?id='.$row["id_usuario"].'&nombre='.$row["nombre"].' '.$row['apellido'].'" class="btn btn-primary">Seleccionar</a>
+                         <a href="indexAdmin.php?id='.$row["id_usuario"].'&nombre='.$row["nombre"].' '.$row['apellido'].'&id_tipo_usuario='.$codigo.'" class="btn btn-primary">Seleccionar</a>
                           </td>
                           </tr>
                          ';
                 	
                     
                 }
-?> </tbody>  </table>
+?> </tbody> 
+ </table>
+ </div>
 </div>
 </div>
 <script>
