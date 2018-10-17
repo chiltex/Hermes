@@ -33,7 +33,7 @@ require_once "../class/Gestion.php";
  ?>
  </div>
               <div class="box-footer">
-                <input type="submit" class="btn btn-primary" name="submit" value="Guardar" >
+                <input type="submit" class="btn btn-primary" name="submit" value="Confirmar" >
                 <input type="button" class="btn btn-danger" onClick="location.href = '../listas/Gestion.php'" name="cancel" value="Cancelar" >
               </div>
             </form>
