@@ -87,7 +87,7 @@ class Usuario extends Conexion
     }
      public function update()
     {
-        $query="UPDATE Usuario SET nombre='".$this->nombre."',apellido='".$this->apellido."',correo='".$this->correo."',id_tipo_usuario='".$this->id_tipo_usuario."' WHERE id_usuario='".$this->id_usuario."'";
+        $query="UPDATE usuario SET nombre='".$this->nombre."',apellido='".$this->apellido."',correo='".$this->correo."',id_tipo_usuario='".$this->id_tipo_usuario."' WHERE id_usuario='".$this->id_usuario."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;
@@ -108,7 +108,7 @@ class Usuario extends Conexion
     }
     public function selectALL()
     {
-        $query="SELECT * FROM Usuario";
+        $query="SELECT * FROM usuario";
         $selectall=$this->db->query($query);
         $ListUsuarios=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuarios;
@@ -171,15 +171,26 @@ class Usuario extends Conexion
                 $_SESSION['logged-in'] = true;
                 $_SESSION['Administrador']= $this->correo;
                 $_SESSION['id_usuario']=$key['id_usuario'];
+                $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
                 return 1;
             }
             elseif($key["id_tipo_usuario"]==2){
              session_start();
                 $_SESSION['logged-in'] = true;
                 $_SESSION['Operador']= $this->correo;
+                $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
                 return 2;
 
-            }else{
+            }
+            elseif($key["id_tipo_usuario"]!=2 && $key["id_tipo_usuario"]!=1){
+             session_start();
+                $_SESSION['logged-in'] = true;
+                $_SESSION['Usuario']= $this->correo;
+                $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
+                return 2;
+
+            }
+            else{
                 $_SESSION['logged-in'] = false;
                 return 3;
             }

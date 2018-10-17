@@ -1,5 +1,5 @@
 <?php
-require_once "../config/conexion.php";
+require_once "config/conexion.php";
 /**
  * 
  */
@@ -270,6 +270,26 @@ class Permisos extends Conexion
         return $ListCategoria;
     }
 
-    
+     public function selectAllTipUsuario()
+    {
+        $query="SELECT * FROM tipo_usuario";
+        $selectall=$this->db->query($query);
+        $ListTC=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListTC;
+    } 
+    public function selectAllTipUsuarioD($codigo)
+    {
+        $query="SELECT * FROM tipo_usuario WHERE id_tipo_usuario !='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListTC=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListTC;
+    }
+     public function selectAllTipUsuario1($codigo)
+    {
+        $query="SELECT * FROM tipo_usuario WHERE id_tipo_usuario ='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListTC=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListTC;
+    }
 }//fin clase
 ?>

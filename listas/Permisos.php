@@ -438,7 +438,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectPermisos.php",  
+                     url:"../views/selectPermiso.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
