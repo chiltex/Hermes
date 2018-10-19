@@ -1,4 +1,6 @@
+
 <?php
+session_start();
 require_once "../class/Events.php";
  $misEvents = new Events();
  $events = $misEvents->selectALL();

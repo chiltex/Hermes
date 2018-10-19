@@ -1,3 +1,6 @@
+<?php 
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -210,7 +213,12 @@
                               echo'
                                <div class="row">
                                <div class="col-md-6">    
+                               <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Empresa: '.$nombre.'
+                            </label>
+                               </div>
                           <div class="form-group">
+
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre Contacto <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-xs-6 col-xs-12">
@@ -252,8 +260,7 @@
                         <dir class="row">
                           <div class="col-md-4">  
                               <div class="form-group">
-                                <label class="control-label col-md-3 col-xs-3 col-xs-12" for="first-name">Telefono Contacto <span class="required">*</span>
-                                </label>
+                                <label class="control-label col-md-3 col-xs-3 col-xs-12" for="first-name">Telefono Contacto</label>
                                 <div class="col-md-5 col-xs-6 col-xs-12">
                                   <input type="text" id="telefono" name="telefono" required="required" class="form-control col-md-3 col-xs-6">
                                 </div>
@@ -261,19 +268,19 @@
                           </div>
                           <div class="col-md-4">
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-xs-4 col-xs-7" for="first-name">Extension <span class="required">*</span>
+                            <label class="control-label col-md-3 col-xs-4 col-xs-7" for="first-name">Extension
                             </label>
                             <div class="col-md-5 col-xs-6 col-xs-12">
-                              <input type="text" id="extension" name="extension" required="required" class="form-control col-md-3 col-xs-6">
+                              <input type="text" id="extension" name="extension"  class="form-control col-md-3 col-xs-6">
                             </div>
                           </div>
                           </div>
                           <div class="col-md-4">
                           <div class="form-group">
-                            <label class="control-label col-md-4 col-xs-2 col-xs-12" for="first-name">Movil <span class="required">*</span>
+                            <label class="control-label col-md-4 col-xs-2 col-xs-12" for="first-name">Movil
                             </label>
                             <div class="col-md-5 col-xs-6 col-xs-12">
-                              <input type="text" id="movil" name="movil" required="required" class="form-control col-md-3 col-xs-6">
+                              <input type="text" id="movil" name="movil" class="form-control col-md-3 col-xs-6">
                             </div>
                           </div>
                           </div>

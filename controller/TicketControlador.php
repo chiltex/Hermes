@@ -76,7 +76,7 @@ elseif ($accion=="guardar")
 	$id_gestion =$_POST['id_gestion'];	
 	$id_tipo_gestion =$_POST['id_tipo_gestion'];		
 	$id_ficha_tecnica =NULL;
-	$solucion=$_POST['solucion'];	
+	$solucion="Escriba la solucion al problema...";	
 	$Ticket = new Ticket();
 	$Ticket->setDescripcion($descripcion);
 	$Ticket->setEstado($estado);
@@ -119,8 +119,16 @@ elseif ($accion=="guardarNC")
 		$nombre1=$_POST['nombrec'];
 		$correo=$_POST['correo'];	
 		$telefono =$_POST['telefono'];
+		if (isset($_POST['extension'])) {
 		$extension =$_POST['extension'];
-		$movil =$_POST['movil'];
+		}else{
+			$extension=00;
+		}
+		if ($_POST['movil']) {
+			$movil =$_POST['movil'];
+		}else{
+			$movil=0000;
+		}
 		$id_cliente =$id_nc-1;
 		$contactos = new Contactos();
 		$contactos->setNombre($nombre1);
@@ -153,8 +161,16 @@ elseif ($accion=="guardarC")
 	$nombre=$_POST['nombre'];
 	$correo=$_POST['correo'];	
 	$telefono =$_POST['telefono'];
+	if (isset($_POST['extension'])) {
 	$extension =$_POST['extension'];
-	$movil =$_POST['movil'];
+	}else{
+		$extension=00;
+	}
+	if ($_POST['movil']) {
+		$movil =$_POST['movil'];
+	}else{
+		$movil=0000;
+	}
 	$id_cliente =$_POST['id_cliente'];
 	$contactos = new Contactos();
 	$contactos->setNombre($nombre);

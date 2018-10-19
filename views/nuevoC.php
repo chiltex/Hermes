@@ -44,7 +44,7 @@ echo '
                             <label class="control-label col-md-3 col-xs-4 col-xs-7" for="first-name">Extension <span class="required">*</span>
                             </label>
                             <div class="col-md-5 col-xs-6 col-xs-12">
-                              <input type="text" id="extension" name="extension" required="required" class="form-control col-md-3 col-xs-6">
+                              <input type="text" id="extension" name="extension"  class="form-control col-md-3 col-xs-6">
                             </div>
                           </div>
                          
@@ -52,7 +52,7 @@ echo '
                             <label class="control-label col-md-3 col-xs-3 col-xs-12" for="first-name">Movil <span class="required">*</span>
                             </label>
                             <div class="col-md-5 col-xs-6 col-xs-12">
-                              <input type="text" id="movil" name="movil" required="required" class="form-control col-md-3 col-xs-6">
+                              <input type="text" id="movil" name="movil" class="form-control col-md-3 col-xs-6">
                             </div>
                           </div> 
                           <input type="hidden" name="employee_id" id="employee_id" />  

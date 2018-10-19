@@ -7,8 +7,16 @@ if ($accion=="modificar") {
 	$nombre=$_POST['nombre'];
 	$correo=$_POST['correo'];	
 	$telefono =$_POST['telefono'];
+	if (isset($_POST['extension'])) {
 	$extension =$_POST['extension'];
-	$movil =$_POST['movil'];
+	}else{
+		$extension=00;
+	}
+	if ($_POST['movil']) {
+		$movil =$_POST['movil'];
+	}else{
+		$movil=0000;
+	}
 	$id_cliente =$_POST['id_cliente'];
 	$id_contacto =$_POST['id_contacto'];
 	$contactos = new Contactos();
@@ -45,8 +53,17 @@ elseif ($accion=="guardar")
 	$nombre=$_POST['nombre'];
 	$correo=$_POST['correo'];	
 	$telefono =$_POST['telefono'];
+	if (isset($_POST['extension'])) {
 	$extension =$_POST['extension'];
-	$movil =$_POST['movil'];
+	}else{
+		$extension=00;
+	}
+	if ($_POST['movil']) {
+		$movil =$_POST['movil'];
+	}else{
+		$movil=0000;
+	}
+	
 	$id_cliente =$_POST['id_cliente'];
 	$contactos = new Contactos();
 	$contactos->setNombre($nombre);
