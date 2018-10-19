@@ -1,3 +1,6 @@
+<?php 
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,12 +221,13 @@
                                                   ';
 
                                              ?>
+                                             <!--
                                         <div class="form-group">
                                         <label class="control-label col-sm-3" for="last-name">Ficha Tecnica <span class="required">:</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <?php 
-                                              if (isset($_GET['id_ficha_tecnica'])) {
+                                             /* if (isset($_GET['id_ficha_tecnica'])) {
                                                 $id_ficha_tecnica=$_GET['id_ficha_tecnica'];
                                                   echo '
                                                   <div class="col-xs-8"><h4><strong> '.$id_ficha_tecnica.'</strong></h4></div>
@@ -235,12 +239,12 @@
                                                     <a href="../views/saveFT_T.php?cliente='.$id.'&id_producto='.$id_producto.'&nombre='.$nombre.'&producto='.$producto.'&codigo_serie='.$codigo_serie.'" class="btn btn-success">Añadir Ficha Tecnica</a>
                                                   ';
 
-                                              }
+                                              }*/
 
                                              ?>
                                         </div>
                                     </div>
-                                           
+                                          --> 
                                   </div>
                               </div>
                              </div>  
@@ -249,47 +253,7 @@
                                 <div class="row">
                                   <div class="col-lg-9">
                                     <div class="row">
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado<span class="required">*</span>
-                                          </label>
-                                          <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select id="estado" name="estado" class="form-control ">
-                                              <option value="Iniciado">Iniciado</option>
-                                              <option value="En Proceso">En Proceso</option>
-                                              <option value="Finalizado">Finalizado</option>                                    
-                                            </select>
-                                          </div>
-                                        </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tecnico Responsable <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                          <select  id="id_usuario" name="id_usuario" class="form-control ">
-                                             <?php
-                                             require_once "../class/Usuario.php";
-                                                 $usua = new Usuario();
-                                                 $usuar=$usua->selectTecnicos();
-                                              
-                                                 # code...
-                                               
-                                               foreach ((array)$usuar as $rew) {
-                                               echo '
-                                                <option value="'.$rew["id_usuario"].'">'.$rew["nombre"].' '.$rew["apellido"].'</option>
-                                               ';
-                                             }
-                                           
-                                           
-                                               ?>
-                                              
-                                          </select>
-                                        </div>
-                                    </div>
-                                    </div>
-                                  </div>
-                                <div class="col-lg-9">
-                                  <div class="row">
-                                 
-                                    <div class="form-group">
+                                           <div class="form-group">
                                       <label class="control-label col-md-3 col-xs-3 col-xs-6" for="first-name">Gestion<span class="required">*</span>
                                       </label>
                                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -354,6 +318,57 @@
                           
                                           </div>
                                         </div>
+                                    </div>
+                                  </div>
+                                <div class="col-lg-9">
+                                  <div class="row">
+                                  <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado<span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select id="estado" name="estado" class="form-control ">
+                                              <option value="Iniciado">Iniciado</option>
+                                              <option value="En Proceso">En Proceso</option>
+                                              <option value="Finalizado">Finalizado</option>                                    
+                                            </select>
+                                          </div>
+                                        </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo Usuario <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <select onchange="mostrarInfo(this.value)" id="id_usuario" name="id_usuario" class="form-control ">
+                                             <?php
+                                             require_once "../class/TipoUsuario.php";
+                                                 $usua = new TipoUsuario();
+                                                 $usuar=$usua->selectALL();
+                                              
+                                                 # code...
+                                               
+                                               foreach ((array)$usuar as $rew) {
+                                               echo '
+                                                <option value="'.$rew["id_tipo_usuario"].'">'.$rew["nombre"].'</option>
+                                               ';
+                                             }
+                                           
+                                           
+                                               ?>
+                                              
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="datos"></div>
+                                    </div>
+                                 
+                                        <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><strong>Urgente</strong><span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-6 col-sm-6 col-xs-12"> 
+                                        <input type="checkbox" name="urgente" id="urgente" value="Si"> 
+                                          </div>
+                                        </div>
+
                                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
                               <button type="submit" class="btn btn-success">Ingresar</button>
@@ -577,6 +592,29 @@ ga('send', 'pageview');
       });  
        
   }); 
+
+   function mostrarInfo(cod){
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("datos").innerHTML=xmlhttp.responseText;
+    }else{ 
+  document.getElementById("datos").innerHTML='Cargando...';
+    }
+  }
+xmlhttp.open("POST","../views/STU.php",true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("cod_banda="+cod);
+}
 
 </script>
 <script>

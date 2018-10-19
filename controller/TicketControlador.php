@@ -6,6 +6,13 @@ require_once "../class/Contactos.php";
 $accion=$_GET['accion'];
 
 if ($accion=="modificar") {
+	if(isset($_POST['urgente']))
+	{
+		$urgente=$_POST['urgente'];
+	}
+	else{
+		$urgente="No";
+		}
 	$descripcion=$_POST['descripcion'];
 	$estado=$_POST['estado'];	
 	$id_cliente =$_POST['id_cliente'];	
@@ -29,12 +36,13 @@ if ($accion=="modificar") {
 	$Ticket->setId_ficha_tecnica($id_ficha_tecnica);
 	$Ticket->setSolucion($solucion);	
 	$Ticket->setId_ticket($id_ticket);
+	$Ticket->setUrgente($urgente);	
 	$update=$Ticket->update();
 	if ($update==true) {
-		header('Location: ../listas/Tickets.php?success=correcto');
+		header('Location: ../listas/Tickets.php?success=correcto&urgente='.$urgente.'');
 		# code...
 	}else{
-		header('Location: ../listas/Tickets.php?error=incorrecto');
+		header('Location: ../listas/Tickets.php?error=incorrecto&urgente='.$urgente.'');
 	}
 
 }
@@ -52,6 +60,13 @@ elseif ($accion=="eliminar") {
 }
 elseif ($accion=="guardar") 
 {	
+	if(isset($_POST['urgente']))
+	{
+		$urgente=$_POST['urgente'];
+	}
+	else{
+		$urgente="No";
+		}
 	$descripcion=$_POST['descripcion'];
 	$estado=$_POST['estado'];	
 	$id_cliente =$_POST['id_cliente'];	
@@ -59,8 +74,8 @@ elseif ($accion=="guardar")
 	$id_producto =$_POST['id_producto'];	
 	$id_usuario =$_POST['id_usuario'];		
 	$id_gestion =$_POST['id_gestion'];	
-	$id_tipo_gestion =$_POST['id_tipo_gestion'];	
-	$id_ficha_tecnica =$_POST['id_ficha_tecnica'];
+	$id_tipo_gestion =$_POST['id_tipo_gestion'];		
+	$id_ficha_tecnica =NULL;
 	$solucion=$_POST['solucion'];	
 	$Ticket = new Ticket();
 	$Ticket->setDescripcion($descripcion);
@@ -72,7 +87,8 @@ elseif ($accion=="guardar")
 	$Ticket->setId_gestion($id_gestion);
 	$Ticket->setId_tipo_gestion($id_tipo_gestion);
 	$Ticket->setId_ficha_tecnica($id_ficha_tecnica);
-	$Ticket->setSolucion($solucion);	
+	$Ticket->setSolucion($solucion);
+	$Ticket->setUrgente($urgente);	
 	$save=$Ticket->save();
 	if ($save==true) {
 		header('Location: ../listas/Tickets.php?success=correcto');

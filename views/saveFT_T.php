@@ -226,6 +226,7 @@ session_start();
                                                  $id_producto=$_GET["id_producto"];
                                                  $codigo_serie=$_GET["codigo_serie"];
                                                   $producto=$_GET["producto"];
+                                                  $id_ticket=$_GET["ticket"];
                                               }
                                               echo '
                                                 <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong></h4></div>
@@ -233,6 +234,7 @@ session_start();
                                  <div class="col-xs-12">
                                               <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
                                               <input type="hidden" name="producto" id="producto" value="'.$producto.'"/>
+                                              <input type="hidden" name="ticket" id="ticket" value="'.$id_ticket.'"/>
                                                   ';
 
                                              ?>

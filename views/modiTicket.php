@@ -1,5 +1,6 @@
 <?php 
   $id_ticket=$_GET["id"];
+  session_start();
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +37,7 @@
             <div class="col-md-3 left_col">
               <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                  <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
+                  <a href="../indexAdmin.php" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
                 </div>
     
                 <div class="clearfix"></div>
@@ -123,7 +124,7 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2>Agregar Ticket</h2>
+                        <h2> Modificar Ticket</h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                           </li>
@@ -164,6 +165,8 @@
                                              <input type="hidden" name="id_ticket" id="id_ticket" value="'.$id_ticket.'"/> 
                               
                                          ';
+                                             $iCliente=$field["id_cliente"];
+                                             $nCliente=$key['nombre'];
                                     }?>
                                       <table id="example2 datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
@@ -189,6 +192,10 @@
                                            </td>
                                           </tr>
                                          ';
+                                     
+                                         
+                                         $iContacto=$field["id_contacto"];
+
                                        }
                                      
                                      
@@ -202,9 +209,12 @@
 
                                               echo '
                                                 <div class="col-xs-8"><h6>Producto:<strong> '.$v["nombre"].'</strong>  Codigo serie: <strong> '.$v["codigo_serie"].'</strong></h6></div> 
-                                  <div class="col-sm-2">
+                                  <div class="col-sm-12">
                                               <input type="hidden" name="id_producto" id="id_producto" value="'.$v["id_producto"].'"/>
                                                   ';
+                                                  $iProducto=$v["id_producto"];
+                                                  $nProducto=$v["nombre"];
+                                                  $cProducto=$v["codigo_serie"];
                                                 }
 
                                              ?>
@@ -212,29 +222,36 @@
                                         <label class="control-label col-sm-3" for="last-name">Ficha Tecnica <span class="required">*</span>
                                         </label>
                                         <div class="">
-                                          <select  id="id_ficha_tecnica" name="id_ficha_tecnica" class="form-control ">
-                                             <?php
-                                             require_once "../class/Ticket.php";
-                                                 $ft = new Ticket();
-                                                 $ftt=$ft->selectFT($field["id_ficha_tecnica"]);
-                                                 $dftt=$ft->selectDFT($field["id_ficha_tecnica"]);
-                                              
-                                                 # code...
-                                               
-                                               foreach ((array)$ftt as $crew) {
-                                               echo '
-                                                <option value="'.$crew["id_ficha_tecnica"].'">'.$crew["id_ficha_tecnica"].'</option>
-                                               ';
-                                             }foreach ((array)$dftt as $df) {
-                                               echo '
-                                                <option value="'.$df["id_ficha_tecnica"].'">'.$df["id_ficha_tecnica"].'</option>
-                                               ';
-                                             }
-                                           
-                                           
-                                               ?>
-                                              
-                                          </select>
+                                           <?php
+                                   
+                                                 if (isset($_GET['id_ficha_tecnica'])) {
+                                                  if (isset($id_ficha_tecnica)) {
+                                                    $id_ficha_tecnica=$_GET['id_ficha_tecnica'];
+                                                  }else
+                                                  {
+                                                    $id_ficha_tecnica=0;
+                                                  }
+                                                  $id_ficha_tecnica=$_GET['id_ficha_tecnica'];
+                                                   echo '
+                                                  <div class="col-xs-8"><h4><strong> '.$id_ficha_tecnica.'</strong></h4></div>
+                                                  <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$id_ficha_tecnica.'"/>
+                                                  <input type="button" name="view" value="Ver Detalle" id="'.$id_ficha_tecnica.'" class="btn btn-info view_data5"/>
+                                                   '; 
+                                              } elseif ($field['id_ficha_tecnica']!=NULL) {
+                                              echo '
+                                                  <div class="col-xs-8"><h4><strong> '.$field['id_ficha_tecnica'].'</strong></h4>
+                                                  <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$field['id_ficha_tecnica'].'"/>
+                                                  <input type="button" name="view" value="Ver Detalle" id="'.$field['id_ficha_tecnica'].'" class="btn btn-info view_data5"/></div>
+                                                   ';
+                                              }
+                                           else{
+                                                  echo '
+                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'" class="btn btn-success">Añadir Ficha Tecnica</a>
+                                                  ';
+
+                                              }
+                                             
+                                           ?>
                                         </div>
                                     </div>
                                            
@@ -247,64 +264,6 @@
                                   <div class="col-lg-9">
                                     <div class="row">
                                         <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado<span class="required">*</span>
-                                          </label>
-                                          <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select id="estado" name="estado" class="form-control ">
-                                              <?php 
-                                              if ($field["estado"]=="Iniciado") {
-                                                echo '  <option value="Iniciado">Iniciado</option>
-                                              <option value="En Proceso">En Proceso</option>
-                                              <option value="Finalizado">Finalizado</option> ';
-                                              }elseif ($field["estado"]=="En Proceso") {
-                                               echo '  
-                                              <option value="En Proceso">En Proceso</option>
-                                              <option value="Iniciado">Iniciado</option>
-                                              <option value="Finalizado">Finalizado</option> ';
-                                              }elseif ($field["estado"]=="Finalizado") {
-                                               echo '
-                                              <option value="Finalizado">Finalizado</option>  
-                                              <option value="En Proceso">En Proceso</option>
-                                              <option value="Iniciado">Iniciado</option> ';
-                                              }
-
-                                               ?>
-                                                                               
-                                            </select>
-                                          </div>
-                                        </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tecnico Responsable <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                          <select  id="id_usuario" name="id_usuario" class="form-control ">
-                                             <?php
-                                             require_once "../class/Usuario.php";
-                                                 $usua = new Usuario();
-                                                 $usuar=$usua->selectOne($field["id_usuario"]);
-                                                 $dusuar=$usua->selectDTecnicos($field["id_usuario"]);
-                                            foreach ((array)$usuar as $w) {
-                                               echo '
-                                                <option value="'.$w["id_usuario"].'">'.$w["nombre"].' '.$w["apellido"].'</option>
-                                               ';
-                                             }foreach ((array)$dusuar as $e) {
-                                               echo '
-                                                <option value="'.$e["id_usuario"].'">'.$e["nombre"].' '.$e["apellido"].'</option>
-                                               ';
-                                             }
-                                           
-                                           
-                                               ?>
-                                              
-                                          </select>
-                                        </div>
-                                    </div>
-                                    </div>
-                                  </div>
-                                <div class="col-lg-9">
-                                  <div class="row">
-                                 
-                                    <div class="form-group">
                                       <label class="control-label col-md-3 col-xs-3 col-xs-6" for="first-name">Gestion<span class="required">*</span>
                                       </label>
                                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -380,6 +339,95 @@
                                            ?>                                  
                                         </div>
                                         </div>
+                                    </div>
+                                  </div>
+                                <div class="col-lg-9">
+                                  <div class="row">
+                                 <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado<span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select id="estado" name="estado" class="form-control ">
+                                              <?php 
+                                              if ($field["estado"]=="Iniciado") {
+                                                echo '  <option value="Iniciado">Iniciado</option>
+                                              <option value="En Proceso">En Proceso</option>
+                                              <option value="Finalizado">Finalizado</option> ';
+                                              }elseif ($field["estado"]=="En Proceso") {
+                                               echo '  
+                                              <option value="En Proceso">En Proceso</option>
+                                              <option value="Iniciado">Iniciado</option>
+                                              <option value="Finalizado">Finalizado</option> ';
+                                              }elseif ($field["estado"]=="Finalizado") {
+                                               echo '
+                                              <option value="Finalizado">Finalizado</option>  
+                                              <option value="En Proceso">En Proceso</option>
+                                              <option value="Iniciado">Iniciado</option> ';
+                                              }
+
+                                               ?>
+                                                                               
+                                            </select>
+                                          </div>
+                                        </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo Usuario <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                          
+                                             <?php
+                                             echo '
+                                                    <select onchange="mostrarInfo(this.value,'.$field["id_usuario"].')" id="id_usuario" name="id_usuario" class="form-control ">
+
+                                                 ';
+                                             require_once "../class/Usuario.php";
+                                                 $usua = new Usuario();
+                                                 $usuar=$usua->selectOneTU($field["id_usuario"]);
+                                                 $dusuar=$usua->selectOneDTU($field["id_usuario"]);
+                                            foreach ((array)$usuar as $w) {
+                                              $usua1=$usua->selectTU($w["id_tipo_usuario"]);
+                                                foreach ($usuar1 as $a) {
+                                                  echo '
+                                                  <option value="'.$a["id_tipo_usuario"].'">'.$a["nombre"].'</option>
+                                                 ';
+                                                }
+                                                 $dusuar2=$usua->selectDTU($w["id_usuario"]);
+                                                  foreach ($dusuar2 as $b) {
+                                                  echo '
+                                                  <option value="'.$b["id_tipo_usuario"].'">'.$b["nombre"].'</option>
+                                                 ';
+                                                }
+
+                                             }
+                                           
+                                           
+                                               ?>
+                                              
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="datos"></div>
+                                    </div>
+                                    
+
+                                         <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><strong>Urgente</strong><span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-6 col-sm-6 col-xs-12"> 
+                                            <?php 
+                                              if ($field['urgente'] =="Si") {
+
+                                               echo'<input type="checkbox" name="urgente" checked id="urgente" value="Si">';
+                                              }
+                                              else{
+                                                echo'<input type="checkbox" name="urgente" id="urgente" value="Si">';
+                                              }
+                                             ?>
+                                        
+                                          </div>
+                                        </div>
+
                                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
                               <button type="submit" class="btn btn-success">Ingresar</button>
@@ -405,7 +453,7 @@
                   </div>
                 </div>
 
-			  
+        
             </div>
             <!--page content -->
       <div id="dataModal2" class="modal fade">  
@@ -449,9 +497,9 @@
           </div>
         </div>
     <!-- jQuery -->
-	 <script src="../vendors/jquery/dist/jquery.min.js"></script>
-	 <!-- Bootstrap -->
-	 <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="../vendors/jquery/dist/jquery.min.js"></script>
+   <!-- Bootstrap -->
+   <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
@@ -542,9 +590,46 @@ ga('send', 'pageview');
                      }  
                 });  
            }   
-      });  
+      }); 
+      $(document).on('click', '.view_data5', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/selecFT.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms2').html(data);  
+                          $('#dataModal2').modal('show');  
+                     }  
+                });  
+           }            
+      });
        
   }); 
+      function mostrarInfo(cod,usua){
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("datos").innerHTML=xmlhttp.responseText;
+    }else{ 
+  document.getElementById("datos").innerHTML='Cargando...';
+    }
+  }
+xmlhttp.open("POST","../views/STU1.php",true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("cod_banda="+cod+"&usuario="+usua);
+}
 
 </script>
 <script>

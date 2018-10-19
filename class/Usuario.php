@@ -120,16 +120,16 @@ class Usuario extends Conexion
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuario;
     }
-      public function selectTecnicos()
+      public function selectTecnicos($codigo)
     {
-        $query="SELECT * FROM usuario WHERE id_tipo_usuario=2";
+        $query="SELECT * FROM usuario WHERE id_tipo_usuario='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuario;
     }
     public function selectDTecnicos($codigo)
     {
-        $query="SELECT * FROM usuario WHERE id_tipo_usuario=2 AND id_usuario!='".$codigo."'";
+        $query="SELECT * FROM usuario WHERE id_tipo_usuario!='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuario;
@@ -152,6 +152,34 @@ class Usuario extends Conexion
  public function selectOneDTC($codigo)
     {
         $query="SELECT * FROM tipo_usuario WHERE id_tipo_usuario!='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+      return $ListUsuario;
+}
+public function selectOneTU($codigo)
+    {
+        $query="SELECT tu.id_tipo_usuario FROM usuario u INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario = u.id_tipo_usuario WHERE u.id_usuario ='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+      return $ListUsuario;
+}
+public function selectTU($codigo)
+    {
+        $query="SELECT id_tipo_usuario, nombre FROM tipo_usuario  WHERE id_tipo_usuario ='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+      return $ListUsuario;
+}
+public function selectDTU($codigo)
+    {
+        $query="SELECT id_tipo_usuario, nombre FROM tipo_usuario  WHERE id_tipo_usuario !='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+      return $ListUsuario;
+}
+public function selectOneDTU($codigo)
+    {
+        $query="SELECT tu.id_tipo_usuario, tu.nombre FROM usuario u INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario = u.id_tipo_usuario WHERE u.id_usuario !='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
       return $ListUsuario;

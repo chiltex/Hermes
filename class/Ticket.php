@@ -14,6 +14,7 @@ class Ticket extends Conexion
 		 private $id_tipo_gestion;
 		 private $id_ficha_tecnica;
 		 private $solucion;
+		 private $urgente;
 
 		  public function __construct()
 			{
@@ -30,6 +31,7 @@ class Ticket extends Conexion
 		        $this->id_tipo_gestion ="";
 		        $this->id_ficha_tecnica ="";
 		        $this->solucion="";  
+		        $this->urgente=""; 
 		    }
 		public function getId_ticket() {
 		        return $this->id_ticket;
@@ -107,13 +109,20 @@ class Ticket extends Conexion
 		    public function setSolucion($solucion) {
 		        $this->solucion = $solucion;
 		    }
+		    public function getUrgente() {
+		        return $this->urgente;
+		    }
+
+		    public function setUrgente($urgente) {
+		        $this->urgente = $urgente;
+		    }
 
 		
 		    //----------------funciones------------------------
 
 			public function update()
 		    {
-		        $query="UPDATE ticket SET descripcion='".$this->descripcion."',estado='".$this->estado."',id_usuario='".$this->id_usuario."', id_gestion='".$this->id_gestion."',id_tipo_gestion='".$this->id_tipo_gestion."', id_ficha_tecnica='".$this->id_ficha_tecnica."',Solucion='".$this->solucion."' WHERE id_ticket='".$this->id_ticket."'";
+		        $query="UPDATE ticket SET descripcion='".$this->descripcion."',estado='".$this->estado."',id_usuario='".$this->id_usuario."', id_gestion='".$this->id_gestion."',id_tipo_gestion='".$this->id_tipo_gestion."', id_ficha_tecnica='".$this->id_ficha_tecnica."',Solucion='".$this->solucion."', urgente='".$this->urgente."' WHERE id_ticket='".$this->id_ticket."'";
 		        $update=$this->db->query($query);
 		        if ($update==true) {
 		            return true;
@@ -123,7 +132,7 @@ class Ticket extends Conexion
 		    }
 			 public function save()
 		    {
-		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_gestion, id_tipo_gestion, id_ficha_tecnica,Solucion)
+		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_gestion, id_tipo_gestion, id_ficha_tecnica,Solucion,urgente)
 		    			values(NULL,
 		    			'".$this->descripcion."',
 		    			'".$this->estado."',
@@ -133,8 +142,9 @@ class Ticket extends Conexion
 		    			'".$this->id_usuario."',
 		    			'".$this->id_gestion."',
 		    			'".$this->id_tipo_gestion."',
-		    			'".$this->id_ficha_tecnica."',
-		    			'".$this->solucion."');";
+		    			NULL,
+		    			'".$this->solucion."',
+		    			'".$this->urgente."');";
 		    	$save=$this->db->query($query);
 		    	if ($save==true) {
 		            return true;
@@ -156,7 +166,7 @@ class Ticket extends Conexion
 		    } 
 		         public function selectALL()
 		    {
-		        $query="SELECT * FROM ticket";
+		        $query="SELECT * FROM ticket ORDER BY urgente DESC";
 		        $selectall=$this->db->query($query);
 		        $ListTickets=$selectall->fetch_all(MYSQLI_ASSOC);
 		        return $ListTickets;

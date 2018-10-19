@@ -1,3 +1,6 @@
+<?php 
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,7 +124,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Clientes</h2>
+                    <h2>Pagina de tickets</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -192,6 +195,7 @@
                           <th>Gestion</th>
                           <th>Responsable</th>
                           <th>Estado</th>
+                          <th>Urgente</th>
                           <th>Opciones</th>                            
                         </tr>
                       </thead>
@@ -209,7 +213,7 @@
                           $tecnico=$misTickets->selectOneU($row['id_usuario']);
                          echo '
                           <tr>
-                           <td>'.$row['id_gestion'].'</td>';
+                           <td>'.$row['id_ticket'].'</td>';
                             foreach ($gestion as $key) {
                               echo '<td>'.$key['nombre'].'</td>';
                             }
@@ -222,9 +226,11 @@
                            echo '
 
                            <td>'.$row['estado'].'</td>
+
+                           <td>'.$row['urgente'].'</td>
                            <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ticket"].'" class="btn btn-info view_data"/> 
+                                    
                                     <a href="../views/modiTicket.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'" class="btn btn-warning">Editar</a>
                                     <a href="../controller/TicketControlador.php?id='.$row["id_ticket"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>

@@ -1,5 +1,5 @@
  <?php
-session_start();
+
 if (isset($_SESSION['id_tipo_usuario'])) {
  $codigo= $_SESSION['id_tipo_usuario']; 
 }else{

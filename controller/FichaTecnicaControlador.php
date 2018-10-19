@@ -100,7 +100,7 @@ elseif ($accion=="guardar")
 	$descripcion =$_POST['descripcion'];
 	$trabajo =$_POST['trabajo'];
 	$equipo_queda =$_POST['equipo_queda'];
-
+	$ticket=$_POST['ticket'];
 	$falla =$_POST['falla'];		
 	$FichaTecnic->setId_contacto($id_contacto);		
 	$FichaTecnic->setId_cliente($id_cliente);
@@ -122,7 +122,7 @@ elseif ($accion=="guardar")
     uploadImgBase64($_POST['imagen2'], 'mi_firma_'.$firma_tecnico.'.png' );
 
 		if ($bandera=="ticket") {
-			header('Location: ../views/saveTicket.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'');
+			header('Location: ../views/modiTicket.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'');
 		}else{
 
 		header('Location: ../listas/FichaTecnca.php?success=correcto');
