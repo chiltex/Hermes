@@ -18,6 +18,8 @@ class FichaTecnica extends Conexion
  private $id_usuario;
  private $falla;
  private $trabajo;
+ private $detalle_repuestos;
+
 
  public function __construct()
 	{
@@ -36,6 +38,7 @@ class FichaTecnica extends Conexion
         $this->id_usuario="";
         $this->falla="";
         $this->trabajo="";
+        $this->detalle_repuestos="";
     }
 
 	public function getId_ficha_tecnica() {
@@ -134,11 +137,18 @@ class FichaTecnica extends Conexion
     public function setTrabajo($trabajo) {
         $this->trabajo = $trabajo;
     }
+    public function getDetalle_repuestos() {
+        return $this->detalle_repuestos;
+    }
+
+    public function setDetalle_repuestos($detalle_repuestos) {
+        $this->detalle_repuestos = $detalle_repuestos;
+    }
     //FUNCIONES----------------
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,detalle_repuestos)
 				values(NULL,
     			'".$this->descripcion."',
     			'".$this->equipo_queda."',
@@ -149,7 +159,8 @@ class FichaTecnica extends Conexion
                 '".$this->firma_tecnico."',
     			'".$this->id_usuario."',
     			'".$this->falla."',
-    			'".$this->trabajo."');";
+    			'".$this->trabajo."',
+                '".$this->detalle_repuestos."');";
     	$save=$this->db->query($query) or die(mysqli_error($this->db->query($query)));
     	if ($save==true) {
             return true;
@@ -171,7 +182,7 @@ class FichaTecnica extends Conexion
     }
      public function update()
     {
-        $query="UPDATE ficha_tecnica SET descripcion='".$this->descripcion."',equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
+        $query="UPDATE ficha_tecnica SET descripcion='".$this->descripcion."',equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', detalle_repuestos='".$this->detalle_repuestos."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;

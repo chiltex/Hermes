@@ -29,6 +29,15 @@ session_start();
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <style>
+      .div1 {
+           overflow:scroll;
+           height:200px;
+           width:500px;
+      }
+     
+
+    </style>
 </head>
 <body class="nav-md">
         <div class="container body">
@@ -227,6 +236,41 @@ session_start();
                                                   ';
 
                                              ?>
+                                      <div class="form-group">
+                                      <div class="table-wrapper-scroll-y div1" >
+
+                                        <table id="example1 datatable-buttons" class="table table-striped table-bordered">
+                                      <thead>
+                                        <tr>
+                                          <th> </th>
+                                          <th>Repuesto</th>
+                                          <th>Codigo Serie</th>                       
+                                          <th>Cantidad</th>                          
+                                        </tr>
+                                      </thead>
+                                      <TBODY>
+                                         <?php 
+                                         require_once "../class/Repuestos.php";
+                                         $repuesto = new Repuestos();
+                                         $repuestos = $repuesto->selectALL();
+                                         foreach ((array)$repuestos as $a) {
+                                         echo '
+                                          <tr>
+                                            <td>
+                                            <input type="radio" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
+                                           </td>
+                                           <td>'.$a['nombre'].'</td>
+                                           <td>'.$a["codigo_serie"].'</td>
+                                           <td> <input type="text" id="cantidad" name="cantidad[]" required="required" class="form-control col-xs-3 col-xs-8"></td>
+                                          </tr>
+                                         ';
+
+                                       }  ?>
+                                          </TBODY>
+                                        </table>
+
+                                        </div>
+                                      </div>
 
                                     <div class="form-group">
                                         <label class="control-label col-xs-4" for="last-name">Descripcion Producto <span class="required">*</span>
@@ -252,10 +296,10 @@ session_start();
                              <div class="row"> 
                               <div class="col-lg-6">
                                 <div class="row">
-                                  <div class="col-lg-9">
+                                  <div class="col-lg-7">
                                     <div class="row">
                                         <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo se entrega<span class="required">*</span>
+                                          <label class="control-label col-md-6 col-sm-6 col-xs-12" for="first-name">Estado entrega
                                           </label>
                                           <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select id="equipo_queda" name="equipo_queda" class="form-control ">

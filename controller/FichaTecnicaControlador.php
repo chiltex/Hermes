@@ -101,7 +101,11 @@ elseif ($accion=="guardar")
 	$trabajo =$_POST['trabajo'];
 	$equipo_queda =$_POST['equipo_queda'];
 	$ticket=$_POST['ticket'];
-	$falla =$_POST['falla'];		
+	$falla =$_POST['falla'];
+
+	foreach ($_POST['id_repuestos'] as $key) {
+			$detalle_repuestos=$_POST['id_repuestos']."/n";
+			}		
 	$FichaTecnic->setId_contacto($id_contacto);		
 	$FichaTecnic->setId_cliente($id_cliente);
 	$FichaTecnic->setId_usuario($id_usuario);
