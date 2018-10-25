@@ -18,7 +18,14 @@ class FichaTecnica extends Conexion
  private $id_usuario;
  private $falla;
  private $trabajo;
- private $detalle_repuestos;
+ private $id_tipo_ma;
+ private $linea_produccion;
+ private $hora_ingreso;
+ private $hora_egreso;
+ private $datos_generales;
+ private $recibe;
+
+
 
 
  public function __construct()
@@ -38,7 +45,13 @@ class FichaTecnica extends Conexion
         $this->id_usuario="";
         $this->falla="";
         $this->trabajo="";
-        $this->detalle_repuestos="";
+        $this->id_tipo_ma="";
+        $this->linea_produccion="";
+        $this->hora_ingreso="";
+        $this->hora_ingreso="";
+        $this->datos_generales="";
+        $this->recibe="";
+
     }
 
 	public function getId_ficha_tecnica() {
@@ -137,18 +150,53 @@ class FichaTecnica extends Conexion
     public function setTrabajo($trabajo) {
         $this->trabajo = $trabajo;
     }
-    public function getDetalle_repuestos() {
-        return $this->detalle_repuestos;
+    public function getId_tipo_ma() {
+        return $this->id_tipo_ma;
     }
 
-    public function setDetalle_repuestos($detalle_repuestos) {
-        $this->detalle_repuestos = $detalle_repuestos;
+    public function setId_tipo_ma($id_tipo_ma) {
+        $this->id_tipo_ma = $id_tipo_ma;
+    }
+    public function getLinea_produccion() {
+        return $this->linea_produccion;
+    }
+
+    public function setLinea_produccion($linea_produccion) {
+        $this->linea_produccion = $linea_produccion;
+    }
+    public function getHora_ingreso() {
+        return $this->hora_ingreso;
+    }
+
+    public function setHora_ingreso($hora_ingreso) {
+        $this->hora_ingreso = $hora_ingreso;
+    }
+    public function getHora_egreso() {
+        return $this->hora_egreso;
+    }
+
+    public function setHora_egreso($hora_egreso) {
+        $this->hora_egreso = $hora_egreso;
+    }
+    public function getDatos_generales() {
+        return $this->datos_generales;
+    }
+
+    public function setDatos_generales($datos_generales) {
+        $this->datos_generales = $datos_generales;
+    }
+    public function getRecibe() {
+        return $this->recibe;
+    }
+
+    public function setRecibe($recibe) {
+        $this->recibe = $recibe;
     }
     //FUNCIONES----------------
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,detalle_repuestos)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,hora_egreso,datos_generales,recibe)
 				values(NULL,
     			'".$this->descripcion."',
     			'".$this->equipo_queda."',
@@ -160,7 +208,12 @@ class FichaTecnica extends Conexion
     			'".$this->id_usuario."',
     			'".$this->falla."',
     			'".$this->trabajo."',
-                '".$this->detalle_repuestos."');";
+                '".$this->id_tipo_ma."',
+                '".$this->linea_produccion."',
+                '".$this->date("h")."',
+                     NULL',
+                '".$this->datos_generales."',,
+                '".$this->recibe."');";
     	$save=$this->db->query($query) or die(mysqli_error($this->db->query($query)));
     	if ($save==true) {
             return true;
@@ -182,7 +235,7 @@ class FichaTecnica extends Conexion
     }
      public function update()
     {
-        $query="UPDATE ficha_tecnica SET descripcion='".$this->descripcion."',equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', detalle_repuestos='".$this->detalle_repuestos."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
+        $query="UPDATE ficha_tecnica SET descripcion='".$this->descripcion."',equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma.", linea_produccion='".$this->linea_produccion."', hora_ingreso='".$this->hora_ingreso.", hora_egreso='".$this->hora_egreso." WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;

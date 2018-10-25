@@ -33,7 +33,7 @@ session_start();
       .div1 {
            overflow:scroll;
            height:200px;
-           width:500px;
+           width:auto;
       }
      
 
@@ -176,12 +176,31 @@ session_start();
                                            # code...
                                          }else{
                                            echo '
-                                         <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
+                                         <div class="col-xs-8"><h2>Empresa:<strong> '.$nombre.'</strong></h2></div>';
                                          }
                                       
 
                                       }
                                       ?>
+                                        <?php 
+                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" bandera="ficha" class="btn btn-info view_data2"/>';
+
+                                            if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
+                                               $id_producto=0;
+                                               $codigo_serie=0000;
+                                               $producto="N/A";
+                                              }else{
+                                                 $id_producto=$_GET["id_producto"];
+                                                 $codigo_serie=$_GET["codigo_serie"];
+                                                  $producto=$_GET["producto"];
+                                              }
+                                              echo '
+                                                <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong>  Codigo serie: <strong> '.$codigo_serie.'</strong></h4></div> 
+                                 
+                                              <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
+                                                  ';
+
+                                             ?>
                                       <table id="example2 datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
@@ -217,29 +236,66 @@ session_start();
                                                      ?>
                                           </TBODY>
                                         </table>
-                                        <?php 
-                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" bandera="ficha" class="btn btn-info view_data2"/>';
+                                      <div class="col-xs-12">
+                                        <div class="form-group">
+                                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Tipo Maquina
+                                          </label>
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                            <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
+                                                 <?php 
+                                                 require_once "../class/TipoMaquina.php";
+                                                 $misGP = new TipoMaquina();
+                                                 $tc = $misGP->selectAll();
+                                                
+                                                   # code...
+                                                 
+                                                 foreach ((array)$tc as $row) {
+                                                 echo '
+                                                  <option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>
+                                                 ';
+                                               }
+                                               ?>
+                                               </select>
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Linea de Produccion
+                                          </label>
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                            <input type="text" id="linea_produccion" name="linea_produccion" class="form-control col-md-7 col-xs-12">
+                                          </div>
+                                        </div>
 
-                                            if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
-                                               $id_producto=0;
-                                               $codigo_serie=0000;
-                                               $producto="N/A";
-                                              }else{
-                                                 $id_producto=$_GET["id_producto"];
-                                                 $codigo_serie=$_GET["codigo_serie"];
-                                                  $producto=$_GET["producto"];
-                                              }
-                                              echo '
-                                                <div class="col-xs-8"><h6>Producto:<strong> '.$producto.'</strong>  Codigo serie: <strong> '.$codigo_serie.'</strong></h6></div> 
-                                 <div class="col-xs-12">
-                                              <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
-                                                  ';
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Descripcion Producto 
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                         <textarea name="descripcion" id="descripcion" class="form-control"></textarea>  
+                          
+                                          </div>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Descripcion Falla
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                         <textarea name="falla" id="falla" class="form-control">
+Horas Maquina:
+Horas bomba:
+Make up: 
+tinta:
+cleaning:
+software:
 
-                                             ?>
-                                      <div class="form-group">
+                                         </textarea>  
+                          
+                                          </div>
+                                       
+                                    </div>
+                                       <div class="form-group">
                                       <div class="table-wrapper-scroll-y div1" >
 
-                                        <table id="example1 datatable-buttons" class="table table-striped table-bordered">
+                                        <table id="datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
                                           <th> </th>
@@ -257,11 +313,11 @@ session_start();
                                          echo '
                                           <tr>
                                             <td>
-                                            <input type="radio" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
+                                            <input type="checkbox" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
                                            </td>
                                            <td>'.$a['nombre'].'</td>
                                            <td>'.$a["codigo_serie"].'</td>
-                                           <td> <input type="text" id="cantidad" name="cantidad[]" required="required" class="form-control col-xs-3 col-xs-8"></td>
+                                           <td> <input type="text" id="cantidad" name="cantidad[]" class="form-control col-xs-3 col-xs-8"></td>
                                           </tr>
                                          ';
 
@@ -271,25 +327,8 @@ session_start();
 
                                         </div>
                                       </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-4" for="last-name">Descripcion Producto <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="descripcion" id="descripcion" class="form-control"></textarea>  
-                          
-                                          </div>
-                                    </div>
-                                     <div class="form-group">
-                                        <label class="control-label col-xs-4" for="last-name">Descripcion Solucion <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="trabajo" id="trabajo" class="form-control"></textarea>  
-                          
-                                          </div>
-                                    </div>
-                                        
                                            
+                                
                                   </div>
                               </div>
                              </div>  
@@ -299,9 +338,9 @@ session_start();
                                   <div class="col-lg-7">
                                     <div class="row">
                                         <div class="form-group">
-                                          <label class="control-label col-md-6 col-sm-6 col-xs-12" for="first-name">Estado entrega
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado entrega
                                           </label>
-                                          <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
                                             <select id="equipo_queda" name="equipo_queda" class="form-control ">
                                               <option value="Iniciado">Reparado</option>
                                               <option value="EnProceso">En espera</option>
@@ -309,23 +348,36 @@ session_start();
                                             </select>
                                           </div>
                                         </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="last-name">Descripcion Falla <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="falla" id="falla" class="form-control"></textarea>  
-                          
-                                          </div>
-                                       
-                                    </div>
+                                    
                                     </div>
                                   </div>
                                 <div class="col-lg-9">
                                   <div class="row">
-                                 
-                                  
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                         <textarea name="datos_generales" id="datos_generales" class="form-control"></textarea>  
+                          
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Descripcion Solucion 
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                         <textarea name="trabajo" id="trabajo" class="form-control"></textarea>  
+                          
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Nombre quien Recibe
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <input type="text" id="recibe" name="recibe"  class="form-control col-md-7 col-xs-12">
+                                      </div>
+                                    </div>
                                      <div class="form-group">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma Cliente<span class="required"></span>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma Cliente
                                     </label>
                                     <br> <br> <br>
                                     <div class="col-md-6 col-sm-6 col-xs-12">

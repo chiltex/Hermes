@@ -10,6 +10,9 @@ class Repuestos extends Conexion
  private $codigo_serie;
  private $estado;
  private $descripcion;
+ private $cantidad;
+ private $id_detalle_repuestos;
+ private $id_ficha_tecnica;
 
  public function __construct()
 	{
@@ -20,6 +23,9 @@ class Repuestos extends Conexion
         $this->codigo_serie = "";
         $this->estado="";
         $this->descripcion="";
+        $this->cantidad="";
+        $this->id_detalle_repuestos="";
+        $this->id_ficha_tecnica="";
     }
 
  public function getId_repuesto() {
@@ -54,11 +60,32 @@ class Repuestos extends Conexion
         $this->estado = $estado;
     }
     public function getDescripcion() {
-        return $this->id_tgrupo_producto;
+        return $this->idescripcion;
     }
 
     public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
+    }
+    public function getCantidad() {
+        return $this->cantidad;
+    }
+
+    public function setCantidad($cantidad) {
+        $this->cantidad = $cantidad;
+    }
+   public function getId_ficha_tecnica() {
+        return $this->id_ficha_tecnica;
+    }
+
+    public function setId_ficha_tecnica($id_ficha_tecnica) {
+        $this->id_ficha_tecnica = $id_ficha_tecnica;
+    }
+   public function getId_detalle_repuestos() {
+        return $this->id_detalle_repuestos;
+    }
+
+    public function setId_detalle_repuestos($id_detalle_repuestos) {
+        $this->id_detalle_repuestos = $id_detalle_repuestos;
     }
 
     //FUNCIONES________________________
@@ -130,6 +157,27 @@ class Repuestos extends Conexion
         return false;
        }
 
+    }
+    //-------------------------------------------------------------------------------------------------------//
+    //-------------------------------------------------------------------------------------------------------//
+    //---------------------------------DETALLE DE REPUESTOS--------------------------------------------------//
+    //-------------------------------------------------------------------------------------------------------//
+    //-------------------------------------------------------------------------------------------------------//
+
+    public function save1()
+    {
+        $query="INSERT INTO detalle_repuestos(id_detalle_repuestos,id_ficha_tecnica,id_repuesto,cantidad)
+                values(NULL,
+                '".$this->id_ficha_tecnica."',
+                '".$this->id_repuesto."',
+                '".$this->cantidad."');";
+        $save=$this->db->query($query);
+        if ($save==true) {
+            return true;
+        }else {
+            
+            return false;
+        }   
     }
 
 }//end class

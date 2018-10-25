@@ -2,6 +2,8 @@
 require_once "../class/FichaTenica.php";
 require_once "../class/Cliente.php";
 require_once "../class/Contactos.php";
+require_once "../class/Repuestos.php";
+
 
 $accion=$_GET['accion'];
 
@@ -92,6 +94,7 @@ elseif ($accion=="guardar")
 	$bandera =$_POST['bandera'];
 		$ft=$FichaTecnic->selectLast();
 	foreach ($ft as $key) {
+		$id_nf1=$key['id_ficha_tecnica'];
 	$id_nf=$key['id_ficha_tecnica']+1;
 		}
 	$ficTec =$id_nf;
@@ -100,12 +103,19 @@ elseif ($accion=="guardar")
 	$descripcion =$_POST['descripcion'];
 	$trabajo =$_POST['trabajo'];
 	$equipo_queda =$_POST['equipo_queda'];
-	$ticket=$_POST['ticket'];
+	if (isset($_POST['ticket'])) {
+		$ticket=$_POST['ticket'];
+	}
+	
 	$falla =$_POST['falla'];
+	$id_tipo_ma=$_POST['id_tipo_ma'];
+	$linea_produccion=$_POST['linea_produccion'];
+	$datos_generales=$_POST['datos_generales'];
+	$recibe=$_POST['recibe'];	
 
-	foreach ($_POST['id_repuestos'] as $key) {
-			$detalle_repuestos=$_POST['id_repuestos']."/n";
-			}		
+	$id_repuestos=$_POST['id_repuestos'];
+	$cont_repuestos=count($id_repuestos);
+	$cantidades=$_POST['cantidad'];
 	$FichaTecnic->setId_contacto($id_contacto);		
 	$FichaTecnic->setId_cliente($id_cliente);
 	$FichaTecnic->setId_usuario($id_usuario);
@@ -115,9 +125,34 @@ elseif ($accion=="guardar")
 	$FichaTecnic->setEquipo_queda($equipo_queda);
 	$FichaTecnic->setFirma_cliente($firma_cliente);
 	$FichaTecnic->setFirma_tecnico($firma_tecnico);
-	$FichaTecnic->setFalla($falla);	
+	$FichaTecnic->setFalla($falla);
+	$FichaTecnic->setId_tipo_ma($id_tipo_ma);
+	$FichaTecnic->setLinea_produccion($linea_produccion);
+	$FichaTecnic->setDatos_generales($datos_generales);
+	$FichaTecnic->setRecibe($recibe);	
 	$save=$FichaTecnic->save();
+	$i=0;
+	$lastFT=$id_nf1;
+		/*do {
+				$dr = new Repuestos();
+					$dr->setId_ficha_tecnica($lastFT);
+					$dr->setId_repuesto($id_repuesto[$i]);
+					$dr->setCantidad($cantidades[$i]);
+					$dr->save1();
+				$i=$i+1;
+				} while ($i<=$cont_repuestos );*/
+		while ($i<=$cont_repuestos) {
+				$dr = new Repuestos();
+					$dr->setId_ficha_tecnica($lastFT);
+					$dr->setId_repuesto($id_repuestos[$i]);
+					$dr->setCantidad($cantidades[$i]);
+					$dr->save1();
+				$i=$i+1;
+		}
+
 	if ($save==true) {
+		
+	
 
     // llamamos a la funcion uploadImgBase64( img_base64, nombre_fina.png) 
     
@@ -126,10 +161,10 @@ elseif ($accion=="guardar")
     uploadImgBase64($_POST['imagen2'], 'mi_firma_'.$firma_tecnico.'.png' );
 
 		if ($bandera=="ticket") {
-			header('Location: ../views/modiTicket.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'');
+			header('Location: ../views/modiTicket.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'&contador='.$cont_repuestos.'');
 		}else{
 
-		header('Location: ../listas/FichaTecnca.php?success=correcto');
+		header('Location: ../listas/FichaTecnca.php?success=correcto&contador='.$cont_repuestos.'');
 		}
 
 		# code...
