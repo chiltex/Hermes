@@ -181,7 +181,42 @@ session_start();
 
                                         
                                       ?>
-                                    
+                                     <div class="form-group">
+                                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Tipo Maquina
+                                          </label>
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                            <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
+                                                 <?php 
+                                                 require_once "../class/TipoMaquina.php";
+                                                 $id_ma=$key['id_tipo_ma'];
+                                                 $misGP = new TipoMaquina();
+                                                 $dtc = $misGP->selectDAll($id_ma);
+                                                 $tc = $misGP->selectOne($id_ma);
+
+                                                 foreach ((array)$tc as $riw) {
+                                                 echo '
+                                                  <option value="'.$riw["id_tipo_ma"].'">'.$riw["nombre"].'</option>
+                                                 ';
+                                               }
+                                                 foreach ((array)$dtc as $row) {
+                                                 echo '
+                                                  <option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>
+                                                 ';
+                                               }
+                                               ?>
+                                               </select>
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Linea de Produccion
+                                          </label>
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                          <?php 
+                                            echo '<input type="text" id="linea_produccion" name="linea_produccion" value="'.$key['linea_produccion'].'" class="form-control col-md-7 col-xs-12">';
+                                           ?>
+                                            
+                                          </div>
+                                        </div>
                                         
                                             
                                               
@@ -196,17 +231,55 @@ session_start();
                                       ?>
                                        </div>
                                     </div>
-                                     <div class="form-group">
-                                        <label class="control-label col-xs-4" for="last-name">Descripcion Solucion <span class="required">*</span>
+                                      <div class="form-group">
+                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="last-name">Descripcion Falla <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">      
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
                                          <?php  
-                                        echo '<textarea name="trabajo" id="trabajo" class="form-control">'.$key['trabajo'].'</textarea> ';
+                                        echo '<textarea name="falla" id="falla" class="form-control">'.$key['falla'].'</textarea> ';
                                       ?>
-                          
-                                          </div>
-                                    </div>
                                         
+                                      </div>
+                                       
+                                    </div>
+                                     <div class="form-group">
+                                      <div class="table-wrapper-scroll-y div1" >
+                                      <?php  ?>
+
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                                      <thead>
+                                        <tr>
+                                          <th> </th>
+                                          <th>Repuesto</th>
+                                          <th>Codigo Serie</th>                       
+                                          <th>Cantidad</th>                          
+                                        </tr>
+                                      </thead>
+                                      <TBODY>
+                                         <?php 
+                                         require_once "../class/Repuestos.php";
+                                         $repuesto = new Repuestos();
+                                         $repuestos = $repuesto->selectALL();
+                                         foreach ((array)$repuestos as $a) {
+                                         echo '
+                                          <tr>
+                                            <td>
+                                            <input type="checkbox" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
+                                           </td>
+                                           <td>'.$a['nombre'].'</td>
+                                           <td>'.$a["codigo_serie"].'</td>
+                                           <td> <input type="text" id="cantidad" name="cantidad[]" class="form-control col-xs-3 col-xs-8"></td>
+                                          </tr>
+                                         ';
+
+                                       }  ?>
+                                          </TBODY>
+                                        </table>
+
+                                        </div>
+                                      </div>
+                                   
                                            
                                   </div>
                               </div>
@@ -245,16 +318,16 @@ session_start();
                                           </div>
                                         </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="last-name">Descripcion Falla <span class="required">*</span>
+                                        <label class="control-label col-xs-4" for="last-name">Descripcion Solucion <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                        <div class="col-md-12 col-sm-6 col-xs-12">      
                                          <?php  
-                                        echo '<textarea name="falla" id="falla" class="form-control">'.$key['falla'].'</textarea> ';
+                                        echo '<textarea name="trabajo" id="trabajo" class="form-control">'.$key['trabajo'].'</textarea> ';
                                       ?>
-                                        
-                                      </div>
-                                       
+                          
+                                          </div>
                                     </div>
+                                        
                                     </div>
                                   </div>
                                 <div class="col-lg-9">

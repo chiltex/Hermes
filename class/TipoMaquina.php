@@ -84,6 +84,13 @@ class TipoMaquina extends Conexion
         $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCategoria;
     }
+     public function selectDALL($codigo)
+    {
+        $query="SELECT * FROM tipo_maquina WHERE id_tipo_ma!='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListCategoria;
+    }
      public function selectOne($codigo)
     {
         $query="SELECT * FROM tipo_maquina WHERE id_tipo_ma='".$codigo."'";

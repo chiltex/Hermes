@@ -279,15 +279,7 @@ session_start();
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Descripcion Falla
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="falla" id="falla" class="form-control">
-Horas Maquina:
-Horas bomba:
-Make up: 
-tinta:
-cleaning:
-software:
-
-                                         </textarea>  
+                                         <textarea name="falla" id="falla" class="form-control"> </textarea>  
                           
                                           </div>
                                        
@@ -357,7 +349,13 @@ software:
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="datos_generales" id="datos_generales" class="form-control"></textarea>  
+                                         <textarea name="datos_generales" id="datos_generales" class="form-control">
+Horas Maquina:
+Horas bomba:
+Make up: 
+tinta:
+cleaning:
+software:</textarea>  
                           
                                           </div>
                                     </div>

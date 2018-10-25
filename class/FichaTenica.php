@@ -196,7 +196,7 @@ class FichaTecnica extends Conexion
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,hora_egreso,datos_generales,recibe)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe)
 				values(NULL,
     			'".$this->descripcion."',
     			'".$this->equipo_queda."',
@@ -210,11 +210,10 @@ class FichaTecnica extends Conexion
     			'".$this->trabajo."',
                 '".$this->id_tipo_ma."',
                 '".$this->linea_produccion."',
-                '".date("h")."',
-                     NULL',
-                '".$this->datos_generales."',,
+                '".$this->hora_ingreso."',
+                '".$this->datos_generales."',
                 '".$this->recibe."');";
-    	$save=$this->db->query($query) or die(mysqli_error($this->db->query($query)));
+    	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
         }else {

@@ -34,6 +34,17 @@ CREATE TABLE `categorias` (
   `descripcion` longtext COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `tipo_maquina` (
+  `id_tipo_ma` int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  `nombre` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `descripcion` longtext COLLATE utf8mb4_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- --------------------------------------------------------
 -- --------------------------------------------------------
 
 --

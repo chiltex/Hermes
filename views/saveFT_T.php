@@ -179,6 +179,30 @@ session_start();
 
                                       }
                                       ?>
+
+                                        <?php 
+                                           
+
+                                            if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
+                                               $id_producto=0;
+                                               $codigo_serie=0000;
+                                               $producto="N/A";
+                                              }else{
+                                                 $id_producto=$_GET["id_producto"];
+                                                 $codigo_serie=$_GET["codigo_serie"];
+                                                  $producto=$_GET["producto"];
+                                                  $id_ticket=$_GET["ticket"];
+                                              }
+                                              echo '
+                                                <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong></h4></div>
+                                                <div class="col-xs-8"><h4>Codigo serie: <strong> '.$codigo_serie.'</strong></h4></div>  
+                                 
+                                              <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
+                                              <input type="hidden" name="producto" id="producto" value="'.$producto.'"/>
+                                              <input type="hidden" name="ticket" id="ticket" value="'.$id_ticket.'"/>
+                                                  ';
+
+                                             ?>
                                       <table id="example2 datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
@@ -215,30 +239,35 @@ session_start();
                                                      ?>
                                           </TBODY>
                                         </table>
-                                        <?php 
-                                           
-
-                                            if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
-                                               $id_producto=0;
-                                               $codigo_serie=0000;
-                                               $producto="N/A";
-                                              }else{
-                                                 $id_producto=$_GET["id_producto"];
-                                                 $codigo_serie=$_GET["codigo_serie"];
-                                                  $producto=$_GET["producto"];
-                                                  $id_ticket=$_GET["ticket"];
-                                              }
-                                              echo '
-                                                <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong></h4></div>
-                                                <div class="col-xs-8"><h4>Codigo serie: <strong> '.$codigo_serie.'</strong></h4></div>  
-                                 <div class="col-xs-12">
-                                              <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
-                                              <input type="hidden" name="producto" id="producto" value="'.$producto.'"/>
-                                              <input type="hidden" name="ticket" id="ticket" value="'.$id_ticket.'"/>
-                                                  ';
-
-                                             ?>
-
+                                        <div class="col-xs-12">
+                                         <div class="form-group">
+                                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Tipo Maquina
+                                          </label>
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                            <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
+                                                 <?php 
+                                                 require_once "../class/TipoMaquina.php";
+                                                 $misGP = new TipoMaquina();
+                                                 $tc = $misGP->selectAll();
+                                                
+                                                   # code...
+                                                 
+                                                 foreach ((array)$tc as $row) {
+                                                 echo '
+                                                  <option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>
+                                                 ';
+                                               }
+                                               ?>
+                                               </select>
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Linea de Produccion
+                                          </label>
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                            <input type="text" id="linea_produccion" name="linea_produccion" class="form-control col-md-7 col-xs-12">
+                                          </div>
+                                        </div>
                                     <div class="form-group">
                                         <label class="control-label col-xs-4" for="last-name">Descripcion Producto <span class="required">*</span>
                                         </label>
@@ -248,14 +277,49 @@ session_start();
                                           </div>
                                     </div>
                                      <div class="form-group">
-                                        <label class="control-label col-xs-4" for="last-name">Descripcion Solucion <span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Descripcion Falla
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="trabajo" id="trabajo" class="form-control"></textarea>  
+                                         <textarea name="falla" id="falla" class="form-control"> </textarea>  
                           
                                           </div>
+                                       
                                     </div>
-                                        
+                                     <div class="form-group">
+                                      <div class="table-wrapper-scroll-y div1" >
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                                      <thead>
+                                        <tr>
+                                          <th> </th>
+                                          <th>Repuesto</th>
+                                          <th>Codigo Serie</th>                       
+                                          <th>Cantidad</th>                          
+                                        </tr>
+                                      </thead>
+                                      <TBODY>
+                                         <?php 
+                                         require_once "../class/Repuestos.php";
+                                         $repuesto = new Repuestos();
+                                         $repuestos = $repuesto->selectALL();
+                                         foreach ((array)$repuestos as $a) {
+                                         echo '
+                                          <tr>
+                                            <td>
+                                            <input type="checkbox" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
+                                           </td>
+                                           <td>'.$a['nombre'].'</td>
+                                           <td>'.$a["codigo_serie"].'</td>
+                                           <td> <input type="text" id="cantidad" name="cantidad[]" class="form-control col-xs-3 col-xs-8"></td>
+                                          </tr>
+                                         ';
+
+                                       }  ?>
+                                          </TBODY>
+                                        </table>
+
+                                        </div>
+                                      </div>
                                            
                                   </div>
                               </div>
@@ -277,13 +341,33 @@ session_start();
                                           </div>
                                         </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="last-name">Descripcion Falla <span class="required">*</span>
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="falla" id="falla" class="form-control"></textarea>  
+                                         <textarea name="datos_generales" id="datos_generales" class="form-control">
+Horas Maquina:
+Horas bomba:
+Make up: 
+tinta:
+cleaning:
+software:</textarea>  
                           
                                           </div>
-                                       
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Descripcion Solucion 
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
+                                         <textarea name="trabajo" id="trabajo" class="form-control"></textarea>  
+                          
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Nombre quien Recibe
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <input type="text" id="recibe" name="recibe"  class="form-control col-md-7 col-xs-12">
+                                      </div>
                                     </div>
                                     </div>
                                   </div>

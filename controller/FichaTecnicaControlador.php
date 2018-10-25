@@ -94,7 +94,6 @@ elseif ($accion=="guardar")
 	$bandera =$_POST['bandera'];
 		$ft=$FichaTecnic->selectLast();
 	foreach ($ft as $key) {
-		$id_nf1=$key['id_ficha_tecnica'];
 	$id_nf=$key['id_ficha_tecnica']+1;
 		}
 	$ficTec =$id_nf;
@@ -128,10 +127,15 @@ elseif ($accion=="guardar")
 	$FichaTecnic->setFalla($falla);
 	$FichaTecnic->setId_tipo_ma($id_tipo_ma);
 	$FichaTecnic->setLinea_produccion($linea_produccion);
+	$FichaTecnic->setHora_ingreso(date("h"));	
 	$FichaTecnic->setDatos_generales($datos_generales);
 	$FichaTecnic->setRecibe($recibe);	
 	$save=$FichaTecnic->save();
 	$i=0;
+	$ft1=$FichaTecnic->selectLast();
+	foreach ($ft1 as $key) {
+		$id_nf1=$key['id_ficha_tecnica'];
+		}
 	$lastFT=$id_nf1;
 		/*do {
 				$dr = new Repuestos();
@@ -141,7 +145,7 @@ elseif ($accion=="guardar")
 					$dr->save1();
 				$i=$i+1;
 				} while ($i<=$cont_repuestos );*/
-		while ($i<=$cont_repuestos) {
+		while ($i<$cont_repuestos) {
 				$dr = new Repuestos();
 					$dr->setId_ficha_tecnica($lastFT);
 					$dr->setId_repuesto($id_repuestos[$i]);
