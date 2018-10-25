@@ -210,7 +210,7 @@ class FichaTecnica extends Conexion
     			'".$this->trabajo."',
                 '".$this->id_tipo_ma."',
                 '".$this->linea_produccion."',
-                '".$this->date("h")."',
+                '".date("h")."',
                      NULL',
                 '".$this->datos_generales."',,
                 '".$this->recibe."');";
