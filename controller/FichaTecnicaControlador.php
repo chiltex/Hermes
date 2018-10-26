@@ -32,6 +32,7 @@ if ($accion=="modificar") {
 		$descripcion=NULL;
 	}
 	$equipo_queda =$_POST['equipo_queda'];
+	
 	$id_cliente =$_POST['id_cliente'];
 	$id_producto =$_POST['id_producto'];
 	if (isset($_POST['id_contacto'])) {
@@ -87,9 +88,14 @@ if ($accion=="modificar") {
 			}
 	}
 	else{
+		if (isset($_POST['foto1'])) {
+			$foto_uno=$_POST['foto1'];
+		}
+		else{
+			$foto_uno =NULL;
 
-		$foto_uno =NULL;
-	}
+		}
+      }
 	if (isset($_FILES['foto_dos'])) {
 		$directorio = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica.'_';
 		$fichero=$directorio.basename($_FILES['foto_dos']['name']);
@@ -101,7 +107,13 @@ if ($accion=="modificar") {
 	}
 	else{
 
-		$foto_uno =NULL;
+		if (isset($_POST['foto2'])) {
+			$foto_dos=$_POST['foto2'];
+		}
+		else{
+			$foto_dos =NULL;
+
+		}
 	}
 	if (isset($_FILES['foto_tres'])) {
 		$directorio = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica.'_';
@@ -112,9 +124,15 @@ if ($accion=="modificar") {
 			}
 	}
 	else{
+		if (isset($_POST['foto3'])) {
+			$foto_tres=$_POST['foto3'];
+		}
+		else{
+			$foto_tres =NULL;
 
-		$foto_uno =NULL;
+		}
 	}
+
 	$FichaTecnica = new FichaTecnica();		
 	$FichaTecnica->setId_ficha_tecnica($id_ficha_tecnica);
 	$FichaTecnica->setLatitud($latitud);
@@ -127,12 +145,18 @@ if ($accion=="modificar") {
 	$FichaTecnica->setTrabajo($trabajo);
 	$FichaTecnica->setFalla($falla);
 	$FichaTecnica->setId_tipo_ma($id_tipo_ma);
-	$FichaTecnica->setLinea_produccion($linea_produccion);	
+	$FichaTecnica->setLinea_produccion($linea_produccion);
+	if ($equipo_queda=="Reparado") {
+	$FichaTecnica->setHora_egreso(date("h"));		
+	}else{
+	$$Hora_e=NULL;
+	$FichaTecnica->setHora_egreso($Hora_e);
+	}
 	$FichaTecnica->setDatos_generales($datos_generales);
 	$FichaTecnica->setRecibe($recibe);	
-	$FichaTecnic->setFoto_uno($foto_uno);
-	$FichaTecnic->setFoto_dos($foto_dos);
-	$FichaTecnic->setFoto_tres($foto_tres);	
+	$FichaTecnica->setFoto_uno($foto_uno);
+	$FichaTecnica->setFoto_dos($foto_dos);
+	$FichaTecnica->setFoto_tres($foto_tres);	
 
 	$update=$FichaTecnica->update();
 	$i=0;
@@ -243,7 +267,7 @@ elseif ($accion=="guardar")
 		
 	$recibe=$_POST['recibe'];
 	}else{
-		$recibe=NULL;
+		$recibe= NULL;
 	}
 	
 	
@@ -271,7 +295,7 @@ elseif ($accion=="guardar")
 	}
 	else{
 
-		$foto_uno =NULL;
+		$foto_dos=NULL;
 	}
 	if (isset($_FILES['foto_tres'])) {
 		$directorio = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec.'_';
@@ -283,7 +307,7 @@ elseif ($accion=="guardar")
 	}
 	else{
 
-		$foto_uno =NULL;
+		$foto_tres =NULL;
 	}
 	$id_repuestos=$_POST['id_repuestos'];
 	$cont_repuestos=count($id_repuestos);
@@ -302,7 +326,7 @@ elseif ($accion=="guardar")
 	$FichaTecnic->setLinea_produccion($linea_produccion);
 	$FichaTecnic->setHora_ingreso(date("h"));	
 	$FichaTecnic->setDatos_generales($datos_generales);
-	$FichaTecnica->setRecibe($recibe);	
+	$FichaTecnic->setRecibe($recibe);	
 	$FichaTecnic->setFoto_uno($foto_uno);
 	$FichaTecnic->setFoto_dos($foto_dos);
 	$FichaTecnic->setFoto_tres($foto_tres);
