@@ -51,6 +51,9 @@ class FichaTecnica extends Conexion
         $this->hora_ingreso="";
         $this->datos_generales="";
         $this->recibe="";
+        $this->foto_uno="";
+        $this->foto_dos="";
+        $this->foto_tres="";
 
     }
 
@@ -192,11 +195,32 @@ class FichaTecnica extends Conexion
     public function setRecibe($recibe) {
         $this->recibe = $recibe;
     }
+    public function getFoto_uno() {
+        return $this->foto_uno;
+    }
+
+    public function setFoto_uno($foto_uno) {
+        $this->foto_uno = $foto_uno;
+    }
+    public function getFoto_dos() {
+        return $this->foto_dos;
+    }
+
+    public function setFoto_dos($foto_dos) {
+        $this->foto_dos = $foto_dos;
+    }
+    public function getFoto_tres() {
+        return $this->foto_tres;
+    }
+
+    public function setFoto_tres($foto_tres) {
+        $this->foto_tres = $foto_tres;
+    }
     //FUNCIONES----------------
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres)
 				values(NULL,
     			'".$this->descripcion."',
     			'".$this->equipo_queda."',
@@ -212,7 +236,10 @@ class FichaTecnica extends Conexion
                 '".$this->linea_produccion."',
                 '".$this->hora_ingreso."',
                 '".$this->datos_generales."',
-                '".$this->recibe."');";
+                '".$this->recibe."',
+                '".$this->foto_uno."',
+                '".$this->foto_dos."',
+                '".$this->foto_tres."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
@@ -234,7 +261,7 @@ class FichaTecnica extends Conexion
     }
      public function update()
     {
-        $query="UPDATE ficha_tecnica SET descripcion='".$this->descripcion."',equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma.", linea_produccion='".$this->linea_produccion."', hora_ingreso='".$this->hora_ingreso.", hora_egreso='".$this->hora_egreso." WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
+        $query="UPDATE ficha_tecnica SET descripcion='".$this->descripcion."',equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma."', linea_produccion='".$this->linea_produccion."', datos_generales='".$this->datos_generales."', recibe='".$this->recibe."', foto_uno='".$this->foto_uno."', foto_dos='".$this->foto_dos."', foto_tres='".$this->foto_tres."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;

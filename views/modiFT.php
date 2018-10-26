@@ -262,16 +262,40 @@ session_start();
                                          $repuesto = new Repuestos();
                                          $repuestos = $repuesto->selectALL();
                                          foreach ((array)$repuestos as $a) {
-                                         echo '
+
+                                         $de_repuestos = $repuesto->repuestoChecked($id_ficha_tecnica,$a["id_repuesto"]); 
+                                         if ($de_repuestos==1) {
+                                             echo '
                                           <tr>
                                             <td>
                                             <input type="checkbox" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
                                            </td>
                                            <td>'.$a['nombre'].'</td>
                                            <td>'.$a["codigo_serie"].'</td>
-                                           <td> <input type="text" id="cantidad" name="cantidad[]" class="form-control col-xs-3 col-xs-8"></td>
+                                           <td> <input type="text" id="cantidad" name="cantidad[]" valueclass="form-control col-xs-3 col-xs-8"></td>
                                           </tr>
                                          ';
+                                         }
+                                         elseif ($de_repuestos==2){
+                                         $deta_repuestos = $repuesto->selectOneDR($id_ficha_tecnica,$a["id_repuesto"]);
+                                         foreach ((array)$deta_repuestos as $b) {
+                                          echo '
+                                          <tr>
+                                            
+                                            <td>
+                                            <input type="checkbox" name="id_repuestos[]" checked value="'.$b["id_repuesto"].'" />
+                                           </td>
+                                           <td>'.$b['nombre'].'</td>
+                                           <td>'.$b["codigo_serie"].'</td>
+                                           <td> <input type="text" id="cantidad" name="cantidad[]" value="'.$b['cantidad'].'" class="form-control col-xs-3 col-xs-8"></td>
+                                          </tr>
+                                         ';                                          
+
+                                         }
+
+                                           
+                                         }
+                                        
 
                                        }  ?>
                                           </TBODY>
@@ -317,15 +341,89 @@ session_start();
                                             </select>
                                           </div>
                                         </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-4" for="last-name">Descripcion Solucion <span class="required">*</span>
+                                        <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">      
-                                         <?php  
-                                        echo '<textarea name="trabajo" id="trabajo" class="form-control">'.$key['trabajo'].'</textarea> ';
-                                      ?>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">    
+                                        <?php 
+                                        echo '<textarea name="datos_generales" id="datos_generales" class="form-control">'.$key['datos_generales'].'</textarea>';
+                                         ?>                               
+                                           
                           
                                           </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12"> 
+                                         <?php 
+                                        if ($key['foto_uno']!=null) {
+                                          echo '
+                                            <strong>Ultima Imagen:</strong>
+                                            <div style="border: 1px solid #CCC;">
+                                            <center><img src="../fotos/'.$key["foto_uno"].'" width="12.5%" height="12.5%" border="1"></center>
+
+                                             </div>
+                                             <br>
+                                             <input name = "foto_uno" type = "file" /> <br>
+                                            ';
+                                        }else{
+
+                                          echo '  <input name = "foto_uno" type = "file" /> <br>';
+                                        }
+                                        if ($key['foto_dos']!=null) {
+                                          echo '
+                                            <strong>Ultima Imagen:</strong>
+                                            <div style="border: 1px solid #CCC;">
+                                            <center><img src="../fotos/'.$key["foto_dos"].'" width="12.5%" height="12.5%" border="1"></center>
+
+                                             </div>
+                                             <br>
+                                             <input name = "foto_dos" type = "file" /> <br>
+                                            ';
+                                        }else{
+
+                                          echo '  <input name = "foto_dos" type = "file" /> <br>';
+                                        }
+                                        if ($key['foto_tres']!=null) {
+                                          echo '
+                                            <strong>Ultima Imagen:</strong>
+                                            <div style="border: 1px solid #CCC;">
+                                            <center><img src="../fotos/'.$key["foto_tres"].'" width="12.5%" height="12.5%" border="1"></center>
+
+                                             </div>
+                                             <br>
+                                             <input name = "foto_tres" type = "file" /> <br>
+                                            ';
+                                        }else{
+
+                                          echo '  <input name = "foto_tres" type = "file" /> <br>';
+                                        }
+                                            
+                                        ?>
+                                          
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <label class="control-label col-xs-4" for="last-name">Descripcion Solucion <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-12 col-sm-6 col-xs-12">      
+                                             <?php  
+                                            echo '<textarea name="trabajo" id="trabajo" class="form-control">'.$key['trabajo'].'</textarea> ';
+                                          ?>
+                          
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Nombre quien Recibe
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <?php 
+                                        echo '<input type="text" id="recibe" name="recibe" value="'.$key['recibe'].'" class="form-control col-md-7 col-xs-12">';
+                                         ?>
+                                        
+                                      </div>
                                     </div>
                                         
                                     </div>

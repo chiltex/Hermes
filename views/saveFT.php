@@ -250,9 +250,7 @@ session_start();
                                                    # code...
                                                  
                                                  foreach ((array)$tc as $row) {
-                                                 echo '
-                                                  <option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>
-                                                 ';
+                                                 echo '<option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>';
                                                }
                                                ?>
                                                </select>
@@ -359,6 +357,16 @@ software:</textarea>
                           
                                           </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12"> 
+                                          <input name = "foto_uno" type = "file" /> <br>
+                                          <input name = "foto_dos" type = "file" /> <br>
+                                          <input name = "foto_tres" type = "file" />
+                                          </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Descripcion Solucion 
                                         </label>

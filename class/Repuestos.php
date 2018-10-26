@@ -179,6 +179,71 @@ class Repuestos extends Conexion
             return false;
         }   
     }
+         public function selectOneDR($codigo,$repuesto)
+    {
+        $query="SELECT dr.* , r.nombre , r.codigo_serie FROM detalle_repuestos dr INNER JOIN repuestos r on dr.id_repuesto = r.id_repuesto WHERE dr.id_ficha_tecnica='".$codigo."' AND r.id_repuesto='".$repuesto."'";
+        $selectall=$this->db->query($query);
+        $ListCliente=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListCliente;
+    }
+     public function repuestoChecked($codigo,$repuesto)
+    {
+        $query="SELECT dr.* , r.nombre , r.codigo_serie FROM detalle_repuestos dr INNER JOIN repuestos r on dr.id_repuesto = r.id_repuesto WHERE dr.id_ficha_tecnica='".$codigo."' AND r.id_repuesto='".$repuesto."'";
+        $selectall=$this->db->query($query);
+        if ($selectall->num_rows==0) {
+            return 1;
+        }else{
+
+            return 2;
+        }
+    }
+      public function update1()
+    {
+       
+        $query1="SELECT * FROM detalle_repuestos WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."' AND id_repuesto='".$this->id_repuesto."'";
+        $selectall=$this->db->query($query1);
+      
+            if ($selectall->num_rows==0) {
+                # code...
+                $query="INSERT INTO detalle_repuestos(id_detalle_repuestos,id_ficha_tecnica,id_repuesto,cantidad)
+                values(NULL,
+                '".$this->id_ficha_tecnica."',
+                '".$this->id_repuesto."',
+                '".$this->cantidad."');";
+                $save=$this->db->query($query);
+                if ($save==true) {
+                    return true;
+                }else {
+                    
+                    return false;
+                } 
+            }
+            else{
+                if ($this->cantidad<=0) {
+                   
+             $query="DELETE FROM detalle_repuestos WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."' AND id_repuesto='".$this->id_repuesto."'"; 
+             $delete=$this->db->query($query);
+
+                }else{
+                    $query="UPDATE detalle_repuestos SET cantidad='".$this->cantidad."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."' AND id_repuesto='".$this->id_repuesto."'";
+                $update=$this->db->query($query);
+                if ($update==true) {
+                    return true;
+                }else {
+                    return false;
+                }  
+
+
+                }
+
+                
+                    
+            }
+        
+
+        
+          
+    }
 
 }//end class
 

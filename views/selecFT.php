@@ -43,6 +43,11 @@
                            <td>Firma Cliente <br><img src="../firmas/mi_firma_'.$key["firma_cliente"].'.png" width="75%" height="75%" border="1"> </td>
                            <td>Firma Tecnico <br><img src="../firmas/mi_firma_'.$key["firma_tecnico"].'.png" width="75%" height="75%" border="1"></td>
                            </tr>
+                           <tr>
+                           <td>Imagen 1 <br><img src="../fotos/'.$key["foto_uno"].'" width="30%" height="30%" border="1"> </td>
+                           <td>Imagen 2<br><img src="../fotos/'.$key["foto_dos"].'" width="30%" height="30%" border="1"></td>
+                           <td>Imagen 3 <br><img src="../fotos/'.$key["foto_tres"].'" width="30%" height="30%" border="1"></td>
+                           </tr>
 						 </table>
           				 </div>
           				 ';

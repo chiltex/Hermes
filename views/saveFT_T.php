@@ -344,7 +344,7 @@ session_start();
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="datos_generales" id="datos_generales" class="form-control">
+                                         <textarea name="datos_generales" id="datos_generales" class="form-control" height="200px">
 Horas Maquina:
 Horas bomba:
 Make up: 
@@ -352,6 +352,15 @@ tinta:
 cleaning:
 software:</textarea>  
                           
+                                          </div>
+                                    </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12"> 
+                                          <input name = "foto_uno" type = "file" /> <br>
+                                          <input name = "foto_dos" type = "file" /> <br>
+                                          <input name = "foto_tres" type = "file" />
                                           </div>
                                     </div>
                                     <div class="form-group">

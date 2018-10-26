@@ -106,6 +106,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                         <ul class="nav child_menu">
                          <li><a href="../listas/lista_grupo_producto.php">Grupo de Productos</a></li>
                           <li><a href="../listas/Productos.php">Productos</a></li>
+                          <li><a href="../listas/lista_TipoMaquina.php">Tipo Maquina</a></li>
                           <li><a href="../listas/Cliente_Producto.php?cliente=0&nombre=nada&producto=0">Productos de Clientes</a></li>
                           <li><a href="../listas/Repuestos.php">Repuestos</a></li>
                         </ul>
@@ -116,6 +117,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                         <ul class="nav child_menu">
                          
                           <li><a href="../listas/Productos.php">Productos</a></li>
+                          <li><a href="../listas/lista_TipoMaquina.php">Tipo Maquina</a></li>
                           <li><a href="../listas/Cliente_Producto.php?cliente=0&nombre=nada&producto=0">Productos de Clientes</a></li>
                           <li><a href="../listas/Repuestos.php">Repuestos</a></li>
                         </ul>
