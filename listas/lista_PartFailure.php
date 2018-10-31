@@ -189,7 +189,7 @@ session_start();
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de tipos de maquina</h2>
+                    <h2>Pagina de Part Failures</h2>
 
 
                     
@@ -254,7 +254,7 @@ session_start();
                   <div class="x_content">
                       
 
-                                    <input type="button" name="accion" value="Nueva TipoMaquinaria" id="accion" class="btn btn-success save_data" /> 
+                                    <input type="button" name="accion" value="Nueva Part Failure" id="accion" class="btn btn-success save_data" /> 
                     <br>
                     <br>
                     <div id="employee_table">
@@ -262,30 +262,30 @@ session_start();
                       <thead>
                         <tr>
                           <th>N° </th>
-                          <th>TipoMaquinaria</th>
+                          <th>Part Failure</th>
                           <th>Descripcion</th>
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
                       <tbody>
                         <?php 
-                         require_once "../class/TipoMaquina.php";
-                         $misTipoMaquina = new TipoMaquina();
-                         $TipoMaquina = $misTipoMaquina->selectALL();
+                         require_once "../class/PartFailures.php";
+                         $misPart Failures = new PartFailures();
+                         $PFail = $misPart Failures->selectALL();
                         
                            # code...
                          
-                         foreach ((array)$TipoMaquina as $row) {
+                         foreach ((array)$PFail as $row) {
                          echo '
                           <tr>
-                           <td>'.$row['id_tipo_ma'].'</td>
+                           <td>'.$row['id_part_fail'].'</td>
                            <td>'.$row['nombre'].'</td>
                            <td>'.$row["descripcion"].'</td>
                            <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_tipo_ma"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_tipo_ma"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/TipoMaquinariaControlador.php?id='.$row["id_tipo_ma"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_part_fail"].'" class="btn btn-info view_data"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_part_fail"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/Part FailureControlador.php?id='.$row["id_part_fail"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
@@ -308,7 +308,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle TipoMaquina</h4>  
+                                                 <h4 class="modal-title">Detalle Part Failures</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_detail">  
                                             </div>  
@@ -323,7 +323,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle TipoMaquina</h4>  
+                                                 <h4 class="modal-title">Detalle Part Failures</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -338,7 +338,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle TipoMaquina</h4>  
+                                                 <h4 class="modal-title">Detalle Part Failures</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -354,7 +354,7 @@ session_start();
            <div class="modal-content">  
                 <div class="modal-header">  
                      <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Agregar nueva TipoMaquinaria</h4>  
+                     <h4 class="modal-title">Agregar nueva Part Failure</h4>  
                 </div>  
                 <div class="modal-body">  
                      
@@ -427,7 +427,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/modiTipoMaquina.php",  
+                     url:"../views/modiPFail.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -443,7 +443,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectTipoMaquina.php",  
+                     url:"../views/selectPFail.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -458,7 +458,7 @@ ga('send', 'pageview');
            if(employee_action != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveTipoMaquina.php",  
+                     url:"../views/savePFail.php",  
                      method:"POST",  
                      data:{employee_action:employee_action},  
                      success:function(data){  

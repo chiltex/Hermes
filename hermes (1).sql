@@ -44,8 +44,47 @@ CREATE TABLE `tipo_maquina` (
   `descripcion` longtext COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+CREATE TABLE `formulario_retorno` (
+  `id_form_retorno` int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  `sales_order` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `PO` longtext COLLATE utf8mb4_bin DEFAULT NULL,
+  `ship_method_via` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `customer_phone` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `customer_fax` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `warranty_status` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `cliente_nombre` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `cliente_phone` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `accion` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `bill_to` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `ship_to` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `customer_address` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `city` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `aplicacion` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `enviroment` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `operating_conditions` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `temperature` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `comentarios` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `estado` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `detalle_retorno` (
+  `id_detalle_retorno` int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  `id_form_retorno` int(11) NOT NULL,
+  `part_number_description` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `marsh_authotization_level` longtext COLLATE utf8mb4_bin DEFAULT NULL,
+  `equipment_serial_number` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `codigo_serie` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `cantidad` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `id_part_fail` varchar(15) COLLATE utf8mb4_bin DEFAULT NULL,
+  `invoice` int(11)) COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- --------------------------------------------------------
 -- --------------------------------------------------------
+
+ALTER TABLE `detalle_retorno`
+  ADD CONSTRAINT `DETALLE_RETORNO_ibfk_1` FOREIGN KEY (`id_form_retorno`) REFERENCES `formulario_retorno` (`id_form_retorno`),
+  ADD CONSTRAINT `DETALLE_RETORNO_ibfk_2` FOREIGN KEY (`id_part_fail`) REFERENCES `grupo_producto` (`id_part_fail`);
 
 --
 -- Estructura de tabla para la tabla `cliente`
