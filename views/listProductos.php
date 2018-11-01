@@ -9,6 +9,7 @@
        <table id="example1" class="table table-striped table-bordered">
          <thead>
                         <tr>
+                          <th>Codigo Serie</th>
                           <th>Nombre / Compañia</th>
                           <th>Categoria</th>
                           <th>Seleccionar</th>                          
@@ -26,6 +27,7 @@
           				 
                   echo '
                           <tr>
+                            <td>'.$row['codigo_serie'].'</td>
                             <td>'.$row['nombre'].'</td>
                            		';
                               $grupo_producto=$misProductos->selectOneGP($row['id_grupo_producto']);
