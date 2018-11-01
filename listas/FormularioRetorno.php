@@ -287,7 +287,7 @@ session_start();
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_form_retorno"].'" class="btn btn-info view_data"/>  
                                     <input type="button" name="edit" value="Editar" id="'.$row["id_form_retorno"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/FormularioRetornoriaControlador.php?id='.$row["id_form_retorno"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <a href="../controller/FormularioRetornoControlador.php?id='.$row["id_form_retorno"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';

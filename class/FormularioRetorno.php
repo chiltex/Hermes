@@ -261,6 +261,13 @@ class FormularioRetorno extends Conexion
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListClientes;
     }
+  public function selectALLONE($codigo)
+    {
+        $query="SELECT * FROM formulario_retorno WHERE id_form_retorno='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
    public function selectLast()
     {
         $query="SELECT * FROM formulario_retorno ORDER BY id_form_retorno DESC LIMIT 1";
