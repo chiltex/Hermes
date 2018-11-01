@@ -84,7 +84,7 @@ if ($accion=="modificar") {
 		$fichero=$directorio.basename($_FILES['foto_uno']['name']);
 		if (move_uploaded_file($_FILES['foto_uno']['tmp_name'], $fichero)) {
 			$nombre=$_FILES['foto_uno']['name'];
-			$foto_uno='fichaTecnica'.$ficTec.'_'.$nombre;
+			$foto_uno='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
 			}
 	}
 	else{

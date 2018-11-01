@@ -114,7 +114,7 @@ elseif ($accion=="guardar")
 	$FormularioRetorno->setCity($city);
 	$FormularioRetorno->setAplicacion($aplicacion);
 	$FormularioRetorno->setEnviroment($enviroment);
-	$FormularioRetorno->setOperating_condition($operating_condition);
+	$FormularioRetorno->setOperating_conditions($operating_condition);
 	$FormularioRetorno->setTemperature($temperature);
 	$FormularioRetorno->setComentarios($comentarios);
 	$FormularioRetorno->setEstado($estado);
@@ -125,14 +125,22 @@ elseif ($accion=="guardar")
 		foreach ($lastFR as $key) {
 			$id_lform = $key['id_form_retorno'];
 		}
+		$i=0;
 
-	$dr = new DetalleRetorno();
-	$dr->setPart_number_description($part_number_description);	
-	$dr->setMarsh_authorization_level($marsh_authorization_level);
-	$dr->setEquipament_serial_number($equipament_serial_number);
-	$dr->setCodigo_Serie($codigo_serie);
+while ( $i<$cont) {
+$dr = new DetalleRetorno();
+	$dr->setPart_number_description($part_number_description[$i]);	
+	$dr->setMarsh_authorization_level($marsh_authorization_level[$i]);
+	$dr->setEquipment_serial_number($equipament_serial_number[$i]);
+	$dr->setCodigo_Serie($codigo_serie[$i]);
+	$dr->setCantidad($cantidad[$i]);
+	$dr->setId_part_fail($id_part_fail[$i]);
 	$dr->setId_form_retorno($id_lform);
 	$dr->save();
+	$i=$i+1;
+
+}
+	
 	/*
 	$FormularioRetorno->setMarsh_authorization_level($marsh_authorization_level);
 	$FormularioRetorno->setCodigo_Serie($codigo_serie);

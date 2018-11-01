@@ -3,9 +3,9 @@ require_once "../config/conexion.php";
 /**
  * 
  */
-class DetalleRetorno extends AnotherClass
+class DetalleRetorno extends Conexion
 {
- private $cantidad;
+
  private $id_form_retorno;
  private $part_number_description;
  private $marsh_authorization_level;
@@ -74,13 +74,6 @@ class DetalleRetorno extends AnotherClass
 
     public function setCodigo_serie($codigo_serie) {
         $this->codigo_serie = $codigo_serie;
-    }
-    public function getCantidad() {
-        return $this->cantidad;
-    }
-
-    public function setCantidad($cantidad) {
-        $this->cantidad = $cantidad;
     }
 
     public function getId_part_fail() {

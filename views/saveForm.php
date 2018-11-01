@@ -261,6 +261,7 @@ session_start();
                             <h2>Detalle Retorno</h2>
                                   </label>
                             <button type="button" id="bt_add_detalle" class="btn btn-primary">Agregar</button>
+                             <input type="button" name="accion" value="Nueva Categoria" id="accion" class="btn btn-success views_data1" /> 
                             <table id="datatable-buttons2" class="table table-striped table-bordered">
                                <thead>
                                         <tr>
@@ -284,8 +285,68 @@ session_start();
                                 
                             </table>
                           </div>
+                          <!--end COL md-12-->
+                          <br>
+                          <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-3">
+                              
+                                             <strong><h5>Aplication</h5></strong><br>
+                                               <input type="radio" name="aplicacion" id="aplicacion" value="alpha-numeric" /><strong> Alpha-numeric</strong><br>
+                                                <input type="radio" name="aplicacion" id="aplicacion" value="logo" /><strong> Logo </strong><br>
+                            </div>
+                             <div class="col-xs-12 col-sm-3">
+                                              <strong><h5>Plant Type</h5></strong><br>
+                                              <input type="radio" name="enviroment" id="warranty_status" value="Textile" /><strong> Textile</strong><br>
+                                               <input type="radio" name="enviroment" id="warranty_status" value="Food" /><strong> Food</strong><br>
+                                                <input type="radio" name="enviroment" id="warranty_status" value="Industrial" /><strong> Industrial </strong><br>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                                 <strong><h5>Operating Condition</h5></strong><br>
+                                              <input type="radio" name="operating_conditions" id="operating_conditions" value="Humid" /><strong> Humid</strong><br>
+                                               <input type="radio" name="operating_conditions" id="operating_conditions" value="Dry" /><strong> Dry </strong><br>
+                                                <input type="radio" name="operating_conditions" id="operating_conditions" value="Wash Down" /><strong> Wash Down </strong><br>
+                            </div>
+                             <div class="col-xs-12 col-sm-3">
+                                               <strong><h5>Temperature</h5></strong><br>
+                                              <input type="radio" name="accion" id="temperature" value="Hot" /><strong> Hot</strong><br>
+                                               <input type="radio" name="accion" id="temperature" value="Cold" /><strong> Cold</strong><br>
+                            </div>
+
+                          </div>
+                          <br>
+                          <br>
+                          <div class="col-xs-12">
+                            <div class="col-xs-4">
+                              <div class="form-group">
+                                  <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Comentario<span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-10 col-sm-6 col-xs-12">
+                                    <textarea id="comentario" name="comentario" class="form-control col-md-7 col-xs-12"></textarea>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                              <div class="form-group">
+                                  <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Estado<span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <select id="estado" name="equipo_queda" class="form-control ">
+                                              <option value="Iniciado">Iniciado</option>
+                                              <option value="Aprovado">Aprobado</option>
+                                              <option value="Rechazado">Rechazado</option>                                    
+                                            </select>
+                                  </div>
+                                </div> 
+
+                            </div>  
+                                    
+
+                          </div>
                         </div>
                         <!--end row-->
+                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
+                              <button type="submit" class="btn btn-success">Ingresar</button>
+                            </div>
                       </form>
 
                  </div>
@@ -296,7 +357,21 @@ session_start();
 			  
             </div>
             <!--page content -->
-    
+     <div id="dataModal2" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">List Part Fail</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_forms2">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+      </div>
             <!-- footer content -->
             <footer>
               <div class="pull-right">
@@ -350,7 +425,22 @@ ga('send', 'pageview');
      
       
       <script>
-        
+          $(document).on('click', '.views_data1', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/listPartFail.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms2').html(data);  
+                          $('#dataModal2').modal('show');  
+                     }  
+                });  
+           }            
+      });  
+
       $(document).ready(function(){
       $('#bt_add_detalle').click(function(){
         agregar_detalle();

@@ -71,7 +71,7 @@ require_once "../class/Permisos.php";
                           echo '<tr><td>Permisos</td><td>Si</td></tr>';
                         }
                         if (($row['campo_p'])!=NULL) {
-                          echo '<tr><td>N/A</td><td>Si</td></tr>';
+                          echo '<tr><td>Extras</td><td>Si</td></tr>';
                         }
                         echo '
                         

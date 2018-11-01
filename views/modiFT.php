@@ -358,22 +358,24 @@ session_start();
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12"> 
                                          <?php 
-                                        if ($key['foto_uno']!=null) {
-                                          echo '
-                                            <strong>Ultima Imagen:</strong>
-                                            <div style="border: 1px solid #CCC;">
-                                            <center><img src="../fotos/'.$key["foto_uno"].'" width="12.5%" height="12.5%" border="1"></center>
-
-                                                <input type="hidden" name="foto1" id="foto1" value="'.$key["foto_uno"].'"/>
-                                             </div>
-                                             <br>
-                                             <input name = "foto_uno" type = "file" /> <br>
-                                            ';
+                                        if ($key['foto_uno']== "") {
+                                       echo '  <input name = "foto_uno" type = "file" /> <br>';
                                         }else{
+                                              echo '
+                                                  <strong>Ultima Imagen:</strong>
+                                                  <div style="border: 1px solid #CCC;">
+                                                  <center><img src="../fotos/'.$key["foto_uno"].'" width="12.5%" height="12.5%" border="1"></center>
 
-                                          echo '  <input name = "foto_uno" type = "file" /> <br>';
+                                                      <input type="hidden" name="foto1" id="foto1" value="'.$key["foto_uno"].'"/>
+                                                   </div>
+                                                   <br>
+                                                 
+                                                  ';
+                                          
                                         }
-                                        if ($key['foto_dos']!=null) {
+                                        if ($key['foto_dos']== "") {
+                                           echo '  <input name = "foto_dos" type = "file" /> <br>';
+                                        }else{
                                           echo '
                                             <strong>Ultima Imagen:</strong>
                                             <div style="border: 1px solid #CCC;">
@@ -383,14 +385,14 @@ session_start();
 
                                              </div>
                                              <br>
-                                             <input name = "foto_dos" type = "file" /> <br>
                                             ';
-                                        }else{
-
-                                          echo '  <input name = "foto_dos" type = "file" /> <br>';
+                                        
                                         }
-                                        if ($key['foto_tres']!=null) {
-                                          echo '
+                                        if ($key['foto_tres']=="") {
+                                         
+                                          echo '  <input name = "foto_tres" type = "file" /> <br>';
+                                        }else{
+                                           echo '
                                             <strong>Ultima Imagen:</strong>
                                             <div style="border: 1px solid #CCC;">
                                             <center><img src="../fotos/'.$key["foto_tres"].'" width="12.5%" height="12.5%" border="1"></center>
@@ -399,11 +401,7 @@ session_start();
 
                                              </div>
                                              <br>
-                                             <input name = "foto_tres" type = "file" /> <br>
                                             ';
-                                        }else{
-
-                                          echo '  <input name = "foto_tres" type = "file" /> <br>';
                                         }
                                             
                                         ?>

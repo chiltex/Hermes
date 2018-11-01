@@ -218,6 +218,17 @@ require_once "../class/Permisos.php";
                              ';
                           }
                           echo'
+                            <tr>
+                          <td>Extras(Formulario retorno y Calidad)</td>';
+                          if (isset($row['campo_p'])&& $row['campo_p']!=NULL) {
+                            echo '<td><input type="checkbox" name="campo_p" id="campo_p" checked value="../listas/lista_PartFailure.php"></td>';
+                          }else
+                          {
+                            echo '
+                            <td><input type="checkbox" name="campo_p" id="campo_p" value="../listas/Permisos.php"></td> 
+                             ';
+                          }
+                          echo'
                           </tr>
                           </table>
                           </div>

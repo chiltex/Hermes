@@ -282,7 +282,7 @@ session_start();
                            <td>'.$row['id_form_retorno'].'</td>
                            <td>'.$row['sales_order'].'</td>
                            <td>'.$row["PO"].'</td>
-                           <td>'.$row["Fecha"].'</td>
+                           <td>'.$row["fecha"].'</td>
                            <td>
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_form_retorno"].'" class="btn btn-info view_data"/>  

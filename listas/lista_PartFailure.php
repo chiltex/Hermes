@@ -269,16 +269,16 @@ session_start();
                       </thead>
                       <tbody>
                         <?php 
-                         require_once "../class/PartFailures.php";
-                         $misPart Failures = new PartFailures();
-                         $PFail = $misPart Failures->selectALL();
+                         require_once "../class/PartFailure.php";
+                         $misPart  = new PartFailure();
+                         $PFail = $misPart->selectALL();
                         
                            # code...
                          
                          foreach ((array)$PFail as $row) {
                          echo '
                           <tr>
-                           <td>'.$row['id_part_fail'].'</td>
+                           <td><strong>P</strong>'.$row['id_part_fail'].'</td>
                            <td>'.$row['nombre'].'</td>
                            <td>'.$row["descripcion"].'</td>
                            <td>

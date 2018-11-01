@@ -45,7 +45,7 @@ class PartFailure extends Conexion
 
     public function save()
     {
-    	$query="INSERT INTO parti_failure(id_part_fail,nombre,descripcion)
+    	$query="INSERT INTO part_failure(id_part_fail,nombre,descripcion)
     			values(NULL,
     			'".$this->nombre."',
     			'".$this->descripcion."');";
@@ -58,7 +58,7 @@ class PartFailure extends Conexion
     }
     public function update()
     {
-        $query="UPDATE parti_failure SET nombre='".$this->nombre."',descripcion='".$this->descripcion."' WHERE id_part_fail='".$this->id_part_fail."'";
+        $query="UPDATE part_failure SET nombre='".$this->nombre."',descripcion='".$this->descripcion."' WHERE id_part_fail='".$this->id_part_fail."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;
@@ -68,7 +68,7 @@ class PartFailure extends Conexion
     }
     public function delete()
     {
-       $query="DELETE FROM parti_failure WHERE id_part_fail='".$this->id_part_fail."'"; 
+       $query="DELETE FROM part_failure WHERE id_part_fail='".$this->id_part_fail."'"; 
        $delete=$this->db->query($query);
        if ($delete == true) {
         return true;
@@ -79,14 +79,14 @@ class PartFailure extends Conexion
     }
     public function selectALL()
     {
-        $query="SELECT * FROM parti_failure";
+        $query="SELECT * FROM part_failure";
         $selectall=$this->db->query($query);
         $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCategoria;
     }
      public function selectOne($codigo)
     {
-        $query="SELECT * FROM parti_failure WHERE id_part_fail='".$codigo."'";
+        $query="SELECT * FROM part_failure WHERE id_part_fail='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCategoria;
