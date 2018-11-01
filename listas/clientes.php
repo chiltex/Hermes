@@ -157,7 +157,6 @@ session_start();
                     ';
                 }
             }elseif (isset($_GET['error'])) {
-              $msj=$_GET['msj'];
                if ($_GET['error']=='incorrecto') {
                     
                     echo '

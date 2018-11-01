@@ -65,6 +65,7 @@ elseif ($accion=="eliminar") {
 elseif ($accion=="guardar") 
 {	
 	//-formulario de retorno-----
+	$fecha=$_POST['fecha'];
 	$sales_order=$_POST['sales_order'];
 	$PO=$_POST['PO'];
 	$ship_method_via=$_POST['ship_method_via'];
@@ -99,6 +100,7 @@ elseif ($accion=="guardar")
 
 
 	$FormularioRetorno = new FormularioRetorno();
+	$FormularioRetorno->setFecha($fecha);
 	$FormularioRetorno->setSales_order($sales_order);
 	$FormularioRetorno->setPO($PO);
 	$FormularioRetorno->setShip_method_via($ship_method_via);
