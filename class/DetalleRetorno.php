@@ -97,12 +97,12 @@ class DetalleRetorno extends Conexion
     			values(NULL,
     			'".$this->id_form_retorno."',
     			'".$this->part_number_description."',
-    			'Activo','".$this->marsh_authorization_level."',
-    			'Activo','".$this->equipment_serial_number."',
-    			'Activo','".$this->codigo_serie."',
-    			'Activo','".$this->cantidad."',
-    			'Activo','".$this->id_part_fail."',
-    			'Activo','".$this->invoice."');";
+                '".$this->marsh_authorization_level."',
+    			'".$this->equipment_serial_number."',
+    			'".$this->codigo_serie."',
+    			'".$this->cantidad."',
+    			'".$this->id_part_fail."',
+    			'".$this->invoice."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;

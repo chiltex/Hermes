@@ -5,7 +5,7 @@
   <input id="filtrar" type="text" class="form-control" placeholder="Buscar...">
 </div>
 //buscador 1
---> <a href="listas/Usuarios.php" class="btn btn-primary">Nuevo Usuario</a>
+-->
 <div id="employee_table">
        <table id="example1" class="table table-striped table-bordered" name="example1">
          <thead>
