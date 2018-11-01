@@ -33,7 +33,7 @@ require_once "../class/FormularioRetorno.php";
                         </tr>
                         <tr>
                         	<td> Comentario: </td>
-                           <td>'.$row["comentario"].'</td>
+                           <td>'.$row["comentarios"].'</td>
                           <input type="hidden" name="id" id="id" value="'.$row['id_form_retorno'].'"/>  
                                                   
                         </tr>

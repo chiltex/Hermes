@@ -203,9 +203,9 @@ session_start();
                                     </label>
                                     <div class="col-md-10 col-sm-3 col-xs-12">
 
-                                              <input type="radio" name="warramty_status" id="warranty_status" value="Warranty Failure" /><strong> Warranty Failure</strong><br>
-                                               <input type="radio" name="warramty_status" id="warranty_status" value="Non Warranty" /><strong> Non Warranty </strong><br>
-                                                <input type="radio" name="warramty_status" id="warranty_status" value="Out of Box Failure" /><strong> Out of Box Failure </strong><h7>(Within 30 days of installation)</h7><br>
+                                              <input type="radio" name="warranty_status" id="warranty_status" value="Warranty Failure" /><strong> Warranty Failure</strong><br>
+                                               <input type="radio" name="warranty_status" id="warranty_status" value="Non Warranty" /><strong> Non Warranty </strong><br>
+                                                <input type="radio" name="warranty_status" id="warranty_status" value="Out of Box Failure" /><strong> Out of Box Failure </strong><h7>(Within 30 days of installation)</h7><br>
                                     </div>
                                   </div>
                                     <div class="form-group">
