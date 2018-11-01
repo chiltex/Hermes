@@ -83,7 +83,7 @@ elseif ($accion=="guardar")
 	$enviroment=$_POST['sales_order'];
 	$operating_condition=$_POST['operating_condition'];
 	$temperature=$_POST['temperature'];
-	$comentarios=$_POST['comentarios'];
+	$comentarios=$_POST['comentario'];
 	$estado=$_POST['estado'];
 	//---------detalle de retorno-------
 

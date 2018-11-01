@@ -296,9 +296,9 @@ session_start();
                             </div>
                              <div class="col-xs-12 col-sm-3">
                                               <strong><h5>Plant Type</h5></strong><br>
-                                              <input type="radio" name="enviroment" id="warranty_status" value="Textile" /><strong> Textile</strong><br>
-                                               <input type="radio" name="enviroment" id="warranty_status" value="Food" /><strong> Food</strong><br>
-                                                <input type="radio" name="enviroment" id="warranty_status" value="Industrial" /><strong> Industrial </strong><br>
+                                              <input type="radio" name="enviroment" id="enviroment" value="Textile" /><strong> Textile</strong><br>
+                                               <input type="radio" name="enviroment" id="enviroment" value="Food" /><strong> Food</strong><br>
+                                                <input type="radio" name="enviroment" id="enviroment" value="Industrial" /><strong> Industrial </strong><br>
                             </div>
                             <div class="col-xs-12 col-sm-3">
                                                  <strong><h5>Operating Condition</h5></strong><br>
@@ -308,8 +308,8 @@ session_start();
                             </div>
                              <div class="col-xs-12 col-sm-3">
                                                <strong><h5>Temperature</h5></strong><br>
-                                              <input type="radio" name="accion" id="temperature" value="Hot" /><strong> Hot</strong><br>
-                                               <input type="radio" name="accion" id="temperature" value="Cold" /><strong> Cold</strong><br>
+                                              <input type="radio" name="temperature" id="temperature" value="Hot" /><strong> Hot</strong><br>
+                                               <input type="radio" name="temperature" id="temperature" value="Cold" /><strong> Cold</strong><br>
                             </div>
 
                           </div>
@@ -330,9 +330,9 @@ session_start();
                                   <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Estado<span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                     <select id="estado" name="equipo_queda" class="form-control ">
+                                     <select id="estado" name="estado" class="form-control ">
                                               <option value="Iniciado">Iniciado</option>
-                                              <option value="Aprovado">Aprobado</option>
+                                              <option value="Aprobado">Aprobado</option>
                                               <option value="Rechazado">Rechazado</option>                                    
                                             </select>
                                   </div>
