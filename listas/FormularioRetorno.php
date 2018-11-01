@@ -265,6 +265,7 @@ session_start();
                           <th>Sales Order</th>
                           <th>PO</th>
                           <th>Date</th>
+                          <th>Estado</th>
                           <th>Options</th>                          
                         </tr>
                       </thead>
@@ -283,6 +284,7 @@ session_start();
                            <td>'.$row['sales_order'].'</td>
                            <td>'.$row["PO"].'</td>
                            <td>'.$row["fecha"].'</td>
+                           <td>'.$row["estado"].'</td>
                            <td>
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_form_retorno"].'" class="btn btn-info view_data"/>  

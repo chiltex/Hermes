@@ -3,7 +3,7 @@ require_once "../class/FormularioRetorno.php";
 
 							$codigo=$_POST["employee_id"];
 					     $misFormularioRetorno = new FormularioRetorno();
-                         $catego = $misFormularioRetorno->selectOne($codigo);
+                         $catego = $misFormularioRetorno->selectALLONE($codigo);
                         
                            # code...
                          
