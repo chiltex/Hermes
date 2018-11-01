@@ -261,7 +261,7 @@ session_start();
                             <h2>Detalle Retorno</h2>
                                   </label>
                             <button type="button" id="bt_add_detalle" class="btn btn-primary">Agregar</button>
-                             <input type="button" name="accion" value="Nueva Categoria" id="accion" class="btn btn-success views_data1" /> 
+                             <input type="button" name="accion" value="List Part Failures" id="accion" class="btn btn-success views_data1" /> 
                             <table id="datatable-buttons2" class="table table-striped table-bordered">
                                <thead>
                                         <tr>
@@ -448,7 +448,7 @@ ga('send', 'pageview');
     });
       function agregar_detalle(){
     
-        fila_taller='<tr><th><input type="text" name="part_number_description[]" class="form-control" /></th><th><input type="text" name="marsh_authorization_level[]" class="form-control" /></th><th><input type="text" name="equipment_serial_number[]" class="form-control" /></th><th><input type="text" name="codigo_serial[]" class="form-control" /></th><th><input type="text" name="cantidad[]" class="form-control" /></th><th><input type="text" name="part_fail[]" class="form-control" /></th><th><input type="text" name="invoice[]" class="form-control" /></th></tr>';
+        fila_taller='<tr><th><input type="text" name="part_number_description[]" class="form-control" /></th><th><input type="text" name="marsh_authorization_level[]" class="form-control" /></th><th><input type="text" name="equipment_serial_number[]" class="form-control" /></th><th><input type="text" name="codigo_serial[]" class="form-control" /></th><th><input type="text" name="cantidad[]" class="form-control" /></th><th><strong>P</strong><input type="text" name="part_fail[]" class="form-control" /></th><th><input type="text" name="invoice[]" class="form-control" /></th></tr>';
      
         $("#datatable-buttons2").append(fila_taller);
       
