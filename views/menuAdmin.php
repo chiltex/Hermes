@@ -173,8 +173,8 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                          <li><a><i class="fa fa-clone"></i>Extras <span class="fa fa-chevron-down"></span></a>
                       
                         <ul class="nav child_menu">
-                          <li><a href="listas/FormularioRetorno.php">Formulario Retorno</a></li>
-                          <li><a href="listas/lista_partFailure.php">Part Failure</a></li>
+                          <li><a href="../listas/FormularioRetorno.php">Formulario Retorno</a></li>
+                          <li><a href="../listas/lista_partFailure.php">Part Failure</a></li>
                         </ul>
                       </li>
                       <?php 

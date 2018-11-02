@@ -141,7 +141,7 @@ class DetalleRetorno extends Conexion
     }
      public function selectOne($codigo)
     {
-        $query="SELECT * FROM detalle_retorno WHERE id_detalle_retorno='".$codigo."'";
+        $query="SELECT * FROM detalle_retorno WHERE id_form_retorno='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListCliente=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCliente;

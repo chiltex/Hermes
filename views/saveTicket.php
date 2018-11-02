@@ -172,6 +172,25 @@ session_start();
 
                                       }
                                       ?>
+                                      <?php 
+                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-info view_data2"/>';
+
+                                            if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
+                                               $id_producto=0;
+                                               $codigo_serie=0000;
+                                               $producto="N/A";
+                                              }else{
+                                                 $id_producto=$_GET["id_producto"];
+                                                 $codigo_serie=$_GET["codigo_serie"];
+                                                  $producto=$_GET["producto"];
+                                              }
+                                              echo '
+                                                <div class="col-xs-8"><h6>Producto:<strong> '.$producto.'</strong>  Codigo serie: <strong> '.$codigo_serie.'</strong></h6></div> 
+                                  <div class="col-sm-12">
+                                              <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
+                                                  ';
+
+                                             ?>
                                       <table id="example2 datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
@@ -202,25 +221,7 @@ session_start();
                                                      ?>
                                           </TBODY>
                                         </table>
-                                        <?php 
-                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-info view_data2"/>';
-
-                                            if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
-                                               $id_producto=0;
-                                               $codigo_serie=0000;
-                                               $producto="N/A";
-                                              }else{
-                                                 $id_producto=$_GET["id_producto"];
-                                                 $codigo_serie=$_GET["codigo_serie"];
-                                                  $producto=$_GET["producto"];
-                                              }
-                                              echo '
-                                                <div class="col-xs-8"><h6>Producto:<strong> '.$producto.'</strong>  Codigo serie: <strong> '.$codigo_serie.'</strong></h6></div> 
-                                  <div class="col-sm-12">
-                                              <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
-                                                  ';
-
-                                             ?>
+                                        
                                              <!--
                                         <div class="form-group">
                                         <label class="control-label col-sm-3" for="last-name">Ficha Tecnica <span class="required">:</span>

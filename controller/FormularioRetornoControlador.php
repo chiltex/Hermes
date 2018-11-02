@@ -35,14 +35,59 @@ if ($accion=="modificar") {
 	$id_part_fail=$_POST['id_part_fail'];
 	$invoice=$_POST['invoice'];
 	$id_detalle_retorno =$_POST['id'];
+	$count_dr=count($part_number_description =$_POST['part_number_description']);
+	$id_fr=$_POST['id_form_dr'];
+
 	$FormularioRetorno = new FormularioRetorno();
-	$FormularioRetorno->setPart_number_description($part_number_description);	
-	$FormularioRetorno->setMarsh_authorization_level($marsh_authorization_level);
-	$FormularioRetorno->setEquipament_serial_number($equipament_serial_number);
-	$FormularioRetorno->setCodigo_Serie($codigo_serie);
-	$FormularioRetorno->setId_detalle_retorno($id_detalle_retorno);
+		$FormularioRetorno->setFecha($fecha);
+	$FormularioRetorno->setSales_order($sales_order);
+	$FormularioRetorno->setPO($PO);
+	$FormularioRetorno->setShip_method_via($ship_method_via);
+	$FormularioRetorno->setCustomer_phone($customer_phone);
+	$FormularioRetorno->setCustomer_fax($customer_fax);
+	$FormularioRetorno->setWarranty_status($warranty_status);
+	$FormularioRetorno->setCliente_nombre($cliente_nombre);
+	$FormularioRetorno->setCliente_phone($cliente_phone);
+	$FormularioRetorno->setAccion($accion);
+	$FormularioRetorno->setBill_to($bill_to);
+	$FormularioRetorno->setShip_to($ship_to);
+	$FormularioRetorno->setCustomer_address($customer_address);
+	$FormularioRetorno->setCity($city);
+	$FormularioRetorno->setAplicacion($aplicacion);
+	$FormularioRetorno->setEnviroment($enviroment);
+	$FormularioRetorno->setOperating_conditions($operating_condition);
+	$FormularioRetorno->setTemperature($temperature);
+	$FormularioRetorno->setComentarios($comentarios);
+	$FormularioRetorno->setEstado($estado);
+	$FormularioRetorno->setId_form_retorno($id_form_retorno);
 	$update=$FormularioRetorno->update();
 	if ($update==true) {
+		$dr = new DetalleRetorno();
+		
+			$j=0;
+	while ($j<$count_dr) {
+		if ($id_fr[$j]>0) {
+		$dr->setPart_number_description($part_number_description[$j]);	
+		$dr->setMarsh_authorization_level($marsh_authorization_level[$j]);
+		$dr->setEquipment_serial_number($equipament_serial_number[$j]);
+		$dr->setCodigo_Serie($codigo_serie[$j]);
+		$dr->setCantidad($cantidad[$j]);
+		$dr->setId_part_fail($id_part_fail[$j]);
+		$dr->setId_detalle_retorno($id_detalle_retorno[$j]);
+		$update1=$dr->update();
+			}
+			else{
+		$dr->setPart_number_description($part_number_description[$j]);	
+		$dr->setMarsh_authorization_level($marsh_authorization_level[$j]);
+		$dr->setEquipment_serial_number($equipament_serial_number[$j]);
+		$dr->setCodigo_Serie($codigo_serie[$j]);
+		$dr->setCantidad($cantidad[$j]);
+		$dr->setId_part_fail($id_part_fail[$j]);
+		$save1=$dr->save();		
+			}
+
+		}
+	
 		header('Location: ../listas/FormularioRetorno.php?success=correcto');
 		# code...
 	}else{
@@ -53,7 +98,7 @@ if ($accion=="modificar") {
 elseif ($accion=="eliminar") {	
 	$id_FormularioRetorno =$_GET['id'];
 	$FormularioRetorno = new FormularioRetorno();
-	$FormularioRetorno->setId_detalle_retorno($id_FormularioRetorno);
+	$FormularioRetorno->setId_form_retorno($id_FormularioRetorno);
 	$delete=$FormularioRetorno->delete();
 	if ($delete==true) {
 		header('Location: ../listas/FormularioRetorno.php?success=correcto');
@@ -78,9 +123,9 @@ elseif ($accion=="guardar")
 	$bill_to=$_POST['bill_to'];
 	$ship_to=$_POST['ship_to'];
 	$customer_address=$_POST['customer_address'];
-	$cityr=$_POST['city'];
+	$city=$_POST['city'];
 	$aplicacion=$_POST['aplicacion'];
-	$enviroment=$_POST['sales_order'];
+	$enviroment=$_POST['enviroment'];
 	$operating_condition=$_POST['operating_conditions'];
 	$temperature=$_POST['temperature'];
 	$comentarios=$_POST['comentario'];
@@ -96,10 +141,7 @@ elseif ($accion=="guardar")
 	$invoice=$_POST['invoice'];
 	$cont=count($part_number_description);
 
-
-
-
-	$FormularioRetorno = new FormularioRetorno();
+    $FormularioRetorno = new FormularioRetorno();
 	$FormularioRetorno->setFecha($fecha);
 	$FormularioRetorno->setSales_order($sales_order);
 	$FormularioRetorno->setPO($PO);
@@ -137,8 +179,10 @@ $dr = new DetalleRetorno();
 	$dr->setCodigo_Serie($codigo_serie[$i]);
 	$dr->setCantidad($cantidad[$i]);
 	$dr->setId_part_fail($id_part_fail[$i]);
+
+	$dr->setInvoice($invoice[$i]);
 	$dr->setId_form_retorno($id_lform);
-	$dr->save();
+	$save2=$dr->save();
 	$i=$i+1;
 
 }
@@ -149,7 +193,7 @@ $dr = new DetalleRetorno();
 	$FormularioRetorno->setPart_number_description($part_number_description);	
 	$save=$FormularioRetorno->save();
 	*/
-		header('Location: ../listas/FormularioRetorno.php?success=correcto');
+		header('Location: ../listas/FormularioRetorno.php?success=correcto$save='.$save2.'');
 		# code...
 	}
 	else{

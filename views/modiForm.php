@@ -143,8 +143,15 @@ session_start();
                       </div>
                 <div class="x_content">
                         <br />
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/FormularioRetornoControlador.php?accion=guardar" method="post">
-                        <div class="row">
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/FormularioRetornoControlador.php?accion=modificar" method="post">
+                      <div class="row">
+                          <?php 
+                                  $id_form_retorno=$_GET["id"];
+                           require_once "../class/FormularioRetorno.php";
+                               $miFichaT = new FormularioRetorno();
+                               $ft = $miFichaT->selectALLONE($id_form_retorno);
+                               foreach ($ft as $key) {
+                               ?>
                           <div class="col-xs-12">
                               <div class="col-xs-8 col-sm-6">
                                 <div class="form-group">
@@ -152,7 +159,10 @@ session_start();
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class='input-group date' id='datetimepicker1'>
-                                        <input type='date' name="fecha" id="fecha" class="form-control" />
+                                        <?php 
+                                          echo '
+                                        <input type="date" name="fecha" id="fecha" value="'.$key['fecha'].'" class="form-control" />';
+                                         ?>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -164,42 +174,61 @@ session_start();
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sales Order <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="sales_order" name="sales_order"  class="form-control col-md-7 col-xs-12">
+                                  <?php  
+                                  echo '<input type="text" id="sales_order" name="sales_order" value="'.$key['sales_order'].'" class="form-control col-md-7 col-xs-12">
+
+                                            <input type="hidden" name="id_form_retorno" id="id_form_retorno" value="'.$id_form_retorno.'"/>
+                                  ';
+                                  ?>
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">PO # <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="PO" name="PO"  class="form-control col-md-7 col-xs-12">
+                                  <?php 
+                                  echo '  <input type="text" id="PO" name="PO" value="'.$key['PO'].'" class="form-control col-md-7 col-xs-12">';
+                                   ?>
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ship Method Via <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="ship_method_via" name="ship_method_via" class="form-control col-md-7 col-xs-12">
+                                  <?php 
+                                  echo '
+                                    <input type="text" id="ship_method_via" name="ship_method_via" value="'.$key['ship_method_via'].'" class="form-control col-md-7 col-xs-12"';
+                                   ?>>
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Customer Phone <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="customer_phone" name="customer_phone"  class="form-control col-md-7 col-xs-12">
+                                  <?php 
+                                  echo '  <input type="text" id="customer_phone" name="customer_phone" value="'.$key['customer_phone'].'" class="form-control col-md-7 col-xs-12">';
+                                   ?>
+                                  
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Customer Fax <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="customer_fax" name="customer_fax" class="form-control col-md-7 col-xs-12">
+                                  <?php 
+                                  echo '<input type="text" id="customer_fax" name="customer_fax" value="'.$key['customer_fax'].'" class="form-control col-md-7 col-xs-12">';
+                                   ?>
+                                    
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">City/ state <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="city" name="city"  class="form-control col-md-7 col-xs-12">
+                                  <?php 
+                                    echo ' <input type="text" id="city" name="city" value="'.$key['city'].'" class="form-control col-md-7 col-xs-12">';
+                                   ?>
+                                   
                                   </div>
                                 </div>
                               </div>
@@ -209,55 +238,117 @@ session_start();
                                     <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name"> <span class="required"></span>
                                     </label>
                                     <div class="col-md-10 col-sm-3 col-xs-12">
-
-                                              <input type="radio" name="warranty_status" id="warranty_status" value="Warranty Failure" /><strong> Warranty Failure</strong><br>
+                                        <?php 
+                                          if ($key['warranty_status']=="Warranty Failure") {
+                                            echo ' <input type="radio" name="warranty_status" id="warranty_status" checked value="Warranty Failure" /><strong> Warranty Failure</strong><br>
                                                <input type="radio" name="warranty_status" id="warranty_status" value="Non Warranty" /><strong> Non Warranty </strong><br>
                                                 <input type="radio" name="warranty_status" id="warranty_status" value="Out of Box Failure" /><strong> Out of Box Failure </strong><h7>(Within 30 days of installation)</h7><br>
-                                    </div>
+                                              ';
+                                          }elseif ($key['warranty_status']=="Non Warranty") {
+                                           echo ' <input type="radio" name="warranty_status" id="warranty_status" value="Warranty Failure" /><strong> Warranty Failure</strong><br>
+                                               <input type="radio" name="warranty_status" id="warranty_status" checked value="Non Warranty" /><strong> Non Warranty </strong><br>
+                                                <input type="radio" name="warranty_status" id="warranty_status" value="Out of Box Failure" /><strong> Out of Box Failure </strong><h7>(Within 30 days of installation)</h7><br>
+                                              ';
+                                          }
+                                          elseif ($key['warranty_status']=="Out of Box Failure") {
+                                           echo ' <input type="radio" name="warranty_status" id="warranty_status" value="Warranty Failure" /><strong> Warranty Failure</strong><br>
+                                               <input type="radio" name="warranty_status" id="warranty_status"  value="Non Warranty" /><strong> Non Warranty </strong><br>
+                                                <input type="radio" name="warranty_status" id="warranty_status" checked value="Out of Box Failure" /><strong> Out of Box Failure </strong><h7>(Within 30 days of installation)</h7><br>
+                                              ';
+                                          }
+                                          else{
+                                             echo ' <input type="radio" name="warranty_status" id="warranty_status" value="Warranty Failure" /><strong> Warranty Failure</strong><br>
+                                               <input type="radio" name="warranty_status" id="warranty_status"  value="Non Warranty" /><strong> Non Warranty </strong><br>
+                                                <input type="radio" name="warranty_status" id="warranty_status"  value="Out of Box Failure" /><strong> Out of Box Failure </strong><h7>(Within 30 days of installation)</h7><br>
+                                              ';
+
+                                          }
+
+
+                                         ?>
+                                         </div>
+                                          
                                   </div>
                                     <div class="form-group">
                                     <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Cliente Name <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input type="text" id="cliente_nombre" name="cliente_nombre" class="form-control col-md-7 col-xs-12">
+                                    <?php 
+                                      echo '<input type="text" id="cliente_nombre" name="cliente_nombre" value="'.$key['cliente_nombre'].'" class="form-control col-md-7 col-xs-12">';
+                                     ?>
+                                      
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Cliente Phone<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input type="text" id="cliente_phone" name="cliente_phone" class="form-control col-md-7 col-xs-12">
+                                    <?php 
+                                    echo '<input type="text" id="cliente_phone" name="cliente_phone" value="'.$key['cliente_phone'].'" class="form-control col-md-7 col-xs-12">';
+                                     ?>
+                                      
                                     </div>
                                   </div>
                                       <div class="form-group">
                                     <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name"> <span class="required"></span>
                                     </label>
                                     <div class="col-md-10 col-sm-3 col-xs-12">
-
+                                        <?php 
+                                          if ($key['accion']=="Returbish/Exchange") {
+                                            echo '  <input type="radio" name="accion" id="warranty_status" checked value="Returbish/Exchange" /><strong> Returbish/Exchange</strong><br>
+                                               <input type="radio" name="accion" id="warranty_status" value="Haber" /><strong> Haber</strong><h7>(Restock fee 30% Equipment 20% Parts and supplies)</h7><br>
+                                                <input type="radio" name="accion" id="warranty_status" value="Out of Box Failure" /><strong> Customer Repair Return </strong><h7>(Customer Owned)</h7><br>
+                                                ';
+                                          }
+                                          elseif ($key['accion']=="Haber") {
+                                            echo '  <input type="radio" name="accion" id="warranty_status" value="Returbish/Exchange" /><strong> Returbish/Exchange</strong><br>
+                                               <input type="radio" name="accion" id="warranty_status" checked value="Haber" /><strong> Haber</strong><h7>(Restock fee 30% Equipment 20% Parts and supplies)</h7><br>
+                                                <input type="radio" name="accion" id="warranty_status" value="Out of Box Failure" /><strong> Customer Repair Return </strong><h7>(Customer Owned)</h7><br>
+                                                ';
+                                          } elseif ($key['accion']=="Out of Box Failure") {
+                                            echo '  <input type="radio" name="accion" id="warranty_status" value="Returbish/Exchange" /><strong> Returbish/Exchange</strong><br>
+                                               <input type="radio" name="accion" id="warranty_status"  value="Haber" /><strong> Haber</strong><h7>(Restock fee 30% Equipment 20% Parts and supplies)</h7><br>
+                                                <input type="radio" name="accion" id="warranty_status" checked value="Out of Box Failure" /><strong> Customer Repair Return </strong><h7>(Customer Owned)</h7><br>
+                                                ';
+                                          }
+                                          else{
+                                            echo '
                                               <input type="radio" name="accion" id="warranty_status" value="Returbish/Exchange" /><strong> Returbish/Exchange</strong><br>
                                                <input type="radio" name="accion" id="warranty_status" value="Haber" /><strong> Haber</strong><h7>(Restock fee 30% Equipment 20% Parts and supplies)</h7><br>
                                                 <input type="radio" name="accion" id="warranty_status" value="Out of Box Failure" /><strong> Customer Repair Return </strong><h7>(Customer Owned)</h7><br>
-                                    </div>
+                                            ';
+                                          }
+
+                                         ?></div>
                                   </div>
                                   <div class="form-group">
                                     <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Bill To <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input type="text" id="bill_to" name="bill_to" class="form-control col-md-7 col-xs-12">
+                                    <?php 
+                                    echo '<input type="text" id="bill_to" name="bill_to" value="'.$key['bill_to'].'" class="form-control col-md-7 col-xs-12">';
+                                     ?>
+                                      
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Ship to <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input type="text" id="ship_to" name="ship_to" class="form-control col-md-7 col-xs-12">
+                                    <?php 
+                                      echo '<input type="text" id="ship_to" name="ship_to" value="'.$key['ship_to'].'" class="form-control col-md-7 col-xs-12">';
+                                     ?>
+                                      
                                     </div>
                                   </div>
                                   <div class="form-group">
                                   <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Customer Address <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="customer_address" name="customer_address" class="form-control col-md-7 col-xs-12">
+                                  <?php 
+                                  echo '<input type="text" id="customer_address" name="customer_address" value="'.$key['customer_address'].'" class="form-control col-md-7 col-xs-12">';
+                                   ?>
+                                    
                                   </div>
                                 </div>
 
@@ -266,7 +357,7 @@ session_start();
                           </div><!--end COL md-12-->
                           <div class="col-xs-12">
                             <h2>Detalle Retorno</h2>
-                                  </label>
+                                 
                             <button type="button" id="bt_add_detalle" class="btn btn-primary">Agregar</button>
                              <input type="button" name="accion" value="List Part Failures" id="accion" class="btn btn-success views_data1" /> 
                             <table id="datatable-buttons2" class="table table-striped table-bordered">
@@ -283,6 +374,29 @@ session_start();
                                         </tr>
                                </thead>
                                 <tbody>
+                                <?php 
+                                    require_once "../class/DetalleRetorno.php";
+                                         $repuesto = new DetalleRetorno();
+                                         $DetalleRetorno = $repuesto->selectOne($id_form_retorno);
+                                         foreach ($DetalleRetorno as $field) {
+                                         echo '
+                                         <tr>
+                                         <th><input type="text" name="part_number_description[]" value="'.$field['part_number_description'].'" class="form-control" /></th>
+                                         <th><input type="text" name="marsh_authorization_level[]" value="'.$field['marsh_authorization_level'].'" class="form-control" /></th>
+                                         <th><input type="text" name="equipment_serial_number[]" value="'.$field['equipment_serial_number'].'" class="form-control" /></th>
+                                         <th><input type="text" name="codigo_serial[]" value="'.$field['codigo_serial'].'" class="form-control" /></th>
+                                         <th><input type="text" name="cantidad[]" value="'.$field['cantidad'].'" class="form-control" /></th>
+                                         <th><strong>P</strong><input type="text" name="part_fail[]" value="'.$field['part_fail'].'" class="form-control" /></th>
+                                         <th><input type="text" name="invoice[]" value="'.$field['invoice'].'" class="form-control" />
+                                            <input type="hidden" name="id_form_dr[]" id="id_form_dr[]" value="'.$id_form_retorno.'"/>
+                                            <input type="hidden" name="id[]" id="id[]" value="'.$field['id_detalle_retorno'].'"/>
+                                         </th>
+                                          </tr>
+
+                                         ';
+                                         }
+
+                                 ?>
                                   
                                 </tbody>
                                 <tfoot>
@@ -293,31 +407,129 @@ session_start();
                             </table>
                           </div>
                           <!--end COL md-12-->
+
+
+
+
+
+
                           <br>
                           <div class="col-xs-12">
                             <div class="col-xs-12 col-sm-3">
-                              
-                                             <strong><h5>Aplication</h5></strong><br>
-                                               <input type="radio" name="aplicacion" id="aplicacion" value="alpha-numeric" /><strong> Alpha-numeric</strong><br>
+                              <?php 
+                                if ($key['aplicacion']=="alpha-numeric") {
+                               echo '<strong><h5>Aplication</h5></strong><br>
+                                               <input type="radio" name="aplicacion" checked id="aplicacion" value="alpha-numeric" /><strong> Alpha-numeric</strong><br>
                                                 <input type="radio" name="aplicacion" id="aplicacion" value="logo" /><strong> Logo </strong><br>
+                                   ';
+                                }elseif ($key['aplicacion']=="logo") {
+                               echo '<strong><h5>Aplication</h5></strong><br>
+                                               <input type="radio" name="aplicacion" id="aplicacion" value="alpha-numeric" /><strong> Alpha-numeric</strong><br>
+                                                <input type="radio" name="aplicacion" id="aplicacion" checked value="logo" /><strong> Logo </strong><br>
+                                   ';
+                                }
+                                else{
+
+                                  echo '<strong><h5>Aplication</h5></strong><br>
+                                               <input type="radio" name="aplicacion" id="aplicacion" value="alpha-numeric" /><strong> Alpha-numeric</strong><br>
+                                                <input type="radio" name="aplicacion" id="aplicacion" value="logo" /><strong> Logo </strong><br>';
+                                }
+
+                               ?>
+                                    
                             </div>
                              <div class="col-xs-12 col-sm-3">
+                             <?php 
+                              if ($key['enviroment']=="Textile") {
+                                echo '
+                                              <strong><h5>Plant Type</h5></strong><br>
+                                              <input type="radio" name="enviroment" id="enviroment" checked value="Textile" /><strong> Textile</strong><br>
+                                               <input type="radio" name="enviroment" id="enviroment" value="Food" /><strong> Food</strong><br>
+                                                <input type="radio" name="enviroment" id="enviroment" value="Industrial" /><strong> Industrial </strong><br>
+                            ';
+                               
+                              }elseif ($key['enviroment']=="Food") {
+                                echo '
+                                              <strong><h5>Plant Type</h5></strong><br>
+                                              <input type="radio" name="enviroment" id="enviroment" value="Textile" /><strong> Textile</strong><br>
+                                               <input type="radio" name="enviroment" id="enviroment" checked  value="Food" /><strong> Food</strong><br>
+                                                <input type="radio" name="enviroment" id="enviroment" value="Industrial" /><strong> Industrial </strong><br>
+                            ';
+                               
+                              }elseif ($key['enviroment']=="Industrial") {
+                                echo '
                                               <strong><h5>Plant Type</h5></strong><br>
                                               <input type="radio" name="enviroment" id="enviroment" value="Textile" /><strong> Textile</strong><br>
                                                <input type="radio" name="enviroment" id="enviroment" value="Food" /><strong> Food</strong><br>
+                                                <input type="radio" name="enviroment" id="enviroment" checked value="Industrial" /><strong> Industrial </strong><br>
+                            ';
+                               
+                              }else
+                              {
+                                echo '<strong><h5>Plant Type</h5></strong><br>
+                                              <input type="radio" name="enviroment" id="enviroment" value="Textile" /><strong> Textile</strong><br>
+                                               <input type="radio" name="enviroment" id="enviroment" value="Food" /><strong> Food</strong><br>
                                                 <input type="radio" name="enviroment" id="enviroment" value="Industrial" /><strong> Industrial </strong><br>
-                            </div>
+                            ';
+                              }
+                              ?>
+                             </div>
                             <div class="col-xs-12 col-sm-3">
+                            <?php 
+                              if ($key['operating_conditions']=="Humid") {
+                               echo '
+                                                 <strong><h5>Operating Condition</h5></strong><br>
+                                              <input type="radio" name="operating_conditions" id="operating_conditions" checked value="Humid" /><strong> Humid</strong><br>
+                                               <input type="radio" name="operating_conditions" id="operating_conditions" value="Dry" /><strong> Dry </strong><br>
+                                                <input type="radio" name="operating_conditions" id="operating_conditions" value="Wash Down" /><strong> Wash Down </strong><br>
+                           ';
+                              }elseif ($key['operating_conditions']=="Dry") {
+                               echo '
+                                                 <strong><h5>Operating Condition</h5></strong><br>
+                                              <input type="radio" name="operating_conditions" id="operating_conditions" value="Humid" /><strong> Humid</strong><br>
+                                               <input type="radio" name="operating_conditions" id="operating_conditions" checked value="Dry" /><strong> Dry </strong><br>
+                                                <input type="radio" name="operating_conditions" id="operating_conditions" value="Wash Down" /><strong> Wash Down </strong><br>
+                           ';
+                              }elseif ($key['operating_conditions']=="Wash Down") {
+                               echo '
+                                                 <strong><h5>Operating Condition</h5></strong><br>
+                                              <input type="radio" name="operating_conditions" id="operating_conditions" value="Humid" /><strong> Humid</strong><br>
+                                               <input type="radio" name="operating_conditions" id="operating_conditions" value="Dry" /><strong> Dry </strong><br>
+                                                <input type="radio" name="operating_conditions" id="operating_conditions" checked value="Wash Down" /><strong> Wash Down </strong><br>
+                           ';
+                              }else{
+                                echo '
                                                  <strong><h5>Operating Condition</h5></strong><br>
                                               <input type="radio" name="operating_conditions" id="operating_conditions" value="Humid" /><strong> Humid</strong><br>
                                                <input type="radio" name="operating_conditions" id="operating_conditions" value="Dry" /><strong> Dry </strong><br>
                                                 <input type="radio" name="operating_conditions" id="operating_conditions" value="Wash Down" /><strong> Wash Down </strong><br>
-                            </div>
+                            ';
+                              }
+                             ?>
+                             </div>
                              <div class="col-xs-12 col-sm-3">
+                             <?php  
+                           if ($key['temperature']=="Hot") {
+                               echo '   <strong><h5>Temperature</h5></strong><br>
+                                              <input type="radio" name="temperature" id="temperature" checked value="Hot" /><strong> Hot</strong><br>
+                                               <input type="radio" name="temperature" id="temperature" value="Cold" /><strong> Cold</strong><br>
+                            ';
+                           }elseif ($key['temperature']=="Cold") {
+                               echo '   <strong><h5>Temperature</h5></strong><br>
+                                              <input type="radio" name="temperature" id="temperature" value="Hot" /><strong> Hot</strong><br>
+                                               <input type="radio" name="temperature" id="temperature" checked value="Cold" /><strong> Cold</strong><br>
+                            ';
+                           }else{
+                            echo '
+
                                                <strong><h5>Temperature</h5></strong><br>
                                               <input type="radio" name="temperature" id="temperature" value="Hot" /><strong> Hot</strong><br>
                                                <input type="radio" name="temperature" id="temperature" value="Cold" /><strong> Cold</strong><br>
-                            </div>
+                            ';
+
+                           }
+                         ?>
+                         </div>
 
                           </div>
                           <br>
@@ -328,7 +540,10 @@ session_start();
                                   <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Comentario<span class="required">*</span>
                                   </label>
                                   <div class="col-md-10 col-sm-6 col-xs-12">
-                                    <textarea id="comentario" name="comentario" class="form-control col-md-7 col-xs-12"></textarea>
+                                    <textarea id="comentario" name="comentario" class="form-control col-md-7 col-xs-12"><?php 
+                                      echo $key['comentarios']; 
+                                      ?>
+                                    </textarea>
                                   </div>
                                 </div>
                             </div>
@@ -338,9 +553,31 @@ session_start();
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
                                      <select id="estado" name="estado" class="form-control ">
+                                     <?php 
+                                      if ($key['estado']=="Iniciado") {
+                                       echo '
+
                                               <option value="Iniciado">Iniciado</option>
                                               <option value="Aprobado">Aprobado</option>
-                                              <option value="Rechazado">Rechazado</option>                                    
+                                              <option value="Rechazado">Rechazado</option> 
+                                       ';
+                                      } elseif ($key['estado']=="Aprobado") {
+                                       echo '
+                                              
+                                              <option value="Aprobado">Aprobado</option>
+                                              <option value="Iniciado">Iniciado</option>
+                                              <option value="Rechazado">Rechazado</option> 
+                                       ';
+                                      } elseif ($key['estado']=="Rechazado") {
+                                       echo '
+                                              
+                                              <option value="Rechazado">Rechazado</option> 
+                                              <option value="Aprobado">Aprobado</option>
+                                              <option value="Iniciado">Iniciado</option>
+                                       ';
+                                      }
+
+                                      ?>                                   
                                             </select>
                                   </div>
                                 </div> 
@@ -349,7 +586,10 @@ session_start();
                                     
 
                           </div>
-                        </div>
+                       </div>
+                        <?php 
+                            }
+                         ?>
                         <!--end row-->
                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
                               <button type="submit" class="btn btn-success">Ingresar</button>
@@ -455,7 +695,7 @@ ga('send', 'pageview');
     });
       function agregar_detalle(){
     
-        fila_taller='<tr><th><input type="text" name="part_number_description[]" class="form-control" /></th><th><input type="text" name="marsh_authorization_level[]" class="form-control" /></th><th><input type="text" name="equipment_serial_number[]" class="form-control" /></th><th><input type="text" name="codigo_serial[]" class="form-control" /></th><th><input type="text" name="cantidad[]" class="form-control" /></th><th><strong>P</strong><input type="text" name="part_fail[]" class="form-control" /></th><th><input type="text" name="invoice[]" class="form-control" /></th></tr>';
+        fila_taller='<tr><th><input type="text" name="part_number_description[]" class="form-control"/></th><th><input type="text" name="marsh_authorization_level[]" class="form-control" /></th><th><input type="text" name="equipment_serial_number[]" class="form-control" /></th><th><input type="text" name="codigo_serial[]" class="form-control" /></th><th><input type="text" name="cantidad[]" class="form-control" /></th><th><strong>P</strong><input type="text" name="part_fail[]" class="form-control" /></th><th><input type="text" name="invoice[]" class="form-control" /><input type="hidden" name="id_form_dr" id="id_form_dr" value="0"/></th></tr>';
      
         $("#datatable-buttons2").append(fila_taller);
       
