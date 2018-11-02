@@ -38,11 +38,14 @@ if ($accion=="modificar") {
 }
 elseif ($accion=="eliminar") {	
 	$id_contacto =$_GET['id'];
+
+	$id_cliente =$_GET['id_cliente'];
+	$nombre =$_GET['nombreC'];
 	$contactos = new Contactos();
 	$contactos->setId_contacto($id_contacto);
 	$delete=$contactos->delete();
 	if ($delete==true) {
-		header('Location: ../listas/contactos.php?success=correcto&id=""&nombre=Seleccione un Cliente');
+		header('Location: ../listas/contactos.php?success=correcto&id='.$id_cliente.'&nombre="'.$nombre.'"');
 		# code...
 	}else{
 		header('Location: ../listas/contactos.php?error=incorrecto&id=""&nombre=Seleccione un Cliente');
@@ -65,6 +68,9 @@ elseif ($accion=="guardar")
 	}
 	
 	$id_cliente =$_POST['id_cliente'];
+
+	
+	$nombreC =$_POST['nombreC'];
 	$contactos = new Contactos();
 	$contactos->setNombre($nombre);
 	$contactos->setCorreo($correo);
@@ -74,7 +80,7 @@ elseif ($accion=="guardar")
 	$contactos->setId_cliente($id_cliente);
 	$save=$contactos->save();
 	if ($save==true) {
-		header('Location: ../listas/contactos.php?success=correcto&id=""&nombre=Seleccione un Cliente');
+		header('Location: ../listas/contactos.php?success=correcto&id='.$id_cliente.'&nombre='.$nombreC.'');
 		# code...
 	}
 	else{

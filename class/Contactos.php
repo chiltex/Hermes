@@ -133,5 +133,12 @@ class Contactos extends Conexion
         $ListCliente=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCliente;
     }
+        public function selectALLE($codigo)
+    {
+        $query="SELECT * FROM contactos WHERE id_cliente='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
 }//End class
 ?>

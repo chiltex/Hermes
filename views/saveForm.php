@@ -164,14 +164,14 @@ session_start();
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sales Order <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="sales_order" name="sales_order" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="sales_order" name="sales_order"  class="form-control col-md-7 col-xs-12">
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">PO # <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="PO" name="PO" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="PO" name="PO"  class="form-control col-md-7 col-xs-12">
                                   </div>
                                 </div>
                                 <div class="form-group">
@@ -185,14 +185,21 @@ session_start();
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Customer Phone <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="customer_phone" name="customer_phone" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="customer_phone" name="customer_phone"  class="form-control col-md-7 col-xs-12">
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Customer Fax <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="customer_fax" name="customer_fax" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="customer_fax" name="customer_fax" " class="form-control col-md-7 col-xs-12">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">City/ state <span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="city" name="city"  class="form-control col-md-7 col-xs-12">
                                   </div>
                                 </div>
                               </div>

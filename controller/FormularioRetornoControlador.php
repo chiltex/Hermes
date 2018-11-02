@@ -81,7 +81,7 @@ elseif ($accion=="guardar")
 	$cityr=$_POST['city'];
 	$aplicacion=$_POST['aplicacion'];
 	$enviroment=$_POST['sales_order'];
-	$operating_condition=$_POST['operating_condition'];
+	$operating_condition=$_POST['operating_conditions'];
 	$temperature=$_POST['temperature'];
 	$comentarios=$_POST['comentario'];
 	$estado=$_POST['estado'];

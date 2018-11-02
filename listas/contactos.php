@@ -227,6 +227,8 @@ session_start();
                           </div>
                           </div>
                           <input type="hidden" id="id_cliente" name="id_cliente" value="'.$id.'">
+
+                          <input type="hidden" id="nombreC" name="nombreC" value="'.$nombre.'">
                                ';
                             }else{
                              echo'
@@ -319,7 +321,27 @@ session_start();
                          require_once "../class/Contactos.php";
                          $misContactos = new Contactos();
                          $contacto = $misContactos->selectALL();
-                         foreach ((array)$contacto as $row) {
+                         if ($id!="") {
+                           
+                         $contacto1 = $misContactos->selectALLE($id);
+                           foreach ((array)$contacto1 as $rew) {
+                         echo '
+                          <tr>
+                           <td>'.$rew['nombre'].'</td>
+                           <td>'.$rew["correo"].'</td>                           
+                           <td>'.$rew["telefono"].'</td>
+                            <td>
+                          
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$rew["id_contacto"].'" class="btn btn-info view_data2"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$rew["id_contacto"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/ContactoControlador.php?id='.$rew["id_contacto"].'&accion=eliminar&id_cliente='.$id.'&nombreC='.$nombre.'" class="btn btn-danger">Eliminar</a>
+                           </td>
+                          </tr>
+                         ';
+                       }
+
+                          }else{
+                           foreach ((array)$contacto as $row) {
                          echo '
                           <tr>
                            <td>'.$row['nombre'].'</td>
@@ -334,9 +356,8 @@ session_start();
                           </tr>
                          ';
                        }
-                     
-                     
-                         ?>
+                     }
+                          ?>
                       </TBODY>
                     </table>
                   </div>
