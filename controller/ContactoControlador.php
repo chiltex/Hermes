@@ -21,6 +21,7 @@ if ($accion=="modificar") {
 	}
 	$id_cliente =$_POST['id_cliente'];
 	$id_contacto =$_POST['id_contacto'];
+	$puesto =$_POST['puesto'];
 	$contactos = new Contactos();
 	$contactos->setNombre($nombre);
 	$contactos->setCorreo($correo);
@@ -29,6 +30,7 @@ if ($accion=="modificar") {
 	$contactos->setMovil($movil);		
 	$contactos->setId_cliente($id_cliente);
 	$contactos->setId_contacto($id_contacto);
+	$contactos->setPuesto($puesto);	
 	$update=$contactos->update();
 	if ($update==true) {
 		header('Location: ../listas/contactos.php?success=correcto&id='.$id_cliente.'&nombre='.$empresa.'');
@@ -71,6 +73,7 @@ elseif ($accion=="guardar")
 	
 	$id_cliente =$_POST['id_cliente'];
 
+	$puesto=$_POST['puesto'];
 	
 	$nombreC =$_POST['nombreC'];
 	$contactos = new Contactos();
@@ -80,6 +83,8 @@ elseif ($accion=="guardar")
 	$contactos->setExtension($extension);
 	$contactos->setMovil($movil);		
 	$contactos->setId_cliente($id_cliente);
+
+	$contactos->setPuesto($puesto);	
 	$save=$contactos->save();
 	if ($save==true) {
 		header('Location: ../listas/contactos.php?success=correcto&id='.$id_cliente.'&nombre='.$nombreC.'');
