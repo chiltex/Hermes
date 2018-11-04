@@ -5,6 +5,8 @@ $accion=$_GET['accion'];
 
 if ($accion=="modificar") {
 	$nombre=$_POST['nombre'];
+
+	$empresa=$_POST['empresa'];
 	$correo=$_POST['correo'];	
 	$telefono =$_POST['telefono'];
 	if (isset($_POST['extension'])) {
@@ -29,7 +31,7 @@ if ($accion=="modificar") {
 	$contactos->setId_contacto($id_contacto);
 	$update=$contactos->update();
 	if ($update==true) {
-		header('Location: ../listas/contactos.php?success=correcto&id=""&nombre=Seleccione un Cliente');
+		header('Location: ../listas/contactos.php?success=correcto&id='.$id_cliente.'&nombre='.$empresa.'');
 		# code...
 	}else{
 		header('Location: ../listas/contactos.php?error=incorrecto&id=""&nombre=Seleccione un Cliente');

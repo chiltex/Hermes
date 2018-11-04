@@ -6,7 +6,8 @@ require_once "../class/Contactos.php";
 
          
 					$codigo=$_POST["employee_id"];
-               $miContacto = new Contactos();
+          $empresa=$_POST["employee_nombre"];
+                         $miContacto = new Contactos();
                          $contac = $miContacto->selectOne($codigo);
                         
                            # code...
@@ -26,6 +27,7 @@ require_once "../class/Contactos.php";
                           <input type="hidden" id="id_cliente" name="id_cliente" value="'.$row["id_cliente"].'">
 
                           <input type="hidden" id="id_contacto" name="id_contacto" value="'.$codigo.'">
+                          <input type="hidden" id="empresa" name="empresa" value="'.$empresa.'">
                             
                               <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Correo <span class="required">*</span>
@@ -65,7 +67,13 @@ require_once "../class/Contactos.php";
                               <input type="text" id="movil" name="movil" required="required" value="'.$row["movil"].'" class="form-control col-md-3 col-xs-6">
                             </div>
                           </div>
-                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Puesto <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="puesto" name="puesto" required="required" value="'.$row["puesto"].'" class="form-control col-md-3 col-xs-6">
+                            </div>
+                          </div>
                         
 
                           ';

@@ -212,20 +212,37 @@ session_start();
                           if ($id!="" && $nombre != "") {
                               echo'
                                <div class="row">
-                               <div class="col-md-6">    
+                               <div class="row">
+                              
+                               <br>
+                    <div class="col-xs-12">  
+
                                <div class="form-group">
                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Empresa: '.$nombre.'
-                            </label>
+                                  </label>
                                </div>
-                          <div class="form-group">
 
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre Contacto <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-xs-6 col-xs-12">
-                              <input type="text" id="nombre" name="nombre" value=""  required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
+                          <div class="col-md-4">
+                              <div class="form-group">
+
+                                <label class="control-label col-md-3 col-sm-4 col-xs-8" for="first-name">Nombre Contacto <span class="required">*</span>
+                                </label>
+                                <div class="col-md-5 col-xs-5 col-xs-12">
+                                  <input type="text" id="nombre" name="nombre" value=""  required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
                           </div>
+
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label col-md-2 col-xs-3 col-xs-8" for="first-name">Puesto
+                                </label>
+                                <div class="col-md-5 col-xs-5 col-xs-12">
+                                  <input type="text" id="puesto" name="puesto" class="form-control col-md-3 col-xs-6">
+                                </div>
+                              </div>
                           </div>
+                     
                           <input type="hidden" id="id_cliente" name="id_cliente" value="'.$id.'">
 
                           <input type="hidden" id="nombreC" name="nombreC" value="'.$nombre.'">
@@ -233,31 +250,33 @@ session_start();
                             }else{
                              echo'
                               <div class="row"> 
-                              <div class="col-md-6">   
+                              <div class="col-xs-12">   
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre Contacto <span class="required">*</span>
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Nombre Contacto <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-xs-6 col-xs-12">
                               <input type="text" id="nombre" name="nombre" value="Seleccione un nombre..." required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
+                         
                               </div>
                                ';
 
                             }
 
-                        ?>
+                        ?>   
                             
-                               <div class="col-md-6">   
-                              <div class="form-group">
-                                <label class="control-label col-md-4 col-xs-4 col-xs-12" for="first-name">Correo <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-xs-6 col-xs-12">
-                                  <input type="text" id="correo" name="correo" required="required" class="form-control col-md-3 col-xs-12">
-                                </div>
-                              </div>
+                               <div class="col-md-4">   
+                                  <div class="form-group">
+                                    <label class="control-label col-md-2 col-xs-2 col-xs-8" for="first-name">Correo <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-xs-4 col-xs-8">
+                                      <input type="text" id="correo" name="correo" required="required" class="form-control col-md-5 col-xs-12">
+                                    </div>
+                                  </div>
                               </div> 
-                              
+                              </div>
+                              </div>
                         </div>
                         <dir class="row">
                           <div class="col-md-4">  
@@ -286,6 +305,7 @@ session_start();
                             </div>
                           </div>
                           </div>
+                           
                          </dir> 
                           
                           
@@ -312,7 +332,8 @@ session_start();
                         <tr>
                           <th>Nombre / Compañia</th>
                           <th>Correo</th>
-                          <th>Telefono</th>                         
+                          <th>Telefono</th>
+                          <th>Puesto</th>                            
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
@@ -329,11 +350,12 @@ session_start();
                           <tr>
                            <td>'.$rew['nombre'].'</td>
                            <td>'.$rew["correo"].'</td>                           
-                           <td>'.$rew["telefono"].'</td>
+                           <td>'.$rew["telefono"].'</td>                          
+                           <td>'.$rew["puesto"].'</td>
                             <td>
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$rew["id_contacto"].'" class="btn btn-info view_data2"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$rew["id_contacto"].'" class="btn btn-warning edit_data" />
+                                    <input type="button" name="edit" value="Editar" id="'.$rew["id_contacto"].'" nombre="'.$nombre.'" empresa="'.$id.'" class="btn btn-warning edit_data" />
                                     <a href="../controller/ContactoControlador.php?id='.$rew["id_contacto"].'&accion=eliminar&id_cliente='.$id.'&nombreC='.$nombre.'" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
@@ -346,7 +368,8 @@ session_start();
                           <tr>
                            <td>'.$row['nombre'].'</td>
                            <td>'.$row["correo"].'</td>                           
-                           <td>'.$row["telefono"].'</td>
+                           <td>'.$row["telefono"].'</td>                        
+                           <td>'.$row["puesto"].'</td>
                             <td>
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_contacto"].'" class="btn btn-info view_data2"/>  
@@ -472,7 +495,7 @@ ga('send', 'pageview');
     
      
       $(document).on('click', '.view_data', function(){  
-           var employee_id = $(this).attr("id");  
+           var employee_id = $(this).attr("id");    
            if(employee_id != '')  
            {  
                 $.ajax({  
@@ -502,13 +525,14 @@ ga('send', 'pageview');
            }            
       }); 
        $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
+          var employee_id = $(this).attr("id"); 
+           var employee_nombre = $(this).attr("nombre"); 
            if(employee_id != '')  
            {  
                 $.ajax({  
                      url:"../views/modiContacto.php",  
                      method:"POST",  
-                     data:{employee_id:employee_id},  
+                     data:{employee_id:employee_id,employee_nombre:employee_nombre},  
                      success:function(data){  
                           $('#employee_forms4').html(data);  
                           $('#dataModal4').modal('show');  

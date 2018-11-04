@@ -12,6 +12,7 @@ class Contactos extends Conexion
  private $extension;
  private $movil;
  private $id_cliente;
+ private $puesto;
 
  public function __construct()
 	{
@@ -24,6 +25,7 @@ class Contactos extends Conexion
         $this->extension="";
         $this->movil = "";
         $this->id_cliente = "";
+        $this->puesto = "";
     }
 
 	public function getId_contacto() {
@@ -78,18 +80,26 @@ class Contactos extends Conexion
     public function setId_cliente($id_cliente) {
         $this->id_cliente = $id_cliente;
     }
+    public function getPuesto() {
+        return $this->puesto;
+    }
+
+    public function setPuesto($puesto) {
+        $this->puesto = $puesto;
+    }
 
     //funciones----
     public function save()
     {
-    	$query="INSERT INTO contactos(id_contacto,nombre,correo,telefono,extension,movil,id_cliente)
+    	$query="INSERT INTO contactos(id_contacto,nombre,correo,telefono,extension,movil,id_cliente,puesto)
     			values(NULL,
     			'".$this->nombre."',
     			'".$this->correo."',
     			'".$this->telefono."',
     			'".$this->extension."',
     			'".$this->movil."',
-    			'".$this->id_cliente."');";
+    			'".$this->id_cliente."',
+                '".$this->puesto."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
@@ -100,7 +110,7 @@ class Contactos extends Conexion
     }
      public function update()
     {
-        $query="UPDATE contactos SET nombre='".$this->nombre."',correo='".$this->correo."',telefono='".$this->telefono."',extension='".$this->extension."',movil='".$this->movil."',id_cliente='".$this->id_cliente."' WHERE id_contacto='".$this->id_contacto."'";
+        $query="UPDATE contactos SET nombre='".$this->nombre."',correo='".$this->correo."',telefono='".$this->telefono."',extension='".$this->extension."',movil='".$this->movil."',id_cliente='".$this->id_cliente."',puesto='".$this->puesto."' WHERE id_contacto='".$this->id_contacto."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;
