@@ -311,7 +311,7 @@ session_start();
                           
                           <div class="ln_solid"></div>
                           <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
+                            <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3">                             
                               <button type="submit" class="btn btn-success">Agregar Contacto</button>
                             </div>
                           </div>
