@@ -175,6 +175,8 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                         <ul class="nav child_menu">
                           <li><a href="../listas/FormularioRetorno.php">Formulario Retorno</a></li>
                           <li><a href="../listas/lista_partFailure.php">Part Failure</a></li>
+                          <li><a href="../listas/lista_Calidad.php">Reportes de Calidad</a></li>
+                        </ul>
                         </ul>
                       </li>
                       <?php 

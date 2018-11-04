@@ -6,6 +6,8 @@ $accion=$_GET['accion'];
 if ($accion=="modificar") {
 
 	//-formulario de retorno-----
+	
+	$fecha=$_POST['fecha'];
 	$sales_order=$_POST['sales_order'];
 	$PO=$_POST['PO'];
 	$ship_method_via=$_POST['ship_method_via'];
@@ -18,24 +20,24 @@ if ($accion=="modificar") {
 	$bill_to=$_POST['bill_to'];
 	$ship_to=$_POST['ship_to'];
 	$customer_address=$_POST['customer_address'];
-	$cityr=$_POST['city'];
+	$city=$_POST['city'];
 	$aplicacion=$_POST['aplicacion'];
-	$enviroment=$_POST['sales_order'];
-	$operating_condition=$_POST['operating_condition'];
+	$enviroment=$_POST['enviroment'];
+	$operating_condition=$_POST['operating_conditions'];
 	$temperature=$_POST['temperature'];
-	$comentarios=$_POST['comentarios'];
+	$comentarios=$_POST['comentario'];
 	$estado=$_POST['estado'];
 	$id_form_retorno=$_POST['id_form_retorno'];
 	//---------------------detalle retorno-----------------------------------
 	$part_number_description =$_POST['part_number_description'];
 	$marsh_authorization_level=$_POST['marsh_authorization_level'];
-	$equipament_serial_number=$_POST['equipament_serial_number'];	
+	$equipament_serial_number=$_POST['equipment_serial_number'];	
 	$codigo_serie=$_POST['codigo_serie'];
 	$cantidad=$_POST['cantidad'];
 	$id_part_fail=$_POST['id_part_fail'];
 	$invoice=$_POST['invoice'];
 	$id_detalle_retorno =$_POST['id'];
-	$count_dr=count($part_number_description =$_POST['part_number_description']);
+	$count_dr=count($part_number_description);
 	$id_fr=$_POST['id_form_dr'];
 
 	$FormularioRetorno = new FormularioRetorno();
@@ -65,8 +67,10 @@ if ($accion=="modificar") {
 		$dr = new DetalleRetorno();
 		
 			$j=0;
-	while ($j<$count_dr) {
+	do{
 		if ($id_fr[$j]>0) {
+
+		$dr = new DetalleRetorno();
 		$dr->setPart_number_description($part_number_description[$j]);	
 		$dr->setMarsh_authorization_level($marsh_authorization_level[$j]);
 		$dr->setEquipment_serial_number($equipament_serial_number[$j]);
@@ -74,19 +78,27 @@ if ($accion=="modificar") {
 		$dr->setCantidad($cantidad[$j]);
 		$dr->setId_part_fail($id_part_fail[$j]);
 		$dr->setId_detalle_retorno($id_detalle_retorno[$j]);
+		$dr->setInvoice($invoice[$j]);
 		$update1=$dr->update();
+	
 			}
-			else{
-		$dr->setPart_number_description($part_number_description[$j]);	
-		$dr->setMarsh_authorization_level($marsh_authorization_level[$j]);
-		$dr->setEquipment_serial_number($equipament_serial_number[$j]);
-		$dr->setCodigo_Serie($codigo_serie[$j]);
-		$dr->setCantidad($cantidad[$j]);
-		$dr->setId_part_fail($id_part_fail[$j]);
-		$save1=$dr->save();		
-			}
+		elseif ($id_fr[$j]==0){
 
-		}
+		$dr1 = new DetalleRetorno();
+		$dr1->setPart_number_description($part_number_description[$j]);	
+		$dr1->setMarsh_authorization_level($marsh_authorization_level[$j]);
+		$dr1->setEquipment_serial_number($equipament_serial_number[$j]);
+		$dr1->setCodigo_Serie($codigo_serie[$j]);
+		$dr1->setCantidad($cantidad[$j]);
+		$dr1->setId_part_fail($id_part_fail[$j]);
+		$dr1->setInvoice($invoice[$j]);
+		$dr1->setId_form_retorno($id_form_retorno);
+		$save1=$dr1->save();	
+			
+			}
+		
+		$j=$j+1;
+		}while ($j<($count_dr));
 	
 		header('Location: ../listas/FormularioRetorno.php?success=correcto');
 		# code...
@@ -134,8 +146,8 @@ elseif ($accion=="guardar")
 
 	$part_number_description =$_POST['part_number_description'];
 	$marsh_authorization_level=$_POST['marsh_authorization_level'];
-	$equipament_serial_number=$_POST['equipament_serial_number'];	
-	$codigo_serie=$_POST['codigo_serie'];
+	$equipament_serial_number=$_POST['equipment_serial_number'];	
+	$codigo_serie=$_POST['codigo_serial'];
 	$cantidad=$_POST['cantidad'];
 	$id_part_fail=$_POST['id_part_fail'];
 	$invoice=$_POST['invoice'];
@@ -197,6 +209,19 @@ $dr = new DetalleRetorno();
 		# code...
 	}
 	else{
+		header('Location: ../listas/FormularioRetorno.php?error=incorrecto');
+	}
+}
+elseif ($accion=="eliminarDR") {	
+	$id_detalle_retorno =$_GET['id'];
+	$id_form_retorno=$_GET['id_form_retorno'];
+	$FormularioRetorno = new DetalleRetorno();
+	$FormularioRetorno->setId_detalle_retorno($id_detalle_retorno);
+	$delete=$FormularioRetorno->delete();
+	if ($delete==true) {
+		header('Location: ../views/modiForm.php?id='.$id_form_retorno.'');
+		# code...
+	}else{
 		header('Location: ../listas/FormularioRetorno.php?error=incorrecto');
 	}
 }

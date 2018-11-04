@@ -1,7 +1,7 @@
 <?php 
 session_start();
  ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,6 +28,7 @@ session_start();
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -189,7 +190,7 @@ session_start();
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Gestion</h2>
+                    <h2>Pagina de Reportes de Calidad</h2>
 
 
                     
@@ -224,7 +225,6 @@ session_start();
                     ';
                 }
             }elseif (isset($_GET['error'])) {
-           
                if ($_GET['error']=='incorrecto') {
                     
                     echo '
@@ -254,7 +254,7 @@ session_start();
                   <div class="x_content">
                       
 
-                                    <input type="button" name="accion" value="Nueva Gestion" id="accion" class="btn btn-success save_data" /> 
+                                    <input type="button" name="accion" value="Nuevo Reporte de Calidad" id="accion" class="btn btn-success save_data" /> 
                     <br>
                     <br>
                     <div id="employee_table">
@@ -262,30 +262,32 @@ session_start();
                       <thead>
                         <tr>
                           <th>N° </th>
-                          <th>Categoria</th>
-                          <th>Descripcion</th>
+                          <th>Cliente</th>                          
+                          <th>Codigo Serie</th>
+                          <th>Mes</th>
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
                       <tbody>
                         <?php 
-                         require_once "../class/Gestion.php";
-                         $misGestions = new Gestion();
-                         $catego = $misGestions->selectALL();
+                         require_once "../class/Calidad.php";
+                         $misCalidad = new Calidad();
+                         $Calidad = $misCalidad->selectALL();
                         
                            # code...
                          
-                         foreach ((array)$catego as $row) {
+                         foreach ((array)$Calidad as $row) {
                          echo '
                           <tr>
-                           <td>'.$row['id_gestion'].'</td>
-                           <td>'.$row['nombre'].'</td>
-                           <td>'.$row["descripcion"].'</td>
+                           <td>'.$row['id_reporte_calidad'].'</td>
+                           <td>'.$row['cliente'].'</td>
+                           <td>'.$row["codigo_serie"].'</td>
+                           <td>'.$row["mes"].'</td>
                            <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_gestion"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_gestion"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/GestionControlador.php?id='.$row["id_gestion"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_reporte_calidad"].'" class="btn btn-info view_data"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_reporte_calidad"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/CalidadControlador.php?id='.$row["id_reporte_calidad"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
@@ -308,7 +310,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Gestion</h4>  
+                                                 <h4 class="modal-title">Detalle Calidad</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_detail">  
                                             </div>  
@@ -323,7 +325,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Gestion</h4>  
+                                                 <h4 class="modal-title">Detalle Calidad</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -338,7 +340,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Gestion</h4>  
+                                                 <h4 class="modal-title">Detalle Calidad</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -354,7 +356,7 @@ session_start();
            <div class="modal-content">  
                 <div class="modal-header">  
                      <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Agregar nueva Gestion</h4>  
+                     <h4 class="modal-title">Agregar nueva Calidadria</h4>  
                 </div>  
                 <div class="modal-body">  
                      
@@ -403,6 +405,7 @@ session_start();
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+   
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 <!-- Google Analytics -->
@@ -417,17 +420,24 @@ ga('send', 'pageview');
     
     </script>
 <script type="text/javascript">
-   $(document).ready(function(){  
+   $(document).ready(function(){ 
+
+      
       $('#add').click(function(){  
            $('#insert').val("Insert");  
            $('#insert_form')[0].reset();  
-      });  
+      }); 
+
+                
+    
+            
+         
       $(document).on('click', '.edit_data', function(){  
           var employee_id = $(this).attr("id");  
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/modiGestion.php",  
+                     url:"../views/modiCalidad.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -443,7 +453,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectGestion.php",  
+                     url:"../views/selecCalidad.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -458,7 +468,7 @@ ga('send', 'pageview');
            if(employee_action != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveGestion.php",  
+                     url:"../views/saveCalidad.php",  
                      method:"POST",  
                      data:{employee_action:employee_action},  
                      success:function(data){  

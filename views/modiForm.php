@@ -382,14 +382,18 @@ session_start();
                                          echo '
                                          <tr>
                                          <th><input type="text" name="part_number_description[]" value="'.$field['part_number_description'].'" class="form-control" /></th>
-                                         <th><input type="text" name="marsh_authorization_level[]" value="'.$field['marsh_authorization_level'].'" class="form-control" /></th>
+                                         <th><input type="text" name="marsh_authorization_level[]" value="'.$field['marsh_authotization_level'].'" class="form-control" /></th>
                                          <th><input type="text" name="equipment_serial_number[]" value="'.$field['equipment_serial_number'].'" class="form-control" /></th>
-                                         <th><input type="text" name="codigo_serial[]" value="'.$field['codigo_serial'].'" class="form-control" /></th>
+                                         <th><input type="text" name="codigo_serie[]" value="'.$field['codigo_serie'].'" class="form-control" /></th>
                                          <th><input type="text" name="cantidad[]" value="'.$field['cantidad'].'" class="form-control" /></th>
-                                         <th><strong>P</strong><input type="text" name="part_fail[]" value="'.$field['part_fail'].'" class="form-control" /></th>
+                                         <th><strong>P</strong><input type="text" name="id_part_fail[]" value="'.$field['id_part_fail'].'" class="form-control" /></th>
                                          <th><input type="text" name="invoice[]" value="'.$field['invoice'].'" class="form-control" />
-                                            <input type="hidden" name="id_form_dr[]" id="id_form_dr[]" value="'.$id_form_retorno.'"/>
+                                            <input type="hidden" name="id_form_dr[]" id="id_form_dr[]" value="'.$field['id_form_retorno'].'"/>
                                             <input type="hidden" name="id[]" id="id[]" value="'.$field['id_detalle_retorno'].'"/>
+                                         </th>
+                                         <th>
+
+                                    <a href="../controller/FormularioRetornoControlador.php?id='.$field["id_detalle_retorno"].'&accion=eliminarDR&id_form_retorno='.$field['id_form_retorno'].'" class="btn btn-danger">X</a>
                                          </th>
                                           </tr>
 
@@ -695,7 +699,7 @@ ga('send', 'pageview');
     });
       function agregar_detalle(){
     
-        fila_taller='<tr><th><input type="text" name="part_number_description[]" class="form-control"/></th><th><input type="text" name="marsh_authorization_level[]" class="form-control" /></th><th><input type="text" name="equipment_serial_number[]" class="form-control" /></th><th><input type="text" name="codigo_serial[]" class="form-control" /></th><th><input type="text" name="cantidad[]" class="form-control" /></th><th><strong>P</strong><input type="text" name="part_fail[]" class="form-control" /></th><th><input type="text" name="invoice[]" class="form-control" /><input type="hidden" name="id_form_dr" id="id_form_dr" value="0"/></th></tr>';
+        fila_taller='<tr><th><input type="text" name="part_number_description[]" class="form-control"/></th><th><input type="text" name="marsh_authorization_level[]" class="form-control" /></th><th><input type="text" name="equipment_serial_number[]" class="form-control" /></th><th><input type="text" name="codigo_serie[]" class="form-control" /></th><th><input type="text" name="cantidad[]" class="form-control" /></th><th><strong>P</strong><input type="text" name="id_part_fail[]" class="form-control" /></th><th><input type="text" name="invoice[]" class="form-control" /><input type="hidden" name="id_form_dr[]" id="id_form_dr" value="0"/></th></tr>';
      
         $("#datatable-buttons2").append(fila_taller);
       

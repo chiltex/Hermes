@@ -37,6 +37,18 @@ CREATE TABLE `categorias` (
 --
 -- Estructura de tabla para la tabla `categorias`
 --
+CREATE TABLE `calidad` (
+  `id_reporte_calidad` int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  `cliente` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `pais` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `año` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `mes` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `instalado_por` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `tecnologia` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `modelo` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `codigo_serie` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `error_instalar` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `tipo_maquina` (
   `id_tipo_ma` int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,

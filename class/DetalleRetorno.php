@@ -5,7 +5,7 @@ require_once "../config/conexion.php";
  */
 class DetalleRetorno extends Conexion
 {
-
+ private $id_detalle_retorno;
  private $id_form_retorno;
  private $part_number_description;
  private $marsh_authorization_level;
@@ -90,10 +90,17 @@ class DetalleRetorno extends Conexion
     public function setInvoice($invoice) {
         $this->invoice = $invoice;
     }
+        public function getId_detalle_retorno() {
+        return $this->id_detalle_retorno;
+    }
+
+    public function setId_detalle_retorno($id_detalle_retorno) {
+        $this->id_detalle_retorno = $id_detalle_retorno;
+    }
 //------------------------------------------------------------------------
      public function save()
     {
-    	$query="INSERT INTO detalle_retorno(id_detalle_retorno, id_form_retorno, part_number_description, marsh_authorization_level, equipment_serial_number, codigo_serie, cantidad, id_part_fail, invoice)
+    	$query="INSERT INTO detalle_retorno(id_detalle_retorno, id_form_retorno, part_number_description, marsh_authotization_level, equipment_serial_number, codigo_serie, cantidad, id_part_fail, invoice)
     			values(NULL,
     			'".$this->id_form_retorno."',
     			'".$this->part_number_description."',
@@ -113,7 +120,7 @@ class DetalleRetorno extends Conexion
     }
     public function update()
     {
-        $query="UPDATE detalle_retorno SET part_number_description='".$this->part_number_description."',marsh_authorization_level='".$this->marsh_authorization_level."',equipment_serial_number='".$this->equipment_serial_number."',codigo_serie='".$this->codigo_serie."',cantidad='".$this->cantidad."',id_part_fail='".$this->id_part_fail."',invoice='".$this->invoice."' WHERE id_detalle_retorno='".$this->id_detalle_retorno."'";
+        $query="UPDATE detalle_retorno SET part_number_description='".$this->part_number_description."',marsh_authotization_level='".$this->marsh_authorization_level."',equipment_serial_number='".$this->equipment_serial_number."',codigo_serie='".$this->codigo_serie."',cantidad='".$this->cantidad."',id_part_fail='".$this->id_part_fail."',invoice='".$this->invoice."' WHERE id_detalle_retorno='".$this->id_detalle_retorno."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;
@@ -123,7 +130,7 @@ class DetalleRetorno extends Conexion
     }
     public function delete()
     {
-       $query="DELETE FROM detalle_retorno WHERE cantidad='".$this->cantidad."'"; 
+       $query="DELETE FROM detalle_retorno WHERE id_detalle_retorno='".$this->id_detalle_retorno."'"; 
        $delete=$this->db->query($query);
        if ($delete == true) {
         return true;
