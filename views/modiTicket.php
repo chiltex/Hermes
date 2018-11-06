@@ -409,12 +409,18 @@
                                     <div class="form-group">
                                         <div id="datos"></div>
                                     </div>
-                                    
+                                      <?php 
+                                      if (isset($_POST['bandera'])) {
+                                        $bandera=$_POST['bandera'];
+                                        echo '<input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>';
+                                      }
+                                       ?>
 
                                          <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><strong>Urgente</strong><span class="required">*</span>
                                           </label>
                                           <div class="col-md-6 col-sm-6 col-xs-12"> 
+
                                             <?php 
                                               if ($field['urgente'] =="Si") {
 

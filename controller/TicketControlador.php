@@ -24,6 +24,12 @@ if ($accion=="modificar") {
 	$id_ficha_tecnica =$_POST['id_ficha_tecnica'];
 	$solucion=$_POST['solucion'];
 	$id_ticket =$_POST['id_ticket'];
+	if (isset($_POST['bandera'])) {
+		$bandera = $_POST['bandera'];
+	}
+	else{
+		$bandera = "ticket";
+	}
 	$Ticket = new Ticket();
 	$Ticket->setDescripcion($descripcion);
 	$Ticket->setEstado($estado);
@@ -39,7 +45,14 @@ if ($accion=="modificar") {
 	$Ticket->setUrgente($urgente);	
 	$update=$Ticket->update();
 	if ($update==true) {
+		if ($bandera=="ticket_u") {
+			
+		header('Location: ../listas/Tickets_u.php?success=correcto&urgente='.$urgente.'');
+		}
+		else{
 		header('Location: ../listas/Tickets.php?success=correcto&urgente='.$urgente.'');
+
+		}
 		# code...
 	}else{
 		header('Location: ../listas/Tickets.php?error=incorrecto&urgente='.$urgente.'');
