@@ -7,7 +7,8 @@ class TipoGestion extends Conexion
 {
 	private $id_tipo_gestion;
 	private $nombre;
-	private $descripcion;
+    private $descripcion;
+    private $id_gestion;
 
 	
 	public function __construct()
@@ -17,6 +18,7 @@ class TipoGestion extends Conexion
         $this->id_tipo_gestion = "";
         $this->nombre = "";
         $this->descripcion = "";
+        $this->id_gestion = "";
 	}
  	public function getId_tipo_gestion() {
         return $this->id_tipo_gestion;
@@ -41,14 +43,22 @@ class TipoGestion extends Conexion
     public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
     }
+    public function getId_gestion() {
+        return $this->id_gestion;
+    }
+
+    public function setId_gestion($id_gestion) {
+        $this->id_gestion = $id_gestion;
+    }
     //FUNCIONES-------------------------------------------------
 
     public function save()
     {
-    	$query="INSERT INTO tipo_gestion(id_tipo_gestion,nombre,descripcion)
+    	$query="INSERT INTO tipo_gestion(id_tipo_gestion,nombre,descripcion,id_gestion)
     			values(NULL,
     			'".$this->nombre."',
-    			'".$this->descripcion."');";
+    			'".$this->descripcion."',
+                '".$this->id_gestion."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
@@ -58,7 +68,7 @@ class TipoGestion extends Conexion
     }
     public function update()
     {
-        $query="UPDATE tipo_gestion SET nombre='".$this->nombre."',descripcion='".$this->descripcion."' WHERE id_tipo_gestion='".$this->id_tipo_gestion."'";
+        $query="UPDATE tipo_gestion SET nombre='".$this->nombre."',descripcion='".$this->descripcion."',id_gestion='".$this->id_gestion."' WHERE id_tipo_gestion='".$this->id_tipo_gestion."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;
@@ -79,7 +89,7 @@ class TipoGestion extends Conexion
     }
     public function selectALL()
     {
-        $query="SELECT * FROM tipo_gestion";
+        $query="SELECT tg.*, g.nombre as gestions FROM tipo_gestion tg INNER JOin gestion g on g.id_gestion= tg.id_gestion";
         $selectall=$this->db->query($query);
         $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCategoria;
@@ -91,7 +101,13 @@ class TipoGestion extends Conexion
         $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCategoria;
     }
-
+    public function selectALLTG($codigo)
+    {
+        $query="SELECT * FROM tipo_gestion WHERE id_gestion='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListCategoria;
+    }
 
 
     

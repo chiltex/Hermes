@@ -264,6 +264,7 @@ session_start();
                           <th>N° </th>
                           <th>Tipo de Gestion</th>
                           <th>Descripcion</th>
+                          <th>Gestion</th>
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
@@ -281,6 +282,7 @@ session_start();
                            <td>'.$row['id_tipo_gestion'].'</td>
                            <td>'.$row['nombre'].'</td>
                            <td>'.$row["descripcion"].'</td>
+                           <td>'.$row["gestions"].'</td>
                            <td>
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_tipo_gestion"].'" class="btn btn-info view_data"/>  

@@ -259,7 +259,7 @@ session_start();
                                       </label>
                                       <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                        <select id="id_gestion" name="id_gestion" class="form-control ">  
+                                        <select onchange="mostrarInfo(this.value)" id="id_gestion" name="id_gestion" class="form-control ">  
                                         <?php
                                          require_once "../class/Gestion.php";
                                              $gestion = new Gestion();
@@ -279,29 +279,8 @@ session_start();
                                       </div>
                                     </div>
                                      <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-6" for="last-name">Tipo Gestion <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                      <select  id="id_tipo_gestion" name="id_tipo_gestion" class="form-control ">
-                                         <?php
-                                         require_once "../class/TipoGestion.php";
-                                             $tg = new TipoGestion();
-                                             $Tgo=$tg->selectALL();
-                                          
-                                             # code...
-                                           
-                                           foreach ((array)$Tgo as $riw) {
-                                           echo '
-                                            <option value="'.$riw["id_tipo_gestion"].'">'.$riw["nombre"].'</option>
-                                           ';
-                                         }
-                                       
-                                       
-                                           ?>
-                                          
-                                      </select>
-                                   </div>
+                                    
+                                        <div id="datos1"></div>
                                     </div>
                                     <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Descripcion<span class="required">*</span>
@@ -614,6 +593,28 @@ xmlhttp.onreadystatechange=function()
     }
   }
 xmlhttp.open("POST","../views/STU.php",true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("cod_banda="+cod);
+
+}function mostrarInfo1(cod){
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("datos1").innerHTML=xmlhttp.responseText;
+    }else{ 
+  document.getElementById("datos1").innerHTML='Cargando...';
+    }
+  }
+xmlhttp.open("POST","../views/SG.php",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("cod_banda="+cod);
 }

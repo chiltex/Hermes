@@ -24,13 +24,7 @@ $accion=$_GET['accion'];
     }
 if ($accion=="modificar") {
 	$latitud=0;
-	$longitud=0;	
-	if (isset($_POST['descripcion'])) {
-			$descripcion =$_POST['descripcion'];
-	}else
-	{
-		$descripcion=NULL;
-	}
+	$longitud=0;
 	$equipo_queda =$_POST['equipo_queda'];
 	
 	$id_cliente =$_POST['id_cliente'];
@@ -137,7 +131,6 @@ if ($accion=="modificar") {
 	$FichaTecnica->setId_ficha_tecnica($id_ficha_tecnica);
 	$FichaTecnica->setLatitud($latitud);
 	$FichaTecnica->setLongitud($longitud);
-	$FichaTecnica->setDescripcion($descripcion);
 	$FichaTecnica->setEquipo_queda($equipo_queda);		
 	$FichaTecnica->setId_cliente($id_cliente);
 	$FichaTecnica->setId_producto($id_producto);
@@ -149,7 +142,7 @@ if ($accion=="modificar") {
 	if ($equipo_queda=="Reparado") {
 	$FichaTecnica->setHora_egreso(date("h"));		
 	}else{
-	$$Hora_e=NULL;
+	$Hora_e=NULL;
 	$FichaTecnica->setHora_egreso($Hora_e);
 	}
 	$FichaTecnica->setDatos_generales($datos_generales);
@@ -225,12 +218,7 @@ elseif ($accion=="guardar")
 	$ficTec =$id_nf;
 	$firma_cliente="FichaTecnica".$ficTec."Cliente".$id_cliente."";
 	$firma_tecnico="FichaTecnica".$ficTec."Tecnico".$id_usuario."";		
-	if (isset($_POST['descripcion'])) {
-			$descripcion =$_POST['descripcion'];
-	}else
-	{
-		$descripcion=NULL;
-	}
+
 	if (isset($_POST['trabajo'])) {
 			$trabajo =$_POST['trabajo'];
 	}else
@@ -316,7 +304,6 @@ elseif ($accion=="guardar")
 	$FichaTecnic->setId_cliente($id_cliente);
 	$FichaTecnic->setId_usuario($id_usuario);
 	$FichaTecnic->setId_producto($id_producto);
-	$FichaTecnic->setDescripcion($descripcion);	
 	$FichaTecnic->setTrabajo($trabajo);
 	$FichaTecnic->setEquipo_queda($equipo_queda);
 	$FichaTecnic->setFirma_cliente($firma_cliente);

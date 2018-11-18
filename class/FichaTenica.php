@@ -8,7 +8,6 @@ class FichaTecnica extends Conexion
  private $id_ficha_tecnica;
  private $latitud;
  private $longitud;
- private $descripcion;
  private $equipo_queda;
  private $id_cliente;
  private $id_producto;
@@ -35,7 +34,6 @@ class FichaTecnica extends Conexion
         $this->id_ficha_tecnica ="";
         $this->latitud ="";
         $this->longitud ="";
-        $this->descripcion="";
         $this->equipo_queda="";
         $this->id_cliente="";
         $this->id_producto="";
@@ -79,14 +77,6 @@ class FichaTecnica extends Conexion
 
     public function setLongitud($ongitud) {
         $this->longitud = $ongitud;
-    }
-
-	public function getDescripcion() {
-        return $this->descripcion;
-    }
-
-    public function setDescripcion($descripcion) {
-        $this->descripcion = $descripcion;
     }
     
     public function getEquipo_queda() {
@@ -220,9 +210,8 @@ class FichaTecnica extends Conexion
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, descripcion, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres)
 				values(NULL,
-    			'".$this->descripcion."',
     			'".$this->equipo_queda."',
     			'".$this->id_cliente."',
     			'".$this->id_producto."',
@@ -261,7 +250,7 @@ class FichaTecnica extends Conexion
     }
      public function update()
     {
-        $query="UPDATE ficha_tecnica SET descripcion='".$this->descripcion."',equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma."', linea_produccion='".$this->linea_produccion."', hora_egreso='".$this->hora_egreso."', datos_generales='".$this->datos_generales."', recibe='".$this->recibe."', foto_uno='".$this->foto_uno."', foto_dos='".$this->foto_dos."', foto_tres='".$this->foto_tres."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
+        $query="UPDATE ficha_tecnica SET equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma."', linea_produccion='".$this->linea_produccion."', hora_egreso='".$this->hora_egreso."', datos_generales='".$this->datos_generales."', recibe='".$this->recibe."', foto_uno='".$this->foto_uno."', foto_dos='".$this->foto_dos."', foto_tres='".$this->foto_tres."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;

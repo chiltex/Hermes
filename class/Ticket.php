@@ -10,7 +10,6 @@ class Ticket extends Conexion
 		 private $id_contacto;
 		 private $id_producto;
 		 private $id_usuario;
-		 private $id_gestion;
 		 private $id_tipo_gestion;
 		 private $id_ficha_tecnica;
 		 private $solucion;
@@ -27,7 +26,6 @@ class Ticket extends Conexion
 		        $this->id_contacto="";
 		        $this->id_producto ="";
 		        $this->id_usuario="";
-		        $this->id_gestion ="";
 		        $this->id_tipo_gestion ="";
 		        $this->id_ficha_tecnica ="";
 		        $this->solucion="";  
@@ -85,13 +83,6 @@ class Ticket extends Conexion
 		        return $this->id_gestion;
 		    }
 
-		    public function setId_gestion($id_gestion) {
-		        $this->id_gestion = $id_gestion;
-		    }
-		    public function getId_tipo_gestion() {
-		        return $this->id_tipo_gestion;
-		    }
-
 		    public function setId_tipo_gestion($id_tipo_gestion) {
 		        $this->id_tipo_gestion = $id_tipo_gestion;
 		    }
@@ -122,7 +113,7 @@ class Ticket extends Conexion
 
 			public function update()
 		    {
-		        $query="UPDATE ticket SET descripcion='".$this->descripcion."',estado='".$this->estado."',id_usuario='".$this->id_usuario."', id_gestion='".$this->id_gestion."',id_tipo_gestion='".$this->id_tipo_gestion."', id_ficha_tecnica='".$this->id_ficha_tecnica."',Solucion='".$this->solucion."', urgente='".$this->urgente."' WHERE id_ticket='".$this->id_ticket."'";
+		        $query="UPDATE ticket SET descripcion='".$this->descripcion."',estado='".$this->estado."',id_usuario='".$this->id_usuario."',id_tipo_gestion='".$this->id_tipo_gestion."', id_ficha_tecnica='".$this->id_ficha_tecnica."',Solucion='".$this->solucion."', urgente='".$this->urgente."' WHERE id_ticket='".$this->id_ticket."'";
 		        $update=$this->db->query($query);
 		        if ($update==true) {
 		            return true;
@@ -132,7 +123,7 @@ class Ticket extends Conexion
 		    }
 			 public function save()
 		    {
-		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_gestion, id_tipo_gestion, id_ficha_tecnica,Solucion,urgente)
+		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_tipo_gestion, id_ficha_tecnica,Solucion,urgente)
 		    			values(NULL,
 		    			'".$this->descripcion."',
 		    			'".$this->estado."',
@@ -140,7 +131,6 @@ class Ticket extends Conexion
 		    			'".$this->id_contacto."',
 		    			'".$this->id_producto."',
 		    			'".$this->id_usuario."',
-		    			'".$this->id_gestion."',
 		    			'".$this->id_tipo_gestion."',
 		    			NULL,
 		    			'".$this->solucion."',

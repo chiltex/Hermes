@@ -218,19 +218,7 @@ session_start();
                                           </div>
                                         </div>
                                         
-                                            
-                                              
-                                           
-
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-4" for="last-name">Descripcion Producto <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">   
-                                        <?php  
-                                        echo '<textarea name="descripcion" id="descripcion" class="form-control">'.$key['descripcion'].'</textarea> ';
-                                      ?>
-                                       </div>
-                                    </div>
+                                          
                                       <div class="form-group">
                                         <label class="control-label col-md-6 col-sm-6 col-xs-12" for="last-name">Descripcion Falla <span class="required">*</span>
                                         </label>
@@ -313,34 +301,7 @@ session_start();
                                 <div class="row">
                                   <div class="col-lg-9">
                                     <div class="row">
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo se entrega<span class="required">*</span>
-                                          </label>
-                                          <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select id="equipo_queda" name="equipo_queda" class="form-control ">
-                                              <?php 
-                                                   if ($key['equipo_queda']=="Iniciado") {
-                                                     # code...
-                                                    echo ' <option value="Iniciado">Reparado</option>
-                                              <option value="EnProceso">En espera</option>
-                                              <option value="Finalizado">Finalizado</option>';
-                                                   }
-                                                   elseif ($key['equipo_queda']=="EnProceso") {
-                                                      echo '
-                                              <option value="EnProceso">En espera</option>
-                                               <option value="Iniciado">Reparado</option>
-                                              <option value="Finalizado">Finalizado</option>';
-                                                   }elseif ($key['equipo_queda']=="Finalizado") {
-                                                      echo '
-                                              <option value="Finalizado">Finalizado</option>
-                                              <option value="EnProceso">En espera</option>
-                                               <option value="Iniciado">Reparado</option>';
-                                                   }
-                                               ?>
-                                                                                
-                                            </select>
-                                          </div>
-                                        </div>
+                                       
                                         <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
@@ -418,6 +379,34 @@ session_start();
                           
                                           </div>
                                     </div>
+                                     <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo se entrega<span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select id="equipo_queda" name="equipo_queda" class="form-control ">
+                                              <?php 
+                                                   if ($key['equipo_queda']=="Iniciado") {
+                                                     # code...
+                                                    echo ' <option value="Iniciado">Reparado</option>
+                                              <option value="EnProceso">En espera</option>
+                                              <option value="Finalizado">Finalizado</option>';
+                                                   }
+                                                   elseif ($key['equipo_queda']=="EnProceso") {
+                                                      echo '
+                                              <option value="EnProceso">En espera</option>
+                                               <option value="Iniciado">Reparado</option>
+                                              <option value="Finalizado">Finalizado</option>';
+                                                   }elseif ($key['equipo_queda']=="Finalizado") {
+                                                      echo '
+                                              <option value="Finalizado">Finalizado</option>
+                                              <option value="EnProceso">En espera</option>
+                                               <option value="Iniciado">Reparado</option>';
+                                                   }
+                                               ?>
+                                                                                
+                                            </select>
+                                          </div>
+                                        </div>
                                     <div class="form-group">
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Nombre quien Recibe
                                       </label>

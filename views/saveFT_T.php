@@ -268,14 +268,7 @@ session_start();
                                             <input type="text" id="linea_produccion" name="linea_produccion" class="form-control col-md-7 col-xs-12">
                                           </div>
                                         </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-4" for="last-name">Descripcion Producto <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="descripcion" id="descripcion" class="form-control"></textarea>  
-                          
-                                          </div>
-                                    </div>
+                                  
                                      <div class="form-group">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Descripcion Falla
                                         </label>
@@ -329,17 +322,7 @@ session_start();
                                 <div class="row">
                                   <div class="col-lg-9">
                                     <div class="row">
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo se entrega<span class="required">*</span>
-                                          </label>
-                                          <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select id="equipo_queda" name="equipo_queda" class="form-control ">
-                                              <option value="Iniciado">Reparado</option>
-                                              <option value="EnProceso">En espera</option>
-                                              <option value="Finalizado">Finalizado</option>                                    
-                                            </select>
-                                          </div>
-                                        </div>
+                                        
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
@@ -371,6 +354,17 @@ software:</textarea>
                           
                                           </div>
                                     </div>
+                                    <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo se entrega<span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select id="equipo_queda" name="equipo_queda" class="form-control ">
+                                              <option value="Iniciado">Reparado</option>
+                                              <option value="EnProceso">En espera</option>
+                                              <option value="Finalizado">Finalizado</option>                                    
+                                            </select>
+                                          </div>
+                                        </div>
                                     <div class="form-group">
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Nombre quien Recibe
                                       </label>

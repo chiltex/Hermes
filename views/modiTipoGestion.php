@@ -25,12 +25,45 @@ require_once "../class/TipoGestion.php";
                 <div class="form-group">
                   <label for="nombre">Descripcion</label>
                   <input type="text" class="form-control" required="" value="'.$row["descripcion"].'" id="descripcion" name="descripcion" placeholder="Nombre">
-                </div>';
+                </div>
+                <div class="form-group">
+                <label >Gestion<span class="required">*</span>
+                                      </label>
+                                      
+
+                                        <select id="id_gestion" name="id_gestion" class="form-control "> ';
+                                       
+                                     
+                                         require_once "../class/Gestion.php";
+                                             $gestion = new Gestion();
+                                             $ges=$gestion->selectALL();
+                                          
+                                             # code...
+                                           
+                                           foreach ((array)$ges as $raw) {
+                                            if ($raw['id_gestion']==$row['id_gestion']) {
+                                               echo '
+                                            <option value="'.$raw["id_gestion"].'" selected>'.$raw["nombre"].'</option>
+                                           ';
+
+                                            }
+                                            else{
+
+                                           echo '
+                                            <option value="'.$raw["id_gestion"].'">'.$raw["nombre"].'</option>
+                                           ';
+                                            }
+
+                                         }
+                                       
+                                       
+                                                                      
+                                       
 
                          }
 
 
- ?>
+ ?> </div></select>
  </div>
               <div class="box-footer">
                 <input type="submit" class="btn btn-primary" name="submit" value="Guardar" >

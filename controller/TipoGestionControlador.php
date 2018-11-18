@@ -7,9 +7,11 @@ if ($accion=="modificar") {
 	$id_TipoGestion =$_POST['id'];
 	$nombre=$_POST['nombre'];
 	$descripcion=$_POST['descripcion'];
+	$id_gestion=$_POST['id_gestion'];
 	$TipoGestion = new TipoGestion();
 	$TipoGestion->setNombre($nombre);
 	$TipoGestion->setDescripcion($descripcion);
+	$TipoGestion->setId_gestion($id_gestion);
 	$TipoGestion->setId_tipo_gestion($id_TipoGestion);
 	$update=$TipoGestion->update();
 	if ($update==true) {
@@ -36,11 +38,13 @@ elseif ($accion=="guardar")
 {
 	$nombre=$_POST['nombre'];
 $descripcion=$_POST['descripcion'];
+$id_gestion=$_POST['id_gestion'];
 
 	# code...
 	$TipoGestion = new TipoGestion();
 	$TipoGestion->setNombre($nombre);
 	$TipoGestion->setDescripcion($descripcion);
+	$TipoGestion->setId_gestion($id_gestion);
 	$save=$TipoGestion->save();
 	if ($save==true) {
 		header('Location: ../listas/TipoGestion.php?success=correcto');
