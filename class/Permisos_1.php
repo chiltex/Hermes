@@ -23,6 +23,8 @@ class Permisos extends Conexion
     private $campo_n;
     private $campo_o;
     private $campo_p;
+    private $campo_q;
+
 
 	
 	public function __construct()
@@ -47,6 +49,7 @@ class Permisos extends Conexion
         $this->campo_n = "";
         $this->campo_o = "";
         $this->campo_p = "";
+        $this->campo_q = "";
 	}
  	public function getId_permiso() {
         return $this->id_permiso;
@@ -190,6 +193,13 @@ class Permisos extends Conexion
     public function setCampo_p($campo_p) {
         $this->campo_p = $campo_p;
     }
+    public function setCampo_q($campo_q) {
+        $this->campo_q = $campo_q;
+    }
+     public function getCampo_q() {
+        return $this->campo_q;
+    }
+
     //FUNCIONES-------------------------------------------------
 
     public function save()
@@ -222,7 +232,7 @@ class Permisos extends Conexion
     }
     public function update()
     {
-        $query="UPDATE permisos SET campo_a='".$this->campo_a."',campo_b='".$this->campo_b."',campo_c='".$this->campo_c."',campo_d='".$this->campo_d."',campo_e='".$this->campo_e."',campo_f='".$this->campo_f."',campo_g='".$this->campo_g."',campo_h='".$this->campo_h."',campo_i='".$this->campo_i."',campo_j='".$this->campo_j."',campo_k='".$this->campo_k."',campo_l='".$this->campo_l."',campo_m='".$this->campo_m."',campo_n='".$this->campo_n."',campo_o='".$this->campo_o."',campo_p='".$this->campo_p."' WHERE id_permiso='".$this->id_permiso."'";
+        $query="UPDATE permisos SET campo_a='".$this->campo_a."',campo_b='".$this->campo_b."',campo_c='".$this->campo_c."',campo_d='".$this->campo_d."',campo_e='".$this->campo_e."',campo_f='".$this->campo_f."',campo_g='".$this->campo_g."',campo_h='".$this->campo_h."',campo_i='".$this->campo_i."',campo_j='".$this->campo_j."',campo_k='".$this->campo_k."',campo_l='".$this->campo_l."',campo_m='".$this->campo_m."',campo_n='".$this->campo_n."',campo_o='".$this->campo_o."',campo_p='".$this->campo_p."',campo_q='".$this->campo_q."' WHERE id_permiso='".$this->id_permiso."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;

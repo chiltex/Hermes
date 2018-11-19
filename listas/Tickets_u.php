@@ -208,17 +208,13 @@ session_start();
                            # code...
                          
                          foreach ((array)$Ticket as $row) {
-                          $gestion=$misTickets->selectOneG($row['id_gestion']);
                           $tipo=$misTickets->selectOneTG($row['id_tipo_gestion']);
                           $tecnico=$misTickets->selectOneU($row['id_usuario']);
                          echo '
                           <tr>
                            <td>'.$row['id_ticket'].'</td>';
-                            foreach ($gestion as $key) {
-                              echo '<td>'.$key['nombre'].'</td>';
-                            }
-                            foreach ($tipo as $rew) {
-                             echo '<td>'.$rew['nombre'].'</td>';
+                           foreach ($tipo as $rew) {
+                             echo '<td>'.$rew['nombre'].'</td><td>'.$rew['gestions'].'</td>';
                             }
                             foreach ($tecnico as $field) {
                                echo '<td>'.$field['nombre'].'</td>';
@@ -231,8 +227,7 @@ session_start();
                            <td>
                           
                                     
-                                    <a href="../views/modiTicket.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'&bandera=ticket_u" class="btn btn-warning">Editar</a>
-                                    <a href="../controller/TicketControlador.php?id='.$row["id_ticket"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <a href="../views/modiTicket_u.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'&bandera=ticket_u&id_usuario='.$row["id_usuario"].'" class="btn btn-warning">Editar</a>
                            </td>
                           </tr>
                          ';

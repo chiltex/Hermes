@@ -1,7 +1,5 @@
 <?php
-require_once "../class/Events.php";
- $misEvents = new Events();
- $events = $misEvents->selectALL();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,26 +13,26 @@ require_once "../class/Events.php";
     <title>DataTables | Gentelella</title>
 
     <!-- Bootstrap -->
-    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
-    <link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
 
     <!-- Custom Theme Style -->
-    <link href="build/css/custom.min.css" rel="stylesheet">
+    <link href="../build/css/custom.min.css" rel="stylesheet">
       <!-- FullCalendar -->
-  <link href='calendar/css/fullcalendar.css' rel='stylesheet' />
+  <link href='../calendar/css/fullcalendar.css' rel='stylesheet' />
 
 
     <!-- Custom CSS -->
@@ -78,32 +76,9 @@ require_once "../class/Events.php";
                 <br />
     
                 <!-- sidebar menu -->
-                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                  <div class="menu_section">
-                    <h3>General</h3>
-                    <ul class="nav side-menu">
-                      
-                      
-                      
-                      <li><a><i class="fa fa-table"></i> Tickets <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                          <li><a href="#">Tables</a></li>
-                          <li><a href="#">Table Dynamic</a></li>
-                        </ul>
-                      </li>
-                    
-                      <li><a><i class="fa fa-clone"></i>Configuraciones <span class="fa fa-chevron-down"></span></a>
-                      
-                        <ul class="nav child_menu">
-                          <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                          <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                  
-    
-                </div>
+               <?php
+                 require_once "menuAdmin.php";
+                  ?>
                 <!-- /sidebar menu -->
     
                 <!-- /menu footer buttons -->
@@ -202,8 +177,8 @@ require_once "../class/Events.php";
 
                       <div class="alert alert-success" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                     <span class="sr-only">Operador:</span>
-                     Seccion en proceso, Gracias por su comprension.
+                     <span class="sr-only">Usuario:</span>
+                     Disculpe las molestia pero esta Seccion se encuentra en proceso, Gracias por su comprension.
                     </div>
                         </div>
 
@@ -237,40 +212,40 @@ require_once "../class/Events.php";
           </div>
         </div>
     <!-- jQuery -->
-   <script src="vendors/jquery/dist/jquery.min.js"></script>
+   <script src="../vendors/jquery/dist/jquery.min.js"></script>
    <!-- Bootstrap -->
-   <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="vendors/nprogress/nprogress.js"></script>
+    <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
-    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="../vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
-    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="vendors/jszip/dist/jszip.min.js"></script>
-    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="build/js/custom.min.js"></script>
+    <script src="../build/js/custom.min.js"></script>
 <!-- Google Analytics -->
     <!-- FullCalendar -->
-  <script src='calendar/js/moment.min.js'></script>
-  <script src='calendar/js/fullcalendar/fullcalendar.min.js'></script>
-  <script src='calendar/js/fullcalendar/fullcalendar.js'></script>
-  <script src='calendar/js/fullcalendar/locale/es.js'></script>
+  <script src='../calendar/js/moment.min.js'></script>
+  <script src='../calendar/js/fullcalendar/fullcalendar.min.js'></script>
+  <script src='../calendar/js/fullcalendar/fullcalendar.js'></script>
+  <script src='../calendar/js/fullcalendar/locale/es.js'></script>
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

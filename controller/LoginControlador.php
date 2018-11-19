@@ -13,7 +13,7 @@ if ($accion=="login") {
 		# code...
 	}
 	elseif($login==2) {
-		header('Location: ../indexOpe.php?success=correcto');
+		header('Location: ../listas/indexOpe.php?success=correcto');
 		# code...
 	}
 	elseif($login==4) {

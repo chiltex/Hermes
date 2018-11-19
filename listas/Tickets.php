@@ -228,7 +228,7 @@ session_start();
                            <td>
                           
                                     
-                                    <a href="../views/modiTicket.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'" class="btn btn-warning">Editar</a>
+                                    <a href="../views/modiTicket.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'&bandera=ticket" class="btn btn-warning">Editar</a>
                                     <a href="../controller/TicketControlador.php?id='.$row["id_ticket"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>

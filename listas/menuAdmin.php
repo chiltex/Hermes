@@ -125,7 +125,15 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                         </ul>
                       </li>
                       <?php 
-                        }if ($row['campo_j']!=NULL) {  ?>
+                        }if ($row['campo_q']!=NULL) {  ?>
+                         <li><a><i class="fa fa-clone"></i>Tickets <span class="fa fa-chevron-down"></span></a>
+                      
+                        <ul class="nav child_menu">
+                          <li><a href="../listas/Tickets_u.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0">Ticket</a></li>
+                        </ul>
+                      </li>
+                      <?php 
+                        } if ($row['campo_j']!=NULL) {  ?>
                          <li><a><i class="fa fa-table"></i> Tickets <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="../listas/Tickets.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0">Ticket</a></li>

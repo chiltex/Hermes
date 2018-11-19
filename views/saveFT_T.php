@@ -201,6 +201,7 @@ session_start();
                                                  $codigo_serie=$_GET["codigo_serie"];
                                                   $producto=$_GET["producto"];
                                                   $id_ticket=$_GET["ticket"];
+                                                  $bandera=$_GET["bandera"];
                                               }
                                               echo '
                                                 <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong></h4></div>
@@ -209,6 +210,8 @@ session_start();
                                               <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
                                               <input type="hidden" name="producto" id="producto" value="'.$producto.'"/>
                                               <input type="hidden" name="ticket" id="ticket" value="'.$id_ticket.'"/>
+
+                                              <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>
                                                   ';
 
                                              ?>
@@ -289,7 +292,7 @@ session_start();
                                     </div>
                                      <div class="form-group">
                                       <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Repuestos
-                                        </label>
+                                        </label><br><br>
                                       <div class="table-wrapper-scroll-y div1" >
 
                                         <table id="datatable-buttons" class="table table-striped table-bordered">
@@ -326,7 +329,8 @@ session_start();
                                       </div>
                                        <div class="form-group">
                                       <div class="table-wrapper-scroll-y div1" >
-
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Consumibles
+                                        </label><br><br>
                                         <table id="datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
@@ -451,7 +455,7 @@ software:</textarea>
                                     <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button>
                                    </div>
                                     </div>
-                                    <input type="hidden" name="bandera" id="bandera" value="ticket"/>
+                                    
                                     
                                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             

@@ -225,7 +225,9 @@ elseif ($accion=="guardar")
 	$empresa=$_POST['empresa'];
 	$producto =$_POST['producto'];
 	$codigo_serie =$_POST['codigo_serie'];
+
 	$bandera =$_POST['bandera'];
+
 		$ft=$FichaTecnic->selectLast();
 	foreach ($ft as $key) {
 	$id_nf=$key['id_ficha_tecnica']+1;
@@ -382,9 +384,11 @@ elseif ($accion=="guardar")
 
 		if ($bandera=="ticket") {
 			header('Location: ../views/modiTicket.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'&contador='.$cont_repuestos.'');
+		}elseif($bandera=="ticket_u"){
+			header('Location: ../views/modiTicket_u.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'&contador='.$cont_repuestos.'&bandera='.$bandera.'');
 		}else{
 
-		header('Location: ../listas/FichaTecnca.php?success=correcto&contador='.$cont_repuestos.'');
+		header('Location: ../listas/FichaTecnca.php?success=correcto&contador='.$bandera.'');
 		}
 
 		# code...

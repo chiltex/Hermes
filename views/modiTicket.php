@@ -148,6 +148,16 @@
                           <div class="col-lg-12">
                             <div class="row">
                               <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/TicketControlador.php?accion=modificar" method="post">
+                               <?php 
+                                      if (isset($_GET['bandera'])) {
+                                        $bandera=$_GET['bandera'];
+                                        echo '<input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>';
+                                     
+                                       
+                                      }
+                                      else
+                                        $bandera =Null;
+                                       ?>
                               <div class="col-lg-6">
                                 <div class="row">
                                 <?php 
@@ -246,7 +256,7 @@
                                               }
                                            else{
                                                   echo '
-                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'" class="btn btn-success">Añadir Ficha Tecnica</a>
+                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera='.$bandera.'" class="btn btn-success">Añadir Ficha Tecnica</a>
                                                   ';
 
                                               }

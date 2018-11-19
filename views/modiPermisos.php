@@ -148,7 +148,7 @@ require_once "../class/Permisos.php";
                           echo'
                           </tr>
                             <tr>
-                          <td>Ticket</td>';
+                          <td>Ticket(Asignacion, Consulta y Modificar)</td>';
                           if (isset($row['campo_j'])&& $row['campo_j']!=NULL) {
                             echo '<td><input type="checkbox" name="campo_j" id="campo_j" checked value="../listas/Tickets.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0"></td>
                              ';
@@ -158,7 +158,17 @@ require_once "../class/Permisos.php";
                              ';
                           }
                           echo'
-                          </tr>
+                          </tr> <tr>
+                          <td>Tickets(Consula y modificar)</td>';
+                          if (isset($row['campo_q'])&& $row['campo_q']!=NULL) {
+                             echo '<td><input type="checkbox" name="campo_q" id="campo_q" checked value="../listas/Tickets_u.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0"></td>
+                             ';
+                          }else
+                          {
+                             echo '<td><input type="checkbox" name="campo_q" id="campo_q" value="../listas/Tickets_u.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0"></td>
+                             ';
+                          }
+                          echo'</tr>
                             <tr>
                           <td>Gestion</td>';
                           if (isset($row['campo_k'])&& $row['campo_k']!=NULL) {

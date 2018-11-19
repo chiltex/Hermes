@@ -85,6 +85,11 @@ if ($accion=="modificar") {
     }else{
         $campo_p=NULL;
    }
+   if (isset($_POST['campo_q'])) {
+  $campo_q=$_POST['campo_q'];
+    }else{
+        $campo_q=NULL;
+   }
     $Permisos = new Permisos();
     $Permisos->setId_tipo_usuario($id_tipo_usuario);
     $Permisos->setCampo_a($campo_a);
@@ -103,6 +108,7 @@ if ($accion=="modificar") {
     $Permisos->setCampo_n($campo_n);
     $Permisos->setCampo_o($campo_o);
     $Permisos->setCampo_p($campo_p);
+    $Permisos->setCampo_q($campo_q);
     $Permisos->setId_permiso($id_Permisos);
     $update=$Permisos->update();
     if ($update==true) {
@@ -207,6 +213,11 @@ elseif ($accion=="guardar")
     }else{
         $campo_p=NULL;
    }
+   if (isset($_POST['campo_q'])) {
+  $campo_q=$_POST['campo_q'];
+    }else{
+        $campo_q=NULL;
+   }
     # code...
     $Permisos = new Permisos();
     $Permisos->setId_tipo_usuario($id_tipo_usuario);
@@ -226,6 +237,7 @@ elseif ($accion=="guardar")
     $Permisos->setCampo_n($campo_n);
     $Permisos->setCampo_o($campo_o);
     $Permisos->setCampo_p($campo_p);
+    $Permisos->setCampo_q($campo_q);
     $save=$Permisos->save();
     if ($save==true) {
         header('Location: ../listas/Permisos.php?success=correcto');
