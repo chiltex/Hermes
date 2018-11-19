@@ -209,6 +209,29 @@ CREATE TABLE `repuestos` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `consumibles`
+--
+
+CREATE TABLE `consumibles` (
+  `id_consumible` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `nombre` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `codigo_serie` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL,
+  `descripcion` longtext COLLATE utf8mb4_bin,
+  `estado` varchar(150) COLLATE utf8mb4_bin DEFAULT NULL
+);
+
+CREATE TABLE `detalle_consumible` (
+  `id_detalle_consumible` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `id_ficha_tecnica` int(11) DEFAULT NULL,
+  `id_consumible` int(11) DEFAULT NULL,
+  `cantidad` int(50) DEFAULT NULL,
+  CONSTRAINT FK_consumibles FOREIGN KEY (id_consumible)
+    REFERENCES consumibles(id_consumible) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ticket`
 --
 

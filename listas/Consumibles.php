@@ -56,9 +56,9 @@ session_start();
                 <br />
     
                 <!-- sidebar menu -->
-               <?php
+<?php
                  require_once "menuAdmin.php";
-                  ?>
+?>
                 <!-- /sidebar menu -->
     
                 <!-- /menu footer buttons -->
@@ -124,7 +124,7 @@ session_start();
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Clientes</h2>
+                    <h2>Pagina de Consumibles</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -187,52 +187,41 @@ session_start();
                     <br>
                     <br>
                     
-                     <input type="button" name="accion" value="Nuevo Producto" id="accion" class="btn btn-success save_data" /> 
+                     <input type="button" name="accion" value="Nuevo Consumible" id="accion" class="btn btn-success save_data" /> 
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
-                        <tr> 
-                          <th>Codigo Serial </th>
-                          <th>Producto</th>
-                          <th>Grupo</th>
+                        <tr>
+                          <th>Nombre / Compañia</th>
+                          <th>Codigo Serie</th>
                           <th>Estado</th>
                           <th>Opciones / Mantenimiento</th>                          
                         </tr>
                       </thead>
                       <TBODY>
                          <?php 
-                         require_once "../class/Productos.php";
-                         $misProductos = new Productos();
-                         $producto = $misProductos->selectALL1();
+                         require_once "../class/Consumibles.php";
+                         $misConsumibles = new Consumibles();
+                         $Consumible = $misConsumibles->selectALL1();
                     
-                         foreach ((array)$producto as $row) {
+                         foreach ((array)$Consumible as $row) {
                          echo '
                           <tr>
-                           <td>'.$row["codigo_serie"].'</td>
                            <td>'.$row['nombre'].'</td>
-                           <td>';
-                                $grupo_producto=$misProductos->selectOneGP($row['id_grupo_producto']);
-                           foreach ($grupo_producto as $rew) {
-                             echo ''.$rew['nombre'].'';
-                           }
-                           
-
-                           
-                           echo '
-
+                           <td>'.$row['codigo_serie'].'</td>
                            <td>'.$row["estado"].'</td>
                            </td>
                            <td>
                           
-                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_producto"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_producto"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_consumible"].'" class="btn btn-info view_data"/>  
+                                    <input type="button" name="edit" value="Editar" id="'.$row["id_consumible"].'" class="btn btn-warning edit_data" />
+                                    <a href="../controller/ConsumiblesControlador.php?id='.$row["id_consumible"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                                 ';
                                 if ($row["estado"]=="Activo") {
-                            echo '<a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=change&estado='.$row["estado"].'" class="btn btn-warning glyphicon glyphicon-refresh">Desactivar</a>';
+                            echo '<a href="../controller/ConsumiblesControlador.php?id='.$row["id_consumible"].'&accion=change&estado='.$row["estado"].'" class="btn btn-warning glyphicon glyphicon-refresh">Desactivar</a>';
                              # code...
                            }else{
-                            echo '<a href="../controller/ProductosControlador.php?id='.$row["id_producto"].'&accion=change&estado='.$row["estado"].'" class="btn btn-success glyphicon glyphicon-refresh">Activar</a>';
+                            echo '<a href="../controller/ConsumiblesControlador.php?id='.$row["id_consumible"].'&accion=change&estado='.$row["estado"].'" class="btn btn-success glyphicon glyphicon-refresh">Activar</a>';
 
                            }
                                     
@@ -253,7 +242,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Producto</h4>  
+                                                 <h4 class="modal-title">Detalle Consumible</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -268,7 +257,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Agregar NUevo Producto</h4>  
+                                                 <h4 class="modal-title">Agregar NUevo Consumible</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -283,7 +272,7 @@ session_start();
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Editar Porducto</h4>  
+                                                 <h4 class="modal-title">Editar Consumible</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms">  
                                             </div>  
@@ -361,7 +350,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectProducto.php",  
+                     url:"../views/selectConsumible.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -376,7 +365,7 @@ ga('send', 'pageview');
            if(employee_action != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveProducto.php",  
+                     url:"../views/saveConsumible.php",  
                      method:"POST",  
                      data:{employee_action:employee_action},  
                      success:function(data){  
@@ -391,7 +380,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/modiProducto.php",  
+                     url:"../views/modiConsumible.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  

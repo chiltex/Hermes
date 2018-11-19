@@ -219,7 +219,7 @@ class Ticket extends Conexion
 				} 
 		public function selectOneTG($codigo)
 		    {
-		        $query="SELECT * FROM tipo_gestion WHERE id_tipo_gestion='".$codigo."'";
+		        $query="SELECT tg.*,g.nombre as gestions FROM tipo_gestion tg INNER JOIN gestion g on g.id_gestion= tg.id_gestion WHERE tg.id_tipo_gestion='".$codigo."'";
 		        $selectall=$this->db->query($query);
 		        $ListTG=$selectall->fetch_all(MYSQLI_ASSOC);
 		      return $ListTG;

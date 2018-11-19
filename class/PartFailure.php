@@ -79,7 +79,7 @@ class PartFailure extends Conexion
     }
     public function selectALL()
     {
-        $query="SELECT * FROM part_failure";
+        $query="SELECT * FROM part_failure Order by id_part_fail";
         $selectall=$this->db->query($query);
         $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCategoria;
@@ -92,8 +92,32 @@ class PartFailure extends Conexion
         return $ListCategoria;
     }
 
-
-
-    
+        public function selectCount()
+    {
+        $query="SELECT coount(id_part_fail) as total FROM part_failure";
+        $selectall=$this->db->query($query);
+        $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListCategoria;
+    }
+    public function selectNexts($codigo)
+    {
+        $query="SELECT * FROM part_failure WHERE id_part_fail > '".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListCategoria;
+    }
+     public function select10First()
+    {
+        $query="SELECT * FROM part_failure LIMIT 0, 8";
+        $selectall=$this->db->query($query);
+        $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListCategoria;
+    }public function select10Next()
+    {
+        $query="SELECT * FROM part_failure LIMIT 8, 8";
+        $selectall=$this->db->query($query);
+        $ListCategoria=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListCategoria;
+    }
 }//fin clase
 ?>

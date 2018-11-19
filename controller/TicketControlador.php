@@ -36,8 +36,7 @@ if ($accion=="modificar") {
 	$Ticket->setId_cliente($id_cliente);
 	$Ticket->setId_contacto($id_contacto);
 	$Ticket->setId_producto($id_producto);
-	$Ticket->setId_usuario($id_usuario);	
-	$Ticket->setId_gestion($id_gestion);
+	$Ticket->setId_usuario($id_usuario);
 	$Ticket->setId_tipo_gestion($id_tipo_gestion);
 	$Ticket->setId_ficha_tecnica($id_ficha_tecnica);
 	$Ticket->setSolucion($solucion);	
@@ -96,8 +95,7 @@ elseif ($accion=="guardar")
 	$Ticket->setId_cliente($id_cliente);
 	$Ticket->setId_contacto($id_contacto);
 	$Ticket->setId_producto($id_producto);
-	$Ticket->setId_usuario($id_usuario);	
-	$Ticket->setId_gestion($id_gestion);
+	$Ticket->setId_usuario($id_usuario);
 	$Ticket->setId_tipo_gestion($id_tipo_gestion);
 	$Ticket->setId_ficha_tecnica($id_ficha_tecnica);
 	$Ticket->setSolucion($solucion);

@@ -193,6 +193,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                           <li><a href="listas/Productos.php">Productos</a></li>
                           <li><a href="listas/Cliente_Producto.php?cliente=0&nombre=nada&producto=0">Productos de Clientes</a></li>
                           <li><a href="listas/Repuestos.php">Repuestos</a></li>
+                          <li><a href="listas/Consumibles.php">Consumibles</a></li>
                         </ul>
                       </li>
                       <?php 
@@ -203,6 +204,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                           <li><a href="listas/Productos.php">Productos</a></li>
                           <li><a href="listas/Cliente_Producto.php?cliente=0&nombre=nada&producto=0">Productos de Clientes</a></li>
                           <li><a href="listas/Repuestos.php">Repuestos</a></li>
+                          <li><a href="listas/Consumibles.php">Consumibles</a></li>
                         </ul>
                       </li>
                       <?php 

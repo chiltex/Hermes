@@ -29,6 +29,15 @@ session_start();
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <style>
+      .div1 {
+           overflow:scroll;
+           height:200px;
+           width:auto;
+      }
+     
+
+    </style>
 </head>
 <body class="nav-md">
         <div class="container body">
@@ -231,10 +240,9 @@ session_start();
                                        
                                     </div>
                                      <div class="form-group">
+                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Repuestos
+                                        </label><br><br>
                                       <div class="table-wrapper-scroll-y div1" >
-                                      <?php  ?>
-
-
                                         <table id="datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
@@ -276,6 +284,70 @@ session_start();
                                            <td>'.$b['nombre'].'</td>
                                            <td>'.$b["codigo_serie"].'</td>
                                            <td> <input type="text" id="cantidad" name="cantidad[]" value="'.$b['cantidad'].'" class="form-control col-xs-3 col-xs-8"></td>
+                                          </tr>
+                                         ';                                          
+
+                                         }
+
+                                           
+                                         }
+                                        
+
+                                       }  ?>
+                                          </TBODY>
+                                        </table>
+
+                                        </div>
+                                      </div>
+                                           <div class="form-group">
+                                              <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Consumibles
+                                        </label>
+                                        <br><br><br>
+                                      <div class="table-wrapper-scroll-y div1" >
+                                     
+
+
+                                        <table id="datatable-buttons2" class="table table-striped table-bordered">
+                                      <thead>
+                                        <tr>
+                                          <th> </th>
+                                          <th>consumible</th>
+                                          <th>Codigo Serie</th>                       
+                                          <th>Cantidad</th>                          
+                                        </tr>
+                                      </thead>
+                                      <TBODY>
+                                         <?php 
+                                         require_once "../class/Consumibles.php";
+                                         $consumible = new Consumibles();
+                                         $consumibles = $consumible->selectALL();
+                                         foreach ((array)$consumibles as $a) {
+
+                                         $de_consumibles = $consumible->consumibleChecked($id_ficha_tecnica,$a["id_consumible"]); 
+                                         if ($de_consumibles==1) {
+                                             echo '
+                                          <tr>
+                                            <td>
+                                            <input type="checkbox" name="id_consumibles[]" value="'.$a["id_consumible"].'" />
+                                           </td>
+                                           <td>'.$a['nombre'].'</td>
+                                           <td>'.$a["codigo_serie"].'</td>
+                                           <td> <input type="text" id="cantidad" name="cantidadC[]" valueclass="form-control col-xs-3 col-xs-8"></td>
+                                          </tr>
+                                         ';
+                                         }
+                                         elseif ($de_consumibles==2){
+                                         $deta_consumibles = $consumible->selectOneDR($id_ficha_tecnica,$a["id_consumible"]);
+                                         foreach ((array)$deta_consumibles as $b) {
+                                          echo '
+                                          <tr>
+                                            
+                                            <td>
+                                            <input type="checkbox" name="id_consumibles[]" checked value="'.$b["id_consumible"].'" />
+                                           </td>
+                                           <td>'.$b['nombre'].'</td>
+                                           <td>'.$b["codigo_serie"].'</td>
+                                           <td> <input type="text" id="cantidad" name="cantidadC[]" value="'.$b['cantidad'].'" class="form-control col-xs-3 col-xs-8"></td>
                                           </tr>
                                          ';                                          
 

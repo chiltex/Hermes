@@ -208,17 +208,14 @@ session_start();
                            # code...
                          
                          foreach ((array)$Ticket as $row) {
-                          $gestion=$misTickets->selectOneG($row['id_gestion']);
                           $tipo=$misTickets->selectOneTG($row['id_tipo_gestion']);
                           $tecnico=$misTickets->selectOneU($row['id_usuario']);
                          echo '
                           <tr>
                            <td>'.$row['id_ticket'].'</td>';
-                            foreach ($gestion as $key) {
-                              echo '<td>'.$key['nombre'].'</td>';
-                            }
+                           
                             foreach ($tipo as $rew) {
-                             echo '<td>'.$rew['nombre'].'</td>';
+                             echo '<td>'.$rew['nombre'].'</td><td>'.$rew['gestions'].'</td>';
                             }
                             foreach ($tecnico as $field) {
                                echo '<td>'.$field['nombre'].'</td>';

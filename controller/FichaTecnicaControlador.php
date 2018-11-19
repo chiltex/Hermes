@@ -3,6 +3,8 @@ require_once "../class/FichaTenica.php";
 require_once "../class/Cliente.php";
 require_once "../class/Contactos.php";
 require_once "../class/Repuestos.php";
+require_once "../class/Consumibles.php";
+
 
 
 $accion=$_GET['accion'];
@@ -72,6 +74,10 @@ if ($accion=="modificar") {
 	$id_repuestos=$_POST['id_repuestos'];
 	$cont_repuestos=count($id_repuestos);
 	$cantidades=$_POST['cantidad'];
+
+	$id_consumibles=$_POST['id_consumibles'];
+	$cont_consumibles=count($id_repuestos);
+	$cantidadesC=$_POST['cantidadC'];
 
 	if (isset($_FILES['foto_uno'])) {
 		$directorio = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica.'_';
@@ -160,6 +166,15 @@ if ($accion=="modificar") {
 					$dr->setCantidad($cantidades[$i]);
 					$dr->update1();
 				$i=$i+1;
+		}
+		$a=0;
+	while ($a<$cont_consumibles) {
+				$dr = new Consumibles();
+					$dr->setId_ficha_tecnica($id_ficha_tecnica);
+					$dr->setId_consumible($id_consumibles[$a]);
+					$dr->setCantidad($cantidadesC[$a]);
+					$dr->update1();
+				$a=$a+1;
 		}
 	if ($update==true) {
 		header('Location: ../listas/FichaTecnca.php?success=correcto');
@@ -300,6 +315,11 @@ elseif ($accion=="guardar")
 	$id_repuestos=$_POST['id_repuestos'];
 	$cont_repuestos=count($id_repuestos);
 	$cantidades=$_POST['cantidad'];
+
+	$id_consumibles=$_POST['id_consumibles'];
+	$cont_consumibles=count($id_repuestos);
+	$cantidadesC=$_POST['cantidadC'];
+
 	$FichaTecnic->setId_contacto($id_contacto);		
 	$FichaTecnic->setId_cliente($id_cliente);
 	$FichaTecnic->setId_usuario($id_usuario);
@@ -320,6 +340,7 @@ elseif ($accion=="guardar")
 
 	$save=$FichaTecnic->save();
 	$i=0;
+	$a=0;
 	$ft1=$FichaTecnic->selectLast();
 	foreach ($ft1 as $key) {
 		$id_nf1=$key['id_ficha_tecnica'];
@@ -341,7 +362,14 @@ elseif ($accion=="guardar")
 					$dr->save1();
 				$i=$i+1;
 		}
-
+		while ($a<$cont_consumibles) {
+				$dr = new Consumibles();
+					$dr->setId_ficha_tecnica($lastFT);
+					$dr->setId_consumible($id_consumibles[$a]);
+					$dr->setCantidad($cantidadesC[$a]);
+					$dr->save1();
+				$a=$a+1;
+		}
 	if ($save==true) {
 		
 	

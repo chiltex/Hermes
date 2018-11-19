@@ -136,7 +136,7 @@ require_once "../class/Permisos.php";
                           echo'
                           </tr>
                            <tr>
-                          <td>Repuestos</td>';
+                          <td>Repuestos y Consumibles</td>';
                           if (isset($row['campo_i'])&& $row['campo_i']!=NULL) {
                             echo ' <td><input type="checkbox" name="campo_i" id="campo_i" checked value="../listas/Repuestos.php"></td>
                            ';

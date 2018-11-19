@@ -259,7 +259,7 @@ session_start();
                                       </label>
                                       <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                        <select onchange="mostrarInfo(this.value)" id="id_gestion" name="id_gestion" class="form-control ">  
+                                        <select onchange="mostrarInfo1(this.value)" id="id_gestion" name="id_gestion" class="form-control ">  
                                         <?php
                                          require_once "../class/Gestion.php";
                                              $gestion = new Gestion();
@@ -278,10 +278,12 @@ session_start();
                                         </select>
                                       </div>
                                     </div>
+
                                      <div class="form-group">
                                     
                                         <div id="datos1"></div>
                                     </div>
+                                    </br>
                                     <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Descripcion<span class="required">*</span>
                                           </label>
@@ -596,7 +598,8 @@ xmlhttp.open("POST","../views/STU.php",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("cod_banda="+cod);
 
-}function mostrarInfo1(cod){
+};
+function mostrarInfo1(cod){
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
@@ -617,7 +620,7 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("POST","../views/SG.php",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("cod_banda="+cod);
-}
+};
 
 </script>
 <script>

@@ -265,10 +265,54 @@ session_start();
                                 <!--end part rigth-->
                           </div><!--end COL md-12-->
                           <div class="col-xs-12">
-                            <h2>Detalle Retorno</h2>
+                            <h3>Detalle Retorno</h3>
+                            <br>
+
+                            <h2>Part Failure list</h2>
                                   </label>
+                             <table id="datatable-buttons" class="table table-striped table-bordered" name="example1">
+                                   <thead>        
+                                                    <tr>
+                                                    <th>Codigo</th>
+                                                
+                                                    <th>Nombre</th> 
+                                                     <th>Descripcion</th>
+                                                                           
+                                                  </tr>
+                                               
+                                                  
+                                                                           
+                                               
+                                                </thead>
+                                                <tbody>
+                                                <?php 
+                            
+                                    require_once "../class/PartFailure.php";
+                                                   $misEvents = new PartFailure();
+                                                  $TU=$misEvents->selectALL();
+                                                  $TU1=$misEvents->select10Next();
+                                                  $i=0;
+                                    
+                                         foreach ($TU as $row) {
+                                        
+                                          
+                                            echo '  
+                                                    <tr>
+                                                      <td><strong>P</strong>'.$row['id_part_fail'].'</td>
+                                                    <td>
+                                                    '.$row['nombre'].'
+                                                    </td>
+                                                   <td>
+                                                    '.$row['descripcion'].'
+                                                    </td>
+                                                   ';
+                                                   echo ' </tr>';
+                                          }
+                          ?>
+                           </tbody> 
+                           </table>
+                           <br><br><br>
                             <button type="button" id="bt_add_detalle" class="btn btn-primary">Agregar</button>
-                             <input type="button" name="accion" value="List Part Failures" id="accion" class="btn btn-success views_data1" /> 
                             <table id="datatable-buttons2" class="table table-striped table-bordered">
                                <thead>
                                         <tr>
