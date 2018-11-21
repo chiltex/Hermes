@@ -163,6 +163,7 @@ alert("Ha ocurrido un error")
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
+
                       <div class="x_title">
                         <h2>Agregar Ficha Tecnica</h2>
                         <ul class="nav navbar-right panel_toolbox">
@@ -183,6 +184,7 @@ alert("Ha ocurrido un error")
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
+                        
                         <br />
                         <div class="row">
                           <div class="col-lg-12">
@@ -471,6 +473,12 @@ software:</textarea>
                                     <input type="hidden" name="bandera" id="bandera" value="Ficha"/>
                                     
                                         <div class="form-group">
+                                        <div class="alert alert-warning" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Incorecto:</span>
+              
+                Por favor, verifique los datos antes de guardar la ficha tecnica.
+                </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
                               <button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>
                             </div>

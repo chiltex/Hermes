@@ -498,6 +498,12 @@ software:</textarea>
                                     
                                     
                                         <div class="form-group">
+                                        <div class="alert alert-warning" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Incorecto:</span>
+              
+                Por favor, verifique los datos antes de guardar la ficha tecnica.
+                </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
                               <button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>
                             </div>

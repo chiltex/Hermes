@@ -35,6 +35,14 @@
                            <td>Falla: </td>
                            <td>'.$key["falla"].'</td>
                            </tr>
+                            <tr>
+                           <td>Ubicacion: </td>
+                           <td>Latitud: '.$key["latitud"].', Longitud: '.$key["longitud"].'</td>
+                           </tr>
+                             <tr>
+                           <td>Entrada : '.$key["hora_ingreso"].'</td>
+                           <td>Salida : '.$key["hora_egreso"].'</td>
+                           </tr>
                            <tr>
                            <td>Solucion: </td>
                            <td>'.$key["trabajo"].'</td>
