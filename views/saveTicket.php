@@ -26,6 +26,8 @@ session_start();
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+        <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -343,6 +345,19 @@ session_start();
                                     <div class="form-group">
                                         <div id="datos"></div>
                                     </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nfactura">Fecha<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class='input-group date' id='myDatepicker2'>
+                            <input type='text' class="form-control" name="fecha" id="fecha" />
+                            <span class="input-group-addon">
+                               <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        </div>
+                      </div>
                                  
                                         <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><strong>Urgente</strong><span class="required">*</span>
@@ -456,7 +471,12 @@ session_start();
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script> 
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-datetimepicker -->    
+    <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -636,6 +656,35 @@ xmlhttp.send("cod_banda="+cod);
     })
   })
 </script>
-        
+         <script>
+    $('#myDatepicker').datetimepicker();
+    
+    $('#myDatepicker2').datetimepicker({
+        format: 'DD/MM/YYYY'
+    });
+    
+    $('#myDatepicker3').datetimepicker({
+        format: 'hh:mm A'
+    });
+    
+    $('#myDatepicker4').datetimepicker({
+        ignoreReadonly: true,
+        allowInputToggle: true
+    });
+
+    $('#datetimepicker6').datetimepicker();
+    
+    $('#datetimepicker7').datetimepicker({
+        useCurrent: false
+    });
+    
+    $("#datetimepicker6").on("dp.change", function(e) {
+        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+    });
+    
+    $("#datetimepicker7").on("dp.change", function(e) {
+        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+    });
+</script>
     </body>
 </html>

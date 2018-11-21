@@ -10,6 +10,7 @@ class Events extends Conexion
  private $end;
  private $descripcion;
  private $id_usuario;
+ private $id_ticket;
 
  public function __construct()
 	{
@@ -22,6 +23,7 @@ class Events extends Conexion
         $this->end="00/00/0000";
         $this->descripcion="";
         $this->id_usuario="";
+        $this->id_ticket="";
     }
 
 	public function getId() {
@@ -73,17 +75,25 @@ class Events extends Conexion
 
     public function setId_usuario($id_usuario) {
         $this->id_usuario = $id_usuario;
+    } 
+    public function getId_ticket() {
+        return $this->id_ticket;
+    }
+
+    public function setId_ticket($id_ticket) {
+        $this->id_ticket = $id_ticket;
     }
 //Funciones-------------------------
  public function save()
     {
-    	$query="INSERT INTO events(id,title,color,start,end,descripcion,id_usuario)
+    	$query="INSERT INTO events(id,title,color,start,end,descripcion,id_usuario,id_ticket)
     			values(0,'".$this->tittle."',
     			'".$this->color."',
     			'".$this->star."',
     			'".$this->end."',
     			'".$this->descripcion."',
-                '".$this->id_usuario."');";
+                '".$this->id_usuario."',
+                '".$this->id_ticket."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
