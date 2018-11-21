@@ -24,6 +24,8 @@ $accion=$_GET['accion'];
             return true;
         }
     }
+
+
 if ($accion=="modificar") {
 	$latitud=0;
 	$longitud=0;
@@ -210,8 +212,12 @@ elseif ($accion=="eliminar") {
 elseif ($accion=="guardar") 
 {
 	$FichaTecnic = new FichaTecnica();
-	$latitud=0;
-	$longitud=0;
+
+	$latphp = $_COOKIE["latcookie"];
+$lonphp = $_COOKIE["loncookie"];
+	$latitud=$latphp;
+	$longitud=$lonphp;
+
 	if (isset($_POST['id_contacto'])) {
 		$id_contacto =$_POST['id_contacto'];
 	}else{
@@ -320,8 +326,9 @@ elseif ($accion=="guardar")
 
 	$id_consumibles=$_POST['id_consumibles'];
 	$cont_consumibles=count($id_repuestos);
-	$cantidadesC=$_POST['cantidadC'];
-
+	$cantidadesC=$_POST['cantidadC'];		
+	$FichaTecnic->setLatitud($latitud);		
+	$FichaTecnic->setLongitud($longitud);
 	$FichaTecnic->setId_contacto($id_contacto);		
 	$FichaTecnic->setId_cliente($id_cliente);
 	$FichaTecnic->setId_usuario($id_usuario);
@@ -374,7 +381,8 @@ elseif ($accion=="guardar")
 		}
 	if ($save==true) {
 		
-	
+	unset ($_COOKIE ["latphp"]);
+	unset ($_COOKIE ["lonphp"]);
 
     // llamamos a la funcion uploadImgBase64( img_base64, nombre_fina.png) 
     
@@ -388,7 +396,7 @@ elseif ($accion=="guardar")
 			header('Location: ../views/modiTicket_u.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'&contador='.$cont_repuestos.'&bandera='.$bandera.'');
 		}else{
 
-		header('Location: ../listas/FichaTecnca.php?success=correcto&contador='.$bandera.'');
+		header('Location: ../listas/FichaTecnca.php?success=correcto&contador='.$bandera.'&latitud='.$latitud.'');
 		}
 
 		# code...

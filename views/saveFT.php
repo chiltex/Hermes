@@ -38,8 +38,40 @@ session_start();
      
 
     </style>
+    <script> 
+function localize() { 
+if (navigator.geolocation) { 
+navigator.geolocation.getCurrentPosition(mapa,error); 
+} else { 
+alert('Tu navegador no soporta geolocalizacion.'); 
+} 
+} 
+function mapa(pos) { /************************ Aqui están las variables que te interesan***********************************/ 
+var latitud = pos.coords.latitude; 
+var longitud = pos.coords.longitude; 
+var precision = pos.coords.accuracy; 
+var contenedor = document.getElementById("map") 
+document.getElementById("lti").innerHTML=latitud;
+document.getElementById("lgi").innerHTML=longitud;  
+document.getElementById("psc").innerHTML=precision; 
+var centro = new google.maps.LatLng(latitud,longitud); 
+var propiedades = { zoom: 15, center: centro, mapTypeId: google.maps.MapTypeId.ROADMAP }; 
+var map = new google.maps.Map(contenedor, propiedades); 
+var marcador = new google.maps.Marker({ position: centro, map: map, title: "Tu posicion actual" }); 
+document.cookie ='latcookie='+latitud; 
+document.cookie ='loncookie='+longitud;
+} 
+function error(errorCode) { 
+if(errorCode.code == 1) 
+alert("No has permitido buscar tu localizacion") 
+else if (errorCode.code==2) 
+alert("Posicion no disponible") 
+else 
+alert("Ha ocurrido un error") 
+} 
+</script>
 </head>
-<body class="nav-md">
+<body class="nav-md" onLoad="localize()">
         <div class="container body">
           <div class="main_container">
             <div class="col-md-3 left_col">
@@ -870,6 +902,7 @@ ga('send', 'pageview');
       document.forms[idForm].submit();
     }
 </script>
+
         
     </body>
 </html>

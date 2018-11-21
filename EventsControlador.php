@@ -36,8 +36,11 @@ elseif ($accion=="guardar")
 	$end = $_POST['end'];
 	$id1 = $_POST['id_usuario1'];
 	$id = $_POST['id_usuario'];
-	$id_ticket=NULL;
+
+	$id_ticket= "NULL";
 	$nombre = $_POST['nu'];
+
+	$t_u = $_POST['tipo_u'];
 	$Events = new Events();
 	$Events->setTittle($tittle);
 	$Events->setStar($start);	
@@ -45,13 +48,19 @@ elseif ($accion=="guardar")
 	$Events->setColor($color);
 	$Events->setDescripcion($descripcion);
 	$Events->setId_usuario($id);
+	$Events->setId_ticket($id_ticket);
 	$save=$Events->save();
 	if ($save==true) {
-		header('Location: indexAdmin.php?success=correcto&id='.$id1.'&nombre='.$nombre.'');
+		if ($t_u!=0) {
+			header('Location: indexAdmin.php?success=correcto&id='.$id.'&nombre='.$nombre.'&id_tipo_usuario='.$t_u.'');
+		}else{
+			header('Location: indexAdmin.php?success=correcto&id=0&nombre=Seleccione un Usuario');
+		}
+		
 		# code...
 	}
 	else{
-		header('Location: indexAdmin.php?error=incorrecto&tittle='.$tittle.'&color='.$color.'&descripcion='.$descripcion.'');
+		header('Location: indexAdmin.php?error=incorrecto&tittle='.$tittle.'&color='.$color.'&descripcion='.$descripcion.'&id_usuario='.$id1.'');
 	}
 }
 elseif($accion=="date") {

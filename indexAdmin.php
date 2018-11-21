@@ -1,11 +1,16 @@
 <?php
 require_once "class/Events.php";
  $misEvents = new Events();
- $codigo=$_GET['id'];
- if ($codigo==0) {
+ if (isset($_GET['id'])) {
+  $codigo1=$_GET['id'];
+ }else{
+  $codigo1 = 0;
+ }
+ 
+ if ($codigo1==0) {
   $events = $misEvents->selectALL();
  }else{
-  $events = $misEvents->selectALLONE($codigo);  
+  $events = $misEvents->selectALLONE($codigo1);  
  }
 ?>
 <!DOCTYPE html>
@@ -395,6 +400,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                                         <option value="'.$row1["id_tipo_usuario"].'">'.$row1["nombre"].'</option>
                                        ';
                                      }
+                              
                                  }
                                  else{
                                               require_once "class/Permisos_1.php";
@@ -406,8 +412,9 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                                      ';
                                    }
                                  }
-                         
-                     
+                             echo '<input type="hidden" name="id" value="'.$codigo1.'"class="form-control" id="id_usuario1">
+              <input type="hidden" name="nu" value="'.$nombre.'"class="form-control" id="nu">';
+                              
                      
                          ?>
                                   
@@ -421,6 +428,9 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                   if (isset($_GET['id_tipo_usuario'])) {
                     $id_tu=$_GET['id_tipo_usuario'];
                     echo ' <input type="button" name="view" value="Seleccionar Usuario" id="'.$id_tu.'" class="btn btn-info view_data"/>';
+                  }else
+                  {
+                    $id_tu=0;
                   }
                  ?>
 
@@ -503,29 +513,37 @@ if (isset($_SESSION['id_tipo_usuario'])) {
             <input type="text" name="end" class="form-control" id="end" readonly>
           </div>
           </div>
-          <div class="form-group">
+          <?php 
+            if ($id_tu==0) {
+              echo ' <div class="form-group">
           <label for="end" class="col-sm-2 control-label">Operador</label>
           <div class="col-sm-10">
-             <select  id="id_usuario" name="id_usuario" class="form-control ">
-          <?php
-            $TU=$misEvents->selectOperadores();
+             <select  id="id_usuario" name="id_usuario" class="form-control "> ';
+               $TU=$misEvents->selectOperadores();
              foreach ((array)$TU as $row) {
                          echo '
                           <option value="'.$row["id_usuario"].'">'.$row["nombre"].' '.$row["apellido"].'</option>
                          ';
                 }
-
-          ?>
+                echo'
             </select>
           </div>
           </div>
-          <?php 
-              echo '
+               
               <input type="hidden" name="id_usuario1" value="'.$codigo.'"class="form-control" id="id_usuario1">
               <input type="hidden" name="nu" value="'.$nombre.'"class="form-control" id="nu">
+ ';
+             }else{
+              $id_usu =$_GET['id'];
+              echo '
+              <input type="hidden" name="id_usuario" value="'.$id_usu.'"class="form-control" id="id_usuario">
+              <input type="hidden" name="tipo_u" value="'.$id_tu.'"class="form-control" id="id_tipou">
 
               ';
-           ?>
+
+
+             }
+             ?>
 
         </div>
         <div class="modal-footer">

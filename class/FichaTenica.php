@@ -210,9 +210,11 @@ class FichaTecnica extends Conexion
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica,latitud, longitud, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres)
 				values(NULL,
-    			'".$this->equipo_queda."',
+                '".$this->latitud."',
+                '".$this->longitud."',
+                '".$this->equipo_queda."',
     			'".$this->id_cliente."',
     			'".$this->id_producto."',
     			'".$this->id_contacto."',

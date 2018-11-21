@@ -149,7 +149,7 @@ class Events extends Conexion
     }
      public function selectOperadores($codigo)
     {
-        $query="SELECT * FROM Usuario WHERE id_tipo_usuario='".$codigo."'";
+        $query="SELECT * FROM usuario WHERE id_tipo_usuario ='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuario;

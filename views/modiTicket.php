@@ -256,7 +256,7 @@
                                               }
                                            else{
                                                   echo '
-                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera='.$bandera.'" class="btn btn-success">Añadir Ficha Tecnica</a>
+                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera='.$bandera.'&falla='.$field['descripcion'].'" class="btn btn-success">Añadir Ficha Tecnica</a>
                                                   ';
 
                                               }
