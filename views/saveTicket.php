@@ -262,6 +262,7 @@ session_start();
                                       <div class="col-md-6 col-sm-6 col-xs-12">
 
                                         <select onchange="mostrarInfo1(this.value)" id="id_gestion" name="id_gestion" class="form-control ">  
+                                        <option value="0">Seleccione una opcion</option>
                                         <?php
                                          require_once "../class/Gestion.php";
                                              $gestion = new Gestion();
@@ -323,6 +324,7 @@ session_start();
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                           <select onchange="mostrarInfo(this.value)" id="id_usuario" name="id_usuario" class="form-control ">
+                                             <option value="0">Seleccione una opcion</option>
                                              <?php
                                              require_once "../class/TipoUsuario.php";
                                                  $usua = new TipoUsuario();
@@ -660,7 +662,7 @@ xmlhttp.send("cod_banda="+cod);
     $('#myDatepicker').datetimepicker();
     
     $('#myDatepicker2').datetimepicker({
-        format: 'DD/MM/YYYY'
+        format: 'YYYY-MM-DD'
     });
     
     $('#myDatepicker3').datetimepicker({

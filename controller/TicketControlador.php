@@ -114,11 +114,15 @@ $tl1=$Ticket->selectLast();
 
 	
 	$tittle="Ticket N°: ".$lastT."";
-	$end=NULL;
+	$end_n = strtotime('+1 day',strtotime($fecha));
+	$nuevo_end =date('Y-m-j',$end_n);
+	
 	$color="#FFD700";
 	$Events = new Events();
+	$star = $fecha.' 00:00:00';
+	$end= $nuevo_end.' 00:00:00';
 	$Events->setTittle($tittle);
-	$Events->setStar($fecha);	
+	$Events->setStar($star);	
 	$Events->setEnd($end);	
 	$Events->setColor($color);
 	$Events->setDescripcion($descripcion);
@@ -126,12 +130,12 @@ $tl1=$Ticket->selectLast();
 	$Events->setId_ticket($lastT);
 	$save=$Events->save();
 
-		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$fecha.'');
+		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.'');
 
 		# code...
 	}
 	else{
-		header('Location: ../listas/Tickets.php?error=incorrecto&producot='.$id_producto.'&cliente='.$id_cliente.'&id_contacto='.$id_contacto.'&fecha='.$fecha.'');
+		header('Location: ../listas/Tickets.php?error=incorrecto&producot='.$id_producto.'&cliente='.$id_cliente.'&id_contacto='.$id_contacto.'&fecha='.$nuevo_end.'');
 	}
 }
 elseif ($accion=="guardarNC") 
