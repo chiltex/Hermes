@@ -5,6 +5,11 @@
                          $ft = $miFichaT->selectOne($codigo);
 
                     foreach ($ft as $key) {
+                      if ($key['hora_egreso']==NULL) {
+                        $hora_egreso= "00:00:00";
+                      }else{
+                        $hora_egreso= $key['hora_egreso'];
+                      }
                     	echo'
                     	 <div class="table-responsive">  
           				 <table class="table table-bordered">
@@ -27,10 +32,7 @@
                            <td>'.$key["prod"].'</td>
                            </tr>
 
-                           <tr>
-                           <td>Descripcion Producto: </td>
-                           <td>'.$key["descripcion"].'</td>
-                           </tr>
+                          
                            <tr>
                            <td>Falla: </td>
                            <td>'.$key["falla"].'</td>
@@ -41,7 +43,7 @@
                            </tr>
                              <tr>
                            <td>Entrada : '.$key["hora_ingreso"].'</td>
-                           <td>Salida : '.$key["hora_egreso"].'</td>
+                           <td>Salida : '.$hora_egreso.'</td>
                            </tr>
                            <tr>
                            <td>Solucion: </td>

@@ -72,7 +72,7 @@ alert("Ha ocurrido un error")
 </script>
 
 </head>
-<body class="nav-md">
+<body class="nav-md" onLoad="localize()">
         <div class="container body">
           <div class="main_container">
             <div class="col-md-3 left_col">
