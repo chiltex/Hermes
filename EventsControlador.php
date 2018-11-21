@@ -36,6 +36,7 @@ elseif ($accion=="guardar")
 	$end = $_POST['end'];
 	$id1 = $_POST['id_usuario1'];
 	$id = $_POST['id_usuario'];
+	$id_ticket=NULL;
 	$nombre = $_POST['nu'];
 	$Events = new Events();
 	$Events->setTittle($tittle);

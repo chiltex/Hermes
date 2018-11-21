@@ -2,6 +2,7 @@
 require_once "../class/Ticket.php";
 require_once "../class/Cliente.php";
 require_once "../class/Contactos.php";
+require_once "../class/Events1.php";
 
 $accion=$_GET['accion'];
 
@@ -85,7 +86,9 @@ elseif ($accion=="guardar")
 	$id_contacto =$_POST['id_contacto'];
 	$id_producto =$_POST['id_producto'];	
 	$id_usuario =$_POST['id_usuario'];		
-	$id_gestion =$_POST['id_gestion'];	
+	$id_gestion =$_POST['id_gestion'];
+
+	$fecha =$_POST['fecha'];		
 	$id_tipo_gestion =$_POST['id_tipo_gestion'];		
 	$id_ficha_tecnica =NULL;
 	$solucion="Escriba la solucion al problema...";	
@@ -101,12 +104,38 @@ elseif ($accion=="guardar")
 	$Ticket->setSolucion($solucion);
 	$Ticket->setUrgente($urgente);	
 	$save=$Ticket->save();
+$tl1=$Ticket->selectLast();
+	foreach ($tl1 as $key) {
+		$id_nt1=$key['id_ticket'];
+		}
+	$lastT=$id_nt1;
+	
 	if ($save==true) {
-		header('Location: ../listas/Tickets.php?success=correcto');
+
+	
+	$tittle="Ticket N°: ".$lastT."";
+	$end_n = strtotime('+1 day',strtotime($fecha));
+	$nuevo_end =date('Y-m-j',$end_n);
+	
+	$color="#FFD700";
+	$Events = new Events();
+	$star = $fecha.' 00:00:00';
+	$end= $nuevo_end.' 00:00:00';
+	$Events->setTittle($tittle);
+	$Events->setStar($star);	
+	$Events->setEnd($end);	
+	$Events->setColor($color);
+	$Events->setDescripcion($descripcion);
+	$Events->setId_usuario($id_usuario);
+	$Events->setId_ticket($lastT);
+	$save=$Events->save();
+
+		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.'');
+
 		# code...
 	}
 	else{
-		header('Location: ../listas/Tickets.php?error=incorrecto&producot='.$id_producto.'&cliente='.$id_cliente.'&id_contacto='.$id_contacto.'');
+		header('Location: ../listas/Tickets.php?error=incorrecto&producot='.$id_producto.'&cliente='.$id_cliente.'&id_contacto='.$id_contacto.'&fecha='.$nuevo_end.'');
 	}
 }
 elseif ($accion=="guardarNC") 

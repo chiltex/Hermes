@@ -274,7 +274,13 @@ class Ticket extends Conexion
 		        $ListFicha=$selectall->fetch_all(MYSQLI_ASSOC);
 		        return $ListFicha;
 		    }
-
+	 public function selectLast()
+    {
+        $query="SELECT * FROM ticket ORDER BY id_ticket DESC LIMIT 1";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
 
 
 
