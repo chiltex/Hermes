@@ -29,6 +29,8 @@ session_start();
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <!-- Custom MAPS -->
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
     <style>
       .div1 {
            overflow:scroll;
@@ -426,7 +428,12 @@ cleaning:
 software:</textarea>  
                           
                                           </div>
-                                    </div>
+                                    </div>}
+                                    <div class="form-group">
+                                     
+                                   <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Latitud: <span id="lti"></span></p></label>
+                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name"> <p>Longitud: <span id="lgi"></span></p></label>
+                                       </div>
                                       <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
                                         </label>

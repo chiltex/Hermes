@@ -385,6 +385,11 @@ session_start();
                           
                                           </div>
                                     </div>
+                                     <div class="form-group">
+                                     
+                                   <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Latitud: <span id="lti"><?php echo $key['latitud'] ?></span></p></label>
+                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name"> <p>Longitud: <span id="lgi"><?php echo $key['longitud'] ?></span></p></label>
+                                       </div>
 
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
