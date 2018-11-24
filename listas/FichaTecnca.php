@@ -222,7 +222,7 @@ session_start();
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
                                     <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar</a>
 
-                                    <a href="../views/selectFTPDF.php?id='.$row["id_ficha_tecnica"].'" target="_blank" class="btn btn-danger">Exportar PDF</a>
+                                    <a href="../views/pdf.php?id='.$row["id_ficha_tecnica"].'" target="_blank" class="btn btn-danger">Exportar PDF</a>
                            </td>
                           </tr>
                          ';

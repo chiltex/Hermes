@@ -4,6 +4,12 @@ require_once "../class/Cliente.php";
 require_once "../class/Contactos.php";
 require_once "../class/Repuestos.php";
 require_once "../class/Consumibles.php";
+//DOMPDF
+require_once 'dompdf-master/lib/html5lib/Parser.php';
+require_once 'dompdf-master/lib/php-font-lib/src/FontLib/Autoloader.php';
+require_once 'dompdf-master/lib/php-svg-lib/src/autoload.php';
+require_once 'dompdf-master/src/Autoloader.php';
+Dompdf\Autoloader::register();
 
 
 

@@ -270,7 +270,8 @@ class FichaTecnica extends Conexion
     }
      public function selectOne($codigo)
     {
-        $query="SELECT ft.*,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto INNER JOIN productos p ON ft.id_producto = p.id_producto INNER JOIN usuario u ON ft.id_usuario = u.id_usuario WHERE ft.id_ficha_tecnica = '".$codigo."'";
+        $query="SELECT ft.*,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario, tp.nombre as tipo_maqui FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto 
+        INNER JOIN tipo_maquina tp ON ft.id_tipo_ma = tp.id_tipo_ma INNER JOIN productos p ON ft.id_producto = p.id_producto INNER JOIN usuario u ON ft.id_usuario = u.id_usuario WHERE ft.id_ficha_tecnica = '".$codigo."'";
         $selectall=$this->db->query($query);
         $ListFicha=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListFicha;
@@ -313,6 +314,18 @@ class FichaTecnica extends Conexion
 		     public function selectLast()
     {
         $query="SELECT * FROM ficha_tecnica ORDER BY id_ficha_tecnica DESC LIMIT 1";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
+    public function reporteHTS($codigo)
+    {
+        $query="SELECT ft.* , cli.nombre as clie, con.nombre as contac,tp.nombre as tipo_maqui, u.nombre as usuario,p.nombre as prod,p.codigo_serie FROM ficha_tecnica ft 
+        INNER JOIN cliente cli ON ft.id_cliente=cli.id_cliente 
+        INNER JOIN contactos con ON ft.id_contacto = con.id_contacto 
+        INNER JOIN tipo_maquina tp ON ft.id_tipo_ma = tp.id_tipo_ma
+        INNER JOIN productos p ON ft.id_producto = p.id_producto
+        INNER JOIN usuario u ON ft.id_usuario = u.id_usuario WHERE ft.id_ficha_tecnica ='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListClientes;
