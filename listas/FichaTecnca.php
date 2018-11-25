@@ -222,7 +222,8 @@ session_start();
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
                                     <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar</a>
 
-                                    <a href="../views/pdf.php?id='.$row["id_ficha_tecnica"].'" target="_blank" class="btn btn-danger">Exportar PDF</a>
+                                    <a href="../controller/pdf.php?id='.$row["id_ficha_tecnica"].'&accion=descargar" target="_blank" class="btn btn-danger">Exportar PDF</a>
+                                    <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" class="btn btn-success send_data"/>
                            </td>
                           </tr>
                          ';
@@ -250,12 +251,13 @@ session_start();
                                        </div>  
                                   </div>  
           </div>
-               <div id="dataModal3" class="modal fade">  
+              
+			  <div id="dataModal3" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Nueva Empresa/Contacto</h4>  
+                                                 <h4 class="modal-title">Enviar Ficha Tecnica</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -265,7 +267,6 @@ session_start();
                                        </div>  
                                   </div>  
                 </div>
-			  
 			  
             </div>
             <!--page content -->
@@ -339,6 +340,21 @@ ga('send', 'pageview');
                      success:function(data){  
                           $('#employee_forms2').html(data);  
                           $('#dataModal2').modal('show');  
+                     }  
+                });  
+           }            
+      });
+       $(document).on('click', '.send_data', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/sendMail.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms3').html(data);  
+                          $('#dataModal3').modal('show');  
                      }  
                 });  
            }            

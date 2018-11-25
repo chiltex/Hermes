@@ -113,6 +113,13 @@ class Usuario extends Conexion
         $ListUsuarios=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuarios;
     }
+        public function selectALLJ()
+    {
+        $query="SELECT * FROM usuario WHERE id_tipo_usuario=1";
+        $selectall=$this->db->query($query);
+        $ListUsuarios=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListUsuarios;
+    }
      public function selectOne($codigo)
     {
         $query="SELECT * FROM usuario WHERE id_usuario='".$codigo."'";

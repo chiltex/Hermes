@@ -23,6 +23,7 @@ class FichaTecnica extends Conexion
  private $hora_egreso;
  private $datos_generales;
  private $recibe;
+ private $fecha_trabajo;
 
 
 
@@ -206,11 +207,18 @@ class FichaTecnica extends Conexion
     public function setFoto_tres($foto_tres) {
         $this->foto_tres = $foto_tres;
     }
+    public function getFecha_trabajo() {
+        return $this->fecha_trabajo;
+    }
+
+    public function setFecha_trabajo($fecha_trabajo) {
+        $this->fecha_trabajo = $fecha_trabajo;
+    }
     //FUNCIONES----------------
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica,latitud, longitud, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica,latitud, longitud, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres,fecha_trabajo)
 				values(NULL,
                 '".$this->latitud."',
                 '".$this->longitud."',
@@ -230,7 +238,8 @@ class FichaTecnica extends Conexion
                 '".$this->recibe."',
                 '".$this->foto_uno."',
                 '".$this->foto_dos."',
-                '".$this->foto_tres."');";
+                '".$this->foto_tres."',
+                'NOW()');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
@@ -270,7 +279,7 @@ class FichaTecnica extends Conexion
     }
      public function selectOne($codigo)
     {
-        $query="SELECT ft.*,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario, tp.nombre as tipo_maqui FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto 
+        $query="SELECT ft.*,ft.id_contacto,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario, tp.nombre as tipo_maqui FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto 
         INNER JOIN tipo_maquina tp ON ft.id_tipo_ma = tp.id_tipo_ma INNER JOIN productos p ON ft.id_producto = p.id_producto INNER JOIN usuario u ON ft.id_usuario = u.id_usuario WHERE ft.id_ficha_tecnica = '".$codigo."'";
         $selectall=$this->db->query($query);
         $ListFicha=$selectall->fetch_all(MYSQLI_ASSOC);
