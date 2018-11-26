@@ -1,5 +1,10 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+?>
 <?php 
 session_start();
+$usua= $_SESSION['id_usuario']; 
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,9 +31,6 @@ session_start();
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -106,74 +108,11 @@ session_start();
                           </a>
                         </li>
                         <li><a href="javascript:;">Help</a></li>
-                        <li><a data-toggle="tooltip" data-placement="top" title="Logout" href="../controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
                     </li>
     
-                    <li role="presentation" class="dropdown">
-                      <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
-                      </a>
-                      <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <div class="text-center">
-                            <a>
-                              <strong>See All Alerts</strong>
-                              <i class="fa fa-angle-right"></i>
-                            </a>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
+                    
                   </ul>
                 </nav>
               </div>
@@ -190,10 +129,7 @@ session_start();
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Reportes de Calidad</h2>
-
-
-                    
+                    <h2>Pagina de Clientes</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -211,6 +147,7 @@ session_start();
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                  <div class="x_content">
            <?php 
             if (isset($_GET['success'])) {
                 
@@ -251,43 +188,43 @@ session_start();
                 }
             }
              ?></div>
-                  <div class="x_content">
-                      
-
-                                    <input type="button" name="accion" value="Nuevo Reporte de Calidad" id="accion" class="btn btn-success save_data" /> 
                     <br>
                     <br>
-                    <div id="employee_table">
-                    <table id="datatable-buttons" class="table table-striped table-bordered" name="datatable-buttons">
+                    <a href="../views/saveFT.php?cliente=0&id_producto=0&codigo_serie=0000&producto=N/A&nombre=N/A&bandera=usuario" class="btn btn-success">Nueva Ficha Tecnica</a>
+                    
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>N° </th>
-                          <th>Cliente</th>                          
-                          <th>Codigo Serie</th>
-                          <th>Mes</th>
-                          <th>Opciones / Mantenimiento</th>                          
+                          <th>N°</th>
+                          <th>Producto</th>
+                          <th>Cliente</th>
+                          <th>Estado</th>
+                          <th>Opciones</th>                            
                         </tr>
                       </thead>
-                      <tbody>
-                        <?php 
-                         require_once "../class/Calidad.php";
-                         $misCalidad = new Calidad();
-                         $Calidad = $misCalidad->selectALL();
+                      <TBODY>
+                         <?php 
+                         require_once "../class/FichaTenica.php";
+                         $misFT = new FichaTecnica();
+                         $fit = $misFT->selectALLU($usua);
                         
-                           # code...
+                      echo $usua;
                          
-                         foreach ((array)$Calidad as $row) {
-                         echo '
-                          <tr>
-                           <td>'.$row['id_reporte_calidad'].'</td>
-                           <td>'.$row['cliente'].'</td>
-                           <td>'.$row["codigo_serie"].'</td>
-                           <td>'.$row["mes"].'</td>
+                         foreach ((array)$fit as $row) {
+                       
+                           echo '
+                            <tr>
+                           <td>'.$row['id_ficha_tecnica'].'</td>
+                           <td>'.$row['nombre'].'</td>
+                           <td>'.$row['client'].'</td>
+                           <td>'.$row['equipo_queda'].'</td>
                            <td>
                           
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_reporte_calidad"].'" class="btn btn-info view_data"/>  
-                                    <input type="button" name="edit" value="Editar" id="'.$row["id_reporte_calidad"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/CalidadControlador.php?id='.$row["id_reporte_calidad"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
+                                    <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar&bandera=usuario" class="btn btn-warning">Modificar</a>
+
+                                    <a href="../controller/pdf.php?id='.$row["id_ficha_tecnica"].'&accion=descargar" target="_blank" class="btn btn-danger">Exportar PDF</a>
+                                    <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" bandera="usuario" class="btn btn-success send_data"/>
                            </td>
                           </tr>
                          ';
@@ -295,37 +232,17 @@ session_start();
                      
                      
                          ?>
-                      </tbody>
+                      </TBODY>
                     </table>
-                  </div>
                   </div>
                 </div>
               </div>
-			  
-			  
-			  
-            </div>
- <div id="dataModal" class="modal fade">  
+			     <div id="dataModal2" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Calidad</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_detail">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-  </div>  
-   <div id="dataModal2" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Calidad</h4>  
+                                                 <h4 class="modal-title">Detalle Ticket</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -334,13 +251,14 @@ session_start();
                                             </div>  
                                        </div>  
                                   </div>  
-  </div>
-     <div id="dataModal3" class="modal fade">  
+          </div>
+              
+			  <div id="dataModal3" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Calidad</h4>  
+                                                 <h4 class="modal-title">Enviar Ficha Tecnica</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms3">  
                                             </div>  
@@ -349,24 +267,10 @@ session_start();
                                             </div>  
                                        </div>  
                                   </div>  
-  </div>
+                </div>
+			  
+            </div>
             <!--page content -->
-<div id="add_data_Modal" class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header">  
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Agregar nueva Calidadria</h4>  
-                </div>  
-                <div class="modal-body">  
-                     
-                </div>  
-                <div class="modal-footer">  
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                </div>  
-           </div>  
-      </div>  
- </div>
     
             <!-- footer content -->
             <footer>
@@ -405,7 +309,6 @@ session_start();
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
-   
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 <!-- Google Analytics -->
@@ -419,41 +322,20 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
     
     </script>
-<script type="text/javascript">
-   $(document).ready(function(){ 
-
-      
+        <script type="text/javascript">
+   $(document).ready(function(){  
       $('#add').click(function(){  
            $('#insert').val("Insert");  
            $('#insert_form')[0].reset();  
-      }); 
-
-                
-    
-            
-         
-      $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/modiCalidad.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms2').html(data);  
-                          $('#dataModal2').modal('show');  
-                     }  
-                });  
-           }   
       });  
+    
      
       $(document).on('click', '.view_data', function(){  
            var employee_id = $(this).attr("id");  
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selecCalidad.php",  
+                     url:"../views/selecFT.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -462,15 +344,16 @@ ga('send', 'pageview');
                      }  
                 });  
            }            
-      });  
-        $(document).on('click', '.save_data', function(){  
-           var employee_action = $(this).attr("accion");  
-           if(employee_action != '')  
+      });
+       $(document).on('click', '.send_data', function(){  
+           var employee_id = $(this).attr("id");
+           var bandera = $(this).attr("bandera");    
+           if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/saveCalidad.php",  
+                     url:"../views/sendMail.php",  
                      method:"POST",  
-                     data:{employee_action:employee_action},  
+                     data:{employee_id:employee_id,bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms3').html(data);  
                           $('#dataModal3').modal('show');  
@@ -478,9 +361,9 @@ ga('send', 'pageview');
                 });  
            }            
       });
+       
  });  
 
 </script>
-        
     </body>
 </html>

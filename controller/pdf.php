@@ -233,7 +233,7 @@ ob_start();
              </table>
                    </div>
                    ';
-                   $fecha_t=$key['fecha_trabajo'];
+                   
                     
                 }
 ?>
@@ -243,6 +243,17 @@ ob_start();
 <?php
   $correo = $_POST['destino'];
   $nombre = $_POST['nombre'];
+
+  $bandera = $_POST['bandera'];
+
+  $jefe = $_POST['cc'];
+  $miFi = new FichaTecnica();
+                         $ft1 = $miFi->selectOne($fichat);
+
+                    foreach ($ft1 as $keys) {
+                      $fecha_t=$keys['fecha_trabajo'];
+                    }
+
 //$correo = 'jhosuegarciastarkand@gmail.com';
   $dompdf1 = new DOMPDF();
 $dompdf1->load_Html(ob_get_clean());
@@ -253,10 +264,17 @@ $dompdf1->render();
   file_put_contents($_SERVER['DOCUMENT_ROOT'].'/Hermes/enviados/'.$filename1, $pdf);
 	//$archivo=$dompdf1->stream($filename1);
 
-	$sending = new Mailer("Ficha Tecnica: ".$fichat."", "Ficha Tecnica:",$filename1, $correo,'prueba@gmail.com',$nombre,$fecha_t);
+	$sending = new Mailer("Ficha Tecnica: ".$fichat."", "Ficha Tecnica:",$filename1, $correo,$jefe,$nombre,$fecha_t);
     $resultado = $sending->enviarCorreo();
 if ($resultado ==1) {
-  header('Location: ../listas/FichaTecnca.php?success=correcto');
+  if ($bandera=="admin") {
+    header('Location: ../listas/FichaTecnca.php?success=correcto');
+  }elseif($bandera=="usuario"){
+
+    header('Location: ../listas/FichaTecnca_u.php?success=correcto');
+
+  }
+  
 
 }
            

@@ -115,7 +115,7 @@ alert("Ha ocurrido un error")
                   <a data-toggle="tooltip" data-placement="top" title="Lock">
                     <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                   </a>
-                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="../controller/LoginControlador.php?accion=logout">
                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                   </a>
                 </div>
@@ -146,7 +146,7 @@ alert("Ha ocurrido un error")
                           </a>
                         </li>
                         <li><a href="javascript:;">Help</a></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                        <li><a data-toggle="tooltip" data-placement="top" title="Logout" href="../controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
                     </li>
     
@@ -195,9 +195,26 @@ alert("Ha ocurrido un error")
               <div class="row">
                               <div class="col-lg-6">
                                 <div class="row">
-                                <input type="button" name="view" value="Seleccionar Empresa" bandera="ficha" id="1" class="btn btn-info view_data"/>
+                                
+                                <?php 
+                              if (isset($_GET['bandera'])) {
+                            $bandera = $_GET['bandera'];
 
-                    <input type="button" name="view" value="Agregar Empresa/Contacto" bandera="ficha" id="1" class="btn btn-info view_data3"/> 
+                                echo' <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/> 
+                                <input type="button" name="view" value="Seleccionar Empresa"  id="1" bandera="'.$bandera.'" class="btn btn-info view_data"/> 
+
+                                ';
+                              }else {
+                                $bandera="admin";
+                                
+                                echo' <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>  
+                                <input type="button" name="view" value="Seleccionar Empresa"  id="1" bandera="'.$bandera.'" class="btn btn-info view_data"/>
+                                
+                                 <input type="button" name="view" value="Agregar Empresa/Contacto" bandera="'.$bandera.'" id="1" class="btn btn-info view_data3"/> 
+                                  ';
+                              }
+                             ?>
+                   
                                 <?php 
                                       if (is_null($_GET["cliente"])&& is_null($_GET["nombre"])) {
                                        $id=0;
@@ -208,7 +225,7 @@ alert("Ha ocurrido un error")
                                          if ($id!="0" && $nombre!="N/A") {
                                              echo '
                                          <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
-                                           echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-warning bandera="ficha" view_data4"/>';
+                                           echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-warning bandera="'.$bandera.'" view_data4"/>';
                                            # code...
                                          }else{
                                            echo '
@@ -219,7 +236,7 @@ alert("Ha ocurrido un error")
                                       }
                                       ?>
                                         <?php 
-                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" bandera="ficha" class="btn btn-info view_data2"/>';
+                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" class="btn btn-info view_data2"/>';
 
                                             if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
                                                $id_producto=0;
@@ -477,15 +494,21 @@ software:</textarea>
                                     <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button>
                                    </div>
                                     </div>
-                                    <input type="hidden" name="bandera" id="bandera" value="Ficha"/>
+                                    <?php 
+                                    echo '<input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>';
+                                     ?>
+
+                                    
                                     
                                         <div class="form-group">
                                         <div class="alert alert-warning" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Incorecto:</span>
+              <span class="sr-only">ALERTA:</span>
               
                 Por favor, verifique los datos antes de guardar la ficha tecnica.
                 </div>
+
+
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
                               <button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>
                             </div>

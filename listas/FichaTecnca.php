@@ -76,7 +76,7 @@ session_start();
                   <a data-toggle="tooltip" data-placement="top" title="Lock">
                     <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                   </a>
-                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="../controller/LoginControlador.php?accion=logout">
                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                   </a>
                 </div>
@@ -107,7 +107,7 @@ session_start();
                           </a>
                         </li>
                         <li><a href="javascript:;">Help</a></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                        <li><a data-toggle="tooltip" data-placement="top" title="Logout" href="../controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
                     </li>
     
@@ -223,7 +223,7 @@ session_start();
                                     <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar</a>
 
                                     <a href="../controller/pdf.php?id='.$row["id_ficha_tecnica"].'&accion=descargar" target="_blank" class="btn btn-danger">Exportar PDF</a>
-                                    <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" class="btn btn-success send_data"/>
+                                    <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" bandera="admin" class="btn btn-success send_data"/>
                            </td>
                           </tr>
                          ';
@@ -345,13 +345,14 @@ ga('send', 'pageview');
            }            
       });
        $(document).on('click', '.send_data', function(){  
-           var employee_id = $(this).attr("id");  
+           var employee_id = $(this).attr("id"); 
+           var bandera = $(this).attr("bandera");   
            if(employee_id != '')  
            {  
                 $.ajax({  
                      url:"../views/sendMail.php",  
                      method:"POST",  
-                     data:{employee_id:employee_id},  
+                     data:{employee_id:employee_id,bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms3').html(data);  
                           $('#dataModal3').modal('show');  

@@ -20,6 +20,7 @@
   
   require_once "../class/Cliente.php";
   						 $codigo=$_POST["employee_id"];
+                $bandera=$_POST["bandera"];
                          $misClientes = new Cliente();
                          $cliente = $misClientes->selectALL();
 
@@ -40,7 +41,7 @@
                            }
                 echo '
                            <td>
-                         <a href="../views/saveFT.php?cliente='.$row["id_cliente"].'&nombre='.$row["nombre"].'&codigo_serie=0000&producto=N/A&id_producto=0" class="btn btn-primary">Seleccionar</a>
+                         <a href="../views/saveFT.php?cliente='.$row["id_cliente"].'&nombre='.$row["nombre"].'&codigo_serie=0000&producto=N/A&id_producto=0&bandera='.$bandera.'" class="btn btn-primary">Seleccionar</a>
                           </tr>
                          ';
                 	

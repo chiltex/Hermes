@@ -123,7 +123,7 @@ session_start();
                           </a>
                         </li>
                         <li><a href="javascript:;">Help</a></li>
-                        <li><a href="controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                        <li><a href="../controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
                     </li>
     

@@ -132,6 +132,13 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                           <li><a href="../listas/Tickets_u.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0">Ticket</a></li>
                         </ul>
                       </li>
+                        <li><a><i class="fa fa-clone"></i>Fichas Tecnicas <span class="fa fa-chevron-down"></span></a>
+                      
+                        <ul class="nav child_menu">
+                          <li><a href="../views/saveFT.php?cliente=0&id_producto=0&producto=N/A&codigo_serie=0000&nombre=N/A&bandera=usuario">Ficha Tecnica</a></li>
+                          <li><a href="../listas/FichaTecnca_u.php">Fichas Tecnica</a></li>
+                        </ul>
+                      </li>
                       <?php 
                         }if ($row['campo_j']!=NULL) {  ?>
                          <li><a><i class="fa fa-table"></i> Tickets <span class="fa fa-chevron-down"></span></a>

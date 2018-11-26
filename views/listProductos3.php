@@ -12,6 +12,7 @@
                $codigo=$_POST["employee_id"];
 
                $empresa=$_POST["employee_name"];
+               $bandera=$_POST["bandera"];
                echo '<a href="../listas/Cliente_Producto.php?cliente='.$codigo.'&nombre='.$empresa.'&producto=0" class="btn btn-primary">Nuevo Producto</a>';
  ?>
 <table id="datatable-buttons" class="table table-striped table-bordered">
@@ -45,7 +46,7 @@
                   echo'
 
           				        <td>
-                         <a href="../views/saveFT.php?cliente='.$codigo.'&id_producto='.$row["id_producto"].'&producto='.$row["nombre"].'&codigo_serie='.$row["codigo_serie"].'&nombre='.$empresa.'" class="btn btn-primary">Seleccionar</a>
+                         <a href="../views/saveFT.php?cliente='.$codigo.'&id_producto='.$row["id_producto"].'&producto='.$row["nombre"].'&codigo_serie='.$row["codigo_serie"].'&nombre='.$empresa.'&bandera='.$bandera.'" class="btn btn-primary">Seleccionar</a>
                          </td>
                           </tr>
                          ';

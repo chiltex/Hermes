@@ -5,11 +5,7 @@ require_once "../class/Contactos.php";
 require_once "../class/Repuestos.php";
 require_once "../class/Consumibles.php";
 //DOMPDF
-require_once 'dompdf-master/lib/html5lib/Parser.php';
-require_once 'dompdf-master/lib/php-font-lib/src/FontLib/Autoloader.php';
-require_once 'dompdf-master/lib/php-svg-lib/src/autoload.php';
-require_once 'dompdf-master/src/Autoloader.php';
-Dompdf\Autoloader::register();
+
 
 
 
@@ -77,7 +73,8 @@ if ($accion=="modificar") {
 	$recibe=$_POST['recibe'];
 	}else{
 		$recibe=NULL;
-	}	
+	}
+	$bandera=$_POST['bandera'];	
 
 	$id_repuestos=$_POST['id_repuestos'];
 	$cont_repuestos=count($id_repuestos);
@@ -185,7 +182,6 @@ if ($accion=="modificar") {
 				$a=$a+1;
 		}
 	if ($update==true) {
-		header('Location: ../listas/FichaTecnca.php?success=correcto');
 		$archivo='../firmas/mi_firma_'.$firma_cliente1.'.png';
 		$NueArchivo=$_POST['imagenC'];
 		$datosBase641 = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '',$NueArchivo));
@@ -196,6 +192,12 @@ if ($accion=="modificar") {
 		if (filesize($archivo1)<=1000) {
 			
    			 uploadImgBase64($_POST['imagen2'], 'mi_firma_'.$firma_tecnico1.'.png' );
+		}
+		if($bandera=="usuario"){
+
+		header('Location: ../listas/FichaTecnca_u.php?success=correcto&contador='.$bandera.'&latitud='.$latitud.'');
+		}elseif($bandera=="admin"){
+		header('Location: ../listas/FichaTecnca.php?success=correcto');
 		}
 		# code...
 	}else{
@@ -400,7 +402,11 @@ $lonphp = $_COOKIE["loncookie"];
 			header('Location: ../views/modiTicket.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'&contador='.$cont_repuestos.'');
 		}elseif($bandera=="ticket_u"){
 			header('Location: ../views/modiTicket_u.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'&contador='.$cont_repuestos.'&bandera='.$bandera.'');
-		}else{
+		}elseif($bandera=="usuario"){
+
+		header('Location: ../listas/FichaTecnca_u.php?success=correcto&contador='.$bandera.'&latitud='.$latitud.'');
+		}
+		else{
 
 		header('Location: ../listas/FichaTecnca.php?success=correcto&contador='.$bandera.'&latitud='.$latitud.'');
 		}
@@ -494,7 +500,12 @@ elseif ($accion=="guardarC")
 	if ($save==true) {
 			if ($bandera=="ticket") {
 			header('Location: ../views/saveFT_T.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'');
-			}else{
+			}
+			elseif($bandera=="usuario"){
+			header('Location: ../views/saveFT.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie=0000&producto=N/A&id_producto=0&badnera=usuario');
+
+			}
+			else{
 			header('Location: ../views/saveFT.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie=0000&producto=N/A&id_producto=0');
 
 			}

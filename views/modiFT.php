@@ -81,7 +81,7 @@ session_start();
                   <a data-toggle="tooltip" data-placement="top" title="Lock">
                     <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                   </a>
-                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="../controller/LoginControlador.php?accion=logout">
                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                   </a>
                 </div>
@@ -112,7 +112,7 @@ session_start();
                           </a>
                         </li>
                         <li><a href="javascript:;">Help</a></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                        <li><a data-toggle="tooltip" data-placement="top" title="Logout" href="../controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
                     </li>
     
@@ -560,6 +560,25 @@ session_start();
                                     </div>
                                     
                                         <div class="form-group">
+                                        <div class="alert alert-warning" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">ALERTA:</span>
+              
+                Por favor, verifique los datos antes de guardar la ficha tecnica.
+                </div>
+
+                            <?php 
+                              if (isset($_GET['bandera'])) {
+                            $bandera = $_GET['bandera'];
+
+                                echo' <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>  ';
+                              }else {
+                                $bandera="admin";
+                                
+                                echo' <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>  ';
+                              }
+                             ?>
+                             
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
                               <button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>
                             </div>

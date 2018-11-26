@@ -272,7 +272,7 @@ class FichaTecnica extends Conexion
 
       public function selectALLU($codigo)
     {
-        $query="SELECT * FROM ficha_tecnica WHERE id_usuario='".$codigo."'";
+       $query="SELECT ft.id_ficha_tecnica, p.nombre, c.nombre as client, ft.equipo_queda FROM ficha_tecnica ft INNER JOIN productos p on ft.id_producto=p.id_producto INNER JOIN cliente c ON ft.id_cliente=c.id_cliente  WHERE ft.id_usuario = '".$codigo."'";
         $selectall=$this->db->query($query);
         $ListFichas=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListFichas;

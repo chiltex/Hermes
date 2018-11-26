@@ -213,6 +213,8 @@ public function selectOneDTU($codigo)
              session_start();
                 $_SESSION['logged-in'] = true;
                 $_SESSION['Operador']= $this->correo;
+                
+                $_SESSION['id_usuario']=$key['id_usuario'];
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
                 return 2;
 
@@ -222,6 +224,8 @@ public function selectOneDTU($codigo)
                 $_SESSION['logged-in'] = true;
                 $_SESSION['Usuario']= $this->correo;
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
+                $_SESSION['id_usuario']=$key['id_usuario'];
+
                 return 2;
 
             }
