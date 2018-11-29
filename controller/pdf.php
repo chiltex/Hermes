@@ -125,6 +125,7 @@ ob_start();
 
 
 $dompdf = new DOMPDF();
+$dompdf->set_option('enable_html5_parser', TRUE);
 $dompdf->load_Html(ob_get_clean());
 $dompdf->render();
 
@@ -256,6 +257,7 @@ ob_start();
 
 //$correo = 'jhosuegarciastarkand@gmail.com';
   $dompdf1 = new DOMPDF();
+  $dompdf1->set_option('enable_html5_parser', TRUE);
 $dompdf1->load_Html(ob_get_clean());
 $dompdf1->render();
   $filename1 = 'fichaTecnica_'.$fichat.'.pdf';
