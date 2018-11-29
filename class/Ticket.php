@@ -161,6 +161,13 @@ class Ticket extends Conexion
 		        $ListTickets=$selectall->fetch_all(MYSQLI_ASSOC);
 		        return $ListTickets;
 		    }
+		        public function selectALLU($codigo)
+		    {
+		        $query="SELECT * FROM ticket WHERE id_usuario='".$codigo."'";
+		        $selectall=$this->db->query($query);
+		        $ListTickets=$selectall->fetch_all(MYSQLI_ASSOC);
+		        return $ListTickets;
+		    }
 		     public function selectOne($codigo)
 		    {
 		        $query="SELECT * FROM ticket WHERE id_ticket='".$codigo."'";
