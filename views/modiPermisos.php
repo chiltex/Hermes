@@ -159,7 +159,7 @@ require_once "../class/Permisos.php";
                           }
                           echo'
                           </tr> <tr>
-                          <td>Tickets(Consula y modificar)</td>';
+                          <td>Tickets y Fichas tecnica(Consulta y modificar)</td>';
                           if (isset($row['campo_q'])&& $row['campo_q']!=NULL) {
                              echo '<td><input type="checkbox" name="campo_q" id="campo_q" checked value="../listas/Tickets_u.php?cliente=0&nombre=N/A&codigo_serie=0000&producto=N/A&id_producto=0"></td>
                              ';
