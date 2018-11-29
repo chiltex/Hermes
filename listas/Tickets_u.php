@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$usua= $_SESSION['id_usuario']; 
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -190,7 +191,7 @@ session_start();
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>N°</th>
+                          <th>N° <?php echo $usua ?></th>
                           <th>Tipo</th>
                           <th>Gestion</th>
                           <th>Responsable</th>
@@ -203,7 +204,7 @@ session_start();
                          <?php 
                          require_once "../class/Ticket.php";
                          $misTickets = new Ticket();
-                         $Ticket = $misTickets->selectALL();
+                         $Ticket = $misTickets->selectALLU($usua);
                         
                            # code...
                          
