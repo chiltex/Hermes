@@ -223,8 +223,8 @@ elseif ($accion=="guardar")
 
 	$latphp = $_COOKIE["latcookie"];
 $lonphp = $_COOKIE["loncookie"];
-	$latitud=$latphp;
-	$longitud=$lonphp;
+	$latitud=$_POST['lti'];
+	$longitud=$_POST['lgi'];
 
 	if (isset($_POST['id_contacto'])) {
 		$id_contacto =$_POST['id_contacto'];
@@ -389,8 +389,8 @@ $lonphp = $_COOKIE["loncookie"];
 		}
 	if ($save==true) {
 		
-	unset ($_COOKIE ["latphp"]);
-	unset ($_COOKIE ["lonphp"]);
+	unset ($_COOKIE ["latcookie"]);
+	unset ($_COOKIE ["loncookie"]);
 
     // llamamos a la funcion uploadImgBase64( img_base64, nombre_fina.png) 
     

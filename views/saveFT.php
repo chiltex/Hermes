@@ -60,8 +60,9 @@ var centro = new google.maps.LatLng(latitud,longitud);
 var propiedades = { zoom: 15, center: centro, mapTypeId: google.maps.MapTypeId.ROADMAP }; 
 var map = new google.maps.Map(contenedor, propiedades); 
 var marcador = new google.maps.Marker({ position: centro, map: map, title: "Tu posicion actual" }); 
-document.cookie ='latcookie='+latitud; 
+document.cookie = 'latcookie='+latitud; 
 document.cookie ='loncookie='+longitud;
+
 } 
 function error(errorCode) { 
 if(errorCode.code == 1) 
@@ -428,8 +429,15 @@ software:</textarea>
                                     </div>
                                     <div class="form-group">
                                      
-                                   <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Latitud: <span id="lti"></span></p></label>
-                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name"> <p>Longitud: <span id="lgi"></span></p></label>
+                                   <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Latitud:</p></label>
+                                   <textarea id="lti" name="lti" readonly="">
+                                   </textarea>
+                                  
+                                                                  
+                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name"> <p>Longitud: </p></label>
+                                        <textarea id="lgi" name="lgi" readonly="">
+                                   </textarea>
+                                  
                                        </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
@@ -548,7 +556,7 @@ software:</textarea>
                                   </div>  
       </div>
        <div id="dataModal3" class="modal fade">  
-                                  <div class="modal-dialog">  
+                                  <div class="modal-dialog  modal-lg">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
@@ -729,6 +737,7 @@ ga('send', 'pageview');
 <script>
   $(function () {
     $('#example1').DataTable()
+    $('#example3').DataTable()
     $('#example2').DataTable({
       'paging'      : false,
       'lengthChange': false,

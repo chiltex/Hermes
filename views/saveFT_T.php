@@ -551,7 +551,7 @@ software:</textarea>
       </div>
        <div id="dataModal3" class="modal fade">  
                                   <div class="modal-dialog">  
-                                       <div class="modal-content">  
+                                       <div class="modal-content  modal-lg">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
                                                  <h4 class="modal-title">Productos</h4>  

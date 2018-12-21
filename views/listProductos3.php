@@ -15,7 +15,7 @@
                $bandera=$_POST["bandera"];
                echo '<a href="../listas/Cliente_Producto.php?cliente='.$codigo.'&nombre='.$empresa.'&producto=0" class="btn btn-primary">Nuevo Producto</a>';
  ?>
-<table id="datatable-buttons" class="table table-striped table-bordered">
+<table id="example1" class="table table-striped table-bordered">
          <thead>
                         <tr>
                           <th>Producto</th>
