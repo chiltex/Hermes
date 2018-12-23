@@ -480,6 +480,23 @@ ga('send', 'pageview');
                 });  
            }            
       });
+
+       $(document).on('click', '.send_data', function(){  
+           var employee_id = $(this).attr("id"); 
+           var bandera = $(this).attr("bandera");   
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/sendMailCalidad.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id,bandera:bandera},  
+                     success:function(data){  
+                          $('#employee_forms3').html(data);  
+                          $('#dataModal3').modal('show');  
+                     }  
+                });  
+           }            
+      });
  });  
 
 </script>

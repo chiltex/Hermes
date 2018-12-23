@@ -270,9 +270,10 @@ session_start();
 
                             <h2>Part Failure list</h2>
                                   </label>
-                             <table id="datatable-buttons" class="table table-striped table-bordered" name="example1">
+                             <table id="example2" class="table table-striped table-bordered" name="example1">
                                    <thead>        
                                                     <tr>
+                                                      <th>
                                                     <th>Codigo</th>
                                                 
                                                     <th>Nombre</th> 
@@ -298,7 +299,8 @@ session_start();
                                           
                                             echo '  
                                                     <tr>
-                                                      <td><strong>P</strong>'.$row['id_part_fail'].'</td>
+                                                    <td><strong>P</strong></td>
+                                                      <td>'.$row['id_part_fail'].'</td>
                                                     <td>
                                                     '.$row['nombre'].'
                                                     </td>
@@ -506,6 +508,20 @@ ga('send', 'pageview');
       
     }
       </script>
+
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
 
         
     </body>

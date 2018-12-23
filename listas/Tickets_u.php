@@ -188,7 +188,7 @@ $usua= $_SESSION['id_usuario'];
                     <br>
                   <!--  <a href="../views/saveTicket.php?cliente=0&id_producto=0&codigo_serie=0000&producto=N/A&nombre=N/A" class="btn btn-success">Nuevo Ticket</a>-->
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                    <table id="example2" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>N° <?php echo $usua ?></th>
@@ -352,6 +352,22 @@ ga('send', 'pageview');
        
  });  
 
+</script>
+
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example3').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+      'order'       : [[1, "desc"]]
+    })
+  })
 </script>
     </body>
 </html>

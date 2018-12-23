@@ -516,5 +516,18 @@ elseif ($accion=="guardarC")
 		header('Location: ../listas/FichaTecnca.php?error=incorrecto&producot='.$id_producto.'&cliente='.$id_cliente.'&id_contacto='.$id_contacto.'');
 	}
 }
+elseif ($accion=="modificarFirma") {
+	$firma_cliente =$_POST['firma_cliente'];
+	$firma_tecnico =$_POST['firma_tecnico'];
+	$bandera=$_POST['bandera'];
+
+    uploadImgBase64($_POST['imagenC'], 'mi_firma_'.$firma_cliente.'.png' );
+
+    uploadImgBase64($_POST['imagen2'], 'mi_firma_'.$firma_tecnico.'.png' );
+
+    header('Location: ../listas/FichaTecnca.php?success=correcto');
+
+
+}
 
 ?>

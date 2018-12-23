@@ -203,14 +203,14 @@ $dompdf1->render();
   $filename1 = 'reporteCalidad'.$codigo1.'.pdf';
 
   $pdf =$dompdf1->output();
-  file_put_contents($_SERVER['DOCUMENT_ROOT'].'/Hermes/enviados/'.$filename1, $pdf);
+  file_put_contents($_SERVER['DOCUMENT_ROOT'].'/Hermes/enviados/calidad/'.$filename1, $pdf);
 	//$archivo=$dompdf1->stream($filename1);
 
-	$sending = new Mailer("Ficha Tecnica: ".$fichat."", "Ficha Tecnica:",$filename1, $correo,$jefe,$nombre,$fecha_t);
-    $resultado = $sending->enviarCorreo();
+	$sending = new Mailer("Reporte Calidad: ".$codigo1."", "Reporte Calidad:",$filename1, $correo,$jefe,$nombre,"00/00");
+    $resultado = $sending->enviarCorreoCalidad();
 if ($resultado ==1) {
   if ($bandera=="admin") {
-    header('Location: ../listas/FichaTecnca.php?success=correcto');
+    header('Location: ../listas/lista_Calidad.php?success=correcto');
   }elseif($bandera=="usuario"){
 
     header('Location: ../listas/FichaTecnca_u.php?success=correcto');

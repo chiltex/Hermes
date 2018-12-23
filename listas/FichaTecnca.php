@@ -191,7 +191,7 @@ session_start();
                     <br>
                     <a href="../views/saveFT.php?cliente=0&id_producto=0&codigo_serie=0000&producto=N/A&nombre=N/A" class="btn btn-success">Nueva Ficha Tecnica</a>
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                    <table id="example2" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>N°</th>
@@ -221,6 +221,7 @@ session_start();
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
                                     <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar</a>
+                                    <a href="../views/modiFT_Firma.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar Firma</a>
 
                                     <a href="../controller/pdf.php?id='.$row["id_ficha_tecnica"].'&accion=descargar" target="_blank" class="btn btn-danger">Exportar PDF</a>
                                     <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" bandera="admin" class="btn btn-success send_data"/>
@@ -363,6 +364,22 @@ ga('send', 'pageview');
        
  });  
 
+</script>
+
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example3').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+      'order'       : [[1, "desc"]]
+    })
+  })
 </script>
     </body>
 </html>
