@@ -355,7 +355,8 @@ alert("Ha ocurrido un error")
                                          echo '
                                           <tr>
                                             <td>
-                                            <input type="checkbox" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
+                                            <input type="hidden" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
+                                            '.$a["id_repuesto"].'
                                            </td>
                                            <td>'.$a['nombre'].'</td>
                                            <td>'.$a["codigo_serie"].'</td>
@@ -391,7 +392,8 @@ alert("Ha ocurrido un error")
                                          echo '
                                           <tr>
                                             <td>
-                                            <input type="checkbox" name="id_consumibles[]" value="'.$a["id_consumible"].'" />
+                                            <input type="hidden" name="id_consumibles[]" value="'.$a["id_consumible"].'" />
+                                            '.$a["id_consumible"].'
                                            </td>
                                            <td>'.$a['nombre'].'</td>
                                            <td>'.$a["codigo_serie"].'</td>

@@ -179,9 +179,9 @@ class Repuestos extends Conexion
             return false;
         }   
     }
-         public function selectOneDR($codigo,$repuesto)
+         public function selectOneDR($codigo)
     {
-        $query="SELECT dr.* , r.nombre , r.codigo_serie FROM detalle_repuestos dr INNER JOIN repuestos r on dr.id_repuesto = r.id_repuesto WHERE dr.id_ficha_tecnica='".$codigo."' AND r.id_repuesto='".$repuesto."'";
+        $query="SELECT dr.* , r.nombre , r.codigo_serie FROM detalle_repuestos dr INNER JOIN repuestos r on dr.id_repuesto = r.id_repuesto WHERE dr.id_ficha_tecnica='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListCliente=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCliente;

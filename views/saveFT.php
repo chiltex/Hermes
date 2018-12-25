@@ -330,7 +330,8 @@ alert("Ha ocurrido un error")
                                     </div>
                                        <div class="form-group">
                                       <div class="table-wrapper-scroll-y div1" >
-
+                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Repuestos
+                                        </label><br><br>
                                         <table id="datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
@@ -349,7 +350,7 @@ alert("Ha ocurrido un error")
                                          echo '
                                           <tr>
                                             <td>
-                                            <input type="checkbox" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
+                                            <input type="hidden" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
                                            </td>
                                            <td>'.$a['nombre'].'</td>
                                            <td>'.$a["codigo_serie"].'</td>
@@ -366,6 +367,9 @@ alert("Ha ocurrido un error")
                                            <div class="form-group">
                                       <div class="table-wrapper-scroll-y div1" >
 
+                                              <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Consumibles
+                                        </label>
+                                        <br><br><br>
                                         <table id="datatable-buttons" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
@@ -384,7 +388,8 @@ alert("Ha ocurrido un error")
                                          echo '
                                           <tr>
                                             <td>
-                                            <input type="checkbox" name="id_consumibles[]" value="'.$a["id_consumible"].'" />
+                                            <input type="hidden" name="id_consumibles[]" value="'.$a["id_consumible"].'" />
+                                            '.$a["id_consumible"].'
                                            </td>
                                            <td>'.$a['nombre'].'</td>
                                            <td>'.$a["codigo_serie"].'</td>

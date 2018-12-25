@@ -74,15 +74,16 @@ if ($accion=="modificar") {
 	}else{
 		$recibe=NULL;
 	}
-	$bandera=$_POST['bandera'];	
+	$bandera=$_POST['bandera'];
+	$estado=$_POST['estado'];		
 
 	$id_repuestos=$_POST['id_repuestos'];
-	$cont_repuestos=count($id_repuestos);
 	$cantidades=$_POST['cantidad'];
+	$cont_repuestos=count($cantidades);
 
 	$id_consumibles=$_POST['id_consumibles'];
-	$cont_consumibles=count($id_repuestos);
 	$cantidadesC=$_POST['cantidadC'];
+	$cont_consumibles=count($cantidadesC);
 
 	if (isset($_FILES['foto_uno'])) {
 		$directorio = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica.'_';
@@ -150,7 +151,7 @@ if ($accion=="modificar") {
 	$FichaTecnica->setFalla($falla);
 	$FichaTecnica->setId_tipo_ma($id_tipo_ma);
 	$FichaTecnica->setLinea_produccion($linea_produccion);
-	if ($equipo_queda=="Reparado") {
+	if ($estado=="Finalizado") {
 	$FichaTecnica->setHora_egreso(date("h"));		
 	}else{
 	$Hora_e=NULL;
@@ -160,26 +161,39 @@ if ($accion=="modificar") {
 	$FichaTecnica->setRecibe($recibe);	
 	$FichaTecnica->setFoto_uno($foto_uno);
 	$FichaTecnica->setFoto_dos($foto_dos);
-	$FichaTecnica->setFoto_tres($foto_tres);	
+	$FichaTecnica->setFoto_tres($foto_tres);
+	$FichaTecnica->setEstado($estado);	
 
 	$update=$FichaTecnica->update();
 	$i=0;
 	while ($i<$cont_repuestos) {
+		if ($cantidades[$i]=="") {
+			$i=$i+1;
+		}else
+		{
 				$dr = new Repuestos();
 					$dr->setId_ficha_tecnica($id_ficha_tecnica);
 					$dr->setId_repuesto($id_repuestos[$i]);
 					$dr->setCantidad($cantidades[$i]);
 					$dr->update1();
 				$i=$i+1;
+
 		}
+	}
 		$a=0;
 	while ($a<$cont_consumibles) {
+		if ($cantidadesC[$a]=="") {
+			$a=$a+1;
+		}
+		else{
+
 				$dr = new Consumibles();
 					$dr->setId_ficha_tecnica($id_ficha_tecnica);
 					$dr->setId_consumible($id_consumibles[$a]);
 					$dr->setCantidad($cantidadesC[$a]);
 					$dr->update1();
 				$a=$a+1;
+		}
 		}
 	if ($update==true) {
 		$archivo='../firmas/mi_firma_'.$firma_cliente1.'.png';
@@ -329,12 +343,13 @@ $lonphp = $_COOKIE["loncookie"];
 		$foto_tres =NULL;
 	}
 	$id_repuestos=$_POST['id_repuestos'];
-	$cont_repuestos=count($id_repuestos);
 	$cantidades=$_POST['cantidad'];
+	$cont_repuestos=count($cantidades);
 
 	$id_consumibles=$_POST['id_consumibles'];
-	$cont_consumibles=count($id_repuestos);
-	$cantidadesC=$_POST['cantidadC'];		
+	$cantidadesC=$_POST['cantidadC'];
+	$cont_consumibles=count($cantidadesC);
+
 	$FichaTecnic->setLatitud($latitud);		
 	$FichaTecnic->setLongitud($longitud);
 	$FichaTecnic->setId_contacto($id_contacto);		
@@ -372,20 +387,30 @@ $lonphp = $_COOKIE["loncookie"];
 				$i=$i+1;
 				} while ($i<=$cont_repuestos );*/
 		while ($i<$cont_repuestos) {
+			if ($cantidades[$i]=="") {
+			$i=$i+1;
+			}else{
 				$dr = new Repuestos();
 					$dr->setId_ficha_tecnica($lastFT);
 					$dr->setId_repuesto($id_repuestos[$i]);
 					$dr->setCantidad($cantidades[$i]);
 					$dr->save1();
 				$i=$i+1;
+
+			}
 		}
 		while ($a<$cont_consumibles) {
+			if ($cantidadesC[$a]=="") {
+				$a=$a+1;
+			}else{
 				$dr = new Consumibles();
 					$dr->setId_ficha_tecnica($lastFT);
 					$dr->setId_consumible($id_consumibles[$a]);
 					$dr->setCantidad($cantidadesC[$a]);
 					$dr->save1();
 				$a=$a+1;
+
+			}
 		}
 	if ($save==true) {
 		

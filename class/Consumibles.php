@@ -179,9 +179,9 @@ class Consumibles extends Conexion
             return false;
         }   
     }
-         public function selectOneDR($codigo,$consumible)
+         public function selectOneDR($codigo)
     {
-        $query="SELECT dr.* , r.nombre , r.codigo_serie FROM detalle_consumible dr INNER JOIN consumibles r on dr.id_consumible = r.id_consumible WHERE dr.id_ficha_tecnica='".$codigo."' AND r.id_consumible='".$consumible."'";
+        $query="SELECT dr.* , r.nombre , r.codigo_serie FROM detalle_consumible dr INNER JOIN consumibles r on dr.id_consumible = r.id_consumible WHERE dr.id_ficha_tecnica='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListCliente=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListCliente;

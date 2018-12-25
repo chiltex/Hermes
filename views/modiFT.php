@@ -243,7 +243,7 @@ session_start();
                                      <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Repuestos
                                         </label><br><br>
                                       <div class="table-wrapper-scroll-y div1" >
-                                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                                        <table id="example2" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
                                           <th> </th>
@@ -256,30 +256,14 @@ session_start();
                                          <?php 
                                          require_once "../class/Repuestos.php";
                                          $repuesto = new Repuestos();
-                                         $repuestos = $repuesto->selectALL();
-                                         foreach ((array)$repuestos as $a) {
-
-                                         $de_repuestos = $repuesto->repuestoChecked($id_ficha_tecnica,$a["id_repuesto"]); 
-                                         if ($de_repuestos==1) {
-                                             echo '
-                                          <tr>
-                                            <td>
-                                            <input type="checkbox" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
-                                           </td>
-                                           <td>'.$a['nombre'].'</td>
-                                           <td>'.$a["codigo_serie"].'</td>
-                                           <td> <input type="text" id="cantidad" name="cantidad[]" valueclass="form-control col-xs-3 col-xs-8"></td>
-                                          </tr>
-                                         ';
-                                         }
-                                         elseif ($de_repuestos==2){
-                                         $deta_repuestos = $repuesto->selectOneDR($id_ficha_tecnica,$a["id_repuesto"]);
+                                         
+                                         $deta_repuestos = $repuesto->selectOneDR($id_ficha_tecnica);
                                          foreach ((array)$deta_repuestos as $b) {
                                           echo '
                                           <tr>
                                             
                                             <td>
-                                            <input type="checkbox" name="id_repuestos[]" checked value="'.$b["id_repuesto"].'" />
+                                            <input type="hidden" name="id_repuestos[]" checked value="'.$b["id_repuesto"].'" />
                                            </td>
                                            <td>'.$b['nombre'].'</td>
                                            <td>'.$b["codigo_serie"].'</td>
@@ -289,11 +273,10 @@ session_start();
 
                                          }
 
-                                           
-                                         }
+                                          
                                         
 
-                                       }  ?>
+                                        ?>
                                           </TBODY>
                                         </table>
 
@@ -307,7 +290,7 @@ session_start();
                                      
 
 
-                                        <table id="datatable-buttons2" class="table table-striped table-bordered">
+                                        <table id="example3" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
                                           <th> </th>
@@ -320,30 +303,13 @@ session_start();
                                          <?php 
                                          require_once "../class/Consumibles.php";
                                          $consumible = new Consumibles();
-                                         $consumibles = $consumible->selectALL();
-                                         foreach ((array)$consumibles as $a) {
-
-                                         $de_consumibles = $consumible->consumibleChecked($id_ficha_tecnica,$a["id_consumible"]); 
-                                         if ($de_consumibles==1) {
-                                             echo '
-                                          <tr>
-                                            <td>
-                                            <input type="checkbox" name="id_consumibles[]" value="'.$a["id_consumible"].'" />
-                                           </td>
-                                           <td>'.$a['nombre'].'</td>
-                                           <td>'.$a["codigo_serie"].'</td>
-                                           <td> <input type="text" id="cantidad" name="cantidadC[]" valueclass="form-control col-xs-3 col-xs-8"></td>
-                                          </tr>
-                                         ';
-                                         }
-                                         elseif ($de_consumibles==2){
-                                         $deta_consumibles = $consumible->selectOneDR($id_ficha_tecnica,$a["id_consumible"]);
+                                         $deta_consumibles = $consumible->selectOneDR($id_ficha_tecnica);
                                          foreach ((array)$deta_consumibles as $b) {
                                           echo '
                                           <tr>
                                             
                                             <td>
-                                            <input type="checkbox" name="id_consumibles[]" checked value="'.$b["id_consumible"].'" />
+                                            <input type="hidden" name="id_consumibles[]" checked value="'.$b["id_consumible"].'" />
                                            </td>
                                            <td>'.$b['nombre'].'</td>
                                            <td>'.$b["codigo_serie"].'</td>
@@ -352,12 +318,7 @@ session_start();
                                          ';                                          
 
                                          }
-
-                                           
-                                         }
-                                        
-
-                                       }  ?>
+                                          ?>
                                           </TBODY>
                                         </table>
 
@@ -481,6 +442,32 @@ session_start();
                                                    }
                                                ?>
                                                                                 
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado
+                                          </label>
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                            <select id="equipo_queda" name="equipo_queda" class="form-control ">
+                                            <?php 
+                                              if ($key['estado']=='Iniciado') {
+                                                echo '   
+                                                <option value="Iniciado" checked>Iniciado</option>
+                                               <option value="En Proceso">En proceso</option>
+                                              <option value="Finalizado">Finalizado</option>';
+                                              }elseif ($key['estado']=='En Proceso') {
+                                                echo '   
+                                                <option value="Iniciado">Iniciado</option>
+                                               <option value="En Proceso" checked>En proceso</option>
+                                              <option value="Finalizado">Finalizado</option>';
+                                              }elseif ($key['estado']=='Finalizado') {
+                                                echo '   
+                                                <option value="Iniciado">Iniciado</option>
+                                               <option value="En Proceso">En proceso</option>
+                                              <option value="Finalizado" checked>Finalizado</option>';
+                                              }
+                                             ?>                                 
                                             </select>
                                           </div>
                                         </div>
@@ -825,6 +812,14 @@ ga('send', 'pageview');
   $(function () {
     $('#example1').DataTable()
     $('#example2').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+    $('#example3').DataTable({
       'paging'      : false,
       'lengthChange': false,
       'searching'   : true,
