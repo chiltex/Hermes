@@ -353,55 +353,18 @@ session_start();
                                        </div>
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Agregar mas Fotografias 
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12"> 
                                          <?php 
-                                        if ($key['foto_uno']== "") {
                                        echo '  <input name = "foto_uno" type = "file" /> <br>';
-                                        }else{
-                                              echo '
-                                                  <strong>Ultima Imagen:</strong>
-                                                  <div style="border: 1px solid #CCC;">
-                                                  <center><img src="../fotos/'.$key["foto_uno"].'" width="12.5%" height="12.5%" border="1"></center>
-
-                                                      <input type="hidden" name="foto1" id="foto1" value="'.$key["foto_uno"].'"/>
-                                                   </div>
-                                                   <br>
-                                                 
-                                                  ';
-                                          
-                                        }
-                                        if ($key['foto_dos']== "") {
-                                           echo '  <input name = "foto_dos" type = "file" /> <br>';
-                                        }else{
-                                          echo '
-                                            <strong>Ultima Imagen:</strong>
-                                            <div style="border: 1px solid #CCC;">
-                                            <center><img src="../fotos/'.$key["foto_dos"].'" width="12.5%" height="12.5%" border="1"></center>
-
-                                                <input type="hidden" name="foto2" id="foto2" value="'.$key["foto_dos"].'"/>
-
-                                             </div>
-                                             <br>
-                                            ';
                                         
-                                        }
-                                        if ($key['foto_tres']=="") {
-                                         
-                                          echo '  <input name = "foto_tres" type = "file" /> <br>';
-                                        }else{
-                                           echo '
-                                            <strong>Ultima Imagen:</strong>
-                                            <div style="border: 1px solid #CCC;">
-                                            <center><img src="../fotos/'.$key["foto_tres"].'" width="12.5%" height="12.5%" border="1"></center>
-
-                                                <input type="hidden" name="foto3" id="foto3" value="'.$key["foto_tres"].'"/>
-
-                                             </div>
-                                             <br>
-                                            ';
-                                        }
+                                     
+                                     echo '  <input name = "foto_dos" type = "file" /> <br>';
+                                       
+                                       
+                                     echo '  <input name = "foto_tres" type = "file" /> <br>';
+                                      
                                             
                                         ?>
                                           
