@@ -112,8 +112,22 @@ ob_start();
                            
              </table>
                    </div>
+                   <br>
+                   <br>
+                   <br>
+                   <label> <H1>Fotografias</H1></label>
+                   <ul>
                    ';
 
+                foreach(glob('../fotos/fichaTecnica'.$codigo.'/*') as $image) {
+                echo '
+                 
+                 <li> <img src="'.$image.'" width="50%" height="50%"></li>
+                 <br>
+                ';
+                }
+
+                echo '</ul>';
                     
                 }
 ?>
@@ -233,8 +247,24 @@ ob_start();
                            
              </table>
                    </div>
+                   <br>
+                   <br>
+                   <br>
+                   <label> <H1>Fotografias</H1></label>
+                   <ul>
                    ';
-                   
+
+                foreach(glob('../fotos/fichaTecnica'.$fichat.'/*') as $image) {
+                echo '
+                 
+                 <li> <img src="'.$image.'" width="50%" height="50%"></li>
+                 <br>
+                ';
+                }
+
+                echo '</ul>';
+                    
+                }
                     
                 }
 ?>
