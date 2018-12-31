@@ -84,12 +84,21 @@ if ($accion=="modificar") {
 	$id_consumibles=$_POST['id_consumibles'];
 	$cantidadesC=$_POST['cantidadC'];
 	$cont_consumibles=count($cantidadesC);
+	
+		
+if (isset($_FILES['foto_uno'])) {
 
-	if (isset($_FILES['foto_uno'])) {
-		 $carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica;
+	$max_ancho = 1280;
+	$max_alto = 900;
+
+	if($_FILES['foto_uno']['type']=='image/png' || $_FILES['foto_uno']['type']=='image/jpeg' || $_FILES['foto_uno']['type']=='image/gif'){
+		$medidasimagen= getimagesize($_FILES['foto_uno']['tmp_name']);
+ 		$carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica;
+		$directorio = $carpeta.'/fichaTecnica'.$id_ficha_tecnica.'_';
+
+		if($medidasimagen[0] < 1280 && $_FILES['foto_uno']['size'] < 100){
 			if (!file_exists($carpeta)) {
 			    mkdir($carpeta, 0777, true);
-			   	$directorio = $carpeta.'/fichaTecnica'.$id_ficha_tecnica.'_';
 				$fichero=$directorio.basename($_FILES['foto_uno']['name']);
 				if (move_uploaded_file($_FILES['foto_uno']['tmp_name'], $fichero)) {
 					$nombre=$_FILES['foto_uno']['name'];
@@ -97,7 +106,6 @@ if ($accion=="modificar") {
 					} 
 			}else{
 
-			   	$directorio = $carpeta.'/fichaTecnica'.$id_ficha_tecnica.'_';
 				$fichero=$directorio.basename($_FILES['foto_uno']['name']);
 				if (move_uploaded_file($_FILES['foto_uno']['tmp_name'], $fichero)) {
 					$nombre=$_FILES['foto_uno']['name'];
@@ -105,80 +113,401 @@ if ($accion=="modificar") {
 					} 
 			}
 	
-
-	}
-	else{
-		if (isset($_POST['foto1'])) {
-			$foto_uno=$_POST['foto1'];
 		}
 		else{
-			$foto_uno =NULL;
 
-		}
-      }
-	if (isset($_FILES['foto_dos'])) {
-					$carpeta =  $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica;
+
+			$nombrearchivo=$_FILES['foto_uno']['name'];
+
+			//Redimensionar
+			$rtOriginal=$_FILES['foto_uno']['tmp_name'];
+
+			if($_FILES['foto_uno']['type']=='image/jpeg'){
+			$original = imagecreatefromjpeg($rtOriginal);
+			}
+			elseif($_FILES['foto_uno']['type']=='image/png'){
+			$original = imagecreatefrompng($rtOriginal);
+			}
+			elseif($_FILES['foto_uno']['type']=='image/gif'){
+			$original = imagecreatefromgif($rtOriginal);
+			}
+
+			list($ancho,$alto)=getimagesize($rtOriginal);
+
+			$x_ratio = $max_ancho / $ancho;
+			$y_ratio = $max_alto / $alto;
+
+
+			if( ($ancho <= $max_ancho) && ($alto <= $max_alto) ){
+			    $ancho_final = $ancho;
+			    $alto_final = $alto;
+			}
+			elseif (($x_ratio * $alto) < $max_alto){
+			    $alto_final = ceil($x_ratio * $alto);
+			    $ancho_final = $max_ancho;
+			}
+			else{
+			    $ancho_final = ceil($y_ratio * $ancho);
+			    $alto_final = $max_alto;
+			}
+
+			$lienzo=imagecreatetruecolor($ancho_final,$alto_final); 
+
+			imagecopyresampled($lienzo,$original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+			 
+			//imagedestroy($original);
+			 
+			$cal=8;
+
+			if($_FILES['foto_uno']['type']=='image/jpeg'){
 			if (!file_exists($carpeta)) {
 			    mkdir($carpeta, 0777, true);
-		$directorio = $carpeta.'/fichaTecnica'.$id_ficha_tecnica.'_';
-		$fichero=$directorio.basename($_FILES['foto_dos']['name']);
-		if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
-			$nombre2=$_FILES['foto_dos']['name'];
+				$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+					imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_uno']['name'];
+					$foto_uno='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					
+			}else{
 
-			$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre2;
+				$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+				imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_uno']['name'];
+					$foto_uno='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					
 			}
+			}
+			elseif($_FILES['foto_uno']['type']=='image/png'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_uno='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_uno='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}
+			}
+			elseif($_FILES['foto_uno']['type']=='image/gif'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_uno='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_uno='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}
+
+			}
+
+
+		}//end else si no es menor a 1kb
+	}
+	else
+	{
+		$mensaje="no soportado";
+	}
+
+		
+	
 }
+	else{
+
+		$foto_uno =NULL;
+	}
+
+if(isset($_FILES['foto_dos'])){
+
+	$max_ancho = 1280;
+	$max_alto = 900;
+
+	if($_FILES['foto_dos']['type']=='image/png' || $_FILES['foto_dos']['type']=='image/jpeg' || $_FILES['foto_dos']['type']=='image/gif'){
+		$medidasimagen= getimagesize($_FILES['foto_dos']['tmp_name']);
+ 		$carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica;
+		$directorio = $carpeta.'/fichaTecnica'.$id_ficha_tecnica.'_';
+
+		if($medidasimagen[0] < 1280 && $_FILES['foto_dos']['size'] < 100){
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+				if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
+					$nombre=$_FILES['foto_dos']['name'];
+					$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					} 
+			}else{
+
+				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+				if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
+					$nombre=$_FILES['foto_dos']['name'];
+					$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					} 
+			}
+	
+		}
+		else{
+
+
+			$nombrearchivo=$_FILES['foto_dos']['name'];
+
+			//Redimensionar
+			$rtOriginal=$_FILES['foto_dos']['tmp_name'];
+
+			if($_FILES['foto_dos']['type']=='image/jpeg'){
+			$original = imagecreatefromjpeg($rtOriginal);
+			}
+			elseif($_FILES['foto_dos']['type']=='image/png'){
+			$original = imagecreatefrompng($rtOriginal);
+			}
+			elseif($_FILES['foto_dos']['type']=='image/gif'){
+			$original = imagecreatefromgif($rtOriginal);
+			}
+
+			list($ancho,$alto)=getimagesize($rtOriginal);
+
+			$x_ratio = $max_ancho / $ancho;
+			$y_ratio = $max_alto / $alto;
+
+
+			if( ($ancho <= $max_ancho) && ($alto <= $max_alto)){
+			    $ancho_final = $ancho;
+			    $alto_final = $alto;
+			}
+			elseif (($x_ratio * $alto) < $max_alto){
+			    $alto_final = ceil($x_ratio * $alto);
+			    $ancho_final = $max_ancho;
+			}
 			else{
-
-		$directorio = $carpeta.'/fichaTecnica'.$id_ficha_tecnica.'_';
-		$fichero=$directorio.basename($_FILES['foto_dos']['name']);
-		if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
-			$nombre2=$_FILES['foto_dos']['name'];
-
-			$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre2;
+			    $ancho_final = ceil($y_ratio * $ancho);
+			    $alto_final = $max_alto;
 			}
 
+			$lienzo=imagecreatetruecolor($ancho_final,$alto_final); 
+
+			imagecopyresampled($lienzo,$original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+			 
+			//imagedestroy($original);
+			 
+			$cal=8;
+
+			if($_FILES['foto_dos']['type']=='image/jpeg'){
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+					imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_dos']['name'];
+					$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					
+			}else{
+
+				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+				imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_dos']['name'];
+					$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					
 			}
+			}
+			elseif($_FILES['foto_dos']['type']=='image/png'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_dos']['name'];
+						$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_dos']['name'];
+						$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}
+			}
+			elseif($_FILES['foto_dos']['type']=='image/gif'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_dos']['name'];
+						$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_dos']['name'];
+						$foto_dos='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}
+
+			}
+
+
+		}//end else si no es menor a 1kb
 	}
+	else
+	{
+		$mensaje="no soportado";
+	}
+
+		
+	
+}
 	else{
 
-		if (isset($_POST['foto2'])) {
-			$foto_dos=$_POST['foto2'];
-		}
-		else{
-			$foto_dos =NULL;
-
-		}
+		$foto_dos =NULL;
 	}
-	if (isset($_FILES['foto_tres'])) {
-				$carpeta =$_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica;
-		if (!file_exists($carpeta)) {
-		    mkdir($carpeta, 0777, true);
+if (isset($_FILES['foto_tres'])){
+
+	$max_ancho = 1280;
+	$max_alto = 900;
+
+	if($_FILES['foto_tres']['type']=='image/png' || $_FILES['foto_tres']['type']=='image/jpeg' || $_FILES['foto_tres']['type']=='image/gif'){
+		$medidasimagen= getimagesize($_FILES['foto_tres']['tmp_name']);
+ 		$carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$id_ficha_tecnica;
 		$directorio = $carpeta.'/fichaTecnica'.$id_ficha_tecnica.'_';
-		$fichero=$directorio.basename($_FILES['foto_tres']['name']);
-		if (move_uploaded_file($_FILES['foto_tres']['tmp_name'], $fichero)) {
-			$nombre3=$_FILES['foto_tres']['name'];
-			$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre3;
+
+		if($medidasimagen[0] < 1280 && $_FILES['foto_tres']['size'] < 100){
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+				if (move_uploaded_file($_FILES['foto_uno']['tmp_name'], $fichero)){
+					$nombre=$_FILES['foto_tres']['name'];
+					$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					} 
+			}else{
+
+				$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+				if (move_uploaded_file($_FILES['foto_tres']['tmp_name'], $fichero)){
+					$nombre=$_FILES['foto_tres']['name'];
+					$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					} 
 			}
+	
 		}
 		else{
 
-		$directorio = $carpeta.'/fichaTecnica'.$id_ficha_tecnica.'_';
-		$fichero=$directorio.basename($_FILES['foto_tres']['name']);
-		if (move_uploaded_file($_FILES['foto_tres']['tmp_name'], $fichero)) {
-			$nombre3=$_FILES['foto_tres']['name'];
-			$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre3;
+
+			$nombrearchivo=$_FILES['foto_tres']['name'];
+
+			//Redimensionar
+			$rtOriginal=$_FILES['foto_tres']['tmp_name'];
+
+			if($_FILES['foto_tres']['type']=='image/jpeg'){
+			$original = imagecreatefromjpeg($rtOriginal);
 			}
-		}
-		}
+			elseif($_FILES['foto_tres']['type']=='image/png'){
+			$original = imagecreatefrompng($rtOriginal);
+			}
+			elseif($_FILES['foto_tres']['type']=='image/gif'){
+			$original = imagecreatefromgif($rtOriginal);
+			}
+
+			list($ancho,$alto)=getimagesize($rtOriginal);
+
+			$x_ratio = $max_ancho / $ancho;
+			$y_ratio = $max_alto / $alto;
+
+
+			if( ($ancho <= $max_ancho) && ($alto <= $max_alto)){
+			    $ancho_final = $ancho;
+			    $alto_final = $alto;
+			}
+			elseif (($x_ratio * $alto) < $max_alto){
+			    $alto_final = ceil($x_ratio * $alto);
+			    $ancho_final = $max_ancho;
+			}
+			else{
+			    $ancho_final = ceil($y_ratio * $ancho);
+			    $alto_final = $max_alto;
+			}
+
+			$lienzo=imagecreatetruecolor($ancho_final,$alto_final); 
+
+			imagecopyresampled($lienzo,$original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+			 
+			//imagedestroy($original);
+			 
+			$cal=8;
+
+			if($_FILES['foto_tres']['type']=='image/jpeg'){
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+					imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_tres']['name'];
+					$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					
+			}else{
+
+				$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+				imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_tres']['name'];
+					$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+					
+			}
+			}
+			elseif($_FILES['foto_tres']['type']=='image/png'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_tres']['name'];
+						$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}
+			}
+			elseif($_FILES['foto_uno']['type']=='image/gif'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_tres']['name'];
+						$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_tres']['name'];
+						$foto_tres='fichaTecnica'.$id_ficha_tecnica.'_'.$nombre;
+						
+				}
+
+			}
+
+
+		}//end else si no es menor a 1kb
+	}
+	else
+	{
+		$mensaje="no soportado";
+	}
+
+		
+	
+}
 	else{
-		if (isset($_POST['foto3'])) {
-			$foto_tres=$_POST['foto3'];
-		}
-		else{
-			$foto_tres =NULL;
 
-		}
+		$foto_tres =NULL;
 	}
 
 	$FichaTecnica = new FichaTecnica();		
@@ -347,11 +676,19 @@ $lonphp = $_COOKIE["loncookie"];
 	
 	
 		
-	if (isset($_FILES['foto_uno'])) {
-		 $carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec;
+if (isset($_FILES['foto_uno'])) {
+
+	$max_ancho = 1280;
+	$max_alto = 900;
+
+	if($_FILES['foto_uno']['type']=='image/png' || $_FILES['foto_uno']['type']=='image/jpeg' || $_FILES['foto_uno']['type']=='image/gif'){
+		$medidasimagen= getimagesize($_FILES['foto_uno']['tmp_name']);
+ 		$carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec;
+		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
+
+		if($medidasimagen[0] < 1280 && $_FILES['foto_uno']['size'] < 100){
 			if (!file_exists($carpeta)) {
 			    mkdir($carpeta, 0777, true);
-			   	$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
 				$fichero=$directorio.basename($_FILES['foto_uno']['name']);
 				if (move_uploaded_file($_FILES['foto_uno']['tmp_name'], $fichero)) {
 					$nombre=$_FILES['foto_uno']['name'];
@@ -359,7 +696,6 @@ $lonphp = $_COOKIE["loncookie"];
 					} 
 			}else{
 
-			   	$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
 				$fichero=$directorio.basename($_FILES['foto_uno']['name']);
 				if (move_uploaded_file($_FILES['foto_uno']['tmp_name'], $fichero)) {
 					$nombre=$_FILES['foto_uno']['name'];
@@ -367,61 +703,398 @@ $lonphp = $_COOKIE["loncookie"];
 					} 
 			}
 	
+		}
+		else{
+
+
+			$nombrearchivo=$_FILES['foto_uno']['name'];
+
+			//Redimensionar
+			$rtOriginal=$_FILES['foto_uno']['tmp_name'];
+
+			if($_FILES['foto_uno']['type']=='image/jpeg'){
+			$original = imagecreatefromjpeg($rtOriginal);
+			}
+			elseif($_FILES['foto_uno']['type']=='image/png'){
+			$original = imagecreatefrompng($rtOriginal);
+			}
+			elseif($_FILES['foto_uno']['type']=='image/gif'){
+			$original = imagecreatefromgif($rtOriginal);
+			}
+
+			list($ancho,$alto)=getimagesize($rtOriginal);
+
+			$x_ratio = $max_ancho / $ancho;
+			$y_ratio = $max_alto / $alto;
+
+
+			if( ($ancho <= $max_ancho) && ($alto <= $max_alto) ){
+			    $ancho_final = $ancho;
+			    $alto_final = $alto;
+			}
+			elseif (($x_ratio * $alto) < $max_alto){
+			    $alto_final = ceil($x_ratio * $alto);
+			    $ancho_final = $max_ancho;
+			}
+			else{
+			    $ancho_final = ceil($y_ratio * $ancho);
+			    $alto_final = $max_alto;
+			}
+
+			$lienzo=imagecreatetruecolor($ancho_final,$alto_final); 
+
+			imagecopyresampled($lienzo,$original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+			 
+			//imagedestroy($original);
+			 
+			$cal=8;
+
+			if($_FILES['foto_uno']['type']=='image/jpeg'){
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+					imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_uno']['name'];
+					$foto_uno='fichaTecnica'.$ficTec.'_'.$nombre;
+					
+			}else{
+
+				$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+				imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_uno']['name'];
+					$foto_uno='fichaTecnica'.$ficTec.'_'.$nombre;
+					
+			}
+			}
+			elseif($_FILES['foto_uno']['type']=='image/png'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_uno='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_uno='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}
+			}
+			elseif($_FILES['foto_uno']['type']=='image/gif'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_uno='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_uno='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}
+
+			}
+
+
+		}//end else si no es menor a 1kb
 	}
+	else
+	{
+		$mensaje="no soportado";
+	}
+
+		
+	
+}
 	else{
 
 		$foto_uno =NULL;
 	}
-	if (isset($_FILES['foto_dos'])) {
-					$carpeta =  $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec;
+
+if(isset($_FILES['foto_dos'])){
+
+	$max_ancho = 1280;
+	$max_alto = 900;
+
+	if($_FILES['foto_dos']['type']=='image/png' || $_FILES['foto_dos']['type']=='image/jpeg' || $_FILES['foto_dos']['type']=='image/gif'){
+		$medidasimagen= getimagesize($_FILES['foto_dos']['tmp_name']);
+ 		$carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec;
+		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
+
+		if($medidasimagen[0] < 1280 && $_FILES['foto_dos']['size'] < 100){
 			if (!file_exists($carpeta)) {
 			    mkdir($carpeta, 0777, true);
-		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
-		$fichero=$directorio.basename($_FILES['foto_dos']['name']);
-		if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
-			$nombre2=$_FILES['foto_dos']['name'];
+				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+				if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
+					$nombre=$_FILES['foto_dos']['name'];
+					$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre;
+					} 
+			}else{
 
-			$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre2;
+				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+				if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
+					$nombre=$_FILES['foto_dos']['name'];
+					$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre;
+					} 
 			}
-}
-			else{
-
-		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
-		$fichero=$directorio.basename($_FILES['foto_dos']['name']);
-		if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
-			$nombre2=$_FILES['foto_dos']['name'];
-
-			$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre2;
-			}
-
-			}
-	}
-	else{
-
-		$foto_dos=NULL;
-	}
-	if (isset($_FILES['foto_tres'])) {
-				$carpeta =$_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec;
-		if (!file_exists($carpeta)) {
-		    mkdir($carpeta, 0777, true);
-		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
-		$fichero=$directorio.basename($_FILES['foto_tres']['name']);
-		if (move_uploaded_file($_FILES['foto_tres']['tmp_name'], $fichero)) {
-			$nombre3=$_FILES['foto_tres']['name'];
-			$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre3;
-			}
+	
 		}
 		else{
 
-		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
-		$fichero=$directorio.basename($_FILES['foto_tres']['name']);
-		if (move_uploaded_file($_FILES['foto_tres']['tmp_name'], $fichero)) {
-			$nombre3=$_FILES['foto_tres']['name'];
-			$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre3;
+
+			$nombrearchivo=$_FILES['foto_dos']['name'];
+
+			//Redimensionar
+			$rtOriginal=$_FILES['foto_dos']['tmp_name'];
+
+			if($_FILES['foto_dos']['type']=='image/jpeg'){
+			$original = imagecreatefromjpeg($rtOriginal);
 			}
-		}
-		}
+			elseif($_FILES['foto_dos']['type']=='image/png'){
+			$original = imagecreatefrompng($rtOriginal);
+			}
+			elseif($_FILES['foto_dos']['type']=='image/gif'){
+			$original = imagecreatefromgif($rtOriginal);
+			}
+
+			list($ancho,$alto)=getimagesize($rtOriginal);
+
+			$x_ratio = $max_ancho / $ancho;
+			$y_ratio = $max_alto / $alto;
+
+
+			if( ($ancho <= $max_ancho) && ($alto <= $max_alto)){
+			    $ancho_final = $ancho;
+			    $alto_final = $alto;
+			}
+			elseif (($x_ratio * $alto) < $max_alto){
+			    $alto_final = ceil($x_ratio * $alto);
+			    $ancho_final = $max_ancho;
+			}
+			else{
+			    $ancho_final = ceil($y_ratio * $ancho);
+			    $alto_final = $max_alto;
+			}
+
+			$lienzo=imagecreatetruecolor($ancho_final,$alto_final); 
+
+			imagecopyresampled($lienzo,$original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+			 
+			//imagedestroy($original);
+			 
+			$cal=8;
+
+			if($_FILES['foto_dos']['type']=='image/jpeg'){
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+					imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_dos']['name'];
+					$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre;
+					
+			}else{
+
+				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+				imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_dos']['name'];
+					$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre;
+					
+			}
+			}
+			elseif($_FILES['foto_dos']['type']=='image/png'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_dos']['name'];
+						$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_dos']['name'];
+						$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}
+			}
+			elseif($_FILES['foto_dos']['type']=='image/gif'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_dos']['name'];
+						$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_dos']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_dos']['name'];
+						$foto_dos='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}
+
+			}
+
+
+		}//end else si no es menor a 1kb
+	}
+	else
+	{
+		$mensaje="no soportado";
+	}
+
+		
 	
+}
+	else{
+
+		$foto_dos =NULL;
+	}
+if (isset($_FILES['foto_tres'])){
+
+	$max_ancho = 1280;
+	$max_alto = 900;
+
+	if($_FILES['foto_tres']['type']=='image/png' || $_FILES['foto_tres']['type']=='image/jpeg' || $_FILES['foto_tres']['type']=='image/gif'){
+		$medidasimagen= getimagesize($_FILES['foto_tres']['tmp_name']);
+ 		$carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec;
+		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
+
+		if($medidasimagen[0] < 1280 && $_FILES['foto_tres']['size'] < 100){
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+				if (move_uploaded_file($_FILES['foto_uno']['tmp_name'], $fichero)){
+					$nombre=$_FILES['foto_tres']['name'];
+					$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre;
+					} 
+			}else{
+
+				$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+				if (move_uploaded_file($_FILES['foto_tres']['tmp_name'], $fichero)){
+					$nombre=$_FILES['foto_tres']['name'];
+					$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre;
+					} 
+			}
+	
+		}
+		else{
+
+
+			$nombrearchivo=$_FILES['foto_tres']['name'];
+
+			//Redimensionar
+			$rtOriginal=$_FILES['foto_tres']['tmp_name'];
+
+			if($_FILES['foto_tres']['type']=='image/jpeg'){
+			$original = imagecreatefromjpeg($rtOriginal);
+			}
+			elseif($_FILES['foto_tres']['type']=='image/png'){
+			$original = imagecreatefrompng($rtOriginal);
+			}
+			elseif($_FILES['foto_tres']['type']=='image/gif'){
+			$original = imagecreatefromgif($rtOriginal);
+			}
+
+			list($ancho,$alto)=getimagesize($rtOriginal);
+
+			$x_ratio = $max_ancho / $ancho;
+			$y_ratio = $max_alto / $alto;
+
+
+			if( ($ancho <= $max_ancho) && ($alto <= $max_alto)){
+			    $ancho_final = $ancho;
+			    $alto_final = $alto;
+			}
+			elseif (($x_ratio * $alto) < $max_alto){
+			    $alto_final = ceil($x_ratio * $alto);
+			    $ancho_final = $max_ancho;
+			}
+			else{
+			    $ancho_final = ceil($y_ratio * $ancho);
+			    $alto_final = $max_alto;
+			}
+
+			$lienzo=imagecreatetruecolor($ancho_final,$alto_final); 
+
+			imagecopyresampled($lienzo,$original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+			 
+			//imagedestroy($original);
+			 
+			$cal=8;
+
+			if($_FILES['foto_tres']['type']=='image/jpeg'){
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+					imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_tres']['name'];
+					$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre;
+					
+			}else{
+
+				$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+				imagejpeg($lienzo,$directorio."".$nombrearchivo);
+					$nombre=$_FILES['foto_tres']['name'];
+					$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre;
+					
+			}
+			}
+			elseif($_FILES['foto_tres']['type']=='image/png'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_tres']['name'];
+						$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_uno']['name']);
+					imagepng($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_uno']['name'];
+						$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}
+			}
+			elseif($_FILES['foto_uno']['type']=='image/gif'){
+				if (!file_exists($carpeta)) {
+				    mkdir($carpeta, 0777, true);
+					$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_tres']['name'];
+						$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}else{
+
+					$fichero=$directorio.basename($_FILES['foto_tres']['name']);
+			imagegif($lienzo,$directorio."".$nombrearchivo);
+						$nombre=$_FILES['foto_tres']['name'];
+						$foto_tres='fichaTecnica'.$ficTec.'_'.$nombre;
+						
+				}
+
+			}
+
+
+		}//end else si no es menor a 1kb
+	}
+	else
+	{
+		$mensaje="no soportado";
+	}
+
+		
+	
+}
 	else{
 
 		$foto_tres =NULL;
@@ -625,7 +1298,7 @@ elseif ($accion=="guardarC")
 		header('Location: ../listas/FichaTecnca.php?error=incorrecto&producot='.$id_producto.'&cliente='.$id_cliente.'&id_contacto='.$id_contacto.'');
 	}
 }
-elseif ($accion=="modificarFirma") {
+elseif ($accion=="modificarFirma"){
 	$firma_cliente =$_POST['firma_cliente'];
 	$firma_tecnico =$_POST['firma_tecnico'];
 	$bandera=$_POST['bandera'];
@@ -638,5 +1311,4 @@ elseif ($accion=="modificarFirma") {
 
 
 }
-
 ?>
