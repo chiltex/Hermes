@@ -439,6 +439,9 @@ software:</textarea>
                                       <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
                                         </label>
+                                        
+                                          
+                                          <small><strong>(Por favor, subir imagenes menores a 2 Mb y con dimensiones no superiores a 1280*980)</strong></small>
                                         <div class="col-md-12 col-sm-6 col-xs-12"> 
                                           <input name = "foto_uno" type = "file" /> <br>
                                           <input name = "foto_dos" type = "file" /> <br>

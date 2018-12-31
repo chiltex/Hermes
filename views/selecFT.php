@@ -67,7 +67,7 @@
     <div class="carousel-inner" role="listbox">
       <div class="item active">
         <img src="../fotos/fichaTecnica'.$codigo.'/'.$key["foto_uno"].'" width="30%" height="30%" border="1"> 
-        <div class="carousel-caption">Imagen #1</div>
+        <div class="carousel-caption">Imagen</div>
       </div>
      
       

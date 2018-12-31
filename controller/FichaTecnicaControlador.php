@@ -829,7 +829,7 @@ if(isset($_FILES['foto_dos'])){
 		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
 
 		if($medidasimagen[0] < 1280 && $_FILES['foto_dos']['size'] < 100){
-			if (!file_exists($carpeta)) {
+			if(!file_exists($carpeta)){
 			    mkdir($carpeta, 0777, true);
 				$fichero=$directorio.basename($_FILES['foto_dos']['name']);
 				if (move_uploaded_file($_FILES['foto_dos']['tmp_name'], $fichero)) {
@@ -1196,7 +1196,7 @@ if (isset($_FILES['foto_tres'])){
 		# code...
 	}
 	else{
-		header('Location: ../listas/FichaTecnca.php?error=incorrecto&id_usuario='.$id_usuario.'&id_cliente='.$id_cliente.'&id_contacto='.$id_contacto.'&equipo_queda='.$equipo_queda.'&descripcion='.$firma_tecnico.'&falla='.$firma_cliente.'');
+		header('Location: ../listas/FichaTecnca.php?error=incorrecto&id_usuario='.$foto_uno.'&id_cliente='.$foto_dos.'&id_contacto='.$foto_tres.'&equipo_queda='.$equipo_queda.'&descripcion='.$firma_tecnico.'&falla='.$firma_cliente.'');
 
 	}
 }
