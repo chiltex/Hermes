@@ -13,27 +13,27 @@ require '../vendors/dompdf/dompdf_config.inc.php';
 //if you get errors about missing classes please also add:
 require_once('../vendors/dompdf/include/autoload.inc.php');
 require_once("../vendors/dompdf/dompdf_config.inc.php");
-if ($accion=="descargar") {
+if($accion=="descargar"){
+
   $codigo=$_GET["id"];
 ob_start();
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
   <title>Ficha Tecnica</title>
 </head>
-<body>
+  <body>
+
 
                     <img src="../src/cabecera.png" alt="..." width="100%" height="40%">
                     <br>
-<?php 
-  require_once "../class/FichaTenica.php";
-  require_once "../class/Contactos.php";
-              
-                         $miFichaT = new FichaTecnica();
+    <?php 
+            require_once "../class/FichaTenica.php";
+            require_once "../class/Contactos.php";
+                        $miFichaT = new FichaTecnica();
                          $ft = $miFichaT->selectOne($codigo);
-
-                    foreach ($ft as $key) {
+                    foreach ($ft as $key){
                       if ($key['hora_egreso']==NULL) {
                         $hora_egreso= "00:00:00";
                       }else{
@@ -114,44 +114,35 @@ ob_start();
                    </div>
                    <br>
                    <br>
-                   <br>
-                   <label> <H1>Fotografias</H1></label>
-                   <ul>
-                   ';
+                   <br>  <label> <H1>Fotografias</H1></label>
+                   <ul>';
+
 
                 foreach(glob('../fotos/fichaTecnica'.$codigo.'/*') as $image) {
                 echo '
-                 
-                 <li> <img src="'.$image.'" width="50%" height="50%"></li>
+                   <li> <img src="'.$image.'" width="50%" height="50%"></li>
                  <br>
                 ';
                 }
-
                 echo '</ul>';
+
                     
                 }
-?>
-
-</body>
+      ?>
+  </body>
 </html>
 
 <?php
-
-
 $dompdf = new DOMPDF();
 $dompdf->set_option('enable_html5_parser', TRUE);
 $dompdf->load_Html(ob_get_clean());
 $dompdf->render();
-
 $filename = 'fichaTecnica_'.$codigo.'.pdf';  $pdf =$dompdf->output();
 $dompdf->stream($filename, array('Attachment' => 0));
-}
-
+}//end if descargar
 elseif($accion=="enviar"){
   $fichat=$_POST['id_ft'];
-
-
-ob_start();
+  ob_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -249,26 +240,19 @@ ob_start();
                    </div>
                    <br>
                    <br>
-                   <br>
-                   <label> <H1>Fotografias</H1></label>
-                   <ul>
-                   ';
+                   <br>  <label> <H1>Fotografias</H1></label>
+                   <ul>';
 
-                foreach(glob('../fotos/fichaTecnica'.$fichat.'/*') as $image) {
+
+                foreach(glob('../fotos/fichaTecnica'.$codigo.'/*') as $image) {
                 echo '
-                 
-                 <li> <img src="'.$image.'" width="50%" height="50%"></li>
+                   <li> <img src="'.$image.'" width="50%" height="50%"></li>
                  <br>
                 ';
                 }
-
                 echo '</ul>';
                     
-                }
-                    
-                }
-?>
-
+                } ?>
 </body>
 </html>
 <?php
@@ -298,20 +282,16 @@ $dompdf1->render();
 
 	$sending = new Mailer("Ficha Tecnica: ".$fichat."", "Ficha Tecnica:",$filename1, $correo,$jefe,$nombre,$fecha_t);
     $resultado = $sending->enviarCorreo();
-if ($resultado ==1) {
-  if ($bandera=="admin") {
-    header('Location: ../listas/FichaTecnca.php?success=correcto');
-  }elseif($bandera=="usuario"){
+  if ($resultado ==1) {
+    if ($bandera=="admin") {
+      header('Location: ../listas/FichaTecnca.php?success=correcto');
+    }elseif($bandera=="usuario"){
 
-    header('Location: ../listas/FichaTecnca_u.php?success=correcto');
+      header('Location: ../listas/FichaTecnca_u.php?success=correcto');
 
+    }
+    
   }
-  
-
-}
            
-
 }
-
-
- ?>
+?>
