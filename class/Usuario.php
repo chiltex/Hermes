@@ -238,6 +238,32 @@ public function selectOneDTU($codigo)
         }
 
     }
+    public function updatePass($contra,$nuevacontra,$usuario)
+    {
+        $query="SELECT * FROM usuario WHERE id_usuario='".$usuario."'";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+        foreach ($ListUsuario as $key) {
+            $antigua_guardada=$key['pass'];
+        }
+
+        $antigua_ingresada = hash('sha256', $contra);
+
+        if ($antigua_ingresada==$antigua_guardada) {
+        $password = hash('sha256', $nuevacontra);
+           
+        $query="UPDATE usuario SET pass='".$password."' WHERE id_usuario='".$usuario."'";
+        $update=$this->db->query($query);
+        if ($update==true) {
+            return "Correcto";
+        }else {
+            return "Error";
+        } 
+        }else{
+            return "Incorrecto";
+        }
+
+    }
  	 
 }//end class
 ?>

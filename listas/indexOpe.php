@@ -122,6 +122,11 @@ session_start();
                             <span>Settings</span>
                           </a>
                         </li>
+                         <li>
+                          <a href="../views/modiContra.php">
+                            <span>Cambiar Contraseña</span>
+                          </a>
+                        </li>
                         <li><a href="javascript:;">Help</a></li>
                         <li><a href="../controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>

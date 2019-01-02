@@ -1,9 +1,6 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-?>
 <?php 
 session_start();
+$id_usuario = $_SESSION['id_usuario'];
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,59 +30,6 @@ session_start();
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-    <style type="text/css">
-body{
-  background:#000;
-}
-
-section.awSlider .carousel{
-  display:table;
-  z-index:2;
-  -moz-box-shadow: 0 0 4px #444;
-  -webkit-box-shadow: 0 0 4px #444;
-  box-shadow: 0 0 15px rgba(1,1,1,.5);
-}
-
-section.awSlider{
-  margin:30px auto;
-  padding:30px;
-  position:relative;
-  display:table;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-section.awSlider:hover > img{
-  -ms-transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
-  opacity:1;
-}
-
-section.awSlider img{
-   pointer-events: none;
-}
-
-section.awSlider > img{
-  position:absolute;
-  top:30px;
-  z-index:1;
-  transition:all .3s;
-  filter: blur(1.8vw);
-  -webkit-filter: blur(2vw);
-  -moz-filter: blur(2vw); 
-  -o-filter: blur(2vw); 
-  -ms-filter: blur(2vw);
-  -ms-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-  opacity:.5;
-}
-    </style>
 </head>
 <body class="nav-md">
         <div class="container body">
@@ -93,7 +37,7 @@ section.awSlider > img{
             <div class="col-md-3 left_col">
               <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                  <a href="../indexAdmin.php" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
+                  <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
                 </div>
     
                 <div class="clearfix"></div>
@@ -113,7 +57,7 @@ section.awSlider > img{
                 <br />
     
                 <!-- sidebar menu -->
-                 <?php
+                  <?php
                  require_once "menuAdmin.php";
                   ?>
                 <!-- /sidebar menu -->
@@ -169,7 +113,7 @@ section.awSlider > img{
                       </ul>
                     </li>
     
-                    
+                   
                   </ul>
                 </nav>
               </div>
@@ -180,32 +124,32 @@ section.awSlider > img{
             <div class="right_col" role="main">
               
         
-              
-
-			  
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Pagina de Clientes</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2>Modificar Contraseña</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                           </li>
-                          <li><a href="#">Settings 2</a>
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a href="#">Settings 1</a>
+                              </li>
+                              <li><a href="#">Settings 2</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li><a class="close-link"><i class="fa fa-close"></i></a>
                           </li>
                         </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-           <?php 
+                 <div class="clearfix"></div>
+                      </div>
+                <div class="x_content">
+
+                             <?php 
             if (isset($_GET['success'])) {
                 
                 if ($_GET['success']=='correcto') {
@@ -216,9 +160,10 @@ section.awSlider > img{
               <span class="sr-only">Correcto:</span>
                 Los datos han sido guardados exitosamente.
            
-                    ';
+                   </div> ';
                 }
             }elseif (isset($_GET['error'])) {
+              
                if ($_GET['error']=='incorrecto') {
                     
                     echo '
@@ -226,81 +171,82 @@ section.awSlider > img{
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="sr-only">Incorecto:</span>
               
-                Error al guardar, verifique los datos ingresados.
+                La ultima contraseña digitada no coincide con la registrada.
 
            
-                    ';
+                  </div>  ';
                 }
-            }elseif (isset($_GET['seleccion'])) {
-               if ($_GET['seleccion']=='nuevo') {
+            }elseif (isset($_GET['error'])) {
+               if ($_GET['error']=='error') {
                     
                     echo '
-                 <div class="alert alert-primary" role="alert">
+                 <div class="alert alert-warning" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="sr-only">Atencion:</span>
               
-                Ingrese todos los datos.
+                Verifique los datos ingresados.
             
-                    ';
+                  </div>  ';
                 }
             }
-             ?></div>
-                    <br>
-                    <br>
-                    <a href="../views/saveFT.php?cliente=0&id_producto=0&codigo_serie=0000&producto=N/A&nombre=N/A" class="btn btn-success">Nueva Ficha Tecnica</a>
-                    
-                    <table id="example2" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>N°</th>
-                          <th>Producto</th>
-                          <th>Cliente</th>
-                          <th>Estado</th>
-                          <th>Opciones</th>                            
-                        </tr>
-                      </thead>
-                      <TBODY>
-                         <?php 
-                         require_once "../class/FichaTenica.php";
-                         $misFT = new FichaTecnica();
-                         $fit = $misFT->selectALL();
-                        
-                           # code...
-                         
-                         foreach ((array)$fit as $row) {
-                       
-                           echo '
-                            <tr>
-                           <td>'.$row['id_ficha_tecnica'].'</td>
-                           <td>'.$row['nombre'].'</td>
-                           <td>'.$row['client'].'</td>
-                           <td>'.$row['equipo_queda'].'</td>
-                           <td>
-                          
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
-                                    <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar</a>
-                                    <a href="../views/modiFT_Firma.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar Firma</a>
+             ?>
+                        <br />
+                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/UsuarioControlador.php?accion=contra" method="post">
+                   
+                      <div class="row">
+                      <div class="col-xs-3"></div>
+                          <div class="col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Antigua Contraseña <span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="contra_anti" name="contra_anti"  class="form-control col-md-7 col-xs-12">
+                                    <?php 
+                                    echo '<input type="hidden" id="id_usuario" name="id_usuario" value="'.$id_usuario.'">';
+                                     ?>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nueva Contraseña <span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="password" id="nueva_contra" name="nueva_contra"  class="form-control col-md-7 col-xs-12">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Confirmar Contraseña <span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="password" id="confirmar" name="confirmar"  class="form-control col-md-7 col-xs-12">
+                                    <input type="hidden" id="confirmado" name="confirmado"  class="form-control col-md-7 col-xs-12">
 
-                                    <a href="../controller/pdf.php?id='.$row["id_ficha_tecnica"].'&accion=descargar" target="_blank" class="btn btn-danger">Exportar PDF</a>
-                                    <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" bandera="admin" class="btn btn-success send_data"/>
-                           </td>
-                          </tr>
-                         ';
-                       }
-                     
-                     
-                         ?>
-                      </TBODY>
-                    </table>
+                                  </div>
+                              </div>
+                              <div class="alert alert-warning" role="alert">
+                               <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <center>  <span class="sr-only">Alerta:</span><p id="mensaje">Los campos deben coincidir</p></center>
+                                   </div><div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
+                              <button type="submit" class="btn btn-success">Ingresar</button>
+                            </div>
+                      </div>
+
+                      <div class="col-xs-6 col-sm-6"></div>
+                       </form>
+
+                 </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-			     <div id="dataModal2" class="modal fade">  
+                </div>      <!--end row-->
+
+			  
+            </div>
+            <!--page content -->
+     <div id="dataModal2" class="modal fade">  
                                   <div class="modal-dialog">  
                                        <div class="modal-content">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Detalle Ticket</h4>  
+                                                 <h4 class="modal-title">List Part Fail</h4>  
                                             </div>  
                                             <div class="modal-body" id="employee_forms2">  
                                             </div>  
@@ -309,27 +255,7 @@ section.awSlider > img{
                                             </div>  
                                        </div>  
                                   </div>  
-          </div>
-              
-			  <div id="dataModal3" class="modal fade">  
-                                  <div class="modal-dialog">  
-                                       <div class="modal-content">  
-                                            <div class="modal-header">  
-                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                                 <h4 class="modal-title">Enviar Ficha Tecnica</h4>  
-                                            </div>  
-                                            <div class="modal-body" id="employee_forms3">  
-                                            </div>  
-                                            <div class="modal-footer">  
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                                            </div>  
-                                       </div>  
-                                  </div>  
-                </div>
-			  
-            </div>
-            <!--page content -->
-    
+      </div>
             <!-- footer content -->
             <footer>
               <div class="pull-right">
@@ -380,20 +306,15 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
     
     </script>
-        <script type="text/javascript">
-   $(document).ready(function(){  
-      $('#add').click(function(){  
-           $('#insert').val("Insert");  
-           $('#insert_form')[0].reset();  
-      });  
-    
      
-      $(document).on('click', '.view_data', function(){  
+      
+      <script>
+          $(document).on('click', '.views_data1', function(){  
            var employee_id = $(this).attr("id");  
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selecFT.php",  
+                     url:"../views/listPartFail.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  
@@ -402,42 +323,40 @@ ga('send', 'pageview');
                      }  
                 });  
            }            
-      });
-       $(document).on('click', '.send_data', function(){  
-           var employee_id = $(this).attr("id"); 
-           var bandera = $(this).attr("bandera");   
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/sendMail.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id,bandera:bandera},  
-                     success:function(data){  
-                          $('#employee_forms3').html(data);  
-                          $('#dataModal3').modal('show');  
-                     }  
-                });  
-           }            
-      });
-       
- });  
-
-</script>
+      });  
+      </script>
 
 <script>
   $(function () {
     $('#example1').DataTable()
-    $('#example3').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
-      'lengthChange': true,
+      'lengthChange': false,
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : true,
-      'order'       : [[1, "desc"]]
+      'autoWidth'   : false
     })
-  })
-</script>
+  });
+
+</script> 
+<script >
+ $(document).ready(function () {
+    $("#confirmar").keyup(function () {
+
+        var contra1 = $("#nueva_contra").val();
+
+        var contra2 = $(this).val();
+        if (contra2 == contra1) {
+          $( "#mensaje" ).text( "Los campos coinciden" );
+
+        $("#confirmado").val(contra1);
+        }else{
+           $( "#mensaje" ).text( "Los campos no coinciden" );
+        }
+    });
+});</script>
+
+        
     </body>
 </html>

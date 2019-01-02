@@ -60,5 +60,23 @@ elseif ($accion=="guardar")
 		header('Location: ../listas/Usuarios.php?error=incorrecto&nombre='.$nombre.'&apellido='.$apellido.'&tipousuario='.$id_tipo_usuario.'&contraseña='.$contraseña.'');
 	}
 }
+elseif ($accion=="contra") 
+{	
+	
+	$contra_antigua=$_POST['contra_anti'];
+	$idusuario=$_POST['id_usuario'];
+	$contra_nueva=$_POST['confirmado'];
+	$usuario = new Usuario();
+	$save=$usuario->updatePass($contra_antigua,$contra_nueva,$idusuario);
+	if ($save=="Correcto") {
+		header('Location: ../views/modiContra.php?success=correcto');
+		# code...
+	}
+	elseif($save=="Incorrecto"){
+		header('Location: ../views/modiContra.php?error=incorrecto');
+	}else{
+		header('Location: ../views/modiContra.php?error=error');
+	}
+}
 
 ?>

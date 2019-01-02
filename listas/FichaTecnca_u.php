@@ -107,6 +107,11 @@ $usua= $_SESSION['id_usuario'];
                             <span>Settings</span>
                           </a>
                         </li>
+                         <li>
+                          <a href="../views/modiContra.php">
+                            <span>Cambiar Contraseña</span>
+                          </a>
+                        </li>
                         <li><a href="javascript:;">Help</a></li>
                         <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
