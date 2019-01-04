@@ -383,7 +383,7 @@ session_start();
                                      <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo se entrega<span class="required">*</span>
                                           </label>
-                                          <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
                                             <select id="equipo_queda" name="equipo_queda" class="form-control ">
                                               <?php 
                                                    if ($key['equipo_queda']=="Iniciado") {
@@ -447,6 +447,7 @@ session_start();
                                         
                                     </div>
                                   </div>
+                                  <br><br>
                                 <div class="col-lg-9">
                                   <div class="row">
                                  

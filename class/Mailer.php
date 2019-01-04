@@ -12,6 +12,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 		private $_archivo;
 		private $_usuario;
         private $_jefe;
+        private $_jefe2;
         private $_nombre_usuario;
         private $_fecha;
 
@@ -162,6 +163,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			//$email2 = "saravis.upta@gmail.com";
 			$mail->addAddress($this->_usuario,$this->_nombre_usuario);
 			$mail->addCC($this->_jefe);
+			$mail->addCC($this->_jefe2);
 			        // Add attachments
 			//$mail->addAddress($email1);
 			//$mail->addAddress($this->_correo);
@@ -220,6 +222,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			//$email2 = "saravis.upta@gmail.com";
 			$mail->addAddress($this->_usuario,$this->_nombre_usuario);
 			$mail->addCC($this->_jefe);
+			$mail->addCC($this->_jefe2);
 			        // Add attachments
 			//$mail->addAddress($email1);
 			//$mail->addAddress($this->_correo);

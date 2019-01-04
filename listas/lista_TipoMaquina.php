@@ -290,7 +290,7 @@ session_start();
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_tipo_ma"].'" class="btn btn-info view_data"/>  
                                     <input type="button" name="edit" value="Editar" id="'.$row["id_tipo_ma"].'" class="btn btn-warning edit_data" />
-                                    <a href="../controller/TipoMaquinariaControlador.php?id='.$row["id_tipo_ma"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <a href="../controller/TipoMaquinaControlador.php?id='.$row["id_tipo_ma"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
                           </tr>
                          ';
