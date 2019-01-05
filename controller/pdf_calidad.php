@@ -194,7 +194,6 @@ ob_start();
   $bandera = $_POST['bandera'];
 
   $jefe = $_POST['cc'];
-  $jefe2 = $_POST['cc2'];
 
 //$correo = 'jhosuegarciastarkand@gmail.com';
   $dompdf1 = new DOMPDF();
@@ -207,7 +206,7 @@ $dompdf1->render();
   file_put_contents($_SERVER['DOCUMENT_ROOT'].'/Hermes/enviados/calidad/'.$filename1, $pdf);
 	//$archivo=$dompdf1->stream($filename1);
 
-	$sending = new Mailer("Reporte Calidad: ".$codigo1."", "Reporte Calidad:",$filename1, $correo,$jefe,$jefe2,$nombre,"00/00");
+	$sending = new Mailer("Reporte Calidad: ".$codigo1."", "Reporte Calidad:",$filename1, $correo,$jefe,$nombre,"00/00");
     $resultado = $sending->enviarCorreoCalidad();
 if ($resultado ==1) {
   if ($bandera=="admin") {

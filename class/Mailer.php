@@ -12,11 +12,10 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 		private $_archivo;
 		private $_usuario;
         private $_jefe;
-        private $_jefe2;
         private $_nombre_usuario;
         private $_fecha;
 
-		public function __construct($asunto, $mensaje, $archivo,$usuario,$jefe,$jefe2,$nombre_usuario,$fecha)
+		public function __construct($asunto, $mensaje, $archivo,$usuario,$jefe,$nombre_usuario,$fecha)
 		{
 			$this->_asunto = $asunto;
 			$this->_mensaje = $mensaje;
@@ -25,7 +24,6 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			$this->_jefe = $jefe;
 			$this->_nombre_usuario = $nombre_usuario;
 			$this->_fecha = $fecha;
-			$this->_jefe2 = $jefe2;
 		}
 		
 		//
@@ -164,7 +162,6 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			//$email2 = "saravis.upta@gmail.com";
 			$mail->addAddress($this->_usuario,$this->_nombre_usuario);
 			$mail->addCC($this->_jefe);
-			$mail->addCC($this->_jefe2);
 			        // Add attachments
 			//$mail->addAddress($email1);
 			//$mail->addAddress($this->_correo);
@@ -223,7 +220,6 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			//$email2 = "saravis.upta@gmail.com";
 			$mail->addAddress($this->_usuario,$this->_nombre_usuario);
 			$mail->addCC($this->_jefe);
-			$mail->addCC($this->_jefe2);
 			        // Add attachments
 			//$mail->addAddress($email1);
 			//$mail->addAddress($this->_correo);
