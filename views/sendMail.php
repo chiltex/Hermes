@@ -51,24 +51,14 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Enviar Copia a jefe: <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                       <select  id="id_usuario" onchange="mostrarInfo(this.value)" name="id_usuario" class="form-control ">
-                                 <?php 
-                         require_once "../class/Usuario.php";
-                         $misTU = new Usuario();
-                         $tc = $misTU->selectAllJ();
-                        
-                           # code...
-                         
-                         foreach ((array)$tc as $row) {
-                         echo '
-                          <option value="'.$row["id_usuario"].'">'.$row["nombre"].'</option>
-                         ';
-                       }
-                     
-                     
-                         ?>
-                                  
-                              </select>
+                                 <input type="text" id="cc" name="cc" required="required"  value="serviciotecnico@hermes.com.gt" class="form-control col-md-7 col-xs-12"><br>
+                               </div>
+                              </div> 
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input type="text" id="cc2" name="cc2" required="required"  value="pcumez@hermes.com.gt" class="form-control col-md-7 col-xs-12"><br>
                                </div>
                               </div>
                               <div class="form-group">

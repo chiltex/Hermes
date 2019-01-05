@@ -16,7 +16,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
         private $_nombre_usuario;
         private $_fecha;
 
-		public function __construct($asunto, $mensaje, $archivo,$usuario,$jefe,$nombre_usuario,$fecha)
+		public function __construct($asunto, $mensaje, $archivo,$usuario,$jefe,$jefe2,$nombre_usuario,$fecha)
 		{
 			$this->_asunto = $asunto;
 			$this->_mensaje = $mensaje;
@@ -25,6 +25,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			$this->_jefe = $jefe;
 			$this->_nombre_usuario = $nombre_usuario;
 			$this->_fecha = $fecha;
+			$this->_jefe2 = $jefe2;
 		}
 		
 		//
