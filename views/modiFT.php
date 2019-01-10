@@ -482,8 +482,9 @@ session_start();
                                       <input type='hidden' name='imagenC' id='imagenC' />
 
 
-                                    <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button>
+                                    
                                       </div>
+                                      <div class="control-label col-md-4 col-sm-4 col-xs-12"><button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button></div>
                                     </div> <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma tecnico<span class="required"></span>
                                     </label>
@@ -506,8 +507,9 @@ session_start();
 
                                       <input type='hidden' name='imagen2' id='imagen2' />
 
-                                    <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button>
+                                    
                                    </div>
+                                   <div class="control-label col-md-4 col-sm-4 col-xs-12"><button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button></div>
                                     </div>
                                     
                                         <div class="form-group">

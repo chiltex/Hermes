@@ -332,7 +332,7 @@ alert("Ha ocurrido un error")
                                       <div class="table-wrapper-scroll-y div1" >
                                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Repuestos
                                         </label><br><br>
-                                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                                        <table id="example5" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
                                           <th> </th>
@@ -370,7 +370,7 @@ alert("Ha ocurrido un error")
                                               <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Consumibles
                                         </label>
                                         <br><br><br>
-                                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                                        <table id="example4" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
                                           <th> </th>
@@ -435,13 +435,9 @@ software:</textarea>
                                     <div class="form-group">
                                      
                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Latitud:</p></label>
-                                   <textarea id="lti" name="lti" readonly="">
-                                   </textarea>
-                                  
-                                                                  
-                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name"> <p>Longitud: </p></label>
-                                        <textarea id="lgi" name="lgi" readonly="">
-                                   </textarea>
+                                   <textarea id="lti" name="lti" readonly=""></textarea>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name"> <p>Longitud: </p></label>
+                                        <textarea id="lgi" name="lgi" readonly=""></textarea>
                                   
                                        </div>
                                     <div class="form-group">
@@ -487,27 +483,27 @@ software:</textarea>
                                     </label>
                                     <br> <br> <br>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <canvas id='canvasCliente' width="300" height="100" style='border: 1px solid #CCC;'>
+                                      <canvas id='canvasCliente' width="400" height="200" style='border: 1px solid #CCC;'>
                                               <p>Tu navegador no soporta canvas</p>
                                           </canvas>
 
                                       <input type='hidden' name='imagenC' id='imagenC' />
 
-                                    <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button>
                                    </div>
+                                   <div class="control-label col-md-4 col-sm-4 col-xs-12"> <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button></div>
                                     </div> <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma tecnico<span class="required"></span>
                                     </label>
                                     <br> <br> <br>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <canvas id='canvas2' width="300" height="100" style='border: 1px solid #CCC;'>
+                                      <canvas id='canvas2' width="400" height="200" style='border: 1px solid #CCC;'>
                                               <p>Tu navegador no soporta canvas</p>
                                           </canvas>
 
                                       <input type='hidden' name='imagen2' id='imagen2' />
 
-                                    <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button>
                                    </div>
+                                   <div class="control-label col-md-4 col-sm-4 col-xs-12">  <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button></div>
                                     </div>
                                     <?php 
                                     echo '<input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>';
@@ -751,6 +747,22 @@ ga('send', 'pageview');
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
+      'autoWidth'   : true
+    })
+    $('#example4').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : false,
+      'autoWidth'   : true
+    })
+    $('#example5').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : false,
       'autoWidth'   : true
     })
   })
