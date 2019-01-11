@@ -448,7 +448,10 @@ software:</textarea>
                                         <div class="col-md-12 col-sm-6 col-xs-12"> 
                                           <input name = "foto_uno" type = "file" /> <br>
                                           <input name = "foto_dos" type = "file" /> <br>
-                                          <input name = "foto_tres" type = "file" />
+                                          <input name = "foto_tres" type = "file" /> <br>
+                                          <input name = "foto_cuatro" type = "file" /> <br>
+                                          <input name = "foto_cinco" type = "file" /> <br>
+                                          <input name = "foto_seis" type = "file" />
                                           </div>
                                     </div>
 
