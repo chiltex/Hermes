@@ -248,7 +248,7 @@ class FichaTecnica extends Conexion
                 '".$this->foto_uno."',
                 '".$this->foto_dos."',
                 '".$this->foto_tres."',
-                'NOW()','Iniciado');";
+                'CURDATE()','Iniciado');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;

@@ -604,9 +604,9 @@ if (isset($_SESSION['id_tipo_usuario'])) {
           </div>
             <div class="form-group"> 
             <div class="col-sm-offset-2 col-sm-10">
-              <div class="checkbox">
+             <!-- <div class="checkbox">
               <label class="text-danger"><input type="checkbox" id="eliminar" name="eliminar"> Eliminar Evento</label>
-              </div>
+              </div>-->
             </div>
           </div>
           

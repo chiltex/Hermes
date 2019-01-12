@@ -363,7 +363,10 @@ session_start();
                                      echo '  <input name = "foto_dos" type = "file" /> <br>';
                                        
                                        
-                                     echo '  <input name = "foto_tres" type = "file" /> <br>';
+                                     echo '  <input name = "foto_tres" type = "file" /> <br>
+                                          <input name = "foto_cuatro" type = "file" /> <br>
+                                          <input name = "foto_cinco" type = "file" /> <br>
+                                          <input name = "foto_seis" type = "file" />';
                                       
                                             
                                         ?>
@@ -412,7 +415,7 @@ session_start();
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado
                                           </label>
                                           <div class="col-md-12 col-sm-8 col-xs-12">
-                                            <select id="equipo_queda" name="equipo_queda" class="form-control ">
+                                            <select id="estado" name="estado" class="form-control ">
                                             <?php 
                                               if ($key['estado']=='Iniciado') {
                                                 echo '   

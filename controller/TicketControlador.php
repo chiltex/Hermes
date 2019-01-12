@@ -86,7 +86,8 @@ elseif ($accion=="guardar")
 	$id_contacto =$_POST['id_contacto'];
 	$id_producto =$_POST['id_producto'];	
 	$id_usuario =$_POST['id_usuario'];		
-	$id_gestion =$_POST['id_gestion'];
+	$id_gestion =$_POST['id_gestion'];	
+	$nombre_empresa =$_POST['nombre_empresa'];
 
 	$fecha =$_POST['fecha'];		
 	$id_tipo_gestion =$_POST['id_tipo_gestion'];		
@@ -113,7 +114,7 @@ $tl1=$Ticket->selectLast();
 	if ($save==true) {
 
 	
-	$tittle="Ticket N°: ".$lastT."";
+	$tittle="T: ".$lastT." Visita a:".$nombre_empresa."";
 	$end_n = strtotime('+1 day',strtotime($fecha));
 	$nuevo_end =date('Y-m-j',$end_n);
 	

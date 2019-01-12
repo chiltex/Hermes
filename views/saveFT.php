@@ -440,6 +440,14 @@ software:</textarea>
                                         <textarea id="lgi" name="lgi" readonly=""></textarea>
                                   
                                        </div>
+                                       <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Hora ingreso <?php $hora = new DateTime("now", new DateTimeZone('America/El_Salvador'));
+echo $hora->format('h:i:s A'); ?>
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">  
+                                          <input type="time" class="form-control col-md-7 col-xs-12" id="hora_ingreso" name="hora_ingreso" min="7:00" max="18:00">
+                                          </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
                                         </label><br><br>

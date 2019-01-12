@@ -163,7 +163,8 @@ session_start();
                                          $nombre=$_GET["nombre"]; 
                                          if ($id!="0" && $nombre!="N/A") {
                                              echo '
-                                         <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
+                                         <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>
+                                         <input type="hidden" name="nombre_empresa" id="nombre_empresa" value="'.$nombre.'"/>';
                                            echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-warning view_data4"/>';
                                            # code...
                                          }else{

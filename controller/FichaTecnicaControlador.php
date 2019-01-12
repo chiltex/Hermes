@@ -946,7 +946,8 @@ if (isset($_FILES['foto_seis'])) {
 	$FichaTecnica->setId_tipo_ma($id_tipo_ma);
 	$FichaTecnica->setLinea_produccion($linea_produccion);
 	if ($estado=="Finalizado") {
-	$FichaTecnica->setHora_egreso(date("h"));		
+		$hora = new DateTime("now", new DateTimeZone('America/El_Salvador'));
+	$FichaTecnica->setHora_egreso($hora->format('h:i:s A'));		
 	}else{
 	$Hora_e=NULL;
 	$FichaTecnica->setHora_egreso($Hora_e);
@@ -1952,6 +1953,7 @@ if (isset($_FILES['foto_tres'])){
 	$id_consumibles=$_POST['id_consumibles'];
 	$cantidadesC=$_POST['cantidadC'];
 	$cont_consumibles=count($cantidadesC);
+	$hora_ingreso=$_POST['hora_ingreso'];
 
 	$FichaTecnic->setLatitud($latitud);		
 	$FichaTecnic->setLongitud($longitud);
@@ -1966,7 +1968,7 @@ if (isset($_FILES['foto_tres'])){
 	$FichaTecnic->setFalla($falla);
 	$FichaTecnic->setId_tipo_ma($id_tipo_ma);
 	$FichaTecnic->setLinea_produccion($linea_produccion);
-	$FichaTecnic->setHora_ingreso(date("h"));	
+	$FichaTecnic->setHora_ingreso($hora_ingreso);	
 	$FichaTecnic->setDatos_generales($datos_generales);
 	$FichaTecnic->setRecibe($recibe);	
 	$FichaTecnic->setFoto_uno($foto_uno);
