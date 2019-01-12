@@ -121,6 +121,17 @@ class Ticket extends Conexion
 		            return false;
 		        }  
 		    }
+
+			public function updateFicha()
+		    {
+		        $query="UPDATE ticket SET id_ficha_tecnica='".$this->id_ficha_tecnica."' WHERE id_ticket='".$this->id_ticket."'";
+		        $update=$this->db->query($query);
+		        if ($update==true) {
+		            return true;
+		        }else {
+		            return false;
+		        }  
+		    }
 			 public function save()
 		    {
 		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_tipo_gestion, id_ficha_tecnica,Solucion,urgente)

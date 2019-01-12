@@ -48,7 +48,7 @@
                     <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                   </div>
                   <div class="profile_info">
-                    <span>Welcome,</span><h2><?php echo''.$_SESSION['nombre_usuario']; ?></h2>
+                    <span>Welcome,<!--</span><h2><?php //echo''.$_SESSION['nombre_usuario']; ?>--></h2>
                   </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -91,7 +91,7 @@
                   <ul class="nav navbar-nav navbar-right">
                     <li class="">
                       <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="images/img.jpg" alt="">John Doe<h2><?php echo''.$_SESSION['nombre_usuario']; ?></h2>
+                        <img src="images/img.jpg" alt="">John Doe<h2><!--</span><h2><?php //echo''.$_SESSION['nombre_usuario']; ?>--></h2>
                       </a>
                       <ul class="dropdown-menu dropdown-usermenu pull-right">
                         <li><a href="javascript:;"> Profile</a></li>

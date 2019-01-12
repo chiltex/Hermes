@@ -4,6 +4,7 @@ require_once "../class/Cliente.php";
 require_once "../class/Contactos.php";
 require_once "../class/Repuestos.php";
 require_once "../class/Consumibles.php";
+require_once "../class/Ticket.php";
 //DOMPDF
 
 
@@ -2029,9 +2030,17 @@ if (isset($_FILES['foto_tres'])){
     uploadImgBase64($_POST['imagen2'], 'mi_firma_'.$firma_tecnico.'.png' );
 
 		if ($bandera=="ticket") {
-			header('Location: ../views/modiTicket.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'&contador='.$cont_repuestos.'');
+			$Ticket = new Ticket();
+			$Ticket->setId_ticket($ticket);
+			$Ticket->setId_ficha_tecnica($ficTec);
+			$modiFicha=$Ticket->updateFicha();
+			header('Location: ../listas/Tickets.php?success=correcto');
 		}elseif($bandera=="ticket_u"){
-			header('Location: ../views/modiTicket_u.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&id_ficha_tecnica='.$ficTec.'&id='.$ticket.'&contador='.$cont_repuestos.'&bandera='.$bandera.'');
+			$Ticket = new Ticket();
+			$Ticket->setId_ticket($ticket);
+			$Ticket->setId_ficha_tecnica($ficTec);
+			$modiFicha=$Ticket->updateFicha();
+			header('Location: ../listas/Tickets_u.php?success=correcto');
 		}elseif($bandera=="usuario"){
 
 		header('Location: ../listas/FichaTecnca_u.php?success=correcto&contador='.$bandera.'&latitud='.$latitud.'');
