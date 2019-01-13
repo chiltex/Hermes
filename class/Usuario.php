@@ -194,7 +194,7 @@ public function selectOneDTU($codigo)
     public function login(){
 
         $pass = hash("sha256", $this->contraseña);
-        $query1="SELECT * FROM usuario WHERE correo='".$this->correo."' AND pass='".$pass."'";
+        $query1="SELECT u.*, tu.nombre as tipo FROM usuario u INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario=u.id_tipo_usuario WHERE correo='".$this->correo."' AND pass='".$pass."'";
         $selectall1=$this->db->query($query1);
         $ListUsuario=$selectall1->fetch_all(MYSQLI_ASSOC);
 
@@ -207,6 +207,7 @@ public function selectOneDTU($codigo)
                 $_SESSION['Administrador']= $this->correo;
                 $_SESSION['id_usuario']=$key['id_usuario'];
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
+                $_SESSION['tipo']=$key['tipo'];
                 return 1;
             }
             elseif($key["id_tipo_usuario"]==2){
@@ -216,6 +217,7 @@ public function selectOneDTU($codigo)
                 
                 $_SESSION['id_usuario']=$key['id_usuario'];
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
+                $_SESSION['tipo']=$key['tipo'];
                 return 2;
 
             }
@@ -225,6 +227,7 @@ public function selectOneDTU($codigo)
                 $_SESSION['Usuario']= $this->correo;
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
                 $_SESSION['id_usuario']=$key['id_usuario'];
+                $_SESSION['tipo']=$key['tipo'];
 
                 return 2;
 

@@ -137,16 +137,7 @@ class Events extends Conexion
             return false;
         }  
     }
-     public function updateDate()
-    {
-        $query="UPDATE events SET start='".$this->star."',end='".$this->end."' WHERE id='".$this->id."'";
-        $update=$this->db->query($query);
-        if ($update==true) {
-            return true;
-        }else {
-            return false;
-        }  
-    }
+
      public function selectOperadores($codigo)
     {
         $query="SELECT * FROM usuario WHERE id_tipo_usuario ='".$codigo."'";
@@ -154,6 +145,40 @@ class Events extends Conexion
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuario;
     }
+      public function updateDate1()
+    {
+        $query="UPDATE events SET start='".$this->star."',end='".$this->end."' WHERE id_ticket='".$this->id_ticket."'";
+        $update=$this->db->query($query);
+        if ($update==true) {
+            return true;
+        }else {
+            return false;
+        }  
+    }
+         public function selectLast()
+    {
+        $query="SELECT * FROM events ORDER BY id DESC LIMIT 1";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
+    public function selectHour($codigo)
+    {
+        $query="SELECT TIME(start) as hora FROM events WHERE id_ticket='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
+    public function selectDate($codigo)
+    {
+        $query="SELECT DATE(start) as fecha FROM events WHERE id_ticket='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
+
+
+
 
 }
 ?>

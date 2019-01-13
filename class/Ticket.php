@@ -14,6 +14,7 @@ class Ticket extends Conexion
 		 private $id_ficha_tecnica;
 		 private $solucion;
 		 private $urgente;
+		 private $id_evento;
 
 		  public function __construct()
 			{
@@ -29,7 +30,8 @@ class Ticket extends Conexion
 		        $this->id_tipo_gestion ="";
 		        $this->id_ficha_tecnica ="";
 		        $this->solucion="";  
-		        $this->urgente=""; 
+		        $this->urgente="";  
+		        $this->id_evento=""; 
 		    }
 		public function getId_ticket() {
 		        return $this->id_ticket;
@@ -107,6 +109,13 @@ class Ticket extends Conexion
 		    public function setUrgente($urgente) {
 		        $this->urgente = $urgente;
 		    }
+		    public function getId_evento() {
+		        return $this->id_evento;
+		    }
+
+		    public function setId_evento($id_evento) {
+		        $this->id_evento = $id_evento;
+		    }
 
 		
 		    //----------------funciones------------------------
@@ -125,6 +134,16 @@ class Ticket extends Conexion
 			public function updateFicha()
 		    {
 		        $query="UPDATE ticket SET id_ficha_tecnica='".$this->id_ficha_tecnica."' WHERE id_ticket='".$this->id_ticket."'";
+		        $update=$this->db->query($query);
+		        if ($update==true) {
+		            return true;
+		        }else {
+		            return false;
+		        }  
+		    }
+		    public function updateEventRecord()
+		    {
+		        $query="UPDATE ticket SET id_evento='".$this->id_evento."' WHERE id_ticket='".$this->id_ticket."'";
 		        $update=$this->db->query($query);
 		        if ($update==true) {
 		            return true;

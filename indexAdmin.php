@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "class/Events.php";
  $misEvents = new Events();
  if (isset($_GET['id'])) {
@@ -7,11 +8,18 @@ require_once "class/Events.php";
   $codigo1 = 0;
  }
  
- if ($codigo1==0) {
+ $tipo_n = $_SESSION['tipo'];
+ $identificador = $_SESSION['id_usuario'];
+ if ($tipo_n !="Administrador") {
+  $events = $misEvents->selectALLONE($identificador);  
+ }else{
+  if ($codigo1==0) {
   $events = $misEvents->selectALL();
  }else{
   $events = $misEvents->selectALLONE($codigo1);  
  }
+ }
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +97,7 @@ require_once "class/Events.php";
     
                 <!-- sidebar menu -->
                 <?php
-session_start();
+
 if (isset($_SESSION['id_tipo_usuario'])) {
  $codigo= $_SESSION['id_tipo_usuario']; 
 }else{
@@ -377,7 +385,12 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                 <h1>Agenda</h1>
                 <div class="row">
                 
-
+<?php 
+  if ($tipo_n != "Administrador") {
+   
+  }
+  else{
+ ?>
                 <form name="form1" role="form" action="indexAdmin.php" method="GET">
                   <div class="box-body">
                   <div class="form-group">
@@ -424,7 +437,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                   </div>
                 </form>
                           <div class="col-sm-4">
-                          <?php 
+                          <?php
                   if (isset($_GET['id_tipo_usuario'])) {
                     $id_tu=$_GET['id_tipo_usuario'];
                     echo ' <input type="button" name="view" value="Seleccionar Usuario" id="'.$id_tu.'" class="btn btn-info view_data"/>';
@@ -450,6 +463,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                             echo "<h3>Seleccione un Tecnico.</h3> ";
 
                             }
+                             }
 
                         ?>
                             
@@ -514,8 +528,18 @@ if (isset($_SESSION['id_tipo_usuario'])) {
           </div>
           </div>
           <?php 
+          if ($tipo_n !="Administrador") {
+              $id_tu = $_SESSION['id_tipo_usuario'];
+              $id_usu = $_SESSION['id_usuario'];
+              echo '
+              <input type="hidden" name="id_usuario" value="'.$id_usu.'"class="form-control" id="id_usuario">
+              <input type="hidden" name="tipo_u" value="'.$id_tu.'"class="form-control" id="id_tipou">
+
+              ';
+          }else{
             if ($id_tu==0) {
               echo ' <div class="form-group">
+          }
           <label for="end" class="col-sm-2 control-label">Operador</label>
           <div class="col-sm-10">
              <select  id="id_usuario" name="id_usuario" class="form-control "> ';
@@ -543,6 +567,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
 
 
              }
+           }
              ?>
 
         </div>

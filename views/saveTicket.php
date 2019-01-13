@@ -361,6 +361,14 @@ session_start();
                         </div>
                         </div>
                       </div>
+                       <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Hora Solucion <?php $hora = new DateTime("now", new DateTimeZone('America/El_Salvador'));
+                  echo $hora->format('h:i:s A'); ?>
+                                        </label>
+                                        <div class="col-md-12 col-sm-6 col-xs-12">  
+                                          <input type="time" class="form-control col-md-7 col-xs-12" id="hora_solucion" name="hora_solucion" min="7:00" max="18:00">
+                                          </div>
+                                    </div>
                                  
                                         <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><strong>Urgente</strong><span class="required">*</span>

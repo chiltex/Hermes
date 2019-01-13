@@ -15,7 +15,8 @@ if ($accion=="modificar") {
 		$urgente="No";
 		}
 	$descripcion=$_POST['descripcion'];
-	$estado=$_POST['estado'];	
+	$estado=$_POST['estado'];
+	$fecha =$_POST['fecha'];
 	$id_cliente =$_POST['id_cliente'];	
 	$id_contacto =$_POST['id_contacto'];
 	$id_producto =$_POST['id_producto'];	
@@ -24,6 +25,12 @@ if ($accion=="modificar") {
 	$id_tipo_gestion =$_POST['id_tipo_gestion'];	
 	$id_ficha_tecnica =$_POST['id_ficha_tecnica'];
 	$solucion=$_POST['solucion'];
+	$fecha =$_POST['fecha'];
+	if (isset($_POST['hora_solucion'])) {
+		$hora_solucion =$_POST['hora_solucion'];
+	}else{
+		$hora_solucion ="00:00:00";
+	}
 	$id_ticket =$_POST['id_ticket'];
 	if (isset($_POST['bandera'])) {
 		$bandera = $_POST['bandera'];
@@ -45,6 +52,18 @@ if ($accion=="modificar") {
 	$Ticket->setUrgente($urgente);	
 	$update=$Ticket->update();
 	if ($update==true) {
+			$Events = new Events();
+	if ($hora_solucion=="00:00:00") {
+	$start = $fecha.' 00:00:00';
+	$end= $nuevo_end.' 00:00:00';
+	}else{
+	$start = $fecha.' '.$hora_solucion;
+	$end= $nuevo_end.' 00:00:00';
+	}
+	$Events->setStar($start);	
+	$Events->setEnd($end);	
+	$Events->setId_ticket($id_ticket);
+	$update=$Events->updateDate1();
 		if ($bandera=="ticket_u") {
 			
 		header('Location: ../listas/Tickets_u.php?success=correcto&urgente='.$urgente.'');
@@ -89,7 +108,13 @@ elseif ($accion=="guardar")
 	$id_gestion =$_POST['id_gestion'];	
 	$nombre_empresa =$_POST['nombre_empresa'];
 
-	$fecha =$_POST['fecha'];		
+	$fecha =$_POST['fecha'];
+	if (isset($_POST['hora_solucion'])) {
+		$hora_solucion =$_POST['hora_solucion'];
+	}else{
+		$hora_solucion ="00:00:00";
+	}
+			
 	$id_tipo_gestion =$_POST['id_tipo_gestion'];		
 	$id_ficha_tecnica =NULL;
 	$solucion="Escriba la solucion al problema...";	
@@ -120,9 +145,15 @@ $tl1=$Ticket->selectLast();
 	
 	$color="#FFD700";
 	$Events = new Events();
+	if ($hora_solucion=="00:00:00") {
 	$star = $fecha.' 00:00:00';
 	$end= $nuevo_end.' 00:00:00';
-	$descri ="Solucionar el Ticket N°: ".$lastT. ", con falla: "+$descripcion+".";
+	}else{
+	$star = $fecha.' '.$hora_solucion;
+	$end= $nuevo_end.' 00:00:00';
+	}
+	
+	$descri ="Solucionar el Ticket N°: ".$lastT. ", con falla: ".$descripcion.".";
 	$Events->setTittle($tittle);
 	$Events->setStar($star);	
 	$Events->setEnd($end);	
@@ -131,8 +162,15 @@ $tl1=$Ticket->selectLast();
 	$Events->setId_usuario($id_usuario);
 	$Events->setId_ticket($lastT);
 	$save=$Events->save();
-
-		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.'');
+		$lev1=$Events->selectLast();
+	foreach ($lev1 as $key1) {
+		$id_ev1=$key1['id_ticket'];
+		}
+	$lastE=$id_ev1;
+		$Ticket->setId_evento($lastE);
+		$Ticket->setId_ticket($lastT);
+		$updateEvento=$Ticket->updateEventRecord();
+		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.','.$lastE.'');
 
 		# code...
 	}
