@@ -238,20 +238,7 @@
                                         <div class="">
                                            <?php
                                    
-                                                 if (isset($_GET['id_ficha_tecnica'])) {
-                                                  if (isset($id_ficha_tecnica)) {
-                                                    $id_ficha_tecnica=$_GET['id_ficha_tecnica'];
-                                                  }else
-                                                  {
-                                                    $id_ficha_tecnica=0;
-                                                  }
-                                                  $id_ficha_tecnica=$_GET['id_ficha_tecnica'];
-                                                   echo '
-                                                  <div class="col-xs-8"><h4><strong> '.$id_ficha_tecnica.'</strong></h4></div>
-                                                  <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$id_ficha_tecnica.'"/>
-                                                  <input type="button" name="view" value="Ver Detalle" id="'.$id_ficha_tecnica.'" class="btn btn-info view_data5"/>
-                                                   '; 
-                                              } elseif ($field['id_ficha_tecnica']!=NULL) {
+                                                if ($field['id_ficha_tecnica']!=NULL) {
                                               echo '
                                                   <div class="col-xs-8"><h4><strong> '.$field['id_ficha_tecnica'].'</strong></h4>
                                                   <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$field['id_ficha_tecnica'].'"/>

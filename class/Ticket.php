@@ -318,6 +318,20 @@ class Ticket extends Conexion
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListClientes;
     }
+    public function selectOneDTU($codigo)
+    {
+        $query="SELECT u.*, tu.nombre as tipo FROM usuario u INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario = u.id_tipo_usuario  WHERE u.id_usuario !='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+      return $ListUsuario;
+}	
+ public function selectOneTU($codigo)
+    {
+        $query="SELECT u.*, tu.nombre as tipo FROM usuario u INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario = u.id_tipo_usuario  WHERE u.id_usuario ='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+      return $ListUsuario;
+}
 
 
 
