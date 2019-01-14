@@ -3,7 +3,10 @@ require_once "../class/Ticket.php";
 require_once "../class/Cliente.php";
 require_once "../class/Contactos.php";
 require_once "../class/Events1.php";
+ require_once '../class/Mailer.php';
+require_once "../class/Usuario.php";
 
+require_once "../class/Productos.php";
 $accion=$_GET['accion'];
 
 if ($accion=="modificar") {
@@ -135,7 +138,7 @@ $tl1=$Ticket->selectLast();
 		$id_nt1=$key['id_ticket'];
 		}
 	$lastT=$id_nt1;
-	
+	//-------------------------------------------------------------------------------------//
 	if ($save==true) {
 
 	
@@ -162,15 +165,54 @@ $tl1=$Ticket->selectLast();
 	$Events->setId_usuario($id_usuario);
 	$Events->setId_ticket($lastT);
 	$save=$Events->save();
-		$lev1=$Events->selectLast();
-	foreach ($lev1 as $key1) {
-		$id_ev1=$key1['id_ticket'];
-		}
-	$lastE=$id_ev1;
-		$Ticket->setId_evento($lastE);
-		$Ticket->setId_ticket($lastT);
-		$updateEvento=$Ticket->updateEventRecord();
-		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.','.$lastE.'');
+		 
+		 $contac = new Contactos();
+		 $clien = new Cliente();
+		 $usuar = new Usuario();
+		 $prd = new Productos();
+		 $datosContactos = $contac->selectOne($id_contacto);
+		 $datosClientes = $clien->selectOne($id_cliente);
+		 $datosUsuarios = $usuar->selectOne($id_usuario);
+		 $datosProductos = $prd->selectOne($id_producto);
+		 foreach ($datosContactos as $value) {
+		 	$nombreContacto = $value['nombre'];
+		 	$correoContacto = $value['correo'];
+		 	$movilContacto = $value['movil'];
+		 }
+		 foreach ($datosClientes as $value1) {
+		 	$nombreCliente = $value1['nombre'];
+		 }
+		 foreach ($datosUsuarios as $value2) {
+		 	$nombreUsuario = $value2['nombre'];
+		 	$correoUsuario = $value2['correo'];
+		 }
+		 foreach ($datosProductos as $value3) {
+		 	$nombreProducto = $value3['nombre'];
+		 }
+		 $asunto = "Ticket asignado: ".$lastT."";
+		 $mensaje = "Estimado ".$nombreUsuario.", se le asignado el Ticket con Correlativo: ".$lastT." correspondiente a la empresa: <br>
+				<strong>".$nombreCliente."<strong> <br> con los datos de contacto: <br>
+				<table class='table table-bordered'>
+					<tr>
+						<td>Nombre de contacto: </td><td>".$nombreContacto."</td>
+					</tr>
+					<tr>
+						<td>Correo de contacto: </td><td>".$correoContacto."</td>
+					</tr>
+					<tr>
+						<td>Numero de contacto: </td><td>".$movilContacto."</td>
+					</tr>
+				</table>
+				<br>
+				<p>El equipo: <strong>".$nombreProducto."</strong></p>
+				<p>Presenta la siguiente falla:</p>
+				<p>".$descripcion."</p>
+				<p><strong>Fecha Cita: ".$star.", Hora citada: ".$hora_solucion."</strong></p><br>
+				<p>Cualquier consulta ingrese al sitio o comuniquese con su jefe, Muchas gracias.</p>";
+	$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","",$nombreUsuario,"");
+		$resultado = $sending->enviarCorreoTicket();
+		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.'');
+
 
 		# code...
 	}

@@ -4,11 +4,7 @@
                                   $codigo=$_POST["employee_id"];
 
                                   $bandera=$_POST["bandera"];
-                         $miFichaT = new FichaTecnica();
-                         $ft = $miFichaT->selectOne($codigo);
-                         foreach ($ft as $key ) {
-                              $id_contacto = $key['id_contacto'];
-                         }
+                        
                          require_once "../class/Contactos.php";
 
                                   ?>
