@@ -26,7 +26,7 @@
                             
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <?php 
-                              echo '<input type="text" id="nombre" name="nombre" required="required" readonly="true" value="Servicio Tecnico" class="form-control col-md-7 col-xs-12">
+                              echo '<input type="text" id="nombre" name="nombre" required="required" readonly="true" value="'.$row['nombre'].'" class="form-control col-md-7 col-xs-12">
                               ';
                                ?>
                             </div>
@@ -37,7 +37,9 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <?php 
                               echo '
-                                 <input type="text" id="destino" name="destino" required="required"  value="serviciotecnico@hermes.com.gt" class="form-control col-md-7 col-xs-12">
+                              <input type="text" id="destino" name="destino" required="required"  value="'.$row['correo'].'" class="form-control col-md-7 col-xs-12">
+                                
+                                 <input type="hidden" id="cc2" name="cc2" required="required"  value="serviciotecnico@hermes.com.gt" class="form-control col-md-7 col-xs-12">
                                 <input type="hidden" name="id_ft" id="id_ft" value="'.$codigo.'"/>
                                  <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>    
                               ';
@@ -54,11 +56,28 @@
                               </div> 
                               <div class="form-group">
                                
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Enviar Copia a jefe: <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Enviar Copia a: <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                  <input type="text" id="cc" name="cc" required="required"  value="pcumez@hermes.com.gt" class="form-control col-md-7 col-xs-12"><br>
                                </div>
+                              </div>
+                              <div class="form-group">
+                               
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><span class="required">*</span>
+                                </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input type="text" id="cc1" name="cc1" required="required"  value="infogt@hermes.com.gt" class="form-control col-md-7 col-xs-12"><br>
+                               </div>
+                              </div>
+                              <div class="form-group">
+                               
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Enviar Copia a contacto: <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input type="text" id="cc3" name="cc3" required="required"  value="" class="form-control col-md-7 col-xs-12"><br>
+                               </div>
+                              
                               </div>
                               <div class="form-group">
                               <div id="datos"></div>

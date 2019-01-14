@@ -262,6 +262,14 @@ elseif($accion=="enviar"){
   $bandera = $_POST['bandera'];
 
   $jefe = $_POST['cc']; 
+  $cc1 = $_POST['cc1']; 
+  $cc2 = $_POST['cc2']; 
+  if(isset($_POST['cc3'])){
+   $cc3 = $_POST['cc3'];
+  }else{
+    $cc3 = "N/A";
+  }
+  
 
                          $miFi = new FichaTecnica();
                          $ft1 = $miFi->selectOne($fichat);
@@ -281,7 +289,7 @@ $dompdf1->render();
   file_put_contents($_SERVER['DOCUMENT_ROOT'].'/Hermes/enviados/'.$filename1, $pdf);
 	//$archivo=$dompdf1->stream($filename1);
 
-	$sending = new Mailer("Ficha Tecnica: ".$fichat."", "Ficha Tecnica:",$filename1, $correo,$jefe,$nombre,$fecha_t);
+	$sending = new Mailer("Ficha Tecnica: ".$fichat."", "Ficha Tecnica:",$filename1, $correo,$jefe,$cc1,$cc2,$cc3,$nombre,$fecha_t);
     $resultado = $sending->enviarCorreo();
   if ($resultado ==1) {
     if ($bandera=="admin") {
