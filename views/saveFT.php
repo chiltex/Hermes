@@ -226,7 +226,18 @@ alert("Ha ocurrido un error")
                                          if ($id!="0" && $nombre!="N/A") {
                                              echo '
                                          <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
-                                           echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-warning bandera="'.$bandera.'" view_data4"/>';
+                                          if (is_null($_GET['id_producto'])) {
+                                           $id_producto1 = $_GET['id_producto'];
+                                            $producto1 =$_GET['producto'];
+                                            $codigo_serie1 =$_GET['codigo_serie'];
+                                             echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" id_producto="'.$id_producto1.'" producto="'.$producto1.'" codigo_serie="'.$codigo_serie1.'" class="btn btn-warning view_data4"/>';
+                                          }else{
+                                            $id_producto1 = 0;
+                                            $producto1 ="N/A";
+                                            $codigo_serie1 ="0000";
+                                             echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" id_producto="'.$id_producto1.'" producto="'.$producto1.'" codigo_serie="'.$codigo_serie1.'" class="btn btn-warning view_data4"/>';
+                                          }
+                                          
                                            # code...
                                          }else{
                                            echo '
@@ -445,11 +456,11 @@ software:</textarea>
 echo $hora->format('h:i:s A'); ?>
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">  
-                                          <input type="time" class="form-control col-md-7 col-xs-12" id="hora_ingreso" name="hora_ingreso" min="7:00" max="18:00">
+                                          <input type="time" class="form-control col-md-4 col-xs-12" id="hora_ingreso" name="hora_ingreso" min="7:00" max="18:00">
                                           </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
+                                        <label class="control-label col-md-5 col-sm-4 col-xs-12" for="last-name">Fotografias 
                                         </label><br><br>
                                           <small><strong>(Por favor, subir imagenes menores a 2 Mb y con dimensiones no superiores a 1280*980)</strong></small>
                                           <br>
@@ -486,7 +497,7 @@ echo $hora->format('h:i:s A'); ?>
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Nombre quien Recibe
                                       </label>
                                       <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <input type="text" id="recibe" name="recibe"  class="form-control col-md-7 col-xs-12">
+                                        <input type="text" id="recibe" name="recibe"  class="form-control col-md-5 col-xs-12">
                                       </div>
                                     </div>
                                      <div class="form-group">
@@ -536,7 +547,7 @@ echo $hora->format('h:i:s A'); ?>
                             </div>
                           </div>
                                   </div>
-                                </div>
+                                </div><!--COL LG 9-->
                                       
                                     </div>
                               </div>
@@ -728,7 +739,10 @@ ga('send', 'pageview');
        $(document).on('click', '.view_data4', function(){  
            var employee_id = $(this).attr("id");    
            var employee_name = $(this).attr("nombre");  
-          var bandera = $(this).attr("bandera");  
+          var bandera = $(this).attr("bandera"); 
+          var id_producto = $(this).attr("id_producto"); 
+          var producto = $(this).attr("producto"); 
+          var codigo_serie = $(this).attr("codigo_serie");  
            if(employee_id != '')  
            {  
                 $.ajax({  
@@ -736,7 +750,10 @@ ga('send', 'pageview');
                      method:"POST",  
                      data:{employee_id:employee_id,
                           employee_name:employee_name,
-                          bandera:bandera},  
+                          bandera:bandera,
+                          id_producto:id_producto,
+                          producto:producto,
+                          codigo_serie:codigo_serie},  
                      success:function(data){  
                           $('#employee_forms4').html(data);  
                           $('#dataModal4').modal('show');  

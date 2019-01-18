@@ -90,6 +90,13 @@ ob_start();
                            <td>'.$key["falla"].'</td>
                            </tr>
                            <tr>
+                           <td><strong>Datos generales:</strong> </td>
+                           
+                           </tr>
+                           <tr>
+                           <td>'.$key["datos_generales"].'</td>
+                           </tr>
+                           <tr>
                            <td><strong>Solucion:</strong> </td>
                            
                            </tr>
@@ -117,12 +124,13 @@ ob_start();
                    <br>  <label> <H1>Fotografias</H1></label>
                    <ul>';
 
-
+                  $FOTO = 1;
                 foreach(glob('../fotos/fichaTecnica'.$codigo.'/*') as $image) {
                 echo '
-                   <li> <img src="'.$image.'" width="50%" height="50%"></li>
+                   <li>Imagen '$FOTO' Equipo<br> <img src="'.$image.'" width="50%" height="50%"></li>
                  <br>
                 ';
+                $FOTO = $FOTO + 1;
                 }
                 echo '</ul>';
 
@@ -216,6 +224,13 @@ elseif($accion=="enviar"){
                            <td>'.$key["falla"].'</td>
                            </tr>
                            <tr>
+                           <td><strong>Datos generales:</strong> </td>
+                           
+                           </tr>
+                           <tr>
+                           <td>'.$key["datos_generales"].'</td>
+                           </tr>
+                           <tr>
                            <td><strong>Solucion:</strong> </td>
                            
                            </tr>
@@ -242,13 +257,13 @@ elseif($accion=="enviar"){
                    <br>
                    <br>  <label> <H1>Fotografias</H1></label>
                    <ul>';
-
-
+                 $FOTO = 1;
                 foreach(glob('../fotos/fichaTecnica'.$codigo.'/*') as $image) {
                 echo '
-                   <li> <img src="'.$image.'" width="50%" height="50%"></li>
+                   <li>Imagen '$FOTO' Equipo<br> <img src="'.$image.'" width="50%" height="50%"></li>
                  <br>
                 ';
+                $FOTO = $FOTO + 1;
                 }
                 echo '</ul>';
                     

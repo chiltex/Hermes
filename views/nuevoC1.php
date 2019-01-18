@@ -3,9 +3,24 @@
 $codigo=$_POST["employee_id"];
 $empresa=$_POST["employee_name"];
 $bandera=$_POST["bandera"];
-$producto=$_POST["producto"];
-$codigo_serie=$_POST["codigo_serie"];
-$id_producto=$_POST["id_producto"];
+if (isset($_POST["producto"])) {
+ $producto=$_POST["producto"];
+}else{
+  $producto ="N/A";
+}
+if (isset($_POST['codigo_serie'])) {
+  $codigo_serie=$_POST["codigo_serie"];
+}else{
+  $codigo_serie="0000";
+}
+if (isset($_POST['id_producto'])) {
+  $id_producto=$_POST["id_producto"];
+}else{
+  $id_producto =0;
+}
+
+
+
 
 echo '
 

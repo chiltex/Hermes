@@ -238,17 +238,17 @@
                                         <div class="">
                                            <?php
                                    
-                                                if ($field['id_ficha_tecnica']!=NULL) {
-                                              echo '
-                                                  <div class="col-xs-8"><h4><strong> '.$field['id_ficha_tecnica'].'</strong></h4>
-                                                  <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$field['id_ficha_tecnica'].'"/>
-                                                  <input type="button" name="view" value="Ver Detalle" id="'.$field['id_ficha_tecnica'].'" class="btn btn-info view_data5"/></div>
-                                                   ';
+                                                if ($field['id_ficha_tecnica']==NULL || $field['id_ficha_tecnica']==0) {
+                                             echo '
+                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera='.$bandera.'&falla='.$field['descripcion'].'" class="btn btn-success">Añadir Ficha Tecnica</a>
+                                                  ';
                                               }
                                            else{
                                                   echo '
-                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera='.$bandera.'&falla='.$field['descripcion'].'" class="btn btn-success">Añadir Ficha Tecnica</a>
-                                                  ';
+                                                  <div class="col-xs-8"><h4><strong> '.$field['id_ficha_tecnica'].'</strong></h4>
+                                                  <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$field['id_ficha_tecnica'].'"/>
+                                                  <input type="button" name="view" value="Ver Detalle" id="'.$field['id_ficha_tecnica'].'" class="btn btn-info view_data5"/></div>
+                                                   '; 
 
                                               }
                                              

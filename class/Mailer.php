@@ -169,10 +169,14 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			//$email1 = "codefuentes@outlook.com";
 			//$email2 = "saravis.upta@gmail.com";
 			$mail->addAddress($this->_usuario,$this->_nombre_usuario);
-			$mail->addAddress($this->_cc3);
+			if ($this->_cc3!="N/A") {
+				# code...
+				$mail->addAddress($this->_cc3);
+			}
+			
 			$mail->addCC($this->_jefe);
-			$mail->addCC($this->_cc1);
-			$mail->addCC($this->_cc2);
+			$mail->addAddress($this->_cc1);
+			$mail->addAddress($this->_cc2);
 			        // Add attachments
 			//$mail->addAddress($email1);
 			//$mail->addAddress($this->_correo);

@@ -1807,13 +1807,13 @@ if(isset($_FILES['foto_cinco'])){
 		$foto_cinco =NULL;
 	}
 
-if (isset($_FILES['foto_tres'])){
+if (isset($_FILES['foto_seis'])){
 
 	$max_ancho = 1280;
 	$max_alto = 900;
 
-	if($_FILES['foto_tres']['type']=='image/png' || $_FILES['foto_tres']['type']=='image/jpeg' || $_FILES['foto_tres']['type']=='image/gif'){
-		$medidasimagen= getimagesize($_FILES['foto_tres']['tmp_name']);
+	if($_FILES['foto_seis']['type']=='image/png' || $_FILES['foto_seis']['type']=='image/jpeg' || $_FILES['foto_seis']['type']=='image/gif'){
+		$medidasimagen= getimagesize($_FILES['foto_seis']['tmp_name']);
  		$carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec;
 		$directorio = $carpeta.'/fichaTecnica'.$ficTec.'_';
 

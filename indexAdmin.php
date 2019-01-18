@@ -358,7 +358,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Bienvenido</h2>
+                    <h2>Bienvenido <?php echo $identificador; ?></h2>
 
 
                     
