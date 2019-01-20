@@ -351,6 +351,33 @@ session_start();
                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Latitud: <span id="lti"><?php echo $key['latitud'] ?></span></p></label>
                                  <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name"> <p>Longitud: <span id="lgi"><?php echo $key['longitud'] ?></span></p></label>
                                        </div>
+                                       <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Hora Actual <?php $hora = new DateTime("now", new DateTimeZone('America/El_Salvador'));
+                            echo $hora->format('h:i:s A'); ?>
+                                        </label>
+                                       
+                                    </div>
+                                       <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Hora Ingreso
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">  
+                                           <?php 
+                                                   echo '<input type="time" class="form-control" id="hora_ingreso" name="hora_ingreso" min="7:00" max="18:00" value="'.$key['hora_ingreso'].'" />';
+                                            ?>
+                                          
+                                          </div>
+                                    </div>
+                                       <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Hora Salida
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">  
+                                           <?php 
+                                                   echo '<input type="time" class="form-control" id="hora_salida" name="hora_salida" min="7:00" max="18:00" value="'.$key['hora_egreso'].'" />';
+                                            ?>
+                                          
+                                          </div>
+                                    </div>
+                                    
 
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Agregar mas Fotografias 

@@ -110,7 +110,7 @@ ob_start();
                            </tr>
                            <tr>
                            <td><strong>Recibe:</strong> '.$key["recibe"].' </td>
-                           <td><strong>Tecnico Encargado:</strong> '.$key["usuario"].'</td>
+                           <td><strong>Tecnico Encargado:</strong> '.$key["usuario"].' '.$key['usuario_ape'].'</td>
                            </tr>
                             <tr>
                            <td>Firma Cliente <br><img src="../firmas/mi_firma_'.$key["firma_cliente"].'.png" width="35%" height="35%" border="1"> </td>
@@ -127,7 +127,7 @@ ob_start();
                   $FOTO = 1;
                 foreach(glob('../fotos/fichaTecnica'.$codigo.'/*') as $image) {
                 echo '
-                   <li>Imagen '$FOTO' Equipo<br> <img src="'.$image.'" width="50%" height="50%"></li>
+                   <li>Imagen '.$FOTO.' Equipo<br> <img src="'.$image.'" width="50%" height="50%"></li>
                  <br>
                 ';
                 $FOTO = $FOTO + 1;
@@ -244,7 +244,7 @@ elseif($accion=="enviar"){
                            </tr>
                            <tr>
                            <td><strong>Recibe:</strong> '.$key["recibe"].' </td>
-                           <td><strong>Tecnico Encargado:</strong> '.$key["usuario"].'</td>
+                           <td><strong>Tecnico Encargado:</strong> '.$key["usuario"].' '.$key['usuario_ape'].'</td>
                            </tr>
                             <tr>
                            <td>Firma Cliente <br><img src="../firmas/mi_firma_'.$key["firma_cliente"].'.png" width="35%" height="35%" border="1"> </td>
@@ -260,7 +260,7 @@ elseif($accion=="enviar"){
                  $FOTO = 1;
                 foreach(glob('../fotos/fichaTecnica'.$codigo.'/*') as $image) {
                 echo '
-                   <li>Imagen '$FOTO' Equipo<br> <img src="'.$image.'" width="50%" height="50%"></li>
+                   <li>Imagen '.$FOTO.' Equipo<br> <img src="'.$image.'" width="50%" height="50%"></li>
                  <br>
                 ';
                 $FOTO = $FOTO + 1;

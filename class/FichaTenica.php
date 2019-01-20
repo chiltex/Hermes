@@ -227,7 +227,7 @@ class FichaTecnica extends Conexion
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica,latitud, longitud, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres,fecha_trabajo,estado)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica,latitud, longitud, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,hora_egreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres,fecha_trabajo,estado)
 				values(NULL,
                 '".$this->latitud."',
                 '".$this->longitud."',
@@ -243,6 +243,7 @@ class FichaTecnica extends Conexion
                 '".$this->id_tipo_ma."',
                 '".$this->linea_produccion."',
                 '".$this->hora_ingreso."',
+                '".$this->hora_egreso."',
                 '".$this->datos_generales."',
                 '".$this->recibe."',
                 '".$this->foto_uno."',
@@ -270,7 +271,7 @@ class FichaTecnica extends Conexion
     }
      public function update()
     {
-        $query="UPDATE ficha_tecnica SET equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma."', linea_produccion='".$this->linea_produccion."', hora_egreso='".$this->hora_egreso."', datos_generales='".$this->datos_generales."', recibe='".$this->recibe."', foto_uno='".$this->foto_uno."', foto_dos='".$this->foto_dos."', foto_tres='".$this->foto_tres."', estado='".$this->estado."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
+        $query="UPDATE ficha_tecnica SET equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma."', linea_produccion='".$this->linea_produccion."', hora_egreso='".$this->hora_egreso."', hora_ingreso='".$this->hora_ingreso."', datos_generales='".$this->datos_generales."', recibe='".$this->recibe."', foto_uno='".$this->foto_uno."', foto_dos='".$this->foto_dos."', foto_tres='".$this->foto_tres."', estado='".$this->estado."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;
@@ -288,7 +289,7 @@ class FichaTecnica extends Conexion
     }
      public function selectOne($codigo)
     {
-        $query="SELECT ft.*,ft.id_contacto,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario, tp.nombre as tipo_maqui FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto 
+        $query="SELECT ft.*,ft.id_contacto,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario,u.apellido as usuario_ape, tp.nombre as tipo_maqui FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto 
         INNER JOIN tipo_maquina tp ON ft.id_tipo_ma = tp.id_tipo_ma INNER JOIN productos p ON ft.id_producto = p.id_producto INNER JOIN usuario u ON ft.id_usuario = u.id_usuario WHERE ft.id_ficha_tecnica = '".$codigo."'";
         $selectall=$this->db->query($query);
         $ListFicha=$selectall->fetch_all(MYSQLI_ASSOC);

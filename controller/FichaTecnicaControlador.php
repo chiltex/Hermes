@@ -55,6 +55,9 @@ if ($accion=="modificar") {
 	}
 	$firma_cliente1=$_POST['firma_cliente'];
 	$firma_tecnico1=$_POST['firma_tecnico'];
+	$hora_ingreso=$_POST['hora_ingreso'];
+	$hora_egreso=$_POST['hora_salida'];
+
 	$id_ficha_tecnica=$_POST['id_ficha_tecnica'];
 	$id_tipo_ma=$_POST['id_tipo_ma'];
 		if ($_POST['linea_produccion']) {
@@ -946,13 +949,11 @@ if (isset($_FILES['foto_seis'])) {
 	$FichaTecnica->setFalla($falla);
 	$FichaTecnica->setId_tipo_ma($id_tipo_ma);
 	$FichaTecnica->setLinea_produccion($linea_produccion);
-	if ($estado=="Finalizado") {
-		$hora = new DateTime("now", new DateTimeZone('America/El_Salvador'));
-	$FichaTecnica->setHora_egreso($hora->format('h:i:s A'));		
-	}else{
-	$Hora_e=NULL;
-	$FichaTecnica->setHora_egreso($Hora_e);
-	}
+	
+	$FichaTecnica->setHora_ingreso($hora_ingreso);		
+	
+	$FichaTecnica->setHora_egreso($hora_egreso);
+	
 	$FichaTecnica->setDatos_generales($datos_generales);
 	$FichaTecnica->setRecibe($recibe);	
 	$FichaTecnica->setFoto_uno($foto_uno);
@@ -1955,6 +1956,7 @@ if (isset($_FILES['foto_seis'])){
 	$cantidadesC=$_POST['cantidadC'];
 	$cont_consumibles=count($cantidadesC);
 	$hora_ingreso=$_POST['hora_ingreso'];
+	$hora_egreso=$_POST['hora_salida'];
 
 	$FichaTecnic->setLatitud($latitud);		
 	$FichaTecnic->setLongitud($longitud);
@@ -1969,7 +1971,8 @@ if (isset($_FILES['foto_seis'])){
 	$FichaTecnic->setFalla($falla);
 	$FichaTecnic->setId_tipo_ma($id_tipo_ma);
 	$FichaTecnic->setLinea_produccion($linea_produccion);
-	$FichaTecnic->setHora_ingreso($hora_ingreso);	
+	$FichaTecnic->setHora_ingreso($hora_ingreso);
+	$FichaTecnic->setHora_egreso($hora_egreso);		
 	$FichaTecnic->setDatos_generales($datos_generales);
 	$FichaTecnic->setRecibe($recibe);	
 	$FichaTecnic->setFoto_uno($foto_uno);

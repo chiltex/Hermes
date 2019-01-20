@@ -415,7 +415,14 @@
                                         $bandera=$_POST['bandera'];
                                         echo '<input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>';
                                       }
+
+              $correo_eliminar = $_SESSION['correo'];
+              if ($correo_eliminar == "pcumez@hermes.com.gt" || $correo_eliminar == "serviciotecnico@hermes.com.gt" || $correo_eliminar == "npinto@hermes.com.gt" || $correo_eliminar == "cfuentes@hermes.com.gt"  ) {
+
+                                    
                                        ?>
+
+
                                        <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nfactura">Fecha<span class="required"></span>
                                         </label>
@@ -456,7 +463,12 @@
                                           
                                           </div>
                                     </div>
-                                    
+                                    <?php 
+                                    }
+                                     ?>
+
+
+
                                          <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><strong>Urgente</strong><span class="required">*</span>
                                           </label>

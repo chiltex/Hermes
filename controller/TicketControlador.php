@@ -28,7 +28,13 @@ if ($accion=="modificar") {
 	$id_tipo_gestion =$_POST['id_tipo_gestion'];	
 	$id_ficha_tecnica =$_POST['id_ficha_tecnica'];
 	$solucion=$_POST['solucion'];
+	if (isset($_POST['fecha'])) {
+		
 	$fecha =$_POST['fecha'];
+	}else{
+	$fecha = '00/00/0000';	
+	}
+
 	if (isset($_POST['hora_solucion'])) {
 		$hora_solucion =$_POST['hora_solucion'];
 	}else{
@@ -56,7 +62,9 @@ if ($accion=="modificar") {
 	$update=$Ticket->update();
 	if ($update==true) {
 			$Events = new Events();
-	if ($hora_solucion=="00:00:00") {
+
+	if ($fecha!='00/00/0000') {
+		if ($hora_solucion=="00:00:00") {
 	$start = $fecha.' 00:00:00';
 	$end= $nuevo_end.' 00:00:00';
 	}else{
@@ -67,6 +75,53 @@ if ($accion=="modificar") {
 	$Events->setEnd($end);	
 	$Events->setId_ticket($id_ticket);
 	$update=$Events->updateDate1();
+				 $contac = new Contactos();
+		 $clien = new Cliente();
+		 $usuar = new Usuario();
+		 $prd = new Productos();
+		 $datosContactos = $contac->selectOne($id_contacto);
+		 $datosClientes = $clien->selectOne($id_cliente);
+		 $datosUsuarios = $usuar->selectOne($id_usuario);
+		 $datosProductos = $prd->selectOne($id_producto);
+		 foreach ($datosContactos as $value) {
+		 	$nombreContacto = $value['nombre'];
+		 	$correoContacto = $value['correo'];
+		 	$movilContacto = $value['movil'];
+		 }
+		 foreach ($datosClientes as $value1) {
+		 	$nombreCliente = $value1['nombre'];
+		 }
+		 foreach ($datosUsuarios as $value2) {
+		 	$nombreUsuario = $value2['nombre'];
+		 	$correoUsuario = $value2['correo'];
+		 }
+		 foreach ($datosProductos as $value3) {
+		 	$nombreProducto = $value3['nombre'];
+		 }
+		 $asunto = "Ticket asignado: ".$id_ticket."";
+		 $mensaje = "Estimado ".$nombreUsuario.", se le asignado el Ticket con Correlativo: ".$id_ticket." correspondiente a la empresa: <br>
+				<strong>".$nombreCliente."<strong> <br> con los datos de contacto: <br>
+				<table class='table table-bordered'>
+					<tr>
+						<td>Nombre de contacto: </td><td>".$nombreContacto."</td>
+					</tr>
+					<tr>
+						<td>Correo de contacto: </td><td>".$correoContacto."</td>
+					</tr>
+					<tr>
+						<td>Numero de contacto: </td><td>".$movilContacto."</td>
+					</tr>
+				</table>
+				<br>
+				<p>El equipo: <strong>".$nombreProducto."</strong></p>
+				<p>Presenta la siguiente falla:</p>
+				<p>".$descripcion."</p>
+				<p><strong>Fecha Cita: ".$star.", Hora citada: ".$hora_solucion."</strong></p><br>
+				<p>Cualquier consulta ingrese al sitio o comuniquese con su jefe, Muchas gracias.</p>";
+	$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","","",$nombreUsuario,"");
+		$resultado = $sending->enviarCorreoTicket();
+	} // end if fecha valida
+	
 		if ($bandera=="ticket_u") {
 			
 		header('Location: ../listas/Tickets_u.php?success=correcto&urgente='.$urgente.'');
@@ -111,7 +166,12 @@ elseif ($accion=="guardar")
 	$id_gestion =$_POST['id_gestion'];	
 	$nombre_empresa =$_POST['nombre_empresa'];
 
+	if (isset($_POST['fecha'])) {
+		
 	$fecha =$_POST['fecha'];
+	}else{
+	$fecha = '00/00/0000';	
+	}
 	if (isset($_POST['hora_solucion'])) {
 		$hora_solucion =$_POST['hora_solucion'];
 	}else{
@@ -140,8 +200,7 @@ $tl1=$Ticket->selectLast();
 	$lastT=$id_nt1;
 	//-------------------------------------------------------------------------------------//
 	if ($save==true) {
-
-	
+if ($fecha !='00/00/0000') {
 	$tittle="T: ".$lastT." Visita a:".$nombre_empresa."";
 	$end_n = strtotime('+1 day',strtotime($fecha));
 	$nuevo_end =date('Y-m-j',$end_n);
@@ -211,6 +270,9 @@ $tl1=$Ticket->selectLast();
 				<p>Cualquier consulta ingrese al sitio o comuniquese con su jefe, Muchas gracias.</p>";
 	$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","",$nombreUsuario,"");
 		$resultado = $sending->enviarCorreoTicket();
+}
+	
+	
 		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.'');
 
 

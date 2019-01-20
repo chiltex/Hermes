@@ -208,6 +208,7 @@ public function selectOneDTU($codigo)
                 $_SESSION['id_usuario']=$key['id_usuario'];
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
                 $_SESSION['tipo']=$key['tipo'];
+                $_SESSION['correo']=$key['correo'];
                 return 1;
             }
             elseif($key["id_tipo_usuario"]==2){
@@ -218,6 +219,7 @@ public function selectOneDTU($codigo)
                 $_SESSION['id_usuario']=$key['id_usuario'];
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
                 $_SESSION['tipo']=$key['tipo'];
+                $_SESSION['correo']=$key['correo'];
                 return 2;
 
             }
@@ -228,6 +230,7 @@ public function selectOneDTU($codigo)
                 $_SESSION['id_tipo_usuario']=$key['id_tipo_usuario'];
                 $_SESSION['id_usuario']=$key['id_usuario'];
                 $_SESSION['tipo']=$key['tipo'];
+                $_SESSION['correo']=$key['correo'];
 
                 return 2;
 

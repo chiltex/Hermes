@@ -629,6 +629,16 @@ if (isset($_SESSION['id_tipo_usuario'])) {
           </div>
             <div class="form-group"> 
             <div class="col-sm-offset-2 col-sm-10">
+              <?php 
+              $correo_eliminar = $_SESSION['correo'];
+              if ($correo_eliminar == "pcumez@hermes.com.gt" || $correo_eliminar == "serviciotecnico@hermes.com.gt" || $correo_eliminar == "npinto@hermes.com.gt" || $correo_eliminar == "cfuentes@hermes.com.gt"  ) {
+               echo '
+               <div class="checkbox">
+              <label class="text-danger"><input type="checkbox" id="eliminar" name="eliminar"> Eliminar Evento</label>
+              </div';
+              }
+
+               ?>
              <!-- <div class="checkbox">
               <label class="text-danger"><input type="checkbox" id="eliminar" name="eliminar"> Eliminar Evento</label>
               </div>-->
