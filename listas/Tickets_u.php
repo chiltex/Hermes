@@ -200,6 +200,7 @@ $usua= $_SESSION['id_usuario'];
                           <th>Tipo</th>
                           <th>Gestion</th>
                           <th>Responsable</th>
+                          <th>Asignado por</th>
                           <th>Estado</th>
                           <th>Urgente</th>
                           <th>Opciones</th>                            
@@ -216,6 +217,7 @@ $usua= $_SESSION['id_usuario'];
                          foreach ((array)$Ticket as $row) {
                           $tipo=$misTickets->selectOneTG($row['id_tipo_gestion']);
                           $tecnico=$misTickets->selectOneU($row['id_usuario']);
+                          $jefe=$misTickets->selectOneU($row['id_jefe']);
                          echo '
                           <tr>
                            <td>'.$row['id_ticket'].'</td>';
@@ -223,6 +225,10 @@ $usua= $_SESSION['id_usuario'];
                              echo '<td>'.$rew['nombre'].'</td><td>'.$rew['gestions'].'</td>';
                             }
                             foreach ($tecnico as $field) {
+                               echo '<td>'.$field['nombre'].'</td>';
+                            }
+
+                            foreach ($jefe as $field) {
                                echo '<td>'.$field['nombre'].'</td>';
                             }
                            echo '

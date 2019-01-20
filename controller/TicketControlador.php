@@ -164,6 +164,7 @@ elseif ($accion=="guardar")
 	$id_producto =$_POST['id_producto'];	
 	$id_usuario =$_POST['id_usuario'];		
 	$id_gestion =$_POST['id_gestion'];	
+	$id_jefe =$_POST['id_jefe'];		
 	$nombre_empresa =$_POST['nombre_empresa'];
 
 	if (isset($_POST['fecha'])) {
@@ -192,6 +193,7 @@ elseif ($accion=="guardar")
 	$Ticket->setId_ficha_tecnica($id_ficha_tecnica);
 	$Ticket->setSolucion($solucion);
 	$Ticket->setUrgente($urgente);	
+	$Ticket->setId_jefe($id_jefe);
 	$save=$Ticket->save();
 $tl1=$Ticket->selectLast();
 	foreach ($tl1 as $key) {

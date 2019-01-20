@@ -377,6 +377,8 @@ session_start();
 
                                     <?php 
                                     }
+                                    $jefe = $_SESSION['id_usuario'];
+                                    echo '<input type="hidden" name="id_jefe" id="id_jefe" value="'.$jefe.'"/>';
                                     ?>
                                  
                                         <div class="form-group">

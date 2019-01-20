@@ -15,6 +15,7 @@ class Ticket extends Conexion
 		 private $solucion;
 		 private $urgente;
 		 private $id_evento;
+		 private $id_jefe;
 
 		  public function __construct()
 			{
@@ -32,6 +33,7 @@ class Ticket extends Conexion
 		        $this->solucion="";  
 		        $this->urgente="";  
 		        $this->id_evento=""; 
+		        $this->id_jefe=""; 
 		    }
 		public function getId_ticket() {
 		        return $this->id_ticket;
@@ -116,6 +118,13 @@ class Ticket extends Conexion
 		    public function setId_evento($id_evento) {
 		        $this->id_evento = $id_evento;
 		    }
+		    public function getId_jefe() {
+		        return $this->id_jefe;
+		    }
+
+		    public function setId_jefe($id_jefe) {
+		        $this->id_jefe = $id_jefe;
+		    }
 
 		
 		    //----------------funciones------------------------
@@ -153,7 +162,7 @@ class Ticket extends Conexion
 		    }
 			 public function save()
 		    {
-		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_tipo_gestion, id_ficha_tecnica,Solucion,urgente)
+		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_tipo_gestion, id_ficha_tecnica,Solucion,urgente,id_jefe)
 		    			values(NULL,
 		    			'".$this->descripcion."',
 		    			'".$this->estado."',
@@ -164,7 +173,8 @@ class Ticket extends Conexion
 		    			'".$this->id_tipo_gestion."',
 		    			NULL,
 		    			'".$this->solucion."',
-		    			'".$this->urgente."');";
+		    			'".$this->urgente."',
+		    			'".$this->id_jefe."');";
 		    	$save=$this->db->query($query);
 		    	if ($save==true) {
 		            return true;
