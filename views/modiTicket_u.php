@@ -147,7 +147,6 @@
                         <br />
                         <div class="row">
                           <div class="col-lg-12">
-                            <div class="row">
                               <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/TicketControlador.php?accion=modificar" method="post">
                                 <?php 
                                       if (isset($_GET['bandera'])) {
@@ -159,8 +158,6 @@
                                       else
                                         $bandera =Null;
                                        ?>
-                              <div class="col-lg-6">
-                                <div class="row">
                                 <?php 
                                       require_once "../class/Ticket.php";
                                       require_once "../class/Cliente.php";
@@ -213,13 +210,14 @@
                                                      ?>
                                           </TBODY>
                                         </table>
+                                        <center>
                                         <?php  require_once "../class/Ticket.php";
                                          $cp = new Ticket();
                                          $contacto = $cp->selectPr($field["id_producto"],$field["id_cliente"]);
                                          foreach ((array)$contacto as $v) {
 
                                               echo '
-                                                <div class="col-xs-8"><h6>Producto:<strong> '.$v["nombre"].'</strong>  Codigo serie: <strong> '.$v["codigo_serie"].'</strong></h6></div> 
+                                                <div class="col-xs-8"><h2>Producto:<strong> '.$v["nombre"].'</strong>  Codigo serie: <strong> '.$v["codigo_serie"].'</strong></h2></div> 
                                   <div class="col-sm-12">
                                               <input type="hidden" name="id_producto" id="id_producto" value="'.$v["id_producto"].'"/>
                                                   ';
@@ -229,51 +227,30 @@
                                                 }
 
                                              ?>
+                                           </center>
                                         <div class="form-group">
-                                        <label class="control-label col-sm-3" for="last-name">Ficha Tecnica <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-xs-3 col-xs-6" for="last-name">Ficha Tecnica <span class="required">*</span>
                                         </label>
-                                        <div class="">
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
                                            <?php
-                                   
-                                                 if (isset($_GET['id_ficha_tecnica'])) {
-                                                  if (isset($id_ficha_tecnica)) {
-                                                    $id_ficha_tecnica=$_GET['id_ficha_tecnica'];
-                                                  }else
-                                                  {
-                                                    $id_ficha_tecnica=0;
-                                                  }
-                                                  $id_ficha_tecnica=$_GET['id_ficha_tecnica'];
-                                                   echo '
-                                                  <div class="col-xs-8"><h4><strong> '.$id_ficha_tecnica.'</strong></h4></div>
-                                                  <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$id_ficha_tecnica.'"/>
-                                                  <input type="button" name="view" value="Ver Detalle" id="'.$id_ficha_tecnica.'" class="btn btn-info view_data5"/>
-                                                   '; 
-                                              } elseif ($field['id_ficha_tecnica']!=NULL) {
-                                              echo '
+                                            if ($field['id_ficha_tecnica']==NULL || $field['id_ficha_tecnica']==0) {
+                                                  echo '
+                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera=ticket_u" class="btn btn-success">Añadir Ficha Tecnica</a>
+                                                  ';
+                                              
+                                              }
+                                           else{
+                                            echo '
                                                   <div class="col-xs-8"><h4><strong> '.$field['id_ficha_tecnica'].'</strong></h4>
                                                   <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$field['id_ficha_tecnica'].'"/>
                                                   <input type="button" name="view" value="Ver Detalle" id="'.$field['id_ficha_tecnica'].'" class="btn btn-info view_data5"/></div>
                                                    ';
-                                              }
-                                           else{
-                                                  echo '
-                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera=ticket_u" class="btn btn-success">Añadir Ficha Tecnica</a>
-                                                  ';
 
                                               }
                                              
                                            ?>
                                         </div>
-                                    </div>
-                                           
-                                  </div>
-                              </div>
-                             </div>  
-                             <div class="row"> 
-                              <div class="col-lg-6">
-                                <div class="row">
-                                  <div class="col-lg-9">
-                                    <div class="row">
+                                    </div> 
                                         <div class="form-group">
                                       <label class="control-label col-md-3 col-xs-3 col-xs-6" for="first-name">Gestion<span class="required">*</span>
                                       </label>
@@ -350,10 +327,6 @@
                                            ?>                                  
                                         </div>
                                         </div>
-                                    </div>
-                                  </div>
-                                <div class="col-lg-9">
-                                  <div class="row">
                                  <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado<span class="required">*</span>
                                           </label>
@@ -423,6 +396,8 @@
                                   -->
                                       <?php 
                                                     echo '<input type="hidden" name="id_usuario" id="id_usuario" value="'.$field['id_usuario'].'"/>';
+                                                     $correo_eliminar = $_SESSION['correo'];
+              if ($correo_eliminar == "pcumez@hermes.com.gt" || $correo_eliminar == "serviciotecnico@hermes.com.gt" || $correo_eliminar == "npinto@hermes.com.gt" || $correo_eliminar == "cfuentes@hermes.com.gt"|| $correo_eliminar == "administrador@gmail.com"  ) {
                                        ?>
                                        <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nfactura">Fecha<span class="required"></span>
@@ -464,6 +439,9 @@
                                           
                                           </div>
                                     </div>
+                                    <?php
+                                    }
+                                    ?>
                                          <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><strong>Urgente</strong><span class="required">*</span>
                                           </label>
@@ -487,12 +465,6 @@
                               <button type="submit" class="btn btn-success">Ingresar</button>
                             </div>
                           </div>
-                                  </div>
-                                </div>
-                                      
-                                    </div>
-                              </div>
-                              </div>
                                 <?php 
 
                                  }
@@ -576,7 +548,7 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-     <!-- bootstrap-daterangepicker -->
+       <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
     <!-- bootstrap-datetimepicker -->    
