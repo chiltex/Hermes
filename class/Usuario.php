@@ -270,6 +270,13 @@ public function selectOneDTU($codigo)
         }
 
     }
+        public function selectALLJ1($codigo)
+    {
+        $query="SELECT * FROM usuario WHERE id_tipo_usuario='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListUsuarios=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListUsuarios;
+    }
  	 
 }//end class
 ?>

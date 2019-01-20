@@ -251,26 +251,34 @@
                                            ?>
                                         </div>
                                     </div> 
+                                  
+                                   
                                         <div class="form-group">
                                       <label class="control-label col-md-3 col-xs-3 col-xs-6" for="first-name">Gestion<span class="required">*</span>
                                       </label>
                                       <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                        <select id="id_gestion" name="id_gestion" class="form-control ">  
+                                        <select id="id_gestion" onchange="mostrarInfo1(this.value)" name="id_gestion" class="form-control ">  
                                         <?php
                                          require_once "../class/Ticket.php";
                                              $gestion = new Ticket();
-                                             $ges=$gestion->selectOneG($field["id_gestion"]);
-                                             $gest=$gestion->selectOneDG($field["id_gestion"]);
+                                             $ges=$gestion->selectOneTG($field["id_tipo_gestion"]);
+                                             $gest=$gestion->selectALLG();
                                           foreach ((array)$ges as $raw) {
-                                           echo '
-                                            <option value="'.$raw["id_gestion"].'">'.$raw["nombre"].'</option>
-                                           ';
+                                           $gestion_seleccionada = $raw['id_gestion'];
+                                           $tipogestion = $raw['id_tipo_gestion'];
                                          }
                                           foreach ((array)$gest as $a) {
-                                           echo '
+                                            if ($gestion_seleccionada== $a['id_gestion']) {
+                                             echo '
+                                            <option value="'.$a["id_gestion"].'" selected>'.$a["nombre"].'</option>
+                                           ';
+                                            }else{
+                                              echo '
                                             <option value="'.$a["id_gestion"].'">'.$a["nombre"].'</option>
                                            ';
+                                            }
+                                           
                                          }
                                        
                                        
@@ -279,31 +287,39 @@
                                       </div>
                                     </div>
                                      <div class="form-group">
+                                     <div id="datos1">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-6" for="last-name">Tipo Gestion <span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12" >
 
                                       <select  id="id_tipo_gestion" name="id_tipo_gestion" class="form-control ">
                                          <?php
                                         
                                              $tg = new Ticket();
-                                             $Tgo=$tg->selectOneTG($field["id_tipo_gestion"]);                                             
-                                             $DTgo=$tg->selectOneDTG($field["id_tipo_gestion"]);
+                                             $Tgo=$tg->selectOneTG($tipogestion);                                             
+                                             $DTgo=$tg->selectALLTG($gestion_seleccionada);
                                           foreach ((array)$Tgo as $riw) {
-                                           echo '
-                                            <option value="'.$riw["id_tipo_gestion"].'">'.$riw["nombre"].'</option>
-                                           ';
+                                            $tipogestion_seleccionada = $riw['id_tipo_gestion'];
                                          }
                                            foreach ((array)$DTgo as $b) {
+                                            if ($tipogestion_seleccionada == $b['id_tipo_gestion']) {
+                                              
+                                           echo '
+                                            <option value="'.$b["id_tipo_gestion"].'" selected>'.$b["nombre"].'</option>
+                                           ';
+                                            }else{
+
                                            echo '
                                             <option value="'.$b["id_tipo_gestion"].'">'.$b["nombre"].'</option>
                                            ';
+                                            }
                                          }
                                        
                                        
                                            ?>
                                           
                                       </select>
+                                   </div>
                                    </div>
                                     </div>
                                     <div class="form-group">

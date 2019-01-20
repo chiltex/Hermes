@@ -25,8 +25,13 @@ if ($accion=="modificar") {
 	$id_producto =$_POST['id_producto'];	
 	$id_usuario =$_POST['id_usuario'];		
 	$id_gestion =$_POST['id_gestion'];	
-	$id_tipo_gestion =$_POST['id_tipo_gestion'];	
-	$id_ficha_tecnica =$_POST['id_ficha_tecnica'];
+	$id_tipo_gestion =$_POST['id_tipo_gestion'];
+	if (isset($_POST['id_ficha_tecnica'])) {
+			$id_ficha_tecnica =$_POST['id_ficha_tecnica'];
+		}else{
+			$id_ficha_tecnica = NULL;
+		}	
+	
 	$solucion=$_POST['solucion'];
 	if (isset($_POST['fecha'])) {
 		

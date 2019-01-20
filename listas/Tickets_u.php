@@ -227,9 +227,15 @@ $usua= $_SESSION['id_usuario'];
                             foreach ($tecnico as $field) {
                                echo '<td>'.$field['nombre'].'</td>';
                             }
-
-                            foreach ($jefe as $field) {
-                               echo '<td>'.$field['nombre'].'</td>';
+                            if($row['id_jefe']  == NULL){
+                            echo '<td></td>';
+                            }
+                            else{
+                            
+                              foreach ($jefe as $field1) {
+                                
+                                 echo '<td>'.$field1['nombre'].'</td>';
+                              }
                             }
                            echo '
 

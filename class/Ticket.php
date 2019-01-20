@@ -342,6 +342,21 @@ class Ticket extends Conexion
         $ListUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
       return $ListUsuario;
 }
+				public function selectALLG()
+			    {
+			        $query="SELECT * FROM gestion";
+			        $selectall=$this->db->query($query);
+			        $ListCont=$selectall->fetch_all(MYSQLI_ASSOC);
+			      return $ListCont;
+				} 
+
+			 public function selectALLTG($codigo)
+			    {
+			        $query="SELECT * FROM tipo_gestion  WHERE id_gestion='".$codigo."'";
+			        $selectall=$this->db->query($query);
+			        $ListDG=$selectall->fetch_all(MYSQLI_ASSOC);
+			      return $ListDG;
+				} 
 
 
 

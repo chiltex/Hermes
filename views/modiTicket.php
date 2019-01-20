@@ -274,21 +274,27 @@
                                       </label>
                                       <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                        <select id="id_gestion" name="id_gestion" class="form-control ">  
+                                        <select id="id_gestion" onchange="mostrarInfo1(this.value)" name="id_gestion" class="form-control ">  
                                         <?php
                                          require_once "../class/Ticket.php";
                                              $gestion = new Ticket();
-                                             $ges=$gestion->selectOneG($field["id_gestion"]);
-                                             $gest=$gestion->selectOneDG($field["id_gestion"]);
+                                             $ges=$gestion->selectOneTG($field["id_tipo_gestion"]);
+                                             $gest=$gestion->selectALLG();
                                           foreach ((array)$ges as $raw) {
-                                           echo '
-                                            <option value="'.$raw["id_gestion"].'">'.$raw["nombre"].'</option>
-                                           ';
+                                           $gestion_seleccionada = $raw['id_gestion'];
+                                           $tipogestion = $raw['id_tipo_gestion'];
                                          }
                                           foreach ((array)$gest as $a) {
-                                           echo '
+                                            if ($gestion_seleccionada== $a['id_gestion']) {
+                                             echo '
+                                            <option value="'.$a["id_gestion"].'" selected>'.$a["nombre"].'</option>
+                                           ';
+                                            }else{
+                                              echo '
                                             <option value="'.$a["id_gestion"].'">'.$a["nombre"].'</option>
                                            ';
+                                            }
+                                           
                                          }
                                        
                                        
@@ -297,31 +303,39 @@
                                       </div>
                                     </div>
                                      <div class="form-group">
+                                     <div id="datos1">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-6" for="last-name">Tipo Gestion <span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12" >
 
                                       <select  id="id_tipo_gestion" name="id_tipo_gestion" class="form-control ">
                                          <?php
                                         
                                              $tg = new Ticket();
-                                             $Tgo=$tg->selectOneTG($field["id_tipo_gestion"]);                                             
-                                             $DTgo=$tg->selectOneDTG($field["id_tipo_gestion"]);
+                                             $Tgo=$tg->selectOneTG($tipogestion);                                             
+                                             $DTgo=$tg->selectALLTG($gestion_seleccionada);
                                           foreach ((array)$Tgo as $riw) {
-                                           echo '
-                                            <option value="'.$riw["id_tipo_gestion"].'">'.$riw["nombre"].'</option>
-                                           ';
+                                            $tipogestion_seleccionada = $riw['id_tipo_gestion'];
                                          }
                                            foreach ((array)$DTgo as $b) {
+                                            if ($tipogestion_seleccionada == $b['id_tipo_gestion']) {
+                                              
+                                           echo '
+                                            <option value="'.$b["id_tipo_gestion"].'" selected>'.$b["nombre"].'</option>
+                                           ';
+                                            }else{
+
                                            echo '
                                             <option value="'.$b["id_tipo_gestion"].'">'.$b["nombre"].'</option>
                                            ';
+                                            }
                                          }
                                        
                                        
                                            ?>
                                           
                                       </select>
+                                   </div>
                                    </div>
                                     </div>
                                     <div class="form-group">
@@ -379,37 +393,70 @@
                                           
                                              <?php
                                              echo '
-                                                    <select onchange="mostrarInfo(this.value,'.$field["id_usuario"].')" id="id_usuario" name="id_usuario" class="form-control ">
+                                                    <select onchange="mostrarInfo(this.value)" id="id_tipo_usuario" name="id_tipo_usuario" class="form-control ">
 
                                                  ';
                                              require_once "../class/Usuario.php";
                                                  $usua = new Usuario();
                                                  $usuar=$usua->selectOneTU($field["id_usuario"]);
-                                                 $dusuar=$usua->selectOneDTU($field["id_usuario"]);
-                                            foreach ((array)$usuar as $w) {
-                                              $usua1=$usua->selectTU($w["id_tipo_usuario"]);
-                                                foreach ($usuar1 as $a) {
-                                                  echo '
-                                                  <option value="'.$a["id_tipo_usuario"].'">'.$a["nombre"].'</option>
-                                                 ';
-                                                }
-                                                 $dusuar2=$usua->selectDTU($w["id_usuario"]);
-                                                  foreach ($dusuar2 as $b) {
-                                                  echo '
-                                                  <option value="'.$b["id_tipo_usuario"].'">'.$b["nombre"].'</option>
-                                                 ';
-                                                }
+                                                 $dusuar=$usua->selectAllTipUsuario();
+
+                                                     foreach ((array)$usuar as $w) {
+                                                        $seleccionado = $w['id_tipo_usuario'];
+                                                        }
+
+                                                 foreach ($dusuar as $k) {
+                                                        if ($seleccionado == $k['id_tipo_usuario']) {
+                                                             echo '
+                                                              <option value="'.$k["id_tipo_usuario"].'" selected>'.$k["nombre"].'</option>
+                                                             ';
+                                                          }else{
+                                                           echo '
+                                                              <option value="'.$k["id_tipo_usuario"].'" >'.$k["nombre"].'</option>
+                                                             '; 
+                                                          }
+                                                 }
+                                                  ?>
+                                              
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="datos">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Usuario Responsable <span class="required">*</span>
+                                        </label>
+                                          <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <select  id="id_usuario" name="id_usuario" class="form-control">
+                                             <?php
+                                             require_once "../class/Usuario.php";
+                                                 $usuario1 = new Usuario();
+                                                 $usuar=$usuario1->selectTecnicos($seleccionado);
+                                                 $dusuar=$usuario1->selectALLJ1($seleccionado);
+                                               //  foreach ($usuar as $keyss) {
+                                                  $usuario_seleccionado = $field['id_usuario'];
+                                                 //}
+                                            foreach ((array)$dusuar as $w) {
+                                                  if ($usuario_seleccionado == $w['id_usuario']) {
+                                                  
+                                               echo '
+                                                <option value="'.$w["id_usuario"].'" selected>'.$w["nombre"].' '.$w["apellido"].'</option>
+                                               ';
+                                                  }else{
+
+                                               echo '
+                                                <option value="'.$w["id_usuario"].'">'.$w["nombre"].' '.$w["apellido"].'</option>
+                                               ';
+                                                  }
 
                                              }
                                            
                                            
                                                ?>
                                               
-                                          </select>
+                                            </select>
+                                            </div>
+
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div id="datos"></div>
                                     </div>
                                       <?php 
                                       if (isset($_POST['bandera'])) {
@@ -667,7 +714,7 @@ ga('send', 'pageview');
       });
        
   }); 
-      function mostrarInfo(cod,usua){
+      function mostrarInfo(cod){
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
@@ -685,10 +732,33 @@ xmlhttp.onreadystatechange=function()
   document.getElementById("datos").innerHTML='Cargando...';
     }
   }
-xmlhttp.open("POST","../views/STU1.php",true);
+xmlhttp.open("POST","../views/STU.php",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-xmlhttp.send("cod_banda="+cod+"&usuario="+usua);
-}
+xmlhttp.send("cod_banda="+cod);
+};
+
+function mostrarInfo1(cod){
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("datos1").innerHTML=xmlhttp.responseText;
+    }else{ 
+  document.getElementById("datos1").innerHTML='Cargando...';
+    }
+  }
+xmlhttp.open("POST","../views/SG.php",true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("cod_banda="+cod);
+};
 
 </script>
 <script>
