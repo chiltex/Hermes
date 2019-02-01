@@ -255,6 +255,7 @@ section.awSlider > img{
                           <th>N°</th>
                           <th>Producto</th>
                           <th>Cliente</th>
+                          <th>Tecnico</th>
                           <th>Estado</th>
                           <th>Opciones</th>                            
                         </tr>
@@ -274,6 +275,7 @@ section.awSlider > img{
                            <td>'.$row['id_ficha_tecnica'].'</td>
                            <td>'.$row['nombre'].'</td>
                            <td>'.$row['client'].'</td>
+                           <td>'.$row['usuario'].' '.$row['usuario_ape'].'</td>
                            <td>'.$row['equipo_queda'].'</td>
                            <td>
                           

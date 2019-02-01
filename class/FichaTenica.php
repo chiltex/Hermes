@@ -307,7 +307,7 @@ class FichaTecnica extends Conexion
     }
       public function selectALL()
     {
-        $query="SELECT ft.id_ficha_tecnica, p.nombre, c.nombre as client, ft.equipo_queda FROM ficha_tecnica ft INNER JOIN productos p on ft.id_producto=p.id_producto INNER JOIN cliente c ON ft.id_cliente=c.id_cliente ";
+        $query="SELECT ft.id_ficha_tecnica, p.nombre, c.nombre as client, ft.equipo_queda,u.nombre as usuario,u.apellido as usuario_ape FROM ficha_tecnica ft INNER JOIN productos p on ft.id_producto=p.id_producto INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN usuario u ON ft.id_usuario = u.id_usuario ";
         $selectall=$this->db->query($query);
         $ListFichas=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListFichas;

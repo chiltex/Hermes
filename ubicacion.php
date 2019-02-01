@@ -22,7 +22,7 @@ var contenedor = document.getElementById("map")
 document.getElementById("lti").innerHTML=latitud;
 document.getElementById("lgi").innerHTML=longitud;	
 document.getElementById("psc").innerHTML=precision;	
-var centro = new google.maps.LatLng(latitud,longitud); 
+var centro = new google.maps.LatLng(13.81,-89.14); 
 var propiedades = { zoom: 15, center: centro, mapTypeId: google.maps.MapTypeId.ROADMAP }; 
 var map = new google.maps.Map(contenedor, propiedades); 
 var marcador = new google.maps.Marker({ position: centro, map: map, title: "Tu posicion actual" }); 
@@ -52,6 +52,16 @@ $lonphp = $_COOKIE["loncookie"];
 
 <p>Longitud: <span id="lgi"></span></p>
 <p>Presici&oacute;n: <span id="psc"></span></p>	
-<div id="map" ></div> 
+<div id="map" ></div>
+<?php
+    $src = 'https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&markers=color:red%7Clabel:C%7C40.718217,-73.998284&zoom=12&size=600x400&key=AIzaSyA-U6DYBUvslIEZRHLQYRZ1VF_CUv3YQP4';
+    $time = time();
+    $desFolder = 'fotos/';
+    $imageName = 'google-map_'.$time.'.PNG';
+    $imagePath = $desFolder.$imageName;
+    file_put_contents($imagePath,file_get_contents($src));
+?>
+<img src="<?php echo $imagePath; ?>"/>
+<img src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&markers=color:red%7Clabel:C%7C40.718217,-73.998284&zoom=12&size=600x400&key=AIzaSyA-U6DYBUvslIEZRHLQYRZ1VF_CUv3YQP4"/>
 </body> 
 </html>

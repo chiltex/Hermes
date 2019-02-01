@@ -359,7 +359,13 @@ class Ticket extends Conexion
 				} 
 
 
-
+public function selectOneCliente($codigo)
+		    {
+		        $query="SELECT * FROM cliente WHERE id_cliente='".$codigo."'";
+		        $selectall=$this->db->query($query);
+		        $ListCliente=$selectall->fetch_all(MYSQLI_ASSOC);
+		        return $ListCliente;
+		    }
 		  
 		    
 }//end class

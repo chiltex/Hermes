@@ -244,7 +244,7 @@ session_start();
                            <td>'.$row['urgente'].'</td>
                            <td>
                           
-                                    
+                                      <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ticket"].'" class="btn btn-info view_data"/>  
                                     <a href="../views/modiTicket.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'&bandera=ticket" class="btn btn-warning">Editar</a>
                                     <a href="../controller/TicketControlador.php?id='.$row["id_ticket"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
                            </td>
@@ -357,7 +357,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectCliente.php",  
+                     url:"../views/selectTicket.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  

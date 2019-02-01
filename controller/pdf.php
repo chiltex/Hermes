@@ -21,7 +21,9 @@ ob_start();
 <!DOCTYPE html>
 <html>
   <head>
+
   <title>Ficha Tecnica</title>
+
 </head>
   <body>
 
@@ -76,6 +78,10 @@ ob_start();
                            <tr>
                            <td><strong>Ubicacion:</strong> </td>
                            <td>Latitud: '.$key["latitud"].', Longitud: '.$key["longitud"].'</td>
+
+                           </tr>
+                           <tr>
+                          <td colspan=2> <img src="../fotos/fichaTecnica'.$codigo.'/ubicacion_fichaTecnica_'.$codigo.'.png"/><td>
                            </tr>
                              <tr>
                            <td><strong>Entrada :</strong> '.$key["hora_ingreso"].'</td>
@@ -87,8 +93,19 @@ ob_start();
                            </tr>
                            <tr>
                            <td><strong>Falla reportada:</strong> </td>
-                           <td>'.$key["falla"].'</td>
-                           </tr>
+                           </tr>';
+                           echo '</table>';
+                           $falla =$key["falla"];
+                           $array_falla = str_split($falla);
+                           $falla_count = strlen($falla);
+
+                           for ($i=0; $i <= $falla_count; $i++) { 
+                             echo $array_falla[$i];
+                           }
+
+                                                     
+                          echo' 
+                   <table class="table table-bordered">
                            <tr>
                            <td><strong>Datos generales:</strong> </td>
                            
@@ -100,10 +117,19 @@ ob_start();
                            <td><strong>Solucion:</strong> </td>
                            
                            </tr>
-                           <tr>
+                           
+                           </table>';
                           
-                           <td>'.$key["trabajo"].'</td>
-                           </tr>
+                           $trabajo= $key["trabajo"];
+                           $array_trabajo = str_split($trabajo);
+                           $trabajo_count = strlen($trabajo);
+
+                           for ($a=0; $a <= $trabajo_count; $a++) { 
+                             echo $array_trabajo[$a];
+                           }
+                          echo'
+                   <table class="table table-bordered">
+
                            <tr>
                            <td><strong>Equipo se entrega:</strong> </td>
                            <td>'.$key["equipo_queda"].'</td>
@@ -221,8 +247,21 @@ elseif($accion=="enviar"){
                            </tr>
                            <tr>
                            <td><strong>Falla reportada:</strong> </td>
-                           <td>'.$key["falla"].'</td>
+                          
                            </tr>
+                           ';
+                           echo '</table>';
+                           $falla =$key["falla"];
+                           $array_falla = str_split($falla);
+                           $falla_count = strlen($falla);
+
+                           for ($i=0; $i <= $falla_count; $i++) { 
+                             echo $array_falla[$i];
+                           }
+
+                                                     
+                          echo' 
+                   <table class="table table-bordered">
                            <tr>
                            <td><strong>Datos generales:</strong> </td>
                            
@@ -234,10 +273,18 @@ elseif($accion=="enviar"){
                            <td><strong>Solucion:</strong> </td>
                            
                            </tr>
-                           <tr>
+                           
+                           </table>';
                           
-                           <td>'.$key["trabajo"].'</td>
-                           </tr>
+                           $trabajo= $key["trabajo"];
+                           $array_trabajo = str_split($trabajo);
+                           $trabajo_count = strlen($trabajo);
+
+                           for ($a=0; $a <= $trabajo_count; $a++) { 
+                             echo $array_trabajo[$a];
+                           }
+                          echo'
+                   <table class="table table-bordered">
                            <tr>
                            <td><strong>Equipo se entrega:</strong> </td>
                            <td>'.$key["equipo_queda"].'</td>

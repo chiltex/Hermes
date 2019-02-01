@@ -251,7 +251,9 @@ $usua= $_SESSION['id_usuario'];
 
                                                              
                                     
-                           echo '</td>
+                           echo '
+                             <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ticket"].'" class="btn btn-info view_data"/>  
+                           </td>
                           </tr>
                          ';
                        }
@@ -361,7 +363,7 @@ ga('send', 'pageview');
            if(employee_id != '')  
            {  
                 $.ajax({  
-                     url:"../views/selectCliente.php",  
+                     url:"../views/selectTicket.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  

@@ -208,7 +208,22 @@ session_start();
                                          require_once "../class/Ticket.php";
                                          $ms = new Ticket();
                                          $contacto = $ms->selectOneC($id);
+                                         $checking = 0;
                                          foreach ((array)$contacto as $row) {
+                                          if ($checking == 0) {
+                                         echo '
+                                          <tr>
+                                           <td>'.$row['nombre'].'</td>
+                                           <td>'.$row["telefono"].'</td>
+                                           <td>'.$row["correo"].'</td>
+                                            <td>
+                                            <input type="radio" name="id_contacto" id="id_contacto" checked value="'.$row["id_contacto"].'" />
+                                             <input type="hidden" name="id_cliente" id="id_cliente" value="'.$row["id_cliente"].'"/>
+                                           </td>
+                                          </tr>
+                                         ';
+                                         }else{
+                                          
                                          echo '
                                           <tr>
                                            <td>'.$row['nombre'].'</td>
@@ -220,6 +235,8 @@ session_start();
                                            </td>
                                           </tr>
                                          ';
+                                         }
+                                          $checking = $checking +1;
                                        }
                                      
                                      
@@ -392,8 +409,15 @@ session_start();
                                         </div>
 
                                         <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
-                              <button type="submit" class="btn btn-success">Ingresar</button>
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">   
+                            <?php 
+                              if ($id!=0 && $id_producto !=0) {
+                                echo '<button type="submit" class="btn btn-success">Ingresar</button>';
+                              }else{
+                                echo '<p><h2>Seleccione una Empresa o Equipo para continuar</h2></p>';
+                              }
+                             ?>                          
+                              
                             </div>
                           </div>
                                   </div>

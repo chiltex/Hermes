@@ -188,7 +188,8 @@
                                       <thead>
                                         <tr>
                                           <th>Contacto</th>
-                                          <th>Numero</th>                       
+                                          <th>Numero</th>
+                                          <th>E-mail</th>                                                                
                                           <th>Seleccionar</th>                          
                                         </tr>
                                       </thead>
@@ -197,17 +198,33 @@
                                          require_once "../class/Ticket.php";
                                          $ms = new Ticket();
                                          $contacto = $ms->selectOneC($field["id_cliente"]);
+                                         $contacto_seleccionado = $field['id_contacto'];
                                          foreach ((array)$contacto as $r) {
+                                          if ($r['id_contacto']== $contacto_seleccionado) {
+                                            
                                          echo '
                                           <tr>
                                            <td>'.$r['nombre'].'</td>
                                            <td>'.$r["telefono"].'</td>
+                                           <td>'.$r["correo"].'</td>
+                                            <td>
+                                            <input type="radio" name="id_contacto" id="id_contacto" checked value="'.$r["id_contacto"].'" />
+                                             <input type="hidden" name="id_cliente" id="id_cliente" value="'.$field["id_cliente"].'"/>
+                                           </td>
+                                          </tr>
+                                         ';
+                                          }else{
+                                         echo '
+                                          <tr>
+                                           <td>'.$r['nombre'].'</td>
+                                           <td>'.$r["telefono"].'</td>
+                                           <td>'.$r["correo"].'</td>
                                             <td>
                                             <input type="radio" name="id_contacto" id="id_contacto"  value="'.$r["id_contacto"].'" />
                                              <input type="hidden" name="id_cliente" id="id_cliente" value="'.$field["id_cliente"].'"/>
                                            </td>
                                           </tr>
-                                         ';
+                                         ';}
                                      
                                          
                                          $iContacto=$field["id_contacto"];

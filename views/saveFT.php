@@ -31,7 +31,7 @@ session_start();
     <link href="../build/css/custom.min.css" rel="stylesheet">
     <!-- Custom MAPS -->
     <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA3QOGrAOPV7JTBeiZ1TUzh2-sHkyheopw&callback=initMap"></script>-->
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3QOGrAOPV7JTBeiZ1TUzh2-sHkyheopw&callback=initMap" type="text/javascript"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-U6DYBUvslIEZRHLQYRZ1VF_CUv3YQP4&callback=initMap" type="text/javascript"></script>
 
     <style>
       .div1 {
@@ -473,7 +473,7 @@ software:</textarea>
                                         <textarea id="lgi" name="lgi" readonly=""></textarea>
                                   
                                        </div>
-                                       <!--
+                                       
                                         <div class="form-group">
                                      
                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Ubicacion:</p></label>
@@ -483,7 +483,6 @@ software:</textarea>
                                   
                                        </div>
                                       
-                                       -->
                                        <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Hora Actual <?php $hora = new DateTime("now", new DateTimeZone('America/El_Salvador'));
                             echo $hora->format('h:i:s A'); ?>

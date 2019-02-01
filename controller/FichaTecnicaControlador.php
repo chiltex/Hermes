@@ -2043,6 +2043,21 @@ if (isset($_FILES['foto_seis'])){
 	unset ($_COOKIE ["latcookie"]);
 	unset ($_COOKIE ["loncookie"]);
 
+ 		$carpeta = $_SERVER['DOCUMENT_ROOT'].'/Hermes/fotos/fichaTecnica'.$ficTec;
+ 		$src = 'https://maps.googleapis.com/maps/api/staticmap?center='.$latitud.','.$longitud.'&markers=color:red%7Clabel:C%7C'.$latitud.','.$longitud.'&zoom=17&size=500x300&key=AIzaSyA-U6DYBUvslIEZRHLQYRZ1VF_CUv3YQP4';
+ 		$ubicacion_name = '/ubicacion_fichaTecnica_'.$ficTec.'.png';
+ 		$imagePath = $carpeta.$ubicacion_name;
+			if (!file_exists($carpeta)) {
+			    mkdir($carpeta, 0777, true);
+				
+    			file_put_contents($imagePath,file_get_contents($src));
+			}else{
+				
+    			file_put_contents($imagePath,file_get_contents($src));
+ 
+			}
+
+
     // llamamos a la funcion uploadImgBase64( img_base64, nombre_fina.png) 
     
     uploadImgBase64($_POST['imagenC'], 'mi_firma_'.$firma_cliente.'.png' );
