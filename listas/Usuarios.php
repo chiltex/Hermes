@@ -223,8 +223,16 @@ session_start();
                            <td>
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_usuario"].'" class="btn btn-info view_data"/> 
-                                    <a href="../views/modiUsuario.php?id='.$row["id_usuario"].'" class="btn btn-warning">Editar</a>
-                                    <a href="../controller/UsurioControlador.php?id='.$row["id_usuario"].'&accion=eliminar" class="btn btn-danger">Eliminar</a>
+                                    <a href="../views/modiUsuario.php?id='.$row["id_usuario"].'" class="btn btn-warning">Editar</a>';
+                                    if ($row['estado']=='Activo') {
+                                      echo '<a href="../controller/UsuarioControlador.php?id='.$row["id_usuario"].'&accion=eliminar&estado=Desactivar" class="btn btn-danger">Desactivar</a>';
+                                    }else{
+
+                                       echo '<a href="../controller/UsuarioControlador.php?id='.$row["id_usuario"].'&accion=eliminar&estado=Activado" class="btn btn-success">Activar</a>';
+                                    }
+                              echo'
+                                  
+                                    <input type="button" name="view" value="Cambio Contraseña" id="'.$row["id_usuario"].'" class="btn btn-warning modi_pass"/>     
                            </td>
                           </tr>
                          ';
@@ -321,6 +329,21 @@ ga('send', 'pageview');
            {  
                 $.ajax({  
                      url:"../views/selectUsuario.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id},  
+                     success:function(data){  
+                          $('#employee_forms2').html(data);  
+                          $('#dataModal2').modal('show');  
+                     }  
+                });  
+           }            
+      }); 
+       $(document).on('click', '.modi_pass', function(){  
+           var employee_id = $(this).attr("id");  
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/modiPass.php",  
                      method:"POST",  
                      data:{employee_id:employee_id},  
                      success:function(data){  

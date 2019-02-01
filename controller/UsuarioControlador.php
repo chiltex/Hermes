@@ -27,9 +27,11 @@ if ($accion=="modificar") {
 }
 elseif ($accion=="eliminar") {	
 	$id_usuario =$_GET['id'];
+	$estado =$_GET['estado'];
 	$usuaro = new Usuario();
 	$usuaro->setId_usuario($id_usuario);
-	$delete=$usuaro->delete();
+	$usuaro->setEstado($estado);
+	$delete=$usuaro->updateStatus();
 	if ($delete==true) {
 		header('Location: ../listas/Usuarios.php?success=correcto');
 		# code...
@@ -76,6 +78,21 @@ elseif ($accion=="contra")
 		header('Location: ../views/modiContra.php?error=incorrecto');
 	}else{
 		header('Location: ../views/modiContra.php?error=error');
+	}
+}
+
+elseif ($accion=="contraAll") 
+{	
+	
+	$idusuario=$_POST['id_usuario'];
+	$contra_nueva=$_POST['confirmado'];
+	$usuario = new Usuario();
+	$save=$usuario->updatePass1($contra_nueva,$idusuario);
+	if ($save=="Correcto") {
+		header('Location: ../listas/Usuarios.php?success=correcto');
+		# code...
+	}else{
+		header('Location: ../listas/Usuarios.php?error=error');
 	}
 }
 

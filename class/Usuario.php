@@ -11,6 +11,7 @@ class Usuario extends Conexion
  private $correo;
  private $contraseña;
  private $id_tipo_usuario;
+ private $estado;
 
  public function __construct()
 	{
@@ -22,6 +23,7 @@ class Usuario extends Conexion
         $this->correo="";
         $this->contraseña="";
         $this->id_tipo_usuario="";
+        $this->estado="";
     }
 
 
@@ -71,6 +73,13 @@ class Usuario extends Conexion
     public function setId_tipo_usuario($id_tipo_usuario) {
         $this->id_tipo_usuario = $id_tipo_usuario;
     }
+    public function getEstado() {
+        return $this->estado;
+    }
+
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
  //---------------------Funciones----------------------------//
      public function save()
     {
@@ -95,6 +104,18 @@ class Usuario extends Conexion
             return false;
         }  
     }
+
+     public function updateStatus()
+    {
+        $query="UPDATE usuario SET estado='".$this->estado."' WHERE id_usuario='".$this->id_usuario."'";
+        $update=$this->db->query($query);
+        if ($update==true) {
+            return true;
+        }else {
+            return false;
+        }  
+    }
+
     public function delete()
     {
        $query="DELETE FROM usuario WHERE id_usuario='".$this->id_usuario."'"; 
@@ -194,7 +215,7 @@ public function selectOneDTU($codigo)
     public function login(){
 
         $pass = hash("sha256", $this->contraseña);
-        $query1="SELECT u.*, tu.nombre as tipo FROM usuario u INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario=u.id_tipo_usuario WHERE correo='".$this->correo."' AND pass='".$pass."'";
+        $query1="SELECT u.*, tu.nombre as tipo FROM usuario u INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario=u.id_tipo_usuario WHERE correo='".$this->correo."' AND pass='".$pass."' AND estado='Activo'";
         $selectall1=$this->db->query($query1);
         $ListUsuario=$selectall1->fetch_all(MYSQLI_ASSOC);
 
@@ -276,6 +297,21 @@ public function selectOneDTU($codigo)
         $selectall=$this->db->query($query);
         $ListUsuarios=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListUsuarios;
+    }
+
+    public function updatePass1($nuevacontra,$usuario)
+    {
+           
+        $password = hash('sha256', $nuevacontra);
+           
+        $query="UPDATE usuario SET pass='".$password."' WHERE id_usuario='".$usuario."'";
+        $update=$this->db->query($query);
+        if ($update==true) {
+            return "Correcto";
+        }else {
+            return "Error";
+        } 
+
     }
  	 
 }//end class

@@ -30,7 +30,7 @@ require_once "class/Events.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DataTables | Gentelella</title>
+    <title>HERMES | CRM</title>
 
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -335,13 +335,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                       </ul>
                     </li>
     
-                    <li role="presentation" class="dropdown">
-                      <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
-                      </a>
-                    
-                    </li>
+                  
                   </ul>
                 </nav>
               </div>
@@ -631,7 +625,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
             <div class="col-sm-offset-2 col-sm-10">
               <?php 
               $correo_eliminar = $_SESSION['correo'];
-              if ($correo_eliminar == "pcumez@hermes.com.gt" || $correo_eliminar == "serviciotecnico@hermes.com.gt" || $correo_eliminar == "npinto@hermes.com.gt" || $correo_eliminar == "cfuentes@hermes.com.gt"  ) {
+              if ($correo_eliminar == "pcumez@hermes.com.gt" || $correo_eliminar == "serviciotecnico@hermes.com.gt" || $correo_eliminar == "npinto@hermes.com.gt" || $correo_eliminar == "cfuentes@hermes.com.gt"  || $correo_eliminar == "administrador@gmail.com") {
                echo '
                <div class="checkbox">
               <label class="text-danger"><input type="checkbox" id="eliminar" name="eliminar"> Eliminar Evento</label>

@@ -83,7 +83,7 @@ ob_start();
                            </tr>
                            <tr>
                            <td><strong>Tipo:</strong> </td>
-                           <td>'.$key["tipo_maqui"].'</td>
+                           <td>'.$key["tipo_maquina"].'</td>
                            </tr>
                            <tr>
                            <td><strong>Falla reportada:</strong> </td>
@@ -217,7 +217,7 @@ elseif($accion=="enviar"){
                            </tr>
                            <tr>
                            <td><strong>Tipo:</strong> </td>
-                           <td>'.$key["tipo_maqui"].'</td>
+                           <td>'.$key["tipo_maquina"].'</td>
                            </tr>
                            <tr>
                            <td><strong>Falla reportada:</strong> </td>

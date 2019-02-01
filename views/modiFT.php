@@ -194,26 +194,24 @@ session_start();
                                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Tipo Maquina
                                           </label>
                                           <div class="col-md-12 col-sm-8 col-xs-12">
-                                            <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
+                                          
+                                          <!--  <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
                                                  <?php 
-                                                 require_once "../class/TipoMaquina.php";
-                                                 $id_ma=$key['id_tipo_ma'];
+                                             /*    require_once "../class/TipoMaquina.php";
                                                  $misGP = new TipoMaquina();
-                                                 $dtc = $misGP->selectDAll($id_ma);
-                                                 $tc = $misGP->selectOne($id_ma);
-
-                                                 foreach ((array)$tc as $riw) {
-                                                 echo '
-                                                  <option value="'.$riw["id_tipo_ma"].'">'.$riw["nombre"].'</option>
-                                                 ';
-                                               }
-                                                 foreach ((array)$dtc as $row) {
-                                                 echo '
-                                                  <option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>
-                                                 ';
-                                               }
+                                                 $tc = $misGP->selectAll();
+                                                
+                                                   # code...
+                                                 
+                                                 foreach ((array)$tc as $row) {
+                                                 echo '<option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>';
+                                               }*/
                                                ?>
-                                               </select>
+                                               </select>-->
+                                               <?php 
+                                               echo '<input type="text" id="tipo_maquina" name="tipo_maquina" class="form-control col-md-7 col-xs-12" value="'.$key['tipo_maquina'].'">';
+                                                ?>
+                                            
                                           </div>
                                         </div>
                                         <div class="form-group">
@@ -256,24 +254,51 @@ session_start();
                                          <?php 
                                          require_once "../class/Repuestos.php";
                                          $repuesto = new Repuestos();
-                                         
+                                         $repuesto_guardado = 0;
+                                         $all_repuestos = $repuesto->selectALL();
                                          $deta_repuestos = $repuesto->selectOneDR($id_ficha_tecnica);
-                                         foreach ((array)$deta_repuestos as $b) {
-                                          echo '
+                                         foreach ($all_repuestos as $a) {
+                                                                                   
+                                             foreach ((array)$deta_repuestos as $b) {
+                                              if ($a['id_repuesto'] == $b['id_repuesto']) {
+                                                
+                                              echo '
+                                              <tr>
+                                                
+                                                <td>
+                                                <input type="hidden" name="id_repuestos[]" checked value="'.$b["id_repuesto"].'" />
+                                               </td>
+                                               <td>'.$b['nombre'].'</td>
+                                               <td>'.$b["codigo_serie"].'</td>
+                                               <td> <input type="text" id="cantidad" name="cantidad[]" value="'.$b['cantidad'].'" class="form-control col-xs-3 col-xs-8"></td>
+                                              </tr>
+                                             '; 
+                                             $repuesto_guardado = $b['id_repuesto'];
+                                              }                                         
+
+                                             }
+
+                                         if ($a['id_repuesto']==$repuesto_guardado) {
+                                         
+                                         }else{
+
+                                           echo '
+                                         }
                                           <tr>
                                             
                                             <td>
-                                            <input type="hidden" name="id_repuestos[]" checked value="'.$b["id_repuesto"].'" />
+                                            <input type="hidden" name="id_repuestos[]" checked value="'.$a["id_repuesto"].'" />
                                            </td>
-                                           <td>'.$b['nombre'].'</td>
-                                           <td>'.$b["codigo_serie"].'</td>
-                                           <td> <input type="text" id="cantidad" name="cantidad[]" value="'.$b['cantidad'].'" class="form-control col-xs-3 col-xs-8"></td>
+                                           <td>'.$a['nombre'].'</td>
+                                           <td>'.$a["codigo_serie"].'</td>
+                                           <td> <input type="text" id="cantidad" name="cantidad[]" value="" class="form-control col-xs-3 col-xs-8"></td>
                                           </tr>
-                                         ';                                          
-
+                                         '; 
+                                         
                                          }
+                                         $repuesto_guardado =0;
 
-                                          
+                                          }
                                         
 
                                         ?>
@@ -304,8 +329,13 @@ session_start();
                                          require_once "../class/Consumibles.php";
                                          $consumible = new Consumibles();
                                          $deta_consumibles = $consumible->selectOneDR($id_ficha_tecnica);
+                                         $all_consumibles = $consumible->selectALL();
+                                         $consumible_guardado = 0;
+
+                                        foreach ((array)$all_consumibles as $a) {
                                          foreach ((array)$deta_consumibles as $b) {
-                                          echo '
+                                           if ($a['id_consumible'] == $b['id_consumible']) {
+                                             echo '
                                           <tr>
                                             
                                             <td>
@@ -315,9 +345,32 @@ session_start();
                                            <td>'.$b["codigo_serie"].'</td>
                                            <td> <input type="text" id="cantidad" name="cantidadC[]" value="'.$b['cantidad'].'" class="form-control col-xs-3 col-xs-8"></td>
                                           </tr>
-                                         ';                                          
-
+                                         '; 
+                                         $consumible_guardado = $b['id_consumible'];
+                                           }
+                                           
                                          }
+
+                                         if ($a['id_consumible']==$consumible_guardado) {
+                                         
+                                         }else{
+
+                                           echo '
+                                         }
+                                          <tr>
+                                            
+                                            <td>
+                                            <input type="hidden" name="id_consumibles[]" checked value="'.$a["id_consumible"].'" />
+                                           </td>
+                                           <td>'.$a['nombre'].'</td>
+                                           <td>'.$a["codigo_serie"].'</td>
+                                           <td> <input type="text" id="cantidad" name="cantidadC[]" value="" class="form-control col-xs-3 col-xs-8"></td>
+                                          </tr>
+                                         '; 
+                                         
+                                         }
+                                         $consumible_guardado =0;
+                                          }
                                           ?>
                                           </TBODY>
                                         </table>
@@ -444,21 +497,21 @@ session_start();
                                           <div class="col-md-12 col-sm-8 col-xs-12">
                                             <select id="estado" name="estado" class="form-control ">
                                             <?php 
-                                              if ($key['estado']=='Iniciado') {
+                                              if($key['estado']=='Iniciado') {
                                                 echo '   
-                                                <option value="Iniciado" checked>Iniciado</option>
+                                                <option value="Iniciado" selected>Iniciado</option>
                                                <option value="En Proceso">En proceso</option>
                                               <option value="Finalizado">Finalizado</option>';
-                                              }elseif ($key['estado']=='En Proceso') {
+                                              }elseif($key['estado']=='En Proceso') {
                                                 echo '   
                                                 <option value="Iniciado">Iniciado</option>
-                                               <option value="En Proceso" checked>En proceso</option>
+                                               <option value="En Proceso" selected>En proceso</option>
                                               <option value="Finalizado">Finalizado</option>';
-                                              }elseif ($key['estado']=='Finalizado') {
+                                              }elseif($key['estado']=='Finalizado') {
                                                 echo '   
                                                 <option value="Iniciado">Iniciado</option>
                                                <option value="En Proceso">En proceso</option>
-                                              <option value="Finalizado" checked>Finalizado</option>';
+                                              <option value="Finalizado" selected>Finalizado</option>';
                                               }
                                              ?>                                 
                                             </select>

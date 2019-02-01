@@ -53,13 +53,19 @@ if ($accion=="modificar") {
 	{
 		$falla==NULL;
 	}
+	if (isset($_POST['tipo_maquina'])) {
+			$tipo_maquina =$_POST['tipo_maquina'];
+	}else
+	{
+		$tipo_maquina==NULL;
+	}
 	$firma_cliente1=$_POST['firma_cliente'];
 	$firma_tecnico1=$_POST['firma_tecnico'];
 	$hora_ingreso=$_POST['hora_ingreso'];
 	$hora_egreso=$_POST['hora_salida'];
 
 	$id_ficha_tecnica=$_POST['id_ficha_tecnica'];
-	$id_tipo_ma=$_POST['id_tipo_ma'];
+	$id_tipo_ma=1;
 		if ($_POST['linea_produccion']) {
 		
 	$linea_produccion=$_POST['linea_produccion'];
@@ -959,7 +965,8 @@ if (isset($_FILES['foto_seis'])) {
 	$FichaTecnica->setFoto_uno($foto_uno);
 	$FichaTecnica->setFoto_dos($foto_dos);
 	$FichaTecnica->setFoto_tres($foto_tres);
-	$FichaTecnica->setEstado($estado);	
+	$FichaTecnica->setEstado($estado);
+	$FichaTecnica->setTipo_maquina($tipo_maquina);		
 
 	$update=$FichaTecnica->update();
 	$i=0;
@@ -994,9 +1001,12 @@ if (isset($_FILES['foto_seis'])) {
 		}
 	if ($update==true) {
 		$archivo='../firmas/mi_firma_'.$firma_cliente1.'.png';
+
+  file_put_contents($_SERVER['DOCUMENT_ROOT'].'Hermes/tmp/mi_firma_'.$firma_cliente1.'.png', $_POST['imagenC']);
+  		$archivo_temporalCliente = '../tmp/mi_firma_'.$firma_cliente1.'.png';
 		$NueArchivo=$_POST['imagenC'];
 		$datosBase641 = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '',$NueArchivo));
-		if (filesize($archivo)<=1000 || filesize($datosBase641)>=1000 ){
+		if (filesize($archivo)<=1000 || filesize($archivo_temporalCliente)>1000 ){
 			uploadImgBase64($_POST['imagenC'], 'mi_firma_'.$firma_cliente1.'.png' );
 		}
 		$archivo1='../firmas/mi_firma_'.$firma_tecnico1.'.png';
@@ -1008,7 +1018,7 @@ if (isset($_FILES['foto_seis'])) {
 
 		header('Location: ../listas/FichaTecnca_u.php?success=correcto&contador='.$bandera.'&latitud='.$latitud.'');
 		}elseif($bandera=="admin"){
-		header('Location: ../listas/FichaTecnca.php?success=correcto');
+		header('Location: ../listas/FichaTecnca.php?success=correcto$estado'.$estado.'');
 		}
 		# code...
 	}else{
@@ -1080,14 +1090,20 @@ $lonphp = $_COOKIE["loncookie"];
 		$falla==NULL;
 	}
 	
-	$id_tipo_ma=$_POST['id_tipo_ma'];
-	if ($_POST['linea_produccion']) {
+	$id_tipo_ma=1;
+	if (isset($_POST['tipo_maquina'])) {
+		
+	$tipo_maquina=$_POST['tipo_maquina'];
+	}else{
+		$tipo_maquina=NULL;
+	}	
+	if (isset($_POST['linea_produccion'])) {
 		
 	$linea_produccion=$_POST['linea_produccion'];
 	}else{
 		$linea_produccion=NULL;
 	}	
-	if ($_POST['datos_generales']) {
+	if (isset($_POST['datos_generales'])) {
 		
 	$datos_generales=$_POST['datos_generales'];
 	}else{
@@ -1978,6 +1994,7 @@ if (isset($_FILES['foto_seis'])){
 	$FichaTecnic->setFoto_uno($foto_uno);
 	$FichaTecnic->setFoto_dos($foto_dos);
 	$FichaTecnic->setFoto_tres($foto_tres);
+	$FichaTecnic->setTipo_maquina($tipo_maquina);
 
 	$save=$FichaTecnic->save();
 	$i=0;

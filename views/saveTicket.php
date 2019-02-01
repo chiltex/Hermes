@@ -198,7 +198,8 @@ session_start();
                                       <thead>
                                         <tr>
                                           <th>Contacto</th>
-                                          <th>Numero</th>                       
+                                          <th>Numero</th>  
+                                          <th>E-mail</th>                          
                                           <th>Seleccionar</th>                          
                                         </tr>
                                       </thead>
@@ -212,6 +213,7 @@ session_start();
                                           <tr>
                                            <td>'.$row['nombre'].'</td>
                                            <td>'.$row["telefono"].'</td>
+                                           <td>'.$row["correo"].'</td>
                                             <td>
                                             <input type="radio" name="id_contacto" id="id_contacto" value="'.$row["id_contacto"].'" />
                                              <input type="hidden" name="id_cliente" id="id_cliente" value="'.$row["id_cliente"].'"/>

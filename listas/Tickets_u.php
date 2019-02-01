@@ -242,11 +242,16 @@ $usua= $_SESSION['id_usuario'];
                            <td>'.$row['estado'].'</td>
 
                            <td>'.$row['urgente'].'</td>
-                           <td>
-                          
+                           <td>';
+                           if ($row['estado']=="Finalizado") {
+                             
+                           }else{
+                            echo '<a href="../views/modiTicket_u.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'&bandera=ticket_u&id_usuario='.$row["id_usuario"].'" class="btn btn-warning">Editar</a>';
+                           }
+
+                                                             
                                     
-                                    <a href="../views/modiTicket_u.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'&bandera=ticket_u&id_usuario='.$row["id_usuario"].'" class="btn btn-warning">Editar</a>
-                           </td>
+                           echo '</td>
                           </tr>
                          ';
                        }

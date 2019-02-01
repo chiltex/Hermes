@@ -30,14 +30,16 @@ session_start();
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
     <!-- Custom MAPS -->
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA3QOGrAOPV7JTBeiZ1TUzh2-sHkyheopw&callback=initMap"></script>-->
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3QOGrAOPV7JTBeiZ1TUzh2-sHkyheopw&callback=initMap" type="text/javascript"></script>
+
     <style>
       .div1 {
            overflow:scroll;
            height:200px;
            width:auto;
       }
-     
+     #map { width: 100%; height: 300px; border: 1px solid #d0d0d0; } 
 
     </style>
     <script> 
@@ -279,7 +281,21 @@ alert("Ha ocurrido un error")
                                          require_once "../class/FichaTenica.php";
                                          $ms = new FichaTecnica();
                                          $contacto = $ms->selectOneC($id);
+                                         $checking = 0;
                                          foreach ((array)$contacto as $row) {
+                                          if ($checking == 0) {
+
+                                         echo '
+                                          <tr>
+                                           <td>'.$row['nombre'].'</td>
+                                           <td>'.$row["telefono"].'</td>
+                                            <td>
+                                            <input type="radio" name="id_contacto" id="id_contacto" checked value="'.$row["id_contacto"].'" />
+                                             <input type="hidden" name="id_cliente" id="id_cliente" value="'.$row["id_cliente"].'"/>
+                                           </td>
+                                          </tr>
+                                         ';
+                                          }else{
                                          echo '
                                           <tr>
                                            <td>'.$row['nombre'].'</td>
@@ -290,6 +306,8 @@ alert("Ha ocurrido un error")
                                            </td>
                                           </tr>
                                          ';
+                                       }
+                                         $checking = $checking +1;
 
                                        }
 
@@ -302,13 +320,14 @@ alert("Ha ocurrido un error")
                                           </TBODY>
                                         </table>
                                       <div class="col-xs-12">
+
                                         <div class="form-group">
                                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Tipo Maquina
                                           </label>
                                           <div class="col-md-12 col-sm-8 col-xs-12">
-                                            <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
+                                          <!--  <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
                                                  <?php 
-                                                 require_once "../class/TipoMaquina.php";
+                                             /*    require_once "../class/TipoMaquina.php";
                                                  $misGP = new TipoMaquina();
                                                  $tc = $misGP->selectAll();
                                                 
@@ -316,11 +335,14 @@ alert("Ha ocurrido un error")
                                                  
                                                  foreach ((array)$tc as $row) {
                                                  echo '<option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>';
-                                               }
+                                               }*/
                                                ?>
-                                               </select>
+                                               </select>-->
+
+                                            <input type="text" id="tipo_maquina" name="tipo_maquina" class="form-control col-md-7 col-xs-12">
                                           </div>
                                         </div>
+
                                         <div class="form-group">
                                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Linea de Produccion
                                           </label>
@@ -334,7 +356,7 @@ alert("Ha ocurrido un error")
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Descripcion Falla
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="falla" id="falla" class="form-control"> </textarea>  
+                                         <textarea name="falla" id="falla" class="cke_panel cke_ltr cke_skin_kama cke_contextmenu form-control" rows="10" cols="50"> </textarea>  
                           
                                           </div>
                                        
@@ -433,7 +455,7 @@ alert("Ha ocurrido un error")
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="datos_generales" id="datos_generales" class="form-control">
+                                         <textarea name="datos_generales" id="datos_generales" class="form-control" rows="6" cols="50">
 Horas Maquina:
 Horas bomba:
 Make up: 
@@ -451,7 +473,17 @@ software:</textarea>
                                         <textarea id="lgi" name="lgi" readonly=""></textarea>
                                   
                                        </div>
-                                       
+                                       <!--
+                                        <div class="form-group">
+                                     
+                                   <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Ubicacion:</p></label>
+
+                                  <p>Presici&oacute;n: <span id="psc"></span></p> 
+                                   <div id="map"></div> 
+                                  
+                                       </div>
+                                      
+                                       -->
                                        <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Hora Actual <?php $hora = new DateTime("now", new DateTimeZone('America/El_Salvador'));
                             echo $hora->format('h:i:s A'); ?>
@@ -556,8 +588,21 @@ software:</textarea>
                 </div>
 
 
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
-                              <button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">    
+                              <?php 
+                              if ($id!=0 && $id_producto !=0) {
+                                echo '<button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>';
+
+                              }
+                              else{
+                                echo "<span class='sr-only'>ALERTA:</span>
+              
+                Por favor, Seleccione un Equipo o Empresa.
+                </div>";   
+                                                           }
+
+                              ?>                         
+                              
                             </div>
                           </div>
                                   </div>
@@ -660,6 +705,9 @@ software:</textarea>
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <script type="text/javascript" src="../vendors/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="../vendors/ckeditor/ckeditor.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -1009,6 +1057,13 @@ ga('send', 'pageview');
       imagen2.value=document.getElementById(idCanvas2).toDataURL('image/png');
       document.forms[idForm].submit();
     }
+</script>
+<script type="text/javascript">
+
+CKEDITOR.replace('falla');
+
+CKEDITOR.replace('trabajo');
+
 </script>
 
         

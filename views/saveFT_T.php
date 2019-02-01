@@ -263,7 +263,21 @@ alert("Ha ocurrido un error")
                                          require_once "../class/FichaTenica.php";
                                          $ms = new FichaTecnica();
                                          $contacto = $ms->selectOneC($id);
+                                         $checking =0;
                                          foreach ((array)$contacto as $row) {
+                                      if ($checking == 0) {
+
+                                         echo '
+                                          <tr>
+                                           <td>'.$row['nombre'].'</td>
+                                           <td>'.$row["telefono"].'</td>
+                                            <td>
+                                            <input type="radio" name="id_contacto" id="id_contacto" checked value="'.$row["id_contacto"].'" />
+                                             <input type="hidden" name="id_cliente" id="id_cliente" value="'.$row["id_cliente"].'"/>
+                                           </td>
+                                          </tr>
+                                         ';
+                                          }else{
                                          echo '
                                           <tr>
                                            <td>'.$row['nombre'].'</td>
@@ -274,6 +288,8 @@ alert("Ha ocurrido un error")
                                            </td>
                                           </tr>
                                          ';
+                                       }
+                                         $checking = $checking +1;
 
                                        }
 
@@ -291,21 +307,22 @@ alert("Ha ocurrido un error")
                                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Tipo Maquina
                                           </label>
                                           <div class="col-md-12 col-sm-8 col-xs-12">
-                                            <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
+                                          
+                                          <!--  <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
                                                  <?php 
-                                                 require_once "../class/TipoMaquina.php";
+                                             /*    require_once "../class/TipoMaquina.php";
                                                  $misGP = new TipoMaquina();
                                                  $tc = $misGP->selectAll();
                                                 
                                                    # code...
                                                  
                                                  foreach ((array)$tc as $row) {
-                                                 echo '
-                                                  <option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>
-                                                 ';
-                                               }
+                                                 echo '<option value="'.$row["id_tipo_ma"].'">'.$row["nombre"].'</option>';
+                                               }*/
                                                ?>
-                                               </select>
+                                               </select>-->
+
+                                            <input type="text" id="tipo_maquina" name="tipo_maquina" class="form-control col-md-7 col-xs-12">
                                           </div>
                                         </div>
                                         <div class="form-group">
@@ -532,8 +549,20 @@ echo $hora->format('h:i:s A'); ?>
               
                 Por favor, verifique los datos antes de guardar la ficha tecnica.
                 </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                             
-                              <button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"> 
+                              <?php 
+                              if ($id!=0 && $id_producto !=0) {
+                                echo '<button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>';
+
+                              }
+                              else{
+                                echo "<span class='sr-only'>ALERTA:</span>
+              
+                Por favor, Seleccione un Equipo o Empresa.
+                </div>";   
+                                                           }
+
+                              ?>                       
                             </div>
                           </div>
                                   </div>
