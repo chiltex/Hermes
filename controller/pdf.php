@@ -81,7 +81,7 @@ ob_start();
 
                            </tr>
                            <tr>
-                          <td colspan=2> <img src="../fotos/fichaTecnica'.$codigo.'/ubicacion_fichaTecnica_'.$codigo.'.png"/><td>
+                          <td colspan=2> <td>
                            </tr>
                              <tr>
                            <td><strong>Entrada :</strong> '.$key["hora_ingreso"].'</td>
@@ -99,7 +99,7 @@ ob_start();
                            $array_falla = str_split($falla);
                            $falla_count = strlen($falla);
 
-                           for ($i=0; $i <= $falla_count; $i++) { 
+                           for ($i=0; $i < $falla_count; $i++) { 
                              echo $array_falla[$i];
                            }
 
@@ -124,7 +124,7 @@ ob_start();
                            $array_trabajo = str_split($trabajo);
                            $trabajo_count = strlen($trabajo);
 
-                           for ($a=0; $a <= $trabajo_count; $a++) { 
+                           for ($a=0; $a < $trabajo_count; $a++) { 
                              echo $array_trabajo[$a];
                            }
                           echo'
@@ -147,6 +147,7 @@ ob_start();
                    </div>
                    <br>
                    <br>
+                   <img src="../fotos/fichaTecnica'.$codigo.'/ubicacion_fichaTecnica_'.$codigo.'.png"/>
                    <br>  <label> <H1>Fotografias</H1></label>
                    <ul>';
 

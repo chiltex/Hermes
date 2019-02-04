@@ -235,7 +235,7 @@
                                            <?php
                                             if ($field['id_ficha_tecnica']==NULL || $field['id_ficha_tecnica']==0) {
                                                   echo '
-                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera=ticket_u&falla='.$field['descripcion'].'" class="btn btn-success">Añadir Ficha Tecnica</a>
+                                                    <a href="../views/saveFT_T.php?cliente='.$iCliente.'&id_producto='.$iProducto.'&nombre='.$nCliente.'&producto='.$nProducto.'&codigo_serie='.$cProducto.'&ticket='.$id_ticket.'&bandera=ticket_u" class="btn btn-success">Añadir Ficha Tecnica</a>
                                                   ';
                                               
                                               }

@@ -343,8 +343,16 @@ alert("Ha ocurrido un error")
                                           }else{
                                             $falla="Describa la falla";
                                           }
-                                         ?>                                   
-                                         <textarea name="falla" id="falla" class="form-control"><?php echo $falla;?> </textarea>  
+                                            require_once "../class/Ticket.php";
+                                         $ms1 = new Ticket();
+                                         $descripcionFalla = $ms1->selectOne($id_ticket);
+                                         foreach ($descripcionFalla as $key) {
+                                           echo '  <textarea name="falla" id="falla" class="form-control">'.$key['descripcion'].'</textarea>  ';
+                                         }
+                                         ?>
+
+
+                                       
                           
                                           </div>
                                        
