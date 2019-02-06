@@ -369,7 +369,7 @@ session_start();
                                     </div>
                                     <?php 
               $correo_eliminar = $_SESSION['correo'];
-              if ($correo_eliminar == "pcumez@hermes.com.gt" || $correo_eliminar == "serviciotecnico@hermes.com.gt" || $correo_eliminar == "npinto@hermes.com.gt" || $correo_eliminar == "cfuentes@hermes.com.gt"  ) {
+              if ($correo_eliminar == "pcumez@hermes.com.gt" || $correo_eliminar == "serviciotecnico@hermes.com.gt" || $correo_eliminar == "npinto@hermes.com.gt" || $correo_eliminar == "cfuentes@hermes.com.gt" || $correo_eliminar == "administrador@gmail.com" ) {
 
                                      ?>
 

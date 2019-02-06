@@ -10,7 +10,7 @@ require_once "class/Events.php";
  
  $tipo_n = $_SESSION['tipo'];
  $identificador = $_SESSION['id_usuario'];
- if ($tipo_n !="Administrador") {
+ if ($tipo_n !="Administrador" || $tipo_n !="Administrativo") {
   $events = $misEvents->selectALLONE($identificador);  
  }else{
   if ($codigo1==0) {
@@ -323,14 +323,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                         <span class=" fa fa-angle-down"></span>
                       </a>
                       <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;"> Profile</a></li>
-                        <li>
-                          <a href="javascript:;">
-                            <span class="badge bg-red pull-right">50%</span>
-                            <span>Settings</span>
-                          </a>
-                        </li>
-                        <li><a href="javascript:;">Help</a></li>
+                        
                         <li><a href="controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
                     </li>
@@ -352,7 +345,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Bienvenido <?php echo $identificador; ?></h2>
+                    <h2>Bienvenido </h2>
 
 
                     
@@ -380,7 +373,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                 <div class="row">
                 
 <?php 
-  if ($tipo_n != "Administrador") {
+  if ($tipo_n != "Administrador" || $tipo_n != "Administrativo") {
    
   }
   else{
@@ -522,7 +515,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
           </div>
           </div>
           <?php 
-          if ($tipo_n !="Administrador") {
+          if ($tipo_n !="Administrador" || $tipo_n != "Administrativo") {
               $id_tu = $_SESSION['id_tipo_usuario'];
               $id_usu = $_SESSION['id_usuario'];
               echo '
