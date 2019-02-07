@@ -175,6 +175,7 @@
                                     echo '
                                          <div class="col-xs-8"><h4>Empresa:<strong> '.$key["nombre"].'</strong></h4></div>
                                              <input type="hidden" name="id_ticket" id="id_ticket" value="'.$id_ticket.'"/> 
+                                             <input type="hidden" name="nombre_empresa" id="nombre_empresa" value="'.$key['nombre'].'"/> 
                               
                                          ';
                                              $iCliente=$field["id_cliente"];
