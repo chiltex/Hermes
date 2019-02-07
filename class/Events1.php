@@ -166,14 +166,23 @@ class Events extends Conexion
     {
         $query="SELECT TIME(start) as hora FROM events WHERE id_ticket='".$codigo."'";
         $selectall=$this->db->query($query);
+          if ($selectall->num_rows!=0) {
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
-        return $ListClientes;
+        }else{
+            $ListClientes = "00:00:00";
+        }
+       
     }
     public function selectDate($codigo)
     {
         $query="SELECT DATE(start) as fecha FROM events WHERE id_ticket='".$codigo."'";
         $selectall=$this->db->query($query);
+        if ($selectall->num_rows!=0) {
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        }else{
+            $ListClientes = "00/00/0000";
+        }
+       
         return $ListClientes;
     }
 

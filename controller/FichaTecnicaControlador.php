@@ -969,6 +969,8 @@ if (isset($_FILES['foto_seis'])) {
 	$FichaTecnica->setTipo_maquina($tipo_maquina);		
 
 	$update=$FichaTecnica->update();
+	
+
 	$i=0;
 	while ($i<$cont_repuestos) {
 		if ($cantidades[$i]=="") {
@@ -1000,6 +1002,10 @@ if (isset($_FILES['foto_seis'])) {
 		}
 		}
 	if ($update==true) {
+		if ($estado == "Finalizado") {
+		$updatecolor=$FichaTecnica->updateColors($id_ficha_tecnica);
+	}
+		
 		$archivo='../firmas/mi_firma_'.$firma_cliente1.'.png';
 
   file_put_contents($_SERVER['DOCUMENT_ROOT'].'Hermes/tmp/mi_firma_'.$firma_cliente1.'.png', $_POST['imagenC']);

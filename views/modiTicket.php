@@ -498,11 +498,16 @@
                                                  $eventos = new Events();
 
                                                  $evento1 = $eventos->selectDate($id_ticket);
+                                                 if ($evento1 != "00/00/0000") {
+                                                    foreach ($evento1 as $eys) {
 
-                                                 foreach ($evento1 as $eys) {
+                                                     echo "<input type='text' class='form-control' name='fecha' id='fecha' value='".$eys['fecha']."' />";
+                                                   }
+                                                 }else{
 
-                                                   echo "<input type='text' class='form-control' name='fecha' id='fecha' value='".$eys['fecha']."' />";
+                                                     echo "<input type='text' class='form-control' name='fecha' id='fecha' />";
                                                  }
+                                                
 
                                              ?>
                                             <span class="input-group-addon">
@@ -520,9 +525,14 @@
                                                 
                                                  $evento2 = new Events();
                                                  $evento11=$evento2->selectHour($id_ticket);
-                                                 foreach ($evento11 as $keys1) {
+                                                 if ($evento11 != "00:00:00") {
+                                                  foreach ($evento11 as $keys1) {
                                                    echo '<input type="time" class="form-control" id="hora_solucion" name="hora_solucion" min="7:00" max="18:00" value="'.$keys1['hora'].'" />';
                                                  }
+                                                 }else{
+                                                  echo '<input type="time" class="form-control" id="hora_solucion" name="hora_solucion" min="7:00" max="18:00" />';
+                                                 }
+                                                 
 
                                              ?>
                                           
