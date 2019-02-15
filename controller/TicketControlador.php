@@ -25,6 +25,7 @@ if ($accion=="modificar") {
 	$id_producto =$_POST['id_producto'];	
 	$id_usuario =$_POST['id_usuario'];		
 	$id_gestion =$_POST['id_gestion'];	
+	$nombre_empresa =$_POST['nombre_empresa'];	
 	$id_tipo_gestion =$_POST['id_tipo_gestion'];
 	if (isset($_POST['id_ficha_tecnica'])) {
 			$id_ficha_tecnica =$_POST['id_ficha_tecnica'];
@@ -69,6 +70,9 @@ if ($accion=="modificar") {
 			$Events = new Events();
 
 	if ($fecha!='00/00/0000') {
+
+	$tittle="T: ".$lastT." Visita a:".$nombre_empresa."";
+	$color="#FFD700";
 		if ($hora_solucion=="00:00:00") {
 	$start = $fecha.' 00:00:00';
 	$end= $nuevo_end.' 00:00:00';
@@ -76,9 +80,15 @@ if ($accion=="modificar") {
 	$start = $fecha.' '.$hora_solucion;
 	$end= $nuevo_end.' 00:00:00';
 	}
+	$descri ="Solucionar el Ticket N°: ".$id_ticket. ", con falla: ".$descripcion.".";
+	$Events->setTittle($tittle);
 	$Events->setStar($start);	
 	$Events->setEnd($end);	
-	$Events->setId_ticket($id_ticket);
+	$Events->setId_ticket($id_ticket);	
+	$Events->setColor($color);
+	$Events->setDescripcion($descri);
+	$Events->setId_usuario($id_usuario);
+
 	$update=$Events->updateDate1();
 				 $contac = new Contactos();
 		 $clien = new Cliente();

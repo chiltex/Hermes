@@ -147,6 +147,27 @@ class Events extends Conexion
     }
       public function updateDate1()
     {
+
+        $query1="SELECT * FROM events WHERE id_ticket='".$this->id_ticket."'";
+        $selectall=$this->db->query($query1);
+        if ($selectall->num_rows==0) {
+            
+            $query="INSERT INTO events(id,title,color,start,end,descripcion,id_usuario,id_ticket)
+                values(0,'".$this->tittle."',
+                '".$this->color."',
+                '".$this->star."',
+                '".$this->end."',
+                '".$this->descripcion."',
+                '".$this->id_usuario."',
+                '".$this->id_ticket."');";
+        $save=$this->db->query($query);
+        if ($save==true) {
+            return true;
+        }else {
+            
+            return false;
+        }   
+    }else{
         $query="UPDATE events SET start='".$this->star."',end='".$this->end."' WHERE id_ticket='".$this->id_ticket."'";
         $update=$this->db->query($query);
         if ($update==true) {
@@ -154,7 +175,15 @@ class Events extends Conexion
         }else {
             return false;
         }  
+
     }
+
+
+}
+
+       
+    
+
          public function selectLast()
     {
         $query="SELECT * FROM events ORDER BY id DESC LIMIT 1";
@@ -166,14 +195,23 @@ class Events extends Conexion
     {
         $query="SELECT TIME(start) as hora FROM events WHERE id_ticket='".$codigo."'";
         $selectall=$this->db->query($query);
+          if ($selectall->num_rows!=0) {
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
-        return $ListClientes;
+        }else{
+            $ListClientes = "00:00:00";
+        }
+       
     }
     public function selectDate($codigo)
     {
         $query="SELECT DATE(start) as fecha FROM events WHERE id_ticket='".$codigo."'";
         $selectall=$this->db->query($query);
+        if ($selectall->num_rows!=0) {
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        }else{
+            $ListClientes = "00/00/0000";
+        }
+       
         return $ListClientes;
     }
 

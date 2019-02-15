@@ -360,6 +360,31 @@ class FichaTecnica extends Conexion
         return $ListClientes;
     }
    
+     public function updateColors($fichaT)
+    {
+        $query1="SELECT * FROM ticket WHERE id_ficha_tecnica='".$fichaT."'";
+        $selectall=$this->db->query($query1);
+        if ($selectall->num_rows!=0) {
+             $ticket=$selectall->fetch_all(MYSQLI_ASSOC);
+             foreach ($ticket as $key ) {
+                 $id_ticket = $key['id_ticket'];
+             }
+             $query="UPDATE events SET color='#B7100A' WHERE id_ticket='".$id_ticket."'";
+        $update=$this->db->query($query);
+        if ($update==true) {
+            return true;
+        }else {
+            return false;
+        } 
+
+            
+        }else{
+
+            return false;
+        }
+      
+      
+    }
 
 }
 ?>
