@@ -1011,8 +1011,10 @@ if (isset($_FILES['foto_seis'])) {
   file_put_contents($_SERVER['DOCUMENT_ROOT'].'Hermes/tmp/mi_firma_'.$firma_cliente1.'.png', $_POST['imagenC']);
   		$archivo_temporalCliente = '../tmp/mi_firma_'.$firma_cliente1.'.png';
 		$NueArchivo=$_POST['imagenC'];
+
 		$datosBase641 = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '',$NueArchivo));
 		if (filesize($archivo)<=1000 || filesize($archivo_temporalCliente)>1000 ){
+			
 			uploadImgBase64($_POST['imagenC'], 'mi_firma_'.$firma_cliente1.'.png' );
 		}
 		$archivo1='../firmas/mi_firma_'.$firma_tecnico1.'.png';
