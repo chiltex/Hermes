@@ -356,7 +356,7 @@ alert("Ha ocurrido un error")
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Descripcion Falla
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="falla" id="falla" class="cke_panel cke_ltr cke_skin_kama cke_contextmenu form-control" rows="10" cols="50"> </textarea>  
+                                         <textarea name="falla" id="falla" class="form-control" rows="10" cols="50"> </textarea>  
                           
                                           </div>
                                        
@@ -475,12 +475,12 @@ software:</textarea>
                                        </div>
                                        
                                         <div class="form-group">
-                                     
+                                  <!--     
                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Ubicacion:</p></label>
 
-                                  <p>Presici&oacute;n: <span id="psc"></span></p> 
+                                <p>Presici&oacute;n: <span id="psc"></span></p> 
                                    <div id="map"></div> 
-                                  
+                                  -->
                                        </div>
                                       
                                        <div class="form-group">
