@@ -1026,6 +1026,14 @@ ga('send', 'pageview');
       document.forms[idForm].submit();
     }
 </script>
+<script type="text/javascript">
+
+CKEDITOR.replace('falla');
+
+CKEDITOR.replace('trabajo');
+
+</script>
+
         
     </body>
 </html>

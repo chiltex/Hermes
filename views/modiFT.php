@@ -737,6 +737,9 @@ session_start();
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    
+    <script type="text/javascript" src="../vendors/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="../vendors/ckeditor/ckeditor.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -1079,6 +1082,13 @@ ga('send', 'pageview');
       document.forms[idForm].submit();
     }
 </script>
-        
+        <script type="text/javascript">
+
+CKEDITOR.replace('falla');
+
+CKEDITOR.replace('trabajo');
+
+</script>
+
     </body>
 </html>

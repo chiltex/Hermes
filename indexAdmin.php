@@ -10,7 +10,7 @@ require_once "class/Events.php";
  
  $tipo_n = $_SESSION['tipo'];
  $identificador = $_SESSION['id_usuario'];
- if ($tipo_n !="Administrador" || $tipo_n !="Administrativo") {
+ if ($tipo_n !="Administrador") {
   $events = $misEvents->selectALLONE($identificador);  
  }else{
   if ($codigo1==0) {
@@ -88,7 +88,7 @@ require_once "class/Events.php";
                   </div>
                   <div class="profile_info">
                     <span>Welcome,</span>
-                    <h2>User</h2>
+                    <h2><?php echo $identificador; ?></h2>
                   </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -900,5 +900,11 @@ ga('send', 'pageview');
     })
   })
 </script> 
+
+<script type="text/javascript">
+
+CKEDITOR.replace('descripcion');
+
+</script>
     </body>
 </html>
