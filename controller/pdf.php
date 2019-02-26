@@ -33,8 +33,14 @@ ob_start();
     <?php 
             require_once "../class/FichaTenica.php";
             require_once "../class/Contactos.php";
+            require_once "../class/Repuestos.php";
+            require_once "../class/Consumibles.php";
                         $miFichaT = new FichaTecnica();
                          $ft = $miFichaT->selectOne($codigo);
+                         $repuestos = new Repuestos();
+                         $misRepuestos = $repuestos->selectOneDR($codigo);
+                         $consumibles = new Consumibles();
+                         $misConsumibles = $consumibles->selectOneDR($codigo);
                     foreach ($ft as $key){
                       if ($key['hora_egreso']==NULL) {
                         $hora_egreso= "00:00:00";
@@ -139,14 +145,56 @@ ob_start();
                            <td><strong>Tecnico Encargado:</strong> '.$key["usuario"].' '.$key['usuario_ape'].'</td>
                            </tr>
                             <tr>
-                           <td>Firma Cliente <br><img src="../firmas/mi_firma_'.$key["firma_cliente"].'.png" width="35%" height="35%" border="1"> </td>
-                           <td>Firma Tecnico <br><img src="../firmas/mi_firma_'.$key["firma_tecnico"].'.png" width="35%" height="35%" border="1"></td>
+                           <td>Firma Cliente <br><img src="../firmas/mi_firma_'.$key["firma_cliente"].'.png" width="45%" height="45%" border="1"> </td>
+                           <td>Firma Tecnico <br><img src="../firmas/mi_firma_'.$key["firma_tecnico"].'.png" width="45%" height="45%" border="1"></td>
                            </tr>
                            
              </table>
                    </div>
                    <br>
-                   <br>
+                   <div class="table-responsive">
+                   <label><strong><h2>Detalle Repuestos:</h2></strong></label>
+                   <table class="table table-bordered" style="border-collapse: collapse;" border="1">
+                   <thead>
+                    <tr>
+                    <th>Repuesto</th>
+                    <th>Cantidad</th>
+                    </tr>
+                   </thead>
+                   <tbody>';
+                   foreach ($misRepuestos as $key) {
+                   echo '
+                    <tr>
+                      <td>'.$key['nombre'].'</td>
+                      <td>'.$key['cantidad'].'</td>
+                    </tr>
+                   ';
+                   }
+
+                   echo '</tbody>
+                   </table>
+                   <br>  <br>
+                   <label><strong><h2>Detalle Consumibles:</h2></strong></label>
+                   <table class="table table-bordered" style="border-collapse: collapse;" border="1">
+                   <thead>
+                    <tr>
+                    <th>Repuesto</th>
+                    <th>Cantidad</th>
+                    </tr>
+                   </thead>
+                   <tbody>';
+                   foreach ($misConsumibles as $key1) {
+                   echo '
+                    <tr>
+                      <td>'.$key1['nombre'].'</td>
+                      <td>'.$key1['cantidad'].'</td>
+                    </tr>
+                   ';
+                   }
+
+                   echo '</tbody>
+                   </table>
+                   </div>
                    <img src="../fotos/fichaTecnica'.$codigo.'/ubicacion_fichaTecnica_'.$codigo.'.png"/>
                    <br>  <label> <H1>Fotografias</H1></label>
                    <ul>';
@@ -347,6 +395,7 @@ elseif($accion=="enviar"){
 $dompdf1->load_Html(ob_get_clean());
 $dompdf1->render();
   $filename1 = 'fichaTecnica_'.$fichat.'.pdf';
+
 
   $pdf =$dompdf1->output();
   file_put_contents($_SERVER['DOCUMENT_ROOT'].'/Hermes/enviados/'.$filename1, $pdf);

@@ -387,7 +387,54 @@ session_start();
                                 <div class="row">
                                   <div class="col-lg-9">
                                     <div class="row">
-                                       
+                                       <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo de Trabajo
+                                          </label>
+                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                            <select id="tipo_trabajo" name="tipo_trabajo" class="form-control ">
+                                              <?php 
+                                                if ($key['tipo_trabajo']== 'Contrato') {
+                                                 echo ' <option value="Contrato" selected>Contrato</option>
+                                              <option value="Cobro">Cobro</option>
+                                              <option value="Garantia">Garantia<option> 
+                                              <option value="Demostracion">Demostracion<option> 
+                                              <option value="Cortesia">Cortesia<option>';
+                                                }elseif ($key['tipo_trabajo']== 'Cobro') {
+                                                 echo ' <option value="Contrato" >Contrato</option>
+                                              <option value="Cobro" selected>Cobro</option>
+                                              <option value="Garantia">Garantia<option> 
+                                              <option value="Demostracion">Demostracion<option> 
+                                              <option value="Cortesia">Cortesia<option>';
+                                                }elseif ($key['tipo_trabajo']== 'Garantia') {
+                                                 echo ' <option value="Contrato" >Contrato</option>
+                                              <option value="Cobro">Cobro</option>
+                                              <option value="Garantia" selected>Garantia<option> 
+                                              <option value="Demostracion">Demostracion<option> 
+                                              <option value="Cortesia">Cortesia<option>';
+                                                }elseif ($key['tipo_trabajo']== 'Demostracion') {
+                                                 echo ' <option value="Contrato" >Contrato</option>
+                                              <option value="Cobro">Cobro</option>
+                                              <option value="Garantia">Garantia<option> 
+                                              <option value="Demostracion" selected>Demostracion<option> 
+                                              <option value="Cortesia">Cortesia<option>';
+                                                }elseif ($key['tipo_trabajo']== 'Cortesia') {
+                                                 echo ' <option value="Contrato" >Contrato</option>
+                                              <option value="Cobro">Cobro</option>
+                                              <option value="Garantia">Garantia<option> 
+                                              <option value="Demostracion">Demostracion<option> 
+                                              <option value="Cortesia" selected>Cortesia<option>';
+                                                }else{
+                                                   echo ' <option value="Contrato">Contrato</option>
+                                              <option value="Cobro">Cobro</option>
+                                              <option value="Garantia">Garantia<option> 
+                                              <option value="Demostracion">Demostracion<option> 
+                                              <option value="Cortesia">Cortesia<option>';
+                                                }
+                                               ?>
+                                                                                 
+                                            </select>
+                                          </div>
+                                        </div>
                                         <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
@@ -501,17 +548,26 @@ session_start();
                                                 echo '   
                                                 <option value="Iniciado" selected>Iniciado</option>
                                                <option value="En Proceso">En proceso</option>
+                                              <option value="Pendiente de Reparar">Pendiente de Reparar</option>
                                               <option value="Finalizado">Finalizado</option>';
                                               }elseif($key['estado']=='En Proceso') {
                                                 echo '   
                                                 <option value="Iniciado">Iniciado</option>
                                                <option value="En Proceso" selected>En proceso</option>
+                                              <option value="Pendiente de Reparar">Pendiente de Reparar</option>
                                               <option value="Finalizado">Finalizado</option>';
                                               }elseif($key['estado']=='Finalizado') {
                                                 echo '   
                                                 <option value="Iniciado">Iniciado</option>
                                                <option value="En Proceso">En proceso</option>
+                                              <option value="Pendiente de Reparar">Pendiente de Reparar</option>
                                               <option value="Finalizado" selected>Finalizado</option>';
+                                              }elseif($key['estado']=='Pendiente de Reparar') {
+                                                echo '   
+                                                <option value="Iniciado">Iniciado</option>
+                                               <option value="En Proceso">En proceso</option>
+                                              <option value="Pendiente de Reparar" selected>Pendiente de Reparar</option>
+                                              <option value="Finalizado">Finalizado</option>';
                                               }
                                              ?>                                 
                                             </select>

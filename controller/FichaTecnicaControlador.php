@@ -94,6 +94,11 @@ if ($accion=="modificar") {
 	$id_consumibles=$_POST['id_consumibles'];
 	$cantidadesC=$_POST['cantidadC'];
 	$cont_consumibles=count($cantidadesC);
+	if (isset($_POST['tipo_trabajo'])) {
+	$tipo_trabajo=$_POST['tipo_trabajo'];
+	}else{
+		$tipo_trabajo = "Cobro";
+	}
 	
 		
 if (isset($_FILES['foto_uno'])) {
@@ -966,7 +971,8 @@ if (isset($_FILES['foto_seis'])) {
 	$FichaTecnica->setFoto_dos($foto_dos);
 	$FichaTecnica->setFoto_tres($foto_tres);
 	$FichaTecnica->setEstado($estado);
-	$FichaTecnica->setTipo_maquina($tipo_maquina);		
+	$FichaTecnica->setTipo_maquina($tipo_maquina);	
+	$FichaTecnica->setTipo_trabajo($tipo_trabajo);	
 
 	$update=$FichaTecnica->update();
 	
@@ -1061,7 +1067,11 @@ $lonphp = $_COOKIE["loncookie"];
 		$id_contacto=NULL;
 	}
 	
-    
+    if (isset($_POST['tipo_trabajo'])) {
+	$tipo_trabajo=$_POST['tipo_trabajo'];
+	}else{
+		$tipo_trabajo = "Cobro";
+	}
 	$id_cliente =$_POST['id_cliente'];
 	$id_usuario =$_POST['id_usuario'];	
 	$id_producto =$_POST['id_producto'];
@@ -2003,6 +2013,7 @@ if (isset($_FILES['foto_seis'])){
 	$FichaTecnic->setFoto_dos($foto_dos);
 	$FichaTecnic->setFoto_tres($foto_tres);
 	$FichaTecnic->setTipo_maquina($tipo_maquina);
+	$FichaTecnic->setTipo_trabajo($tipo_trabajo);
 
 	$save=$FichaTecnic->save();
 	$i=0;
