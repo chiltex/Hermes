@@ -177,6 +177,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			$mail->addCC($this->_jefe);
 			$mail->addAddress($this->_cc1);
 			$mail->addAddress($this->_cc2);
+			$mail->addAddress("infogt@hermes.com.gt","Infot GT");
 			        // Add attachments
 			//$mail->addAddress($email1);
 			//$mail->addAddress($this->_correo);
@@ -237,6 +238,8 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			$mail->addCC($this->_jefe);
 			$mail->addCC($this->_cc1);
 			$mail->addCC($this->_cc2);
+			
+			$mail->addAddress("infogt@hermes.com.gt","Infot GT");
 			        // Add attachments
 			//$mail->addAddress($email1);
 			//$mail->addAddress($this->_correo);

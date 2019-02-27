@@ -161,6 +161,7 @@ session_start();
                 <?php 
 
                      $id_ficha_tecnica=$_GET["id"];
+                     $bandera=$_GET["bandera"];
                      require_once "../class/FichaTenica.php";
                          $miFichaT = new FichaTecnica();
                          $ft = $miFichaT->selectOne($id_ficha_tecnica);
@@ -183,6 +184,8 @@ session_start();
                                          <input type="hidden" name="id_cliente" id="id_cliente" value="'.$key["id_contacto"].'"/>';
                                           echo '<input type="hidden" name="id_usuario" id="id_usuario" value="'.$key['id_usuario'].'"/>
                                                 <input type="hidden" name="id_ficha_tecnica" id="id_ficha_tecnica" value="'.$id_ficha_tecnica.'"/>
+                                                <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>
+
                                           ';
                                           echo '
                                                 <div class="col-xs-8"><h5>Producto:<strong> '.$key['prod'].'</strong>  Codigo serie: <strong> '.$key['codigo_serie'].'</strong></h5></div> 

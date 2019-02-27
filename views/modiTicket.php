@@ -655,6 +655,10 @@
     <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    
+    <script type="text/javascript" src="../vendors/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="../vendors/ckeditor/ckeditor.js"></script>
     <!-- bootstrap-datetimepicker -->    
     <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- Custom Theme Scripts -->
@@ -832,5 +836,13 @@ xmlhttp.send("cod_banda="+cod);
         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
     });
 </script>
+<script type="text/javascript">
+
+CKEDITOR.replace('solucion');
+
+CKEDITOR.replace('descripcion');
+
+</script>
+
     </body>
 </html>

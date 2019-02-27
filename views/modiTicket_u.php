@@ -571,6 +571,9 @@
     <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+
+    <script type="text/javascript" src="../vendors/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="../vendors/ckeditor/ckeditor.js"></script>
 <!-- Google Analytics -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -720,6 +723,14 @@ xmlhttp.send("cod_banda="+cod+"&usuario="+usua);
     $("#datetimepicker7").on("dp.change", function(e) {
         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
     });
-</script>  
+</script> 
+<script type="text/javascript">
+
+CKEDITOR.replace('descripcion');
+
+CKEDITOR.replace('solucion');
+
+</script>
+
     </body>
 </html>
