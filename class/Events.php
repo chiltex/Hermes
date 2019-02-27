@@ -115,14 +115,14 @@ class Events extends Conexion
     }
  public function selectALL()
     {
-        $query="SELECT * FROM events";
+        $query="SELECT id, title, start, end, color, replace(descripcion,'\n','') AS descripcion1, id_usuario, id_ticket FROM events";
         $selectall=$this->db->query($query);
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListClientes;
     }
  public function selectALLONE($codigo)
     {
-        $query="SELECT * FROM events WHERE id_usuario='".$codigo."'";
+        $query="SELECT id, title, start, end, color, replace(descripcion,'\n','') AS descripcion1, id_usuario, id_ticket FROM events WHERE id_usuario='".$codigo."'";
         $selectall=$this->db->query($query);
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListClientes;

@@ -288,7 +288,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 
 
 
-			$mail->SetFrom('hermes.soporte@gmail.com','Eduardo Garcia');
+			$mail->SetFrom('info.hermes@sistemashermesgt.com','Eduardo Garcia');
 			$mail->FromName = 'APP HERMES INTERNATIONAL';
 			//$email = "blink242@outlook.com";
 			//$email1 = "codefuentes@outlook.com";

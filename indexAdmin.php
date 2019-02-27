@@ -817,7 +817,7 @@ ga('send', 'pageview');
           start: '<?php echo $start; ?>',
           end: '<?php echo $end; ?>',
           color: '<?php echo $event['color']; ?>',
-          descripcion: '<?php echo $event['descripcion']; ?>',
+          descripcion: '<?php echo $event['descripcion1']; ?>',
         },
       <?php endforeach; ?>
       ]
@@ -900,5 +900,11 @@ ga('send', 'pageview');
     })
   })
 </script> 
+
+<script type="text/javascript">
+
+CKEDITOR.replace('descripcion');
+
+</script>
     </body>
 </html>
