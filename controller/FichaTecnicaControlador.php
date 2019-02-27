@@ -2217,8 +2217,14 @@ elseif ($accion=="modificarFirma"){
     uploadImgBase64($_POST['imagenC'], 'mi_firma_'.$firma_cliente.'.png' );
 
     uploadImgBase64($_POST['imagen2'], 'mi_firma_'.$firma_tecnico.'.png' );
-
+    if ($bandera=="admin") {
+    	
     header('Location: ../listas/FichaTecnca.php?success=correcto');
+    }else{
+
+    header('Location: ../listas/FichaTecnca_u.php?success=correcto');
+    }
+
 
 
 }

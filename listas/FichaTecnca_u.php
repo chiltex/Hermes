@@ -227,6 +227,7 @@ $usua= $_SESSION['id_usuario'];
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
                                     <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar&bandera=usuario" class="btn btn-warning">Modificar</a>
+                                    <a href="../views/modiFT_Firma.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar&bandera=usua" class="btn btn-warning">Modificar Firma</a>
 
                                     <a href="../controller/pdf.php?id='.$row["id_ficha_tecnica"].'&accion=descargar" target="_blank" class="btn btn-danger">Exportar PDF</a>
                                     <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" bandera="usuario" class="btn btn-success send_data"/>

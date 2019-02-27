@@ -281,7 +281,7 @@ section.awSlider > img{
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
                                     <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar</a>
-                                    <a href="../views/modiFT_Firma.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar Firma</a>
+                                    <a href="../views/modiFT_Firma.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar&bandera=admin" class="btn btn-warning">Modificar Firma</a>
 
                                     <a href="../controller/pdf.php?id='.$row["id_ficha_tecnica"].'&accion=descargar" target="_blank" class="btn btn-danger">Exportar PDF</a>
                                     <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" bandera="admin" class="btn btn-success send_data"/>
