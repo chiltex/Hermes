@@ -10,7 +10,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DataTables | Gentelella</title>
+    <title>HERMES |CRM</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,16 +30,14 @@ session_start();
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
     <!-- Custom MAPS -->
-    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA3QOGrAOPV7JTBeiZ1TUzh2-sHkyheopw&callback=initMap"></script>-->
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-U6DYBUvslIEZRHLQYRZ1VF_CUv3YQP4&callback=initMap" type="text/javascript"></script>
-
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
     <style>
       .div1 {
            overflow:scroll;
            height:200px;
            width:auto;
       }
-     #map { width: 100%; height: 300px; border: 1px solid #d0d0d0; } 
+     
 
     </style>
     <script> 
@@ -62,9 +60,8 @@ var centro = new google.maps.LatLng(latitud,longitud);
 var propiedades = { zoom: 15, center: centro, mapTypeId: google.maps.MapTypeId.ROADMAP }; 
 var map = new google.maps.Map(contenedor, propiedades); 
 var marcador = new google.maps.Marker({ position: centro, map: map, title: "Tu posicion actual" }); 
-document.cookie = 'latcookie='+latitud; 
+document.cookie ='latcookie='+latitud; 
 document.cookie ='loncookie='+longitud;
-
 } 
 function error(errorCode) { 
 if(errorCode.code == 1) 
@@ -75,6 +72,7 @@ else
 alert("Ha ocurrido un error") 
 } 
 </script>
+
 </head>
 <body class="nav-md" onLoad="localize()">
         <div class="container body">
@@ -82,7 +80,7 @@ alert("Ha ocurrido un error")
             <div class="col-md-3 left_col">
               <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                  <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Hermes</span></a>
+                  <img src="../logos/logohermes.jpeg" alt="..." width="225" height="70" >
                 </div>
     
                 <div class="clearfix"></div>
@@ -90,11 +88,11 @@ alert("Ha ocurrido un error")
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                   <div class="profile_pic">
-                    <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                    <img src="../logos/user.png" alt="..." class="img-circle profile_img">
                   </div>
                   <div class="profile_info">
                     <span>Welcome,</span>
-                    <h2>John Doe</h2>
+                    <h2><?php echo''.$_SESSION['nombre_usuario']; ?></h2>
                   </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -137,18 +135,18 @@ alert("Ha ocurrido un error")
                   <ul class="nav navbar-nav navbar-right">
                     <li class="">
                       <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="images/img.jpg" alt="">John Doe
+                        <img src="images/img.jpg" alt="">
+                    <?php echo''.$_SESSION['nombre_usuario']; ?>
                         <span class=" fa fa-angle-down"></span>
                       </a>
                       <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;"> Profile</a></li>
-                        <li>
-                          <a href="javascript:;">
-                            <span class="badge bg-red pull-right">50%</span>
-                            <span>Settings</span>
+                        
+                         <li>
+                          <a href="../views/modiContra.php">
+                            <span>Cambiar Contraseña</span>
                           </a>
                         </li>
-                        <li><a href="javascript:;">Help</a></li>
+                        
                         <li><a data-toggle="tooltip" data-placement="top" title="Logout" href="../controller/LoginControlador.php?accion=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
                     </li>
@@ -168,7 +166,6 @@ alert("Ha ocurrido un error")
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
-
                       <div class="x_title">
                         <h2>Agregar Ficha Tecnica</h2>
                         <ul class="nav navbar-right panel_toolbox">
@@ -177,79 +174,54 @@ alert("Ha ocurrido un error")
                           <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                             <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
+                             
                             </ul>
                           </li>
-                          <li><a class="close-link"><i class="fa fa-close"></i></a>
+                          
                           </li>
                         </ul>
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
-                        
                         <br />
                         <div class="row">
-                          <div class="col-xs-12">
+                          <div class="col-xs-12 col-md-8 col-lg-12">
                           
            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="../controller/FichaTecnicaControlador.php?accion=guardar" method="post" ENCTYPE="multipart/form-data">
               <div class="row">
                               <div class="col-lg-6">
-                                
-                                <?php 
-                              if (isset($_GET['bandera'])) {
-                            $bandera = $_GET['bandera'];
+                             
 
-                                echo' <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/> 
-                                <input type="button" name="view" value="Seleccionar Empresa"  id="1" bandera="'.$bandera.'" class="btn btn-info view_data"/> 
-
-                                ';
-                              }else {
-                                $bandera="admin";
-                                
-                                echo' <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>  
-                                <input type="button" name="view" value="Seleccionar Empresa"  id="1" bandera="'.$bandera.'" class="btn btn-info view_data"/>
-                                
-                                 <input type="button" name="view" value="Agregar Empresa/Contacto" bandera="'.$bandera.'" id="1" class="btn btn-info view_data3"/> 
-                                  ';
-                              }
-                             ?>
-                   
+                    <input type="button" name="view" value="Agregar Empresa/Contacto" id="1" bandera="ticket" class="btn btn-info view_data3"/> 
                                 <?php 
                                       if (is_null($_GET["cliente"])&& is_null($_GET["nombre"])) {
                                        $id=0;
                                        $nombre="N/A";
                                       }else{
                                          $id=$_GET["cliente"];
-                                         $nombre=$_GET["nombre"]; 
+                                         $nombre=$_GET["nombre"];
+                                         $id_producto=$_GET["id_producto"];
+                                         $producto=$_GET["producto"];
+                                         $codigo_serie=$_GET["codigo_serie"]; 
                                          if ($id!="0" && $nombre!="N/A") {
                                              echo '
                                          <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
-                                          if (is_null($_GET['id_producto'])) {
-                                           $id_producto1 = $_GET['id_producto'];
-                                            $producto1 =$_GET['producto'];
-                                            $codigo_serie1 =$_GET['codigo_serie'];
-                                             echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" id_producto="'.$id_producto1.'" producto="'.$producto1.'" codigo_serie="'.$codigo_serie1.'" class="btn btn-warning view_data4"/>';
-                                          }else{
-                                            $id_producto1 = 0;
-                                            $producto1 ="N/A";
-                                            $codigo_serie1 ="0000";
-                                             echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" id_producto="'.$id_producto1.'" producto="'.$producto1.'" codigo_serie="'.$codigo_serie1.'" class="btn btn-warning view_data4"/>';
-                                          }
-                                          
+                                           echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" bandera="ticket" producto="'.$producto.'" codigo_serie="'.$codigo_serie.'" id_producto="'.$id_producto.'" class="btn btn-warning view_data4"/>
+                                           <input type="hidden" name="empresa" id="empresa" value="'.$nombre.'"/>
+
+                                           ';
                                            # code...
                                          }else{
                                            echo '
-                                         <div class="col-xs-8"><h2>Empresa:<strong> '.$nombre.'</strong></h2></div>';
+                                         <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
                                          }
                                       
 
                                       }
                                       ?>
+
                                         <?php 
-                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" class="btn btn-info view_data2"/>';
+                                           
 
                                             if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
                                                $id_producto=0;
@@ -259,11 +231,18 @@ alert("Ha ocurrido un error")
                                                  $id_producto=$_GET["id_producto"];
                                                  $codigo_serie=$_GET["codigo_serie"];
                                                   $producto=$_GET["producto"];
+                                                  $id_ticket=$_GET["ticket"];
+                                                  $bandera=$_GET["bandera"];
                                               }
                                               echo '
-                                                <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong>  Codigo serie: <strong> '.$codigo_serie.'</strong></h4></div> 
+                                                <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong></h4></div>
+                                                <div class="col-xs-8"><h4>Codigo serie: <strong> '.$codigo_serie.'</strong></h4></div>  
                                  
                                               <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
+                                              <input type="hidden" name="producto" id="producto" value="'.$producto.'"/>
+                                              <input type="hidden" name="ticket" id="ticket" value="'.$id_ticket.'"/>
+
+                                              <input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>
                                                   ';
 
                                              ?>
@@ -282,7 +261,7 @@ alert("Ha ocurrido un error")
                                          $contacto = $ms->selectOneC($id);
                                          $checking = 0;
                                          foreach ((array)$contacto as $row) {
-                                          if ($checking == 0) {
+                                      if ($checking == 0) {
 
                                          echo '
                                           <tr>
@@ -312,19 +291,19 @@ alert("Ha ocurrido un error")
 
                                          
                                          $id_usuario=$_SESSION['id_usuario'];
-                                         echo '<input type="hidden" name="id_usuario" id="id_usuario" value="'.$id_usuario.'"/>';
+                                         echo '<input type="hidden" name="id_usuario" id="id_usuario" value="'.$id_usuario.'"/>
+                                         <input type="hidden" name="codigo_serie" id="codigo_serie" value="'.$codigo_serie.'"/>';
                                      
                                      
                                                      ?>
                                           </TBODY>
                                         </table>
-                                      <div class="col-xs-12">
-
-                                        <div class="form-group">
+                                        <div class="col-xs-12">
+                                         <div class="form-group">
                                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Tipo Maquina
                                           </label>
                                           <div class="col-md-12 col-sm-8 col-xs-12">
-                                          <!--  <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
+                                            <!--  <select id="id_tipo_ma" name="id_tipo_ma" class="form-control ">
                                                  <?php 
                                              /*    require_once "../class/TipoMaquina.php";
                                                  $misGP = new TipoMaquina();
@@ -341,7 +320,6 @@ alert("Ha ocurrido un error")
                                             <input type="text" id="tipo_maquina" name="tipo_maquina" class="form-control col-md-7 col-xs-12">
                                           </div>
                                         </div>
-
                                         <div class="form-group">
                                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Linea de Produccion
                                           </label>
@@ -349,27 +327,42 @@ alert("Ha ocurrido un error")
                                             <input type="text" id="linea_produccion" name="linea_produccion" class="form-control col-md-7 col-xs-12">
                                           </div>
                                         </div>
-
-                                   
-                                    <div class="form-group">
+                                  
+                                     <div class="form-group">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Descripcion Falla
                                         </label>
-                                        <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="falla" id="falla" class="form-control" rows="10" cols="50"> </textarea>  
-                          
+                                        <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <?php 
+                                          if (isset($_GET['falla'])) {
+                                            $falla = $_GET['falla'];
+                                          }else{
+                                            $falla="Describa la falla";
+                                          }
+                                         ?>                                     
+                          	<?php 
+                          	
+                                          require_once "../class/Ticket.php";
+                                         $ms1 = new Ticket();
+                                         $descripcionFalla = $ms1->selectOne($id_ticket);
+                                         foreach ($descripcionFalla as $key) {
+                                           echo '  <textarea name="falla" id="falla" class="form-control">'.$key['descripcion'].'</textarea>  ';
+                                         }
+                          	?>
                                           </div>
                                        
                                     </div>
-                                       <div class="form-group">
-                                      <div class="table-wrapper-scroll-y div1" >
-                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Repuestos
+                                     <div class="form-group">
+                                      <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Repuestos
                                         </label><br><br>
-                                        <table id="example5" class="table table-striped table-bordered">
+                                      <div class="table-wrapper-scroll-y div1" >
+
+                                        <table id="example4" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
                                           <th> </th>
                                           <th>Repuesto</th>
-                                          <th>Codigo Serie</th>                       
+                                          <th>Codigo Serie</th> 
+                                          <th>Descripcion</th>                      
                                           <th>Cantidad</th>                          
                                         </tr>
                                       </thead>
@@ -383,9 +376,11 @@ alert("Ha ocurrido un error")
                                           <tr>
                                             <td>
                                             <input type="hidden" name="id_repuestos[]" value="'.$a["id_repuesto"].'" />
+                                            '.$a["id_repuesto"].'
                                            </td>
                                            <td>'.$a['nombre'].'</td>
                                            <td>'.$a["codigo_serie"].'</td>
+                                           <td>'.$a['descripcion'].'</td>
                                            <td> <input type="text" id="cantidad" name="cantidad[]" class="form-control col-xs-3 col-xs-8"></td>
                                           </tr>
                                          ';
@@ -396,18 +391,17 @@ alert("Ha ocurrido un error")
 
                                         </div>
                                       </div>
-                                           <div class="form-group">
+                                       <div class="form-group">
                                       <div class="table-wrapper-scroll-y div1" >
-
-                                              <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Consumibles
-                                        </label>
-                                        <br><br><br>
-                                        <table id="example4" class="table table-striped table-bordered">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">Consumibles
+                                        </label><br><br>
+                                        <table id="example5" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
                                           <th> </th>
                                           <th>Consumibles</th>
-                                          <th>Codigo Serie</th>                       
+                                          <th>Codigo Serie</th>  
+                                          <th>Descripcion</th>                     
                                           <th>Cantidad</th>                          
                                         </tr>
                                       </thead>
@@ -425,6 +419,7 @@ alert("Ha ocurrido un error")
                                            </td>
                                            <td>'.$a['nombre'].'</td>
                                            <td>'.$a["codigo_serie"].'</td>
+                                           <td>'.$a['descripcion'].'</td>
                                            <td> <input type="text" id="cantidad" name="cantidadC[]" class="form-control col-xs-3 col-xs-8"></td>
                                           </tr>
                                          ';
@@ -435,31 +430,16 @@ alert("Ha ocurrido un error")
 
                                         </div>
                                       </div> 
-                                
+                                           
                                   </div>
-                             </div>  <!-- col lg 6-->
-                              <div class="col-xs-12">
-                              
-                              <!--  <div class="col-md-4">-->
-                                  <div class="row">
-                                      <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo de Trabajo
-                                          </label>
-                                          <div class="col-md-12 col-sm-8 col-xs-12">
-                                            <select id="tipo_trabajo" name="tipo_trabajo" class="form-control ">
-                                              <option value="Contrato">Contrato</option>
-                                              <option value="Cobro">Cobro</option>
-                                              <option value="Garantia">Garantia<option> 
-                                              <option value="Demostracion">Demostracion<option> 
-                                              <option value="Cortesia">Cortesia<option>                                    
-                                            </select>
-                                          </div>
-                                        </div>
+                             </div>  
+                              <div class="col-lg-6">
+                                        
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="datos_generales" id="datos_generales" class="form-control" rows="6" cols="50">
+                                         <textarea name="datos_generales" id="datos_generales" class="form-control" height="200px" rows="6" cols="50">
 Horas Maquina:
 Horas bomba:
 Make up: 
@@ -469,7 +449,7 @@ software:</textarea>
                           
                                           </div>
                                     </div>
-                                    <div class="form-group">
+                                     <div class="form-group">
                                      
                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Latitud:</p></label>
                                    <textarea id="lti" name="lti" readonly=""></textarea>
@@ -477,66 +457,55 @@ software:</textarea>
                                         <textarea id="lgi" name="lgi" readonly=""></textarea>
                                   
                                        </div>
-                                       
-                                        <div class="form-group">
-                                  <!--     
-                                   <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Ubicacion:</p></label>
-
-                                <p>Presici&oacute;n: <span id="psc"></span></p> 
-                                   <div id="map"></div> 
-                                  -->
-                                       </div>
-                                      
                                        <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Hora Actual <?php $hora = new DateTime("now", new DateTimeZone('America/El_Salvador'));
                             echo $hora->format('h:i:s A'); ?>
                                         </label>
                                        
                                     </div>
-                                       <div class="form-group">
+                                        <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Hora ingreso
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">  
-                                          <input type="time" class="form-control col-md-4 col-xs-12" id="hora_ingreso" name="hora_ingreso" min="7:00" max="18:00">
+                                          <input type="time" class="form-control col-md-7 col-xs-12" id="hora_ingreso" name="hora_ingreso" min="7:00" max="18:00">
                                           </div>
                                     </div>
-
-                                       <div class="form-group">
+                                    <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Hora Salida
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">  
                                           <input type="time" class="form-control col-md-4 col-xs-12" id="hora_salida" name="hora_salida" min="7:00" max="18:00">
                                           </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-5 col-sm-4 col-xs-12" for="last-name">Fotografias 
-                                        </label><br><br>
-                                          <small><strong>(Por favor, subir imagenes menores a 2 Mb y con dimensiones no superiores a 1280*980)</strong></small>
-                                          <br>
+                                      <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Fotografias 
+                                        </label>
+                                        <small><strong>(Por favor, subir imagenes menores a 2 Mb y con dimensiones no superiores a 1280*980)</strong></small>
+                                        <br>
                                         <div class="col-md-12 col-sm-6 col-xs-12"> 
                                           <input name = "foto_uno" type = "file" /> <br>
                                           <input name = "foto_dos" type = "file" /> <br>
-                                          <input name = "foto_tres" type = "file" /> <br>
+                                          <input name = "foto_tres" type = "file" /><br>
                                           <input name = "foto_cuatro" type = "file" /> <br>
                                           <input name = "foto_cinco" type = "file" /> <br>
                                           <input name = "foto_seis" type = "file" />
                                           </div>
                                     </div>
-
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Descripcion Solucion 
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="trabajo" id="trabajo" class="form-control"></textarea>  
+                                         <textarea name="trabajo" id="trabajo" class="form-control" rows="10" cols="50"></textarea>  
                           
                                           </div>
                                     </div>
-                                      <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado entrega
+                                    <div class="form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo se entrega<span class="required">*</span>
                                           </label>
-                                          <div class="col-md-12 col-sm-8 col-xs-12">
+                                          <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select id="equipo_queda" name="equipo_queda" class="form-control ">
-                                              <option value="Iniciado">Reparado</option>
+                                              <option value="Iniciado">Reparado</option>                                              
+                                              <option value="Pendiente de Reparar">Pendiente de Reparar</option>
                                               <option value="EnProceso">En espera</option>
                                               <option value="Finalizado">Finalizado</option>                                    
                                             </select>
@@ -546,11 +515,15 @@ software:</textarea>
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Nombre quien Recibe
                                       </label>
                                       <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <input type="text" id="recibe" name="recibe"  class="form-control col-md-5 col-xs-12">
+                                        <input type="text" id="recibe" name="recibe"  class="form-control col-md-7 col-xs-12">
                                       </div>
                                     </div>
+
+                                  <!--AQUI NO-->
+                                 
+                                  
                                      <div class="form-group">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma Cliente
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma Cliente<span class="required"></span>
                                     </label>
                                     <br> <br> <br>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -560,8 +533,9 @@ software:</textarea>
 
                                       <input type='hidden' name='imagenC' id='imagenC' />
 
+                                    
                                    </div>
-                                   <div class="control-label col-md-4 col-sm-4 col-xs-12"> <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button></div>
+                                   <div class="control-label col-md-4 col-sm-4 col-xs-12"><button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button></div>
                                     </div> <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma tecnico<span class="required"></span>
                                     </label>
@@ -573,26 +547,21 @@ software:</textarea>
 
                                       <input type='hidden' name='imagen2' id='imagen2' />
 
+                                   
                                    </div>
-                                   <div class="control-label col-md-4 col-sm-4 col-xs-12">  <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button></div>
+                                   <div class="control-label col-md-4 col-sm-4 col-xs-12"> <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button></div>
                                     </div>
-                                    <?php 
-                                    echo '<input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>';
-                                     ?>
-
                                     
                                     
                                         <div class="form-group">
                                         <div class="alert alert-warning" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">ALERTA:</span>
+              <span class="sr-only">Incorecto:</span>
               
                 Por favor, verifique los datos antes de guardar la ficha tecnica.
                 </div>
-
-
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">    
-                              <?php 
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"> 
+                            <?php 
                               if ($id!=0 && $id_producto !=0) {
                                 echo '<button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>';
 
@@ -604,14 +573,10 @@ software:</textarea>
                 </div>";   
                                                            }
 
-                              ?>                         
-                              
+                              ?>                       
                             </div>
                           </div>
-                                  </div>
-                                <!--</div>COL LG 9-->
                                       
-                              </div><!--COL LG 6-->
 
            </form>
                           
@@ -641,8 +606,8 @@ software:</textarea>
                                   </div>  
       </div>
        <div id="dataModal3" class="modal fade">  
-                                  <div class="modal-dialog  modal-lg">  
-                                       <div class="modal-content">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content  modal-lg">  
                                             <div class="modal-header">  
                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>  
                                                  <h4 class="modal-title">Productos</h4>  
@@ -732,7 +697,7 @@ ga('send', 'pageview');
     
      
       $(document).on('click', '.view_data', function(){  
-           var employee_id = $(this).attr("id");  
+           var employee_id = $(this).attr("id");   
           var bandera = $(this).attr("bandera");  
            if(employee_id != '')  
            {  
@@ -740,7 +705,7 @@ ga('send', 'pageview');
                      url:"../views/listClientes4.php",  
                      method:"POST",  
                      data:{employee_id:employee_id,
-                          bandera:bandera},  
+                           bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms2').html(data);  
                           $('#dataModal2').modal('show');  
@@ -751,7 +716,7 @@ ga('send', 'pageview');
       $(document).on('click', '.view_data2', function(){  
            var employee_id = $(this).attr("id");   
            var employee_name = $(this).attr("nombre");  
-          var bandera = $(this).attr("bandera");  
+          var bandera = $(this).attr("bandera");   
            if(employee_id != '')  
            {  
                 $.ajax({  
@@ -759,7 +724,7 @@ ga('send', 'pageview');
                      method:"POST",  
                      data:{employee_id:employee_id,
                           employee_name:employee_name,
-                           bandera:bandera},  
+                          bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms3').html(data);  
                           $('#dataModal3').modal('show');  
@@ -768,13 +733,15 @@ ga('send', 'pageview');
            }            
       }); 
        $(document).on('click', '.edit_data', function(){  
-          var employee_id = $(this).attr("id");  
+          var employee_id = $(this).attr("id");   
+          var bandera = $(this).attr("bandera");  
            if(employee_id != '')  
            {  
                 $.ajax({  
                      url:"../views/modiContacto.php",  
                      method:"POST",  
-                     data:{employee_id:employee_id},  
+                     data:{employee_id:employee_id,
+                          bandera:bandera},  
                      success:function(data){  
                           $('#employee_forms4').html(data);  
                           $('#dataModal4').modal('show');  
@@ -783,8 +750,8 @@ ga('send', 'pageview');
            }   
       }); 
          $(document).on('click', '.view_data3', function(){  
-           var employee_id = $(this).attr("id");   
-          var bandera = $(this).attr("bandera"); 
+           var employee_id = $(this).attr("id");  
+          var bandera = $(this).attr("bandera");   
            if(employee_id != '')  
            {  
                 $.ajax({  
@@ -801,11 +768,12 @@ ga('send', 'pageview');
       });
        $(document).on('click', '.view_data4', function(){  
            var employee_id = $(this).attr("id");    
-           var employee_name = $(this).attr("nombre");  
+           var employee_name = $(this).attr("nombre"); 
+
           var bandera = $(this).attr("bandera"); 
+          var producto = $(this).attr("producto");
+          var codigo_serie = $(this).attr("codigo_serie"); 
           var id_producto = $(this).attr("id_producto"); 
-          var producto = $(this).attr("producto"); 
-          var codigo_serie = $(this).attr("codigo_serie");  
            if(employee_id != '')  
            {  
                 $.ajax({  
@@ -814,9 +782,9 @@ ga('send', 'pageview');
                      data:{employee_id:employee_id,
                           employee_name:employee_name,
                           bandera:bandera,
-                          id_producto:id_producto,
                           producto:producto,
-                          codigo_serie:codigo_serie},  
+                          codigo_serie:codigo_serie,
+                          id_producto:id_producto},  
                      success:function(data){  
                           $('#employee_forms4').html(data);  
                           $('#dataModal4').modal('show');  
@@ -831,7 +799,6 @@ ga('send', 'pageview');
 <script>
   $(function () {
     $('#example1').DataTable()
-    $('#example3').DataTable()
     $('#example2').DataTable({
       'paging'      : false,
       'lengthChange': false,
@@ -841,7 +808,7 @@ ga('send', 'pageview');
       'autoWidth'   : true
     })
     $('#example4').DataTable({
-      'paging'      : false,
+      'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
       'ordering'    : true,
@@ -849,7 +816,7 @@ ga('send', 'pageview');
       'autoWidth'   : true
     })
     $('#example5').DataTable({
-      'paging'      : false,
+      'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
       'ordering'    : true,
@@ -1022,21 +989,21 @@ ga('send', 'pageview');
       e.preventDefault();
       if (e.targetTouches.length == 1) { 
         var touch = e.targetTouches[0]; 
-        MouseMove(touch);
+        MouseMove2(touch);
       }
     }
 
     function TouchStart2(e){
       if (e.targetTouches.length == 1) { 
         var touch = e.targetTouches[0]; 
-        MouseDown(touch);
+        MouseDown2(touch);
       }
     }
 
     function TouchEnd2(e){
       if (e.targetTouches.length == 1) { 
         var touch = e.targetTouches[0]; 
-        MouseUp(touch);
+        MouseUp2(touch);
       }
     }
 
@@ -1059,6 +1026,7 @@ ga('send', 'pageview');
       document.forms[idForm].submit();
     }
 </script>
+       
 <script type="text/javascript">
 
 CKEDITOR.replace('falla');
@@ -1066,7 +1034,6 @@ CKEDITOR.replace('falla');
 CKEDITOR.replace('trabajo');
 
 </script>
-
-        
+ 
     </body>
 </html>

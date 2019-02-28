@@ -238,7 +238,7 @@ class FichaTecnica extends Conexion
         return $this->tipo_trabajo;
     }
 
-    public function setTipo_maquina($tipo_trabajo) {
+    public function setTipo_trabajo($tipo_trabajo) {
         $this->tipo_trabajo = $tipo_trabajo;
     }
     //FUNCIONES----------------
