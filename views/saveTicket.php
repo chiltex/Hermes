@@ -167,6 +167,9 @@ session_start();
                                          <input type="hidden" name="nombre_empresa" id="nombre_empresa" value="'.$nombre.'"/>';
                                            echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-warning view_data4"/>';
                                            # code...
+                                            echo '<input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-info view_data2"/>
+                                            <input type="button" name="view" value="Ingresar Nuevo Producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-success save_PC"/>
+                                            ';
                                          }else{
                                            echo '
                                          <div class="col-xs-8"><h4>Empresa:<strong> '.$nombre.'</strong></h4></div>';
@@ -176,7 +179,7 @@ session_start();
                                       }
                                       ?>
                                       <?php 
-                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-info view_data2"/>';
+                                          //  echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-info view_data2"/>';
 
                                             if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
                                                $id_producto=0;
@@ -644,6 +647,23 @@ ga('send', 'pageview');
                 });  
            }            
       });  
+         $(document).on('click', '.save_PC', function(){  
+           var employee_id = $(this).attr("id");   
+           var employee_empresa = $(this).attr("nombre");   
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/saveClienteProductoT.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id,
+                          employee_empresa:employee_empresa},  
+                     success:function(data){  
+                          $('#employee_forms3').html(data);  
+                          $('#dataModal3').modal('show');  
+                     }  
+                });  
+           }            
+      }); 
        
   }); 
 

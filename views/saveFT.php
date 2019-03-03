@@ -232,24 +232,31 @@ alert("Ha ocurrido un error")
                                             $producto1 =$_GET['producto'];
                                             $codigo_serie1 =$_GET['codigo_serie'];
                                              echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" id_producto="'.$id_producto1.'" producto="'.$producto1.'" codigo_serie="'.$codigo_serie1.'" class="btn btn-warning view_data4"/>';
+                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" class="btn btn-info view_data2"/>
+                                                  <input type="button" name="view" value="Ingresar Nuevo Producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-success save_PC"/>
+                                            ';
                                           }else{
                                             $id_producto1 = 0;
                                             $producto1 ="N/A";
                                             $codigo_serie1 ="0000";
                                              echo ' <input type="button" name="view" value="Agregar Contacto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" id_producto="'.$id_producto1.'" producto="'.$producto1.'" codigo_serie="'.$codigo_serie1.'" class="btn btn-warning view_data4"/>';
+                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" class="btn btn-info view_data2"/>
+                                                  <input type="button" name="view" value="Ingresar Nuevo Producto" id="'.$id.'" nombre="'.$nombre.'" class="btn btn-success save_PC"/>
+                                            ';
                                           }
                                           
                                            # code...
                                          }else{
                                            echo '
                                          <div class="col-xs-8"><h2>Empresa:<strong> '.$nombre.'</strong></h2></div>';
+
+                                            
                                          }
                                       
 
                                       }
                                       ?>
                                         <?php 
-                                            echo ' <input type="button" name="view" value="Seleccionar producto" id="'.$id.'" nombre="'.$nombre.'" bandera="'.$bandera.'" class="btn btn-info view_data2"/>';
 
                                             if (is_null($_GET["id_producto"]) && is_null($_GET["codigo_serie"])&& is_null($_GET["producto"])) {
                                                $id_producto=0;
@@ -438,10 +445,9 @@ alert("Ha ocurrido un error")
                                 
                                   </div>
                              </div>  <!-- col lg 6-->
-                              <div class="col-xs-12">
+                              <div class="col-lg-5">
                               
                               <!--  <div class="col-md-4">-->
-                                  <div class="row">
                                       <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo de Trabajo
                                           </label>
@@ -561,7 +567,7 @@ software:</textarea>
                                       <input type='hidden' name='imagenC' id='imagenC' />
 
                                    </div>
-                                   <div class="control-label col-md-4 col-sm-4 col-xs-12"> <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button></div>
+                                   <div class="control-label col-md-5 col-sm-4 col-xs-12"> <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Borrar</button></div>
                                     </div> <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Firma tecnico<span class="required"></span>
                                     </label>
@@ -574,7 +580,7 @@ software:</textarea>
                                       <input type='hidden' name='imagen2' id='imagen2' />
 
                                    </div>
-                                   <div class="control-label col-md-4 col-sm-4 col-xs-12">  <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button></div>
+                                   <div class="control-label col-md-5 col-sm-4 col-xs-12">  <button class="btn btn-warning" type='button' onclick='LimpiarTrazado2()'>Borrar</button></div>
                                     </div>
                                     <?php 
                                     echo '<input type="hidden" name="bandera" id="bandera" value="'.$bandera.'"/>';
@@ -608,7 +614,6 @@ software:</textarea>
                               
                             </div>
                           </div>
-                                  </div>
                                 <!--</div>COL LG 9-->
                                       
                               </div><!--COL LG 6-->
@@ -824,6 +829,24 @@ ga('send', 'pageview');
                 });  
            }            
       });  
+
+ $(document).on('click', '.save_PC', function(){  
+           var employee_id = $(this).attr("id");   
+           var employee_empresa = $(this).attr("nombre");   
+           if(employee_id != '')  
+           {  
+                $.ajax({  
+                     url:"../views/saveClienteProductoFT.php",  
+                     method:"POST",  
+                     data:{employee_id:employee_id,
+                          employee_empresa:employee_empresa},  
+                     success:function(data){  
+                          $('#employee_forms3').html(data);  
+                          $('#dataModal3').modal('show');  
+                     }  
+                });  
+           }            
+      }); 
        
   }); 
 

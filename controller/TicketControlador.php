@@ -5,6 +5,8 @@ require_once "../class/Contactos.php";
 require_once "../class/Events1.php";
  require_once '../class/Mailer.php';
 require_once "../class/Usuario.php";
+require_once "../class/Productos.php";
+require_once "../class/ClienteProducto.php";
 
 require_once "../class/Productos.php";
 $accion=$_GET['accion'];
@@ -390,6 +392,48 @@ elseif ($accion=="guardarC")
 	}
 }
 	
+elseif ($accion=="guardarPC") 
+{	//$bandera=$_POST['bandera'];
+	//$producto=$_POST['producto'];
+	$codigo_serie=$_POST['codigo_serie'];
+	$empresa = $_POST['empresa'];
+	$nombre=$_POST['nombre'];
+	$id_grupo_producto =$_POST['id_grupo_producto'];
+	$id_cliente =$_POST['id_cliente'];
+
+	$id_grupo_producto =$_POST['id_grupo_producto'];
+	$nombre=$_POST['nombre'];
+	$codigo_serie=$_POST['codigo_serie'];
+
+	$Productos = new Productos();
+	$Productos->setNombre($nombre);
+	$Productos->setCodigo_Serie($codigo_serie);
+	$Productos->setId_grupo_producto($id_grupo_producto);	
+	$save=$Productos->save();
+
+	
+	if ($save==true) {
+			
+			$last_p = $Productos->selectLast1($codigo_serie);
+			foreach ($last_p as $key1) {
+				$id_producto = $key1['id_producto'];
+				$producto = $key1['nombre'];
+			}
+			$cp = new ClienteProducto();
+			$cp->setId_cliente($id_cliente);
+			$cp->setId_producto($id_producto);
+			$save1=$cp->save();
+			if ($save1 == true) {
+				header('Location: ../views/saveTicket.php?cliente='.$id_cliente.'&nombre='.$empresa.'&codigo_serie='.$codigo_serie.'&producto='.$producto.'&id_producto='.$id_producto.'&bandera=usuario');
+
+			}
+			
+			else{
+				header('Location: ../listas/Cliente_Producto.php?error=incorrecto&cliente=0&nombre=nada&producto=0');
+			}
+			
+	}
+}
 
 
 ?>

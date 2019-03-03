@@ -146,7 +146,20 @@ class Productos extends Conexion
 	      return $ListGP;
 	}
 
-
+     public function selectLast()
+    {
+        $query="SELECT * FROM cliente_producto ORDER BY id_cliente_producto DESC LIMIT 1";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
+ public function selectLast1($codigo)
+    {
+        $query="SELECT * FROM productos WHERE codigo_serie='".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
 
 }//end class
 
