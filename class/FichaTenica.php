@@ -26,7 +26,12 @@ class FichaTecnica extends Conexion
  private $fecha_trabajo;
  private $estado;
  private $tipo_maquina;
- private $tipo_trabajo;
+ private $horas_maquina;
+ private $horas_bomba;
+ private $make_up;
+ private $tina;
+ private $cleaning;
+ private $software;
 
 
 
@@ -59,6 +64,12 @@ class FichaTecnica extends Conexion
         $this->estado="";
         $this->tipo_maquina="";
         $this->tipo_trabajo="";
+        $this->horas_maquina="";
+        $this->horas_bomba="";
+        $this->make_up="";
+        $this->tinta="";
+        $this->cleaning="";
+        $this->software="";
 
     }
 
@@ -241,11 +252,57 @@ class FichaTecnica extends Conexion
     public function setTipo_trabajo($tipo_trabajo) {
         $this->tipo_trabajo = $tipo_trabajo;
     }
+     public function getHoras_maquina() {
+        return $this->horas_maquina;
+    }
+
+    public function setHoras_maquina($horas_maquina) {
+        $this->horas_maquina = $horas_maquina;
+    }
+
+     public function getHoras_bomba() {
+        return $this->horas_bomba;
+    }
+
+    public function setHoras_bomba($horas_bomba) {
+        $this->horas_bomba = $horas_bomba;
+    }
+     public function getMake_up() {
+        return $this->make_up;
+    }
+
+    public function setMake_up($make_up) {
+        $this->make_up = $make_up;
+    }
+
+     public function getTinta($tinta) {
+        return $this->$tinta;
+    }
+
+    public function setTinta($tinta) {
+        $this->tinta = $tinta;
+    }
+
+     public function getCleaning() {
+        return $this->cleaning;
+    }
+
+    public function setCleaning($cleaning) {
+        $this->cleaning = $cleaning;
+    }
+     public function getSoftware() {
+        return $this->software;
+    }
+
+    public function setSoftware($software) {
+        $this->software = $software;
+    }
+
     //FUNCIONES----------------
 
     public function save()
     {
-    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica,latitud, longitud, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,hora_egreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres,fecha_trabajo,estado,tipo_maquina,tipo_trabajo)
+    	$query="INSERT INTO ficha_tecnica (id_ficha_tecnica,latitud, longitud, equipo_queda, id_cliente, id_producto, id_contacto, firma_cliente, firma_tecnico, id_usuario, falla, trabajo,id_tipo_ma,linea_produccion,hora_ingreso,hora_egreso,datos_generales,recibe,foto_uno,foto_dos,foto_tres,fecha_trabajo,estado,tipo_maquina,tipo_trabajo,horas_maquina,horas_bomba,make_up,tinta,cleaning,software)
 				values(NULL,
                 '".$this->latitud."',
                 '".$this->longitud."',
@@ -269,7 +326,13 @@ class FichaTecnica extends Conexion
                 '".$this->foto_tres."',
                 CURDATE(),'Iniciado',
                 '".$this->tipo_maquina."',
-                '".$this->tipo_trabajo."');";
+                '".$this->tipo_trabajo."',
+                '".$this->horas_maquina."',
+                '".$this->horas_bomba."',
+                '".$this->make_up."',
+                '".$this->tinta."',
+                '".$this->cleaning."',
+                '".$this->software."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
@@ -291,7 +354,7 @@ class FichaTecnica extends Conexion
     }
      public function update()
     {
-        $query="UPDATE ficha_tecnica SET equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma."', linea_produccion='".$this->linea_produccion."', hora_egreso='".$this->hora_egreso."', hora_ingreso='".$this->hora_ingreso."', datos_generales='".$this->datos_generales."', recibe='".$this->recibe."', foto_uno='".$this->foto_uno."', foto_dos='".$this->foto_dos."', foto_tres='".$this->foto_tres."', estado='".$this->estado."', tipo_maquina='".$this->tipo_maquina."', tipo_trabajo='".$this->tipo_trabajo."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
+        $query="UPDATE ficha_tecnica SET equipo_queda='".$this->equipo_queda."', falla='".$this->falla."', trabajo='".$this->trabajo."', id_tipo_ma='".$this->id_tipo_ma."', linea_produccion='".$this->linea_produccion."', hora_egreso='".$this->hora_egreso."', hora_ingreso='".$this->hora_ingreso."', datos_generales='".$this->datos_generales."', recibe='".$this->recibe."', foto_uno='".$this->foto_uno."', foto_dos='".$this->foto_dos."', foto_tres='".$this->foto_tres."', estado='".$this->estado."', tipo_maquina='".$this->tipo_maquina."', tipo_trabajo='".$this->tipo_trabajo."', horas_maquina='".$this->horas_maquina."', horas_bomba='".$this->horas_bomba."', make_up='".$this->make_up."', tinta='".$this->tinta."', cleaning='".$this->cleaning."', software='".$this->software."' WHERE id_ficha_tecnica='".$this->id_ficha_tecnica."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;

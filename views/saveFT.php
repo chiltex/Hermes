@@ -465,16 +465,59 @@ alert("Ha ocurrido un error")
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Datos Generales <span class="required">*</span>
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12">                                   
-                                         <textarea name="datos_generales" id="datos_generales" class="form-control" rows="6" cols="50">
+                               <!--          <textarea name="datos_generales" id="datos_generales" class="form-control" rows="6" cols="50">
 Horas Maquina:
 Horas bomba:
 Make up: 
 tinta:
 cleaning:
 software:</textarea>  
-                          
+                          -->
                                           </div>
                                     </div>
+                                     <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Horas manquina:
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <input type="text" id="horas_maquina" name="horas_maquina"  class="form-control col-md-5 col-xs-12">
+                                      </div>
+                                    </div>
+                                     <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Horas bomba:
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <input type="text" id="horas_bomba" name="horas_bomba"  class="form-control col-md-5 col-xs-12">
+                                      </div>
+                                    </div>
+                                     <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Make up:
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <input type="text" id="make_up" name="make_up"  class="form-control col-md-5 col-xs-12">
+                                      </div>
+                                    </div>
+                                     <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Tinta:
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <input type="text" id="tinta" name="tinta"  class="form-control col-md-5 col-xs-12">
+                                      </div>
+                                    </div>
+                                     <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Cleaning:
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <input type="text" id="cleaning" name="cleaning"  class="form-control col-md-5 col-xs-12">
+                                      </div>
+                                    </div>
+                                     <div class="form-group">
+                                      <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Software:
+                                      </label>
+                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <input type="text" id="software" name="software"  class="form-control col-md-5 col-xs-12">
+                                      </div>
+                                    </div>
+
                                     <div class="form-group">
                                      
                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">  <p>Latitud:</p></label>

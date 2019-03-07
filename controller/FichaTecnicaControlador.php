@@ -74,13 +74,50 @@ if ($accion=="modificar") {
 	$linea_produccion=$_POST['linea_produccion'];
 	}else{
 		$linea_produccion=NULL;
-	}	
-	if ($_POST['datos_generales']) {
-		
-	$datos_generales=$_POST['datos_generales'];
-	}else{
-		$datos_generales=NULL;
 	}
+
+
+		
+	$datos_generales="N/A";
+	
+
+	if ($_POST['horas_maquina']) {
+		
+	$horas_maquina=$_POST['horas_maquina'];
+	}else{
+		$horas_maquina=NULL;
+	}
+	if ($_POST['horas_bomba']) {
+		
+	$horas_bomba=$_POST['horas_bomba'];
+	}else{
+		$horas_bomba=NULL;
+	}
+	if ($_POST['make_up']) {
+		
+	$make_up=$_POST['make_up'];
+	}else{
+		$make_up=NULL;
+	}
+	if ($_POST['tinta']) {
+		
+	$tinta=$_POST['tinta'];
+	}else{
+		$tinta=NULL;
+	}
+	if ($_POST['cleaning']) {
+		
+	$cleaning=$_POST['cleaning'];
+	}else{
+		$cleaning=NULL;
+	}
+	if ($_POST['software']) {
+		
+	$software=$_POST['software'];
+	}else{
+		$software=NULL;
+	}
+
 	if ($_POST['recibe']) {
 		
 	$recibe=$_POST['recibe'];
@@ -975,7 +1012,13 @@ if (isset($_FILES['foto_seis'])) {
 	$FichaTecnica->setFoto_tres($foto_tres);
 	$FichaTecnica->setEstado($estado);
 	$FichaTecnica->setTipo_maquina($tipo_maquina);	
-	$FichaTecnica->setTipo_trabajo($tipo_trabajo);	
+	$FichaTecnica->setTipo_trabajo($tipo_trabajo);		
+	$FichaTecnica->setHoras_maquina($horas_maquina);
+	$FichaTecnica->setHoras_bomba($horas_bomba);
+	$FichaTecnica->setMake_up($make_up);	
+	$FichaTecnica->setTinta($tinta);
+	$FichaTecnica->setCleaning($cleaning);
+	$FichaTecnica->setSoftware($software);
 
 	$update=$FichaTecnica->update();
 	
@@ -1124,12 +1167,48 @@ $lonphp = $_COOKIE["loncookie"];
 	}else{
 		$linea_produccion=NULL;
 	}	
-	if (isset($_POST['datos_generales'])) {
+
+	$datos_generales="N/A";
+	
+
+	if ($_POST['horas_maquina']) {
 		
-	$datos_generales=$_POST['datos_generales'];
+	$horas_maquina=$_POST['horas_maquina'];
 	}else{
-		$datos_generales=NULL;
+		$horas_maquina=NULL;
 	}
+	if ($_POST['horas_bomba']) {
+		
+	$horas_bomba=$_POST['horas_bomba'];
+	}else{
+		$horas_bomba=NULL;
+	}
+	if ($_POST['make_up']) {
+		
+	$make_up=$_POST['make_up'];
+	}else{
+		$make_up=NULL;
+	}
+	if ($_POST['tinta']) {
+		
+	$tinta=$_POST['tinta'];
+	}else{
+		$tinta=NULL;
+	}
+	if ($_POST['cleaning']) {
+		
+	$cleaning=$_POST['cleaning'];
+	}else{
+		$cleaning=NULL;
+	}
+	if ($_POST['software']) {
+		
+	$software=$_POST['software'];
+	}else{
+		$software=NULL;
+	}
+
+
 	if ($_POST['recibe']) {
 		
 	$recibe=$_POST['recibe'];
@@ -2016,7 +2095,14 @@ if (isset($_FILES['foto_seis'])){
 	$FichaTecnic->setFoto_dos($foto_dos);
 	$FichaTecnic->setFoto_tres($foto_tres);
 	$FichaTecnic->setTipo_maquina($tipo_maquina);
-	$FichaTecnic->setTipo_trabajo($tipo_trabajo);
+	$FichaTecnic->setTipo_trabajo($tipo_trabajo);	
+	$FichaTecnic->setHoras_maquina($horas_maquina);
+	$FichaTecnic->setHoras_bomba($horas_bomba);
+	$FichaTecnic->setMake_up($make_up);	
+	$FichaTecnic->setTinta($tinta);
+	$FichaTecnic->setCleaning($cleaning);
+	$FichaTecnic->setSoftware($software);
+
 
 	$save=$FichaTecnic->save();
 	$i=0;
