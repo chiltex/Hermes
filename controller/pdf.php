@@ -94,6 +94,10 @@ ob_start();
                            <td><strong>Salida :</strong> '.$hora_egreso.'</td>
                            </tr>
                            <tr>
+                           <td><strong>Tipo de Trabajo:</strong> </td>
+                           <td>'.$key["tipo_trabajo"].'</td>
+                           </tr>
+                           <tr>
                            <td><strong>Tipo:</strong> </td>
                            <td>'.$key["tipo_maquina"].'</td>
                            </tr>
@@ -116,9 +120,40 @@ ob_start();
                            <td><strong>Datos generales:</strong> </td>
                            
                            </tr>
-                           <tr>
-                           <td>'.$key["datos_generales"].'</td>
+                           ';
+                           if ($key['datos_generales']!= 'N/A') {
+                           echo '<tr><td>'.nl2br($key["datos_generales"]).'</td></tr>';
+                           }else{
+                            echo ' 
+                            <tr>
+                           <td><strong>Horas Maquina:</strong> </td>
+                           <td>'.$key["horas_maquina"].'</td>
                            </tr>
+                            <tr>
+                           <td><strong>Horas Bomba:</strong> </td>
+                           <td>'.$key["horas_bomba"].'</td>
+                           </tr>
+                            <tr>
+                           <td><strong>Make Up:</strong> </td>
+                           <td>'.$key["make_up"].'</td>
+                           </tr>
+                            <tr>
+                           <td><strong>Tinta:</strong> </td>
+                           <td>'.$key["tinta"].'</td>
+                           </tr>
+                            <tr>
+                           <td><strong>Cleaning:</strong> </td>
+                           <td>'.$key["cleaning"].'</td>
+                           </tr>
+                            <tr>
+                           <td><strong>Software:</strong> </td>
+                           <td>'.$key["software"].'</td>
+                           </tr>
+                           ';
+
+                           }
+                           
+                           echo '
                            <tr>
                            <td><strong>Solucion:</strong> </td>
                            

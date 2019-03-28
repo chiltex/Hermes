@@ -26,6 +26,7 @@ class FichaTecnica extends Conexion
  private $fecha_trabajo;
  private $estado;
  private $tipo_maquina;
+ private $tipo_trabajo;
  private $horas_maquina;
  private $horas_bomba;
  private $make_up;
