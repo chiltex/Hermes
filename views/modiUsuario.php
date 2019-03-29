@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['tiempo']) ) {
+/*if(isset($_SESSION['tiempo']) ) {
 
         //Tiempo en segundos para dar vida a la sesión.
         $inactivo = 1200;//20min en este caso.
@@ -22,7 +22,7 @@ if(isset($_SESSION['tiempo']) ) {
             }
 
     }
-    $_SESSION['tiempo'] = time();
+    $_SESSION['tiempo'] = time();*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
