@@ -396,7 +396,7 @@ session_start();
                               </div>
                              </div>  
                     
-                              <div class="col-lg-6 col-md-8 col-lg-12">
+                              <div class="col-lg-6 col-md-5 col-xs-12">
                                
                                   
                                       <div class="form-group">
@@ -471,7 +471,7 @@ session_start();
                                      <div class="form-group">
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Horas manquina:
                                       </label>
-                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                      <div class="col-md-6 col-sm-4 col-xs-12">
                                         <?php 
                                           echo ' <input type="text" id="horas_maquina" name="horas_maquina" value="'.$key['horas_maquina'].'" class="form-control col-md-5 col-xs-12">';
                                          ?>
@@ -481,7 +481,7 @@ session_start();
                                      <div class="form-group">
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Horas bomba:
                                       </label>
-                                      <div class="col-md-12 col-sm-6 col-xs-12"> <?php 
+                                      <div class="col-md-6 col-sm-4 col-xs-12"> <?php 
                                           echo ' <input type="text" id="horas_bomba" name="horas_bomba" value="'.$key['horas_bomba'].'" class="form-control col-md-5 col-xs-12">';
                                          ?>
                                       </div>
@@ -489,7 +489,7 @@ session_start();
                                      <div class="form-group">
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Make up:
                                       </label>
-                                      <div class="col-md-12 col-sm-6 col-xs-12"> 
+                                      <div class="col-md-6 col-sm-4 col-xs-12"> 
                                         <?php 
                                           echo ' <input type="text" id="make_up" name="make_up" value="'.$key['make_up'].'" class="form-control col-md-5 col-xs-12">';
                                          ?>
@@ -498,7 +498,7 @@ session_start();
                                      <div class="form-group">
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Tinta:
                                       </label>
-                                      <div class="col-md-12 col-sm-6 col-xs-12"> 
+                                      <div class="col-md-6 col-sm-4 col-xs-12"> 
                                         <?php 
                                           echo ' <input type="text" id="tinta" name="tinta" value="'.$key['tinta'].'" class="form-control col-md-5 col-xs-12">';
                                          ?>
@@ -507,7 +507,7 @@ session_start();
                                      <div class="form-group">
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Cleaning:
                                       </label>
-                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                      <div class="col-md-6 col-sm-4 col-xs-12">
                                         <?php 
                                           echo ' <input type="text" id="cleaning" name="cleaning" value="'.$key['cleaning'].'" class="form-control col-md-5 col-xs-12">';
                                          ?>
@@ -516,7 +516,7 @@ session_start();
                                      <div class="form-group">
                                       <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Software:
                                       </label>
-                                      <div class="col-md-12 col-sm-6 col-xs-12">
+                                      <div class="col-md-6 col-sm-4 col-xs-12">
                                         <?php 
                                           echo ' <input type="text" id="software" name="software" value="'.$key['software'].'" class="form-control col-md-5 col-xs-12">';
                                          ?>
@@ -697,7 +697,7 @@ session_start();
 
                                        ?>
                                       
-                                       <canvas id='canvasCliente' width="350" height="115" style='border: 1px solid #CCC;'>
+                                       <canvas id='canvasCliente' width="300" height="115" style='border: 1px solid #CCC;'>
                                               <p>Tu navegador no soporta canvas</p>
                                           </canvas>
 
@@ -723,7 +723,7 @@ session_start();
                                              <br>
                                             ';
                                         ?>
-                                         <canvas id='canvas2' width="350" height="155" style='border: 1px solid #CCC;'>
+                                         <canvas id='canvas2' width="300" height="155" style='border: 1px solid #CCC;'>
                                               <p>Tu navegador no soporta canvas</p>
                                           </canvas>
 
@@ -735,13 +735,16 @@ session_start();
                                     </div>
                                     
                                         <div class="form-group">
-                                        <div class="alert alert-warning" role="alert">
+                                          <div class="col-xs-10">
+                                              <div class="alert alert-warning" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="sr-only">ALERTA:</span>
               
                 Por favor, verifique los datos antes de guardar la ficha tecnica.
                 </div>
 
+                                          </div>
+                                      
                             <?php 
                               if (isset($_GET['bandera'])) {
                             $bandera = $_GET['bandera'];
