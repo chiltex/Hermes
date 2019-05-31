@@ -162,7 +162,7 @@ class Ticket extends Conexion
 		    }
 			 public function save()
 		    {
-		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_tipo_gestion, id_ficha_tecnica,Solucion,urgente,id_jefe)
+		    	$query="INSERT INTO ticket (id_ticket, descripcion, estado, id_cliente, id_contacto, id_producto, id_usuario, id_tipo_gestion, id_ficha_tecnica,Solucion,urgente,id_jefe,fecha_creacion)
 		    			values(NULL,
 		    			'".$this->descripcion."',
 		    			'".$this->estado."',
@@ -174,7 +174,7 @@ class Ticket extends Conexion
 		    			NULL,
 		    			'".$this->solucion."',
 		    			'".$this->urgente."',
-		    			'".$this->id_jefe."');";
+		    			'".$this->id_jefe."',NOW());";
 		    	$save=$this->db->query($query);
 		    	if ($save==true) {
 		            return true;

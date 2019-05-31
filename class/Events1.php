@@ -215,7 +215,13 @@ class Events extends Conexion
         return $ListClientes;
     }
 
-
+       public function colorU($usuario)
+    {
+        $query="SELECT color FROM events WHERE id_usuario='".$usuario."'";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
 
 
 }

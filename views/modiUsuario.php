@@ -298,7 +298,13 @@ session_start();
                                  <input type="text" id="correo" name="correo" required="required" value="'.$field["correo"].'" class="form-control col-md-7 col-xs-12">
                                  </div>
                               </div>
-                              
+                               <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Color <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input type="color" id="color_u" name="color_u" required="required" value="'.$field["color"].'" class="form-control col-md-7 col-xs-12">
+                                 </div>
+                              </div>
                             
 
                               ';

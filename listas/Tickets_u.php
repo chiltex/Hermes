@@ -226,6 +226,7 @@ if(isset($_SESSION['tiempo']) ) {
                           <th>Asignado por</th>
                           <th>Estado</th>
                           <th>Urgente</th>
+                          <th>Creada</th>
                           <th>Opciones</th>                            
                         </tr>
                       </thead>
@@ -264,8 +265,14 @@ if(isset($_SESSION['tiempo']) ) {
 
                            <td>'.$row['estado'].'</td>
 
-                           <td>'.$row['urgente'].'</td>
-                           <td>';
+                           <td>'.$row['urgente'].'</td>';
+                           if($row['fecha_creacion'] == NULL){
+                            echo '<td></td>';
+                           }else{
+                            echo '<td>'.$row['fecha_creacion'].'</td>';
+                           }
+                           
+                           echo '<td>';
                            if ($row['estado']=="Finalizado") {
                              
                            }else{

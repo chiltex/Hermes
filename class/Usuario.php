@@ -12,6 +12,7 @@ class Usuario extends Conexion
  private $contraseña;
  private $id_tipo_usuario;
  private $estado;
+ private $color;
 
  public function __construct()
 	{
@@ -24,6 +25,7 @@ class Usuario extends Conexion
         $this->contraseña="";
         $this->id_tipo_usuario="";
         $this->estado="";
+        $this->color="";
     }
 
 
@@ -80,12 +82,19 @@ class Usuario extends Conexion
     public function setEstado($estado) {
         $this->estado = $estado;
     }
+        public function getColor() {
+        return $this->color;
+    }
+
+    public function setColor($color) {
+        $this->color = $color;
+    }
  //---------------------Funciones----------------------------//
      public function save()
     {
         $password = hash('sha256', $this->contraseña);
-    	$query="INSERT INTO usuario (id_usuario,nombre,apellido,correo,pass,id_tipo_usuario)
-    			values(NULL,'".$this->nombre."','".$this->apellido."','".$this->correo."','".$password."','".$this->id_tipo_usuario."');";
+    	$query="INSERT INTO usuario (id_usuario,nombre,apellido,correo,pass,id_tipo_usuario,color)
+    			values(NULL,'".$this->nombre."','".$this->apellido."','".$this->correo."','".$password."','".$this->id_tipo_usuario."','".$this->color."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
@@ -96,7 +105,7 @@ class Usuario extends Conexion
     }
      public function update()
     {
-        $query="UPDATE usuario SET nombre='".$this->nombre."',apellido='".$this->apellido."',correo='".$this->correo."',id_tipo_usuario='".$this->id_tipo_usuario."' WHERE id_usuario='".$this->id_usuario."'";
+        $query="UPDATE usuario SET nombre='".$this->nombre."',apellido='".$this->apellido."',correo='".$this->correo."',id_tipo_usuario='".$this->id_tipo_usuario."', color='".$this->color."' WHERE id_usuario='".$this->id_usuario."'";
         $update=$this->db->query($query);
         if ($update==true) {
             return true;

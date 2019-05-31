@@ -10,12 +10,14 @@ if ($accion=="modificar") {
 	$apellido=$_POST['apellido'];
 	$correo=$_POST['correo'];	
 	$id_usuario =$_POST['id_usuario'];
+	$color_u =$_POST['color_u'];
 	$usuarioss = new Usuario();
 	$usuarioss->setNombre($nombre);
 	$usuarioss->setApellido($apellido);
 	$usuarioss->setCorreo($correo);
 	$usuarioss->setId_tipo_usuario($id_tipo_usuario);	
 	$usuarioss->setId_usuario($id_usuario);
+	$usuarioss->setColor($color_u);	
 	$update=$usuarioss->update();
 	if ($update==true) {
 		header('Location: ../listas/Usuarios.php?success=correcto');
@@ -47,12 +49,15 @@ elseif ($accion=="guardar")
 	$correo=$_POST['correo'];
 	$contraseña =$_POST['contraseña'];
 	$id_tipo_usuario =$_POST['id_tipo_usuario'];
+
+	$color_u =$_POST['color_u'];
 	$usuario = new Usuario();
 	$usuario->setNombre($nombre);
 	$usuario->setApellido($apellido);
 	$usuario->setCorreo($correo);
 	$usuario->setContraseña($contraseña);
 	$usuario->setId_tipo_usuario($id_tipo_usuario);	
+	$usuario->setColor($color_u);	
 	$save=$usuario->save();
 	if ($save==true) {
 		header('Location: ../listas/Usuarios.php?success=correcto');

@@ -227,6 +227,7 @@ if(isset($_SESSION['tiempo']) ) {
                           <th>Producto</th>
                           <th>Cliente</th>
                           <th>Estado</th>
+                          <th>Fecha Creada</th>
                           <th>Opciones</th>                            
                         </tr>
                       </thead>
@@ -245,8 +246,14 @@ if(isset($_SESSION['tiempo']) ) {
                            <td>'.$row['id_ficha_tecnica'].'</td>
                            <td>'.$row['nombre'].'</td>
                            <td>'.$row['client'].'</td>
-                           <td>'.$row['equipo_queda'].'</td>
-                           <td>
+                           <td>'.$row['equipo_queda'].'</td>';
+                              if($row['fecha_creacion'] == NULL){
+                            echo '<td></td>';
+                           }else{
+                            echo '<td>'.$row['fecha_creacion'].'</td>';
+                           }
+                           
+                            echo '<td>
                           
                                     <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
                                     <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar&bandera=usuario" class="btn btn-warning">Modificar</a>

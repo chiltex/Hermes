@@ -397,8 +397,8 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                 <div class="row">
                 
 <?php 
-  if ($tipo_n != "Administrador" || $tipo_n != "Administrativo") {
-   
+  if ($tipo_n != "Administrador" && $tipo_n != "Administrativo") {
+   echo $tipo_n;
   }
   else{
  ?>
@@ -650,9 +650,7 @@ if (isset($_SESSION['id_tipo_usuario'])) {
               }
 
                ?>
-             <!-- <div class="checkbox">
-              <label class="text-danger"><input type="checkbox" id="eliminar" name="eliminar"> Eliminar Evento</label>
-              </div>-->
+             
             </div>
           </div>
           
@@ -848,6 +846,11 @@ ga('send', 'pageview');
     });
     
     function edit(event){
+      <?php 
+      if($tipo_n != 'Tecnico'){
+       ?>
+      
+
       start = event.start.format('YYYY-MM-DD HH:mm:ss');
       if(event.end){
         end = event.end.format('YYYY-MM-DD HH:mm:ss');
@@ -861,8 +864,9 @@ ga('send', 'pageview');
       Event[0] = id;
       Event[1] = start;
       Event[2] = end;
+
       <?php 
-        if ($codigo!=0){
+        if ($codigo != 0){
        ?>
       
       $.ajax({
@@ -874,9 +878,17 @@ ga('send', 'pageview');
         }
 
       });  
+
     <?php } else{?>
         alert('Seleccione un Tecnico Para modficar la cita seleccionada. O intente ingresando nuevamente la cita'); 
-      <?php      }?>
+      <?php      }
+
+    }
+    else{
+    ?>
+        alert('Para modificar la fecha agendada, debe comunicarse previamente con su supervisor, Gracias.'); 
+   <?php } ?>
+
     }
     
   });

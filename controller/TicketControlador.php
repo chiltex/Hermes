@@ -87,7 +87,11 @@ if ($accion=="modificar") {
 	$Events->setStar($start);	
 	$Events->setEnd($end);	
 	$Events->setId_ticket($id_ticket);	
-	$Events->setColor($color);
+	$Lcolor = $Events->colorU($id_usuario);
+	foreach ($Lcolor as $cu) {
+		$color_u = $cu['color'];
+	}
+	$Events->setColor($color_u);
 	$Events->setDescripcion($descri);
 	$Events->setId_usuario($id_usuario);
 
@@ -115,7 +119,32 @@ if ($accion=="modificar") {
 		 foreach ($datosProductos as $value3) {
 		 	$nombreProducto = $value3['nombre'];
 		 }
-		 $asunto = "Ticket asignado: ".$id_ticket."";
+		 if ($urgente == 'Si') {
+		 	 $asunto = "(URGENTE)Ticket asignado: ".$id_ticket."";
+		 $mensaje = "
+		 <p><strong>URGENTE!</strong></p>
+		 <br>
+		 Estimado ".$nombreUsuario.", se le asignado el Ticket con Correlativo: ".$id_ticket." correspondiente a la empresa: <br>
+				<strong>".$nombreCliente."<strong> <br> con los datos de contacto: <br>
+				<table class='table table-bordered'>
+					<tr>
+						<td>Nombre de contacto: </td><td>".$nombreContacto."</td>
+					</tr>
+					<tr>
+						<td>Correo de contacto: </td><td>".$correoContacto."</td>
+					</tr>
+					<tr>
+						<td>Numero de contacto: </td><td>".$movilContacto."</td>
+					</tr>
+				</table>
+				<br>
+				<p>El equipo: <strong>".$nombreProducto."</strong></p>
+				<p>Presenta la siguiente falla:</p>
+				<p>".$descripcion."</p>
+				<p><strong>Fecha Cita: ".$star.", Hora citada: ".$hora_solucion."</strong></p><br>
+				<p>Cualquier consulta ingrese al sitio o comuniquese con su jefe, Muchas gracias.</p>";
+		 }else{
+		 	 $asunto = "Ticket asignado: ".$id_ticket."";
 		 $mensaje = "Estimado ".$nombreUsuario.", se le asignado el Ticket con Correlativo: ".$id_ticket." correspondiente a la empresa: <br>
 				<strong>".$nombreCliente."<strong> <br> con los datos de contacto: <br>
 				<table class='table table-bordered'>
@@ -135,8 +164,27 @@ if ($accion=="modificar") {
 				<p>".$descripcion."</p>
 				<p><strong>Fecha Cita: ".$star.", Hora citada: ".$hora_solucion."</strong></p><br>
 				<p>Cualquier consulta ingrese al sitio o comuniquese con su jefe, Muchas gracias.</p>";
+		 }
+		 	$asuntoCliente = "Ticket asignado por la empresa: ".$id_ticket."";
+		  $mensajeCliente = "
+		
+		  Estimado ".$nombreContacto.", miembro de la empresa:<strong>".$nombreCliente."<strong> se le asignado el Ticket con Correlativo: ".$id_ticket." <br>
+				 <br>Este correo es para enviar la siguiente informacion de la cita agendada: <br>
+				<table class='table table-bordered'>
+					<tr>
+						<td>Fecha: ".$fecha." </td><td>Hora: ".$hora_solucion."</td>
+					</tr>
+					<tr>
+						<td>Tecnico Asignado: </td><td>".$nombreUsuario."</td>
+					</tr>
+				</table>
+				<br>
+				
+				<p>Cualquier consulta comuniquese con nuestro Call Center, Muchas gracias.</p>";
+		
 	$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","","",$nombreUsuario,"");
 		$resultado = $sending->enviarCorreoTicket();
+		$resultado_cliente = $sending->enviarCorreoTicketC($correoContacto,$nombreContacto,$asuntoCliente,$mensajeCliente);
 	} // end if fecha valida
 	
 		if ($bandera=="ticket_u") {
@@ -220,6 +268,7 @@ $tl1=$Ticket->selectLast();
 	//-------------------------------------------------------------------------------------//
 	if ($save==true) {
 if ($fecha !='00/00/0000') {
+
 	$tittle="T: ".$lastT." Visita a:".$nombre_empresa."";
 	$end_n = strtotime('+1 day',strtotime($fecha));
 	$nuevo_end =date('Y-m-j',$end_n);
@@ -234,11 +283,14 @@ if ($fecha !='00/00/0000') {
 	$end= $nuevo_end.' 00:00:00';
 	}
 	
-	$descri ="Solucionar el Ticket N°: ".$lastT. ", con falla: ".$descripcion.".";
+	$descri ="Solucionar el Ticket N°: ".$lastT. ",solicitado por la empresa ".$nombre_empresa;
 	$Events->setTittle($tittle);
 	$Events->setStar($star);	
-	$Events->setEnd($end);	
-	$Events->setColor($color);
+	$Events->setEnd($end);	$Lcolor = $Events->colorU($id_usuario);
+	foreach ($Lcolor as $cu) {
+		$color_u = $cu['color'];
+	}
+	$Events->setColor($color_u);
 	$Events->setDescripcion($descri);
 	$Events->setId_usuario($id_usuario);
 	$Events->setId_ticket($lastT);
@@ -267,6 +319,32 @@ if ($fecha !='00/00/0000') {
 		 foreach ($datosProductos as $value3) {
 		 	$nombreProducto = $value3['nombre'];
 		 }
+		 if($urgente == 'Si'){
+		 $asunto = "(URGENTE)Ticket asignado: ".$lastT."";
+		  $mensaje = "
+		  <p><strong>URGENTE:</strong></p><br>
+		  Estimado ".$nombreUsuario.", se le asignado el Ticket con Correlativo: ".$lastT." correspondiente a la empresa: <br>
+				<strong>".$nombreCliente."<strong> <br> con los datos de contacto: <br>
+				<table class='table table-bordered'>
+					<tr>
+						<td>Nombre de contacto: </td><td>".$nombreContacto."</td>
+					</tr>
+					<tr>
+						<td>Correo de contacto: </td><td>".$correoContacto."</td>
+					</tr>
+					<tr>
+						<td>Numero de contacto: </td><td>".$movilContacto."</td>
+					</tr>
+				</table>
+				<br>
+				<p>El equipo: <strong>".$nombreProducto."</strong></p>
+				<p>Presenta la siguiente falla:</p>
+				<p>".$descripcion."</p>
+				<p><strong>Fecha Cita: ".$star.", Hora citada: ".$hora_solucion."</strong></p><br>
+				<p>Cualquier consulta ingrese al sitio o comuniquese con su jefe, Muchas gracias.</p>";
+
+		 
+	}else{
 		 $asunto = "Ticket asignado: ".$lastT."";
 		 $mensaje = "Estimado ".$nombreUsuario.", se le asignado el Ticket con Correlativo: ".$lastT." correspondiente a la empresa: <br>
 				<strong>".$nombreCliente."<strong> <br> con los datos de contacto: <br>
@@ -287,10 +365,27 @@ if ($fecha !='00/00/0000') {
 				<p>".$descripcion."</p>
 				<p><strong>Fecha Cita: ".$star.", Hora citada: ".$hora_solucion."</strong></p><br>
 				<p>Cualquier consulta ingrese al sitio o comuniquese con su jefe, Muchas gracias.</p>";
-	$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","",$nombreUsuario,"");
+		}
+		$asuntoCliente = "Ticket asignado por la empresa: ".$lastT."";
+		  $mensajeCliente = "
+		
+		  Estimado ".$nombreContacto.", miembro de la empresa:<strong>".$nombreCliente."<strong> se le asignado el Ticket con Correlativo: ".$lastT." <br>
+				 <br>Este correo es para enviar la siguiente informacion de la cita agendada: <br>
+				<table class='table table-bordered'>
+					<tr>
+						<td>Fecha: ".$fecha." </td><td>Hora: ".$hora_solucion."</td>
+					</tr>
+					<tr>
+						<td>Tecnico Asignado: </td><td>".$nombreUsuario."</td>
+					</tr>
+				</table>
+				<br>
+				
+				<p>Cualquier consulta comuniquese con nuestro Call Center, Muchas gracias.</p>";
+				$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","",$nombreUsuario,"");
 		$resultado = $sending->enviarCorreoTicket();
-}
-	
+		$resultado_cliente = $sending->enviarCorreoTicketC($correoContacto,$nombreContacto,$asuntoCliente,$mensajeCliente);
+	}
 	
 		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.'');
 

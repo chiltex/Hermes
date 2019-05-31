@@ -332,5 +332,65 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 		    }
 			
 		}	
+				public function enviarCorreoTicketC($correo,$cliente,$asunto,$mensaje)
+		{
+			//postmaster@localhost
+		  	$mail = new PHPMailer();
+			
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = 'smtp.gmail.com';  					  // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			$mail->Username = 'jhosuegarciastarkand@gmail.com';                 // SMTP username
+			$mail->Password = 'jhougar96';                           // SMTP password
+			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = 587;                                    // TCP port to connect to
+			
+
+			//CABECERA DE CORREO
+
+
+
+
+			$mail->SetFrom('info.hermes@sistemashermesgt.com','Eduardo Garcia');
+			$mail->FromName = 'APP HERMES INTERNATIONAL';
+			//$email = "blink242@outlook.com";
+			//$email1 = "codefuentes@outlook.com";
+			//$email2 = "saravis.upta@gmail.com";
+			$mail->addAddress($correo,$cliente);
+			/*$mail->addCC($this->_jefe);
+			$mail->addCC($this->_cc1);
+			$mail->addCC($this->_cc2);*/
+			        // Add attachments
+			//$mail->addAddress($email1);
+			//$mail->addAddress($this->_correo);
+			    // Optional name
+
+			$mail->isHTML(true);                                  // Set email format to HTML
+			$mail->Subject = ''.$asunto;
+			$mail->Body    = '<h3 style="color:red;">Este correo fue generado automaticamente desde nuestra aplicacion, por favor no responder a este correo.</h3><p></p></br>'.$mensaje;
+	     	// $id_usuario = $_SESSION['session']['id'];
+		    // $mensaje = new contactoPersistencia();
+		    // $mensaje = $mensaje->registrarMensaje($id_usuario, $this->_asunto, $this->_mensaje);
+		    //$mail->AddAttachment($_SERVER['DOCUMENT_ROOT'].'/Hermes/enviados/calidad/'.$this->_archivo, 'ReporteCalidad.pdf');
+		    if(!$mail->send())
+		    {
+		    	return 0;
+		    	/* echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+				/*echo "<script>
+						alert('Enviando mensaje...');
+						window.location='?';
+					</script>";*/
+		    }
+		    else
+		    {
+		    	return 1;
+		    	/*
+		    	echo "<script>
+						alert('Enviando mensaje...');
+						window.location='?';
+					</script>"; */
+		    }
+			
+		}
 
 	}	

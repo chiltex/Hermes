@@ -225,6 +225,7 @@ if(isset($_SESSION['tiempo']) ) {
                           <th>Asignado por</th>
                           <th>Estado</th>
                           <th>Urgente</th>
+                          <th>Creada</th>
                           <th>Opciones</th>                            
                         </tr>
                       </thead>
@@ -264,8 +265,14 @@ if(isset($_SESSION['tiempo']) ) {
 
                            <td>'.$row['estado'].'</td>
 
-                           <td>'.$row['urgente'].'</td>
-                           <td>
+                           <td>'.$row['urgente'].'</td>';
+                           if($row['fecha_creacion'] == NULL){
+                            echo '<td></td>';
+                           }else{
+                            echo '<td>'.$row['fecha_creacion'].'</td>';
+                           }
+                           
+                           echo '<td>
                           
                                       <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ticket"].'" class="btn btn-info view_data"/>  
                                     <a href="../views/modiTicket.php?id='.$row["id_ticket"].'&id_producto='.$row["id_producto"].'&id_cliente='.$row["id_cliente"].'&id_contacto='.$row["id_contacto"].'&bandera=ticket" class="btn btn-warning">Editar</a>
@@ -400,6 +407,10 @@ ga('send', 'pageview');
     $('#example1').DataTable()
     $('#example3').DataTable()
     $('#example2').DataTable({
+          buttons:[
+            'excelHtml5'
+        ],
+        dom: 'lBf',
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
@@ -407,8 +418,15 @@ ga('send', 'pageview');
       'info'        : true,
       'autoWidth'   : true,
       'order'       : [[0, "desc"]]
-    })
+     
+    });
+
   })
+</script>
+<script type="text/javascript"> 
+
+$('#example2').buttons().container()
+    .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
 </script>
     </body>
 </html>
