@@ -389,10 +389,16 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                       </li>
                     </ul>
                     <div class="clearfix"></div>
+                      <div class="well-sm col-sm-12">
+                        <div class="btn-group pull-right">
+                                            <input type="button" name="accion" value="Exportar Excel" id="accion" class="btn btn-success save_data" /> 
 
+                        </div>
+                      </div>
                     </div>
                      <div class="row">
             <div class="col-lg-12 text-center">
+
                 <h1>Agenda</h1>
                 <div class="row">
                 
@@ -706,6 +712,21 @@ if (isset($_SESSION['id_tipo_usuario'])) {
                                        </div>  
                                   </div>  
   </div>
+   <div id="dataModal3" class="modal fade">  
+                                  <div class="modal-dialog">  
+                                       <div class="modal-content">  
+                                            <div class="modal-header">  
+                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                 <h4 class="modal-title">Exportar a Excel</h4>  
+                                            </div>  
+                                            <div class="modal-body" id="employee_forms3">  
+                                            </div>  
+                                            <div class="modal-footer">  
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                                            </div>  
+                                       </div>  
+                                  </div>  
+  </div>
 
     
             <!-- footer content -->
@@ -917,7 +938,21 @@ ga('send', 'pageview');
                 });  
            }            
       });
- 
+     $(document).on('click', '.save_data', function(){  
+           var employee_action = $(this).attr("accion");  
+           if(employee_action != '')  
+           {  
+                $.ajax({  
+                     url:"views/exportEventExcel.php",  
+                     method:"POST",  
+                     data:{employee_action:employee_action},  
+                     success:function(data){  
+                          $('#employee_forms3').html(data);  
+                          $('#dataModal3').modal('show');  
+                     }  
+                });  
+           }            
+      });
   
        
   }); 

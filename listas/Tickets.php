@@ -23,6 +23,26 @@ if(isset($_SESSION['tiempo']) ) {
 
     }
     $_SESSION['tiempo'] = time();
+   /*        if(isset($_POST["export_data"])) {
+$filename = "ticekts_".date('Ymd') . ".xls";
+header("Content-Type: application/vnd.ms-excel");
+header("Content-Disposition: attachment; filename=".$filename."");
+$show_coloumn = false;
+require_once "../class/Ticket.php";
+                         $misTickets1 = new Ticket();
+                         $Ticket1 = $misTickets1->selectALL();
+if(!empty($Ticket1)) {
+foreach($Ticket1 as $record) {
+if(!$show_coloumn) {
+// display field/column names in first row
+echo implode("\t", array_keys($record)) . "\n";
+$show_coloumn = true;
+}
+echo implode("\t", array_values($record)) . "\n";
+}
+}
+exit;
+}  */
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -215,7 +235,16 @@ if(isset($_SESSION['tiempo']) ) {
                     <br>
                     <a href="../views/saveTicket.php?cliente=0&id_producto=0&codigo_serie=0000&producto=N/A&nombre=N/A" class="btn btn-success">Nuevo Ticket</a>
                     
-                    <table id="example2" class="table table-striped table-bordered">
+                   <div class="container">
+<div class="well-sm col-sm-12">
+<div class="btn-group pull-right">
+<form action="../controller/exportar.php?accion=todos" method="post">
+  <input type="hidden" name="accion" value="todos_ticket">
+<button type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-info">Export to excel</button>
+</form>
+</div>
+</div>
+                    <table id="example1" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>N°</th>
@@ -235,7 +264,6 @@ if(isset($_SESSION['tiempo']) ) {
                          $misTickets = new Ticket();
                          $Ticket = $misTickets->selectALL();
                         
-                           # code...
                          
                          foreach ((array)$Ticket as $row) {
                           $tipo=$misTickets->selectOneTG($row['id_tipo_gestion']);
@@ -281,7 +309,8 @@ if(isset($_SESSION['tiempo']) ) {
                           </tr>
                          ';
                        }
-                     
+
+             
                      
                          ?>
                       </TBODY>
@@ -404,7 +433,8 @@ ga('send', 'pageview');
 
 <script>
   $(function () {
-    $('#example1').DataTable()
+    $('#example1').DataTable({
+      'order'       : [[0, "desc"]]})
     $('#example3').DataTable()
     $('#example2').DataTable({
           buttons:[

@@ -222,6 +222,13 @@ class Events extends Conexion
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListClientes;
     }
+    public function selectMonthEvents($mes,$año)
+    {
+        $query="SELECT * FROM `events` WHERE MONTH(start)=".$mes."  AND YEAR(start)= ".$año."";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
 
 
 }
