@@ -567,8 +567,42 @@ if(isset($_SESSION['tiempo']) ) {
                                           </div>
                                     </div>
                                     
+                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Fotografias cargadas
+                                        </label><br><br>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">  
+                                          <ul>
+                                        <?php 
+                                            $primerNombre = '../fotos/fichaTecnica'.$id_ficha_tecnica.'/fichaTecnica'.$id_ficha_tecnica.'_';
+                                            $PrimerCount= strlen($primerNombre);
+                                                $FOTO = 0;
+                                               
+                                              foreach(glob('../fotos/fichaTecnica'.$id_ficha_tecnica.'/*') as $image) {
+                                                 if($FOTO==0){
 
+                                                }else{
+                                           echo '<li>';
+                                                   //    echo $image;         
+                                         $array_trabajo = str_split($image);
+                                         $trabajo_count = strlen($image);
+                                         for ($i=0; $i < $trabajo_count ; $i++) { 
+                                           if ($i<=($PrimerCount-1)) {
+                                             
+                                           }else{
+                                            echo $array_trabajo[($i)];
+                                           }
+                                         }
+                                         echo "\n";
+                                         }
+                                              $FOTO = $FOTO + 1;
+                                             
+                                             echo '</li>'; }
+                                           ?>
+                                            </ul>
+                                          </div>
+                                    </div>
                                     <div class="form-group">
+
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Agregar mas Fotografias 
                                         </label>
                                         <div class="col-md-12 col-sm-6 col-xs-12"> 
