@@ -48,7 +48,7 @@ if(isset($_SESSION['tiempo']) ) {
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
-   <!-- <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
 
@@ -275,7 +275,7 @@ section.awSlider > img{
                     <br>
                     <br>
                     <a href="../views/saveFT.php?cliente=0&id_producto=0&codigo_serie=0000&producto=N/A&nombre=N/A" class="btn btn-success">Nueva Ficha Tecnica</a>
-                    
+                    <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered">
                       <thead>
                         <tr>
@@ -340,6 +340,7 @@ section.awSlider > img{
                          ?>
                       </TBODY>
                     </table>
+                       </div>
                     </div>
                   </div> <!--X PANEL-->
                 </div>
@@ -426,10 +427,10 @@ section.awSlider > img{
     <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>-->
    <!-- <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script> -->
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script> -->
+  <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script> 
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
