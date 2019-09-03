@@ -37,7 +37,7 @@ if(isset($_SESSION['tiempo']) ) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DataTables | Gentelella</title>
+    <title>HERMES| REPORTES</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -57,6 +57,15 @@ if(isset($_SESSION['tiempo']) ) {
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+     <!-- SELECT WITH SEARCH-->
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
+
+   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -211,10 +220,12 @@ section.awSlider > img{
 
 			  
               <div class="col-md-12 col-sm-12 col-xs-12">
+
+
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pagina de Clientes</h2>
-                    <ul class="nav navbar-right panel_toolbox">
+                    <h2>Pagina de Reportes</h2>
+                 <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
@@ -232,107 +243,205 @@ section.awSlider > img{
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-           <?php 
-            if (isset($_GET['success'])) {
-                
-                if ($_GET['success']=='correcto') {
+                     <form action="reportes.php" method="POST" class="form-horizontal form-label-right">
+                 
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nfactura">Seleccione una opcion<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h2> 
+                      Buscar por Tecnico: <input type="checkbox" id="myCheck2" name="myCheck2" value="opcion3" onclick="myFunction2()">
+                      Buscar por fecha: <input type="checkbox" id="myCheck" name="myCheck" value="opcion1" onclick="myFunction()">
+                      Buscar por estado: <input type="checkbox" id="myCheck1"  name="myCheck1" value="opcion2" onclick="myFunction1()"></h2>
+                        </div>
+                      </div>
                     
-                    echo '
-              <div class="alert alert-success" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Correcto:</span>
-                Los datos han sido guardados exitosamente.
-           </div>
-                    ';
-                }
-            }elseif (isset($_GET['error'])) {
-               if ($_GET['error']=='incorrecto') {
-                    
-                    echo '
-                <div class="alert alert-danger" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Incorecto:</span>
-              
-                Error al guardar, verifique los datos ingresados.
+                          <div id="tecnico" class="form-group" style="display:none">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nfactura">Tecnico<span class="required"></span>
+                        </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                           <select class="selectpicker form-control" name="id_usuario" id="id_usuario" data-live-search="true" title="-- SELECCIONA UNA OPCION --">
+                          <option>Seleccione un usuario para buscar</option>
+                        <?php 
+                          require_once "../class/Usuario.php";
 
-           </div>
-                    ';
-                }
-            }elseif (isset($_GET['seleccion'])) {
-               if ($_GET['seleccion']=='nuevo') {
+                          $mistipos = new Usuario();
+                         $catego = $mistipos->selectTecnicos(5);
+                          foreach ((array)$catego as $row) {
+
+                            echo "<option value='".$row['id_usuario']."'>Tec. ".$row['nombre']."".$row['apellido']."</option>";
+
+                          } 
+
                     
-                    echo '
-                 <div class="alert alert-primary" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Atencion:</span>
-              
-                Ingrese todos los datos.
-            </div>
-                    ';
-                }
-            }
-             ?>
+                          ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div id="fechai" class="form-group" style="display:none">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nfactura">Fecha inicial<span class="required"></span>
+                        </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                          <div class='input-group date' id='myDatepicker2'>
+                            <input type='text' class="form-control" name="fecha_inicial" id="fecha_inicial" />
+                            <span class="input-group-addon">
+                               <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        </div>
+                      </div>
+                        <div id="fechaf" class="form-group" style="display:none">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nfactura">Fecha final<span class="required"></span>
+                        </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                          <div class='input-group date' id='myDatepicker3'>
+                            <input type='text' class="form-control" name="fecha_final" id="fecha_final" />
+                            <span class="input-group-addon">
+                               <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        </div>
+                      </div>
+                       <div id="estado" style="display:none" class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nfactura">Estado<span class="required"></span>
+                        </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                          <select class="form-control" id="estado_con" name="estado_con">
+                          <option value="Iniciado">Iniciado</option>
+                          <option value="Pendiente de Reparar">Pendiente de Reparar</option>
+                          <option value="Finalizado">Finalizado</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="box-footer">
+
+                        <div class="form-label-right col-md-5 col-sm-5 col-xs-12">
+               <center> <input type="submit" class="btn btn-primary" name="submit" value="Consultar" ></center>
+                        </div>
+                      </div>
+                    </form>
+                               
+
+
+
+
+          
                     <br>
                     <br>
-                    <a href="../views/saveFT.php?cliente=0&id_producto=0&codigo_serie=0000&producto=N/A&nombre=N/A" class="btn btn-success">Nueva Ficha Tecnica</a>
-                    <a href="reportes.php" class="btn btn-primary">Reportes</a>
+                
                     <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered">
+                      <?php 
+                      if (isset($_POST['myCheck2'])) {
+                         require_once "../class/Usuario.php";
+                         $misUsua = new Usuario();
+                         $id_u = $_POST['id_usuario'];
+                         $usua=$misUsua->selectOne($id_u);
+                         foreach ($usua as $key) {
+                           $nombreUsuario = $key['nombre'];
+                           $apellidoUsuario= $key['apellido'];
+                         }
+                        echo '<caption><center><h2>Reporte de datos del Tecnico <strong>'.$nombreUsuario.' '.$apellidoUsuario.'</strong></h2></center></caption>';
+                      }elseif (isset($_POST['myCheck'])) {
+                        
+                           $fecha1=$_POST['fecha_inicial'];
+                           $fecha2=$_POST['fecha_final'];
+                            echo '<caption><center><h2>Reporte de datos de <strong>'.$fecha1.'</strong> hasta <strong>'.$fecha2.'</strong></h2></center></caption>';
+                      }elseif (isset($_POST['myCheck1'])) {
+                          $estado = $_POST['estado_con'];
+                            echo '<caption><center><h2>Reporte de datos con estado <strong>'.$estado.'</strong></h2></center></caption>';
+                      }
+
+                       ?>
                       <thead>
                         <tr>
                           <th>N°</th>
-                          <th>Producto</th>
+                          <th>Fecha</th>
                           <th>Cliente</th>
+                          <th>Hora I.</th>
+                          <th>Hora S.</th>
+                          <th>Trabajo</th>
+                          <th>Trabajo Realizado</th>
+                          <th>Equipo</th>
+                          <th>Serie</th>
+                          <th>Tinta</th>
+                          <th>Make Up</th>
+                          <th>Horas Bomba</th>
                           <th>Tecnico</th>
-                          <th>Estado</th>
-                          <th>Fecha Creada</th>
-                          <th>Opciones</th>                            
+                          <th>Contacto</th>
+                          <th>Estado</th>                     
                         </tr>
                       </thead>
                       <tfoot>
                           <tr>
                           <th>N°</th>
-                          <th>Producto</th>
+                          <th>Fecha</th>
                           <th>Cliente</th>
+                          <th>Hora I.</th>
+                          <th>Hora S.</th>
+                          <th>Trabajo</th>
+                          <th>Trabajo Realizado</th>
+                          <th>Equipo</th>
+                          <th>Serie</th>
+                          <th>Tinta</th>
+                          <th>Make Up</th>
+                          <th>Horas Bomba</th>
                           <th>Tecnico</th>
-                          <th>Estado</th>
-                          <th>Fecha Creada</th>
-                          <th>Opciones</th>                            
+                          <th>Contacto</th>
+                          <th>Estado</th>                          
                         </tr>
                       </tfoot>
                       <TBODY>
                          <?php 
                          require_once "../class/FichaTenica.php";
                          $misFT = new FichaTecnica();
-                         $fit = $misFT->selectALL();
-                        
-                           # code...
-                         
-                         foreach ((array)$fit as $row) {
-                       
+
+                         if (isset($_POST['myCheck2'])) {
+                           $tecnico = $_POST['id_usuario']; 
+                           $fit = $misFT->selectAll_TECNICO($tecnico);
+                         }elseif (isset($_POST['myCheck'])) {
+                           $fecha1=$_POST['fecha_inicial'];
+                           $fecha2=$_POST['fecha_final'];
+                           $fit = $misFT->selectAll_DATES($fecha1,$fecha2);
+
+                         }elseif (isset($_POST['myCheck1'])) {
+                           $estado = $_POST['estado_con']; 
+                           $fit = $misFT->selectAll_STATUS($estado);
+                         }else{
+                          $fit=NULL;
+                         }                  
+                        foreach ((array)$fit as $row) {
+
+                          $cadena = strtotime($row['hora_ingreso']);
+                          $cadena = date("H:i", $cadena);
+                          $cadena2 = strtotime($row['hora_egreso']);
+                          $cadena2 = date("H:i", $cadena2);
+                        $hora1 = new DateTime($cadena);//fecha inicial
+                          $hora2 = new DateTime($cadena2);//fecha de cierre
+
+                          $intervalo = $hora1->diff($hora2);
+
                            echo '
                             <tr>
                            <td>'.$row['id_ficha_tecnica'].'</td>
-                           <td>'.$row['nombre'].'</td>
-                           <td>'.$row['client'].'</td>
-                           <td>'.$row['usuario'].' '.$row['usuario_ape'].'</td>
+                           <td>'.$row['fecha_creacion'].'</td>
+                           <td>'.$row['clie'].'</td>
+                           <td>'.$row['hora_ingreso'].'</td>
+                           <td>'.$row['hora_egreso'].'</td>
+                           <td>'.$intervalo->format('%H:%i:%s').'</td>
+                           <td>'.$row['trabajo'].'</td>
+                           <td>'.$row['prod'].'</td>
+                           <td>'.$row['codigo_serie'].'</td>
+                           <td>'.$row['tinta'].'</td>
+                           <td>'.$row['make_up'].'</td>
+                           <td>'.$row['horas_bomba'].'</td>
+                           <td>'.$row['usuario'].'</td>
+                           <td>'.$row['contac'].'</td>
                            <td>'.$row['equipo_queda'].'</td>
                            ';
-                           if($row['fecha_creacion'] == NULL){
-                            echo '<td></td>';
-                           }else{
-                            echo '<td>'.$row['fecha_creacion'].'</td>';
-                           }
                            
-                            echo '<td>
-                          
-                                    <input type="button" name="view" value="Ver Detalle" id="'.$row["id_ficha_tecnica"].'" class="btn btn-info view_data"/> 
-                                    <a href="../views/modiFT.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar" class="btn btn-warning">Modificar</a>
-                                    <a href="../views/modiFT_Firma.php?id='.$row["id_ficha_tecnica"].'&accion=eliminar&bandera=admin" class="btn btn-warning">Modificar Firma</a>
-
-                                    <a href="../controller/pdf.php?id='.$row["id_ficha_tecnica"].'&accion=descargar" target="_blank" class="btn btn-danger">Exportar PDF</a>
-                                    <input type="button" name="send" value="Enviar al correo" id="'.$row["id_ficha_tecnica"].'" bandera="admin" class="btn btn-success send_data"/>
-                           </td>
+                            echo '
                           </tr>
                          ';
                        }
@@ -344,6 +453,8 @@ section.awSlider > img{
                        </div>
                     </div>
                   </div> <!--X PANEL-->
+
+
                 </div>
               </div>
 			     <div id="dataModal2" class="modal fade">  
@@ -436,6 +547,12 @@ section.awSlider > img{
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+            <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-datetimepicker -->    
+    <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 <!-- Google Analytics -->
@@ -449,51 +566,7 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
     
     </script>
-        <script type="text/javascript">
-   $(document).ready(function(){  
-      $('#add').click(function(){  
-           $('#insert').val("Insert");  
-           $('#insert_form')[0].reset();  
-      });  
-    
-     
-      $(document).on('click', '.view_data', function(){  
-           var employee_id = $(this).attr("id");  
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/selecFT.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id},  
-                     success:function(data){  
-                          $('#employee_forms2').html(data);  
-                          $('#dataModal2').modal('show');  
-                     }  
-                });  
-           }            
-      });
-       $(document).on('click', '.send_data', function(){  
-           var employee_id = $(this).attr("id"); 
-           var bandera = $(this).attr("bandera");   
-           if(employee_id != '')  
-           {  
-                $.ajax({  
-                     url:"../views/sendMail.php",  
-                     method:"POST",  
-                     data:{employee_id:employee_id,bandera:bandera},  
-                     success:function(data){  
-                          $('#employee_forms3').html(data);  
-                          $('#dataModal3').modal('show');  
-                     }  
-                });  
-           }            
-      });
-       
- });  
-
-</script>
-
-<script>
+  <script>
   $(function () {
     $('#example1').DataTable()
     $('#example3').DataTable({
@@ -552,14 +625,132 @@ ga('send', 'pageview');
             },
             {
                 extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 5 ]
+                    columns: ':visible'
                 }
             },
             'colvis'
         ]
     } );
 } );
+</script>
+<script >
+  
+  function myFunction() {
+  var checkBox = document.getElementById("myCheck");
+  var fecha_i = document.getElementById("fechai");
+  var fecha_f = document.getElementById("fechaf");
+  var checkBox2 = document.getElementById("myCheck1");
+  var estado = document.getElementById("estado");
+  var checkBox3 = document.getElementById("myCheck2");
+  var tecnico = document.getElementById("tecnico");
+  if (checkBox.checked == true){
+    fecha_i.style.display = "block";
+    fecha_f.style.display = "block";
+    checkBox2.checked=false;
+     estado.style.display = "none";
+    checkBox3.checked=false;
+     tecnico.style.display = "none";
+     
+    
+  } else {
+     fecha_i.style.display = "none";
+     fecha_f.style.display = "none";
+     estado.style.display = "none";
+     tecnico.style.display = "none";
+     
+  }
+}function myFunction1() {
+  var checkBox = document.getElementById("myCheck");
+  var fecha_i = document.getElementById("fechai");
+  var fecha_f = document.getElementById("fechaf");
+  var checkBox2 = document.getElementById("myCheck1");
+  var estado = document.getElementById("estado");
+  var checkBox3 = document.getElementById("myCheck2");
+  var tecnico = document.getElementById("tecnico");
+  
+
+  if(checkBox2.checked == true){
+    estado.style.display = "block";
+    checkBox.checked=false;
+     fecha_i.style.display = "none";
+     fecha_f.style.display = "none";
+    checkBox3.checked=false;
+     tecnico.style.display = "none";
+    
+  } else {
+     fecha_i.style.display = "none";
+     fecha_f.style.display = "none";
+     estado.style.display = "none";
+     tecnico.style.display = "none";
+     
+  }
+}
+  function myFunction2() {
+  var checkBox = document.getElementById("myCheck");
+  var fecha_i = document.getElementById("fechai");
+  var fecha_f = document.getElementById("fechaf");
+  var checkBox2 = document.getElementById("myCheck1");
+  var estado = document.getElementById("estado");
+  var checkBox3 = document.getElementById("myCheck2");
+  var tecnico = document.getElementById("tecnico");
+  if (checkBox3.checked == true){
+    tecnico.style.display = "block";
+    checkBox.checked=false;
+     estado.style.display = "none"; 
+     checkBox2.checked=false;
+     fecha_i.style.display = "none";
+     fecha_f.style.display = "none";
+     
+    
+  } else {
+     fecha_ip.style.display = "none";
+     fecha_fp.style.display = "none";
+     estadop.style.display = "none";
+     
+     tecnico.style.display = "none";
+  }
+}
+</script>
+ <script>
+    $('#myDatepicker').datetimepicker();
+    
+    $('#myDatepicker2').datetimepicker({
+        format: 'YYYY.MM.DD'
+    });
+    
+    $('#myDatepicker3').datetimepicker({
+          format: 'YYYY-MM-DD'
+    });
+     $('#myDatepicker33').datetimepicker({
+          format: 'YYYY-MM-DD'
+    });
+      $('#myDatepicker34').datetimepicker({
+          format: 'YYYY-MM-DD'
+    });
+    
+    $('#myDatepicker4').datetimepicker({
+        ignoreReadonly: true,
+        allowInputToggle: true
+    });
+
+    $('#datetimepicker6').datetimepicker();
+    
+    $('#datetimepicker7').datetimepicker({
+        useCurrent: false
+    });
+    
+    $("#datetimepicker6").on("dp.change", function(e) {
+        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+    });
+    
+    $("#datetimepicker7").on("dp.change", function(e) {
+        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+    });
+
+  
 </script>
     </body>
 </html>

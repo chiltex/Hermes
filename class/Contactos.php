@@ -150,5 +150,13 @@ class Contactos extends Conexion
         $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListClientes;
     }
+
+     public function selectLast($cliente)
+    {
+        $query="SELECT * FROM contactos WHERE id_cliente ='".$cliente."' ORDER BY id_contacto DESC LIMIT 1 ";
+        $selectall=$this->db->query($query);
+        $ListClientes=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListClientes;
+    }
 }//End class
 ?>

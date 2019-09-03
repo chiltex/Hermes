@@ -294,10 +294,11 @@ alert("Ha ocurrido un error")
                                                 <div class="col-xs-8"><h4>Producto:<strong> '.$producto.'</strong>  Codigo serie: <strong> '.$codigo_serie.'</strong></h4></div> 
                                  
                                               <input type="hidden" name="id_producto" id="id_producto" value="'.$id_producto.'"/>
+                                             <input type="hidden" name="id_cliente" id="id_cliente" value="'.$id.'"/>
                                                   ';
 
                                              ?>
-                                      <table id="example2 datatable-buttons" class="table table-striped table-bordered">
+                                      <table id="example2" class="table table-striped table-bordered">
                                       <thead>
                                         <tr>
                                           <th>Contacto</th>
@@ -311,6 +312,17 @@ alert("Ha ocurrido un error")
                                          $ms = new FichaTecnica();
                                          $contacto = $ms->selectOneC($id);
                                          $checking = 0;
+                                            if(count($contacto)==0){
+                                         echo '
+                                          <tr>
+                                           <td>No posee contactos</td>
+                                           <td></td>
+                                            <td>
+                                            
+                                           </td>
+                                          </tr>
+                                         ';
+                                         }
                                          foreach ((array)$contacto as $row) {
                                           if ($checking == 0) {
 
@@ -320,7 +332,6 @@ alert("Ha ocurrido un error")
                                            <td>'.$row["telefono"].'</td>
                                             <td>
                                             <input type="radio" name="id_contacto" id="id_contacto" checked value="'.$row["id_contacto"].'" />
-                                             <input type="hidden" name="id_cliente" id="id_cliente" value="'.$row["id_cliente"].'"/>
                                            </td>
                                           </tr>
                                          ';
@@ -331,7 +342,6 @@ alert("Ha ocurrido un error")
                                            <td>'.$row["telefono"].'</td>
                                             <td>
                                             <input type="radio" name="id_contacto" id="id_contacto" value="'.$row["id_contacto"].'" />
-                                             <input type="hidden" name="id_cliente" id="id_cliente" value="'.$row["id_cliente"].'"/>
                                            </td>
                                           </tr>
                                          ';

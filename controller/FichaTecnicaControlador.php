@@ -1107,10 +1107,29 @@ $lonphp = $_COOKIE["loncookie"];
 	$latitud=$_POST['lti'];
 	$longitud=$_POST['lgi'];
 
-	if (isset($_POST['id_contacto'])) {
+	$id_cliente =$_POST['id_cliente'];
+		if (isset($_POST['id_contacto'])) {
 		$id_contacto =$_POST['id_contacto'];
 	}else{
-		$id_contacto=NULL;
+    
+	$contactos = new Contactos();
+	$contactos->setNombre('No posee Contacto Agregado');
+	$contactos->setCorreo('n/a');
+	$contactos->setTelefono('0000000');
+	$contactos->setExtension('00');
+	$contactos->setMovil('0000');		
+	$contactos->setId_cliente($id_cliente);
+
+	$contactos->setPuesto($puesto);	
+	$save=$contactos->save();
+	if ($save == TRUE) {
+	 $ultimoC = $contactos->selectLast($id_cliente);
+	    foreach($ultimoC as $var){
+	        $id_contacto=$var['id_contacto'];
+	    }
+	}
+   
+	//$id_contacto=NULL;
 	}
 	
     if (isset($_POST['tipo_trabajo'])) {
@@ -1118,7 +1137,6 @@ $lonphp = $_COOKIE["loncookie"];
 	}else{
 		$tipo_trabajo = "Cobro";
 	}
-	$id_cliente =$_POST['id_cliente'];
 	$id_usuario =$_POST['id_usuario'];	
 	$id_producto =$_POST['id_producto'];
 	$empresa=$_POST['empresa'];

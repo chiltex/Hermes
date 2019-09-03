@@ -460,6 +460,34 @@ class FichaTecnica extends Conexion
       
       
     }
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+    //------------------------ CONSULTAS REPORTES PDF -------------------------------------------------------------------------------------------------------------------------------------------------------------//
+        public function selectAll_TECNICO($codigo)
+    {
+        $query="SELECT ft.*,ft.id_contacto,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario,u.apellido as usuario_ape, tp.nombre as tipo_maqui FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto 
+        INNER JOIN tipo_maquina tp ON ft.id_tipo_ma = tp.id_tipo_ma INNER JOIN productos p ON ft.id_producto = p.id_producto INNER JOIN usuario u ON ft.id_usuario = u.id_usuario WHERE ft.id_usuario = '".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListFicha=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListFicha;
+    }
+
+          public function selectAll_DATES($fecha1,$fecha2)
+    {
+        $query="SELECT ft.*,ft.id_contacto,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario,u.apellido as usuario_ape, tp.nombre as tipo_maqui FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto 
+        INNER JOIN tipo_maquina tp ON ft.id_tipo_ma = tp.id_tipo_ma INNER JOIN productos p ON ft.id_producto = p.id_producto INNER JOIN usuario u ON ft.id_usuario = u.id_usuario WHERE ft.fecha_creacion BETWEEN '".$fecha1."' AND '".$fecha2."'";
+        $selectall=$this->db->query($query);
+        $ListFicha=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListFicha;
+    }
+       public function selectAll_STATUS($codigo)
+    {
+        $query="SELECT ft.*,ft.id_contacto,c.nombre as clie, co.nombre as contac,p.nombre as prod,p.codigo_serie,u.nombre as usuario,u.apellido as usuario_ape, tp.nombre as tipo_maqui FROM ficha_tecnica ft INNER JOIN cliente c ON ft.id_cliente=c.id_cliente INNER JOIN contactos co ON ft.id_contacto=co.id_contacto 
+        INNER JOIN tipo_maquina tp ON ft.id_tipo_ma = tp.id_tipo_ma INNER JOIN productos p ON ft.id_producto = p.id_producto INNER JOIN usuario u ON ft.id_usuario = u.id_usuario WHERE ft.equipo_queda = '".$codigo."'";
+        $selectall=$this->db->query($query);
+        $ListFicha=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListFicha;
+    }
+
 
 }
 ?>
