@@ -676,7 +676,14 @@ software:</textarea>
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">    
                               <?php 
                               if ($id!=0 && $id_producto !=0) {
+                                if ( $_SESSION['logged-in'] == true) {
+                                  # code...
                                 echo '<button type="submit" onclick="GuardarTrazado()" class="btn btn-success">Ingresar</button>';
+                                }else{
+
+                                 header("Location: ../index.php");
+
+                                }
 
                               }
                               else{

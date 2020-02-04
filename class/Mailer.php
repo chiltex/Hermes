@@ -272,7 +272,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 		    }
 			
 		}	
-		public function enviarCorreoTicket()
+		public function enviarCorreoTicket($copia,$correo_copia)
 		{
 			//postmaster@localhost
 		  	$mail = new PHPMailer();
@@ -288,15 +288,14 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 
 			//CABECERA DE CORREO
 
-
-
-
 			$mail->SetFrom('info.hermes@sistemashermesgt.com','Eduardo Garcia');
 			$mail->FromName = 'APP HERMES INTERNATIONAL';
 			//$email = "blink242@outlook.com";
 			//$email1 = "codefuentes@outlook.com";
 			//$email2 = "saravis.upta@gmail.com";
 			$mail->addAddress($this->_usuario,$this->_nombre_usuario);
+			
+			$mail->addCC($copia,$correo_copia);
 			/*$mail->addCC($this->_jefe);
 			$mail->addCC($this->_cc1);
 			$mail->addCC($this->_cc2);*/
@@ -332,7 +331,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 		    }
 			
 		}	
-				public function enviarCorreoTicketC($correo,$cliente,$asunto,$mensaje)
+				public function enviarCorreoTicketC($correo,$cliente,$asunto,$mensaje,$copia,$correo_copia)
 		{
 			//postmaster@localhost
 		  	$mail = new PHPMailer();
@@ -357,6 +356,7 @@ require '../vendors/PHPMailer1/src/SMTP.php';
 			//$email1 = "codefuentes@outlook.com";
 			//$email2 = "saravis.upta@gmail.com";
 			$mail->addAddress($correo,$cliente);
+			$mail->addCC($copia,$correo_copia);
 			/*$mail->addCC($this->_jefe);
 			$mail->addCC($this->_cc1);
 			$mail->addCC($this->_cc2);*/

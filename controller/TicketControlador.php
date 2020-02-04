@@ -183,8 +183,8 @@ if ($accion=="modificar") {
 				<p>Cualquier consulta comuniquese con nuestro Call Center, Muchas gracias.</p>";
 		
 	$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","","",$nombreUsuario,"");
-		$resultado = $sending->enviarCorreoTicket();
-		$resultado_cliente = $sending->enviarCorreoTicketC($correoContacto,$nombreContacto,$asuntoCliente,$mensajeCliente);
+		$resultado = $sending->enviarCorreoTicket('Raul Castillo','josue.garpe96@gmail.com');
+		$resultado_cliente = $sending->enviarCorreoTicketC($correoContacto,$nombreContacto,$asuntoCliente,$mensajeCliente,'Raul Castillo','josue.garpe96@gmail.com');
 	} // end if fecha valida
 	
 		if ($bandera=="ticket_u") {
@@ -382,9 +382,9 @@ if ($fecha !='00/00/0000') {
 				<br>
 				
 				<p>Cualquier consulta comuniquese con nuestro Call Center, Muchas gracias.</p>";
-				$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","",$nombreUsuario,"");
-		$resultado = $sending->enviarCorreoTicket();
-		$resultado_cliente = $sending->enviarCorreoTicketC($correoContacto,$nombreContacto,$asuntoCliente,$mensajeCliente);
+				$sending = new Mailer($asunto,$mensaje,"",$correoUsuario,"","","","",$nombreUsuario,"");
+		$resultado = $sending->enviarCorreoTicket('Raul Castillo','raulcastillo@hermesinternacional.com');
+		$resultado_cliente = $sending->enviarCorreoTicketC($correoContacto,$nombreContacto,$asuntoCliente,$mensajeCliente,'Raul Castillo','raulcastillo@hermesinternacional.com');
 	}
 	
 		header('Location: ../listas/Tickets.php?success=correcto&fecha='.$nuevo_end.'');
